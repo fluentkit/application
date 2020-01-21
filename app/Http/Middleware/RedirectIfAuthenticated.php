@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Middleware;
+namespace FluentKit\Http\Middleware;
 
-use App\Providers\RouteServiceProvider;
+use FluentKit\Providers\RouteServiceProvider;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 

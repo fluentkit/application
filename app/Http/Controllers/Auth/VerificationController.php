@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace FluentKit\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
+use FluentKit\Http\Controllers\Controller;
+use FluentKit\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\VerifiesEmails;
 
 class VerificationController extends Controller

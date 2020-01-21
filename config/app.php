@@ -169,11 +169,11 @@ return [
         /*
          * Application Service Providers...
          */
-        App\Providers\AppServiceProvider::class,
-        App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
+        FluentKit\Providers\AppServiceProvider::class,
+        FluentKit\Providers\AuthServiceProvider::class,
+        // FluentKit\Providers\BroadcastServiceProvider::class,
+        FluentKit\Providers\EventServiceProvider::class,
+        FluentKit\Providers\RouteServiceProvider::class,
 
     ],
 

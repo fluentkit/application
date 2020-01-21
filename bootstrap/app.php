@@ -1,5 +1,7 @@
 <?php
 
+define('ARTISAN_BINARY', 'fluentkit');
+
 /*
 |--------------------------------------------------------------------------
 | Create The Application
@@ -28,17 +30,17 @@ $app = new Illuminate\Foundation\Application(
 
 $app->singleton(
     Illuminate\Contracts\Http\Kernel::class,
-    App\Http\Kernel::class
+    FluentKit\Http\Kernel::class
 );
 
 $app->singleton(
     Illuminate\Contracts\Console\Kernel::class,
-    App\Console\Kernel::class
+    FluentKit\Console\Kernel::class
 );
 
 $app->singleton(
     Illuminate\Contracts\Debug\ExceptionHandler::class,
-    App\Exceptions\Handler::class
+    FluentKit\Exceptions\Handler::class
 );
 
 /*

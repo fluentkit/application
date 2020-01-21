@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Console;
+namespace FluentKit\Console;
 
+use Illuminate\Console\Application;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -38,5 +39,12 @@ class Kernel extends ConsoleKernel
         $this->load(__DIR__.'/Commands');
 
         require base_path('routes/console.php');
+    }
+
+    protected function getArtisan()
+    {
+        return tap(parent::getArtisan(), function (Application $artisan) {
+            $artisan->setName('FluentKit');
+        });
     }
 }
