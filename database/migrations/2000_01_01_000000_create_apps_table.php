@@ -19,6 +19,14 @@ class CreateAppsTable extends Migration
             $table->boolean('master');
             $table->timestamps();
         });
+
+        Schema::create('app_domains', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->text('domain');
+            $table->timestamps();
+
+            $table->linkToApp();
+        });
     }
 
     /**
@@ -28,6 +36,7 @@ class CreateAppsTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('app_domains');
         Schema::dropIfExists('apps');
     }
 }
