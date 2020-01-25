@@ -4,6 +4,8 @@
 
 @tailwind utilities;
 
+@import '~nprogress/nprogress.css';
+
 html {
     font-family: 'Open Sans', sans-serif;
 }

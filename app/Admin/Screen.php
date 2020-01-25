@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace FluentKit\Admin;
 
+use Illuminate\Http\Request;
+
 class Screen implements ScreenInterface
 {
     public const SCREEN_ID = 'screen';
@@ -13,6 +15,8 @@ class Screen implements ScreenInterface
     protected string $icon = 'fa-home';
 
     protected string $label = '';
+
+    protected string $type = 'html';
 
     public function getId(): string
     {
@@ -34,6 +38,11 @@ class Screen implements ScreenInterface
         return trans($this->label);
     }
 
+    public function getType(): string
+    {
+        return $this->type;
+    }
+
     public function toArray(): array
     {
         return [
@@ -41,6 +50,26 @@ class Screen implements ScreenInterface
             'priority' => $this->getPriority(),
             'icon' => $this->getIcon(),
             'label' => $this->getLabel(),
+            'type' => $this->getType(),
+        ];
+    }
+
+    public function getHtml(Request $request): array
+    {
+        return [
+            'data' => [
+                'html' => '
+                    <div class="flex-1 bg-white shadow-md rounded p-10 m-4">
+                        im
+                    </div>
+                    <div class="flex-1 bg-white shadow-md rounded p-10 m-4">
+                        from
+                    </div>
+                    <div class="flex-1 bg-white shadow-md rounded p-10 m-4">
+                        '.get_called_class().'
+                    </div>
+                ',
+            ],
         ];
     }
 }

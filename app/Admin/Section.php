@@ -43,6 +43,11 @@ class Section implements SectionInterface
         return $this;
     }
 
+    public function getScreen(string $id): ?ScreenInterface
+    {
+        return $this->screens[$id] ?? null;
+    }
+
     public function toArray(): array
     {
         return [

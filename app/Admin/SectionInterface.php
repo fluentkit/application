@@ -16,5 +16,7 @@ interface SectionInterface
 
     public function registerScreen(ScreenInterface $screen): self;
 
+    public function getScreen(string $id): ?ScreenInterface;
+
     public function toArray(): array;
 }

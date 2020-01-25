@@ -34,20 +34,11 @@
             </section>
             <section class="flex-grow flex-column bg-gray-200">
                 <nav class="flex items-center h-16 px-12 bg-white shadow-md">
-                    header
+                    <i class="fas mr-2" :class="$route.meta.section.icon"></i> @{{ $route.meta.screen.label }}
                 </nav>
-                <div class="flex m-10">
-                    <div class="flex-1 bg-white shadow-md rounded p-10 m-4">
-                        foo
-                    </div>
-                    <div class="flex-1 bg-white shadow-md rounded p-10 m-4">
-                        bar
-                    </div>
-                    <div class="flex-1 bg-white shadow-md rounded p-10 m-4">
-                        bazzer
-                    </div>
+                <div id="screen-container" class="flex">
+                    <router-view></router-view>
                 </div>
-                <router-view></router-view>
             </section>
         </div>
 

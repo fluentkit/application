@@ -14,5 +14,7 @@ interface ScreenInterface
 
     public function getLabel(): string;
 
+    public function getType(): string;
+
     public function toArray(): array;
 }

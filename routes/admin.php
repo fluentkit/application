@@ -14,3 +14,5 @@
 Route::get('/{path?}', function () {
     return view('admin.layouts.default', ['admin' => app(\FluentKit\Admin\Area::class)->toArray()]);
 })->where('path', '(.*?)');
+
+Route::post('/{section}/{screen}/{action}', [\FluentKit\Admin\Http\Controllers\Actions\ScreenActionsController::class, 'postAction']);
