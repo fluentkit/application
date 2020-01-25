@@ -174,6 +174,7 @@ return [
         // FluentKit\Providers\BroadcastServiceProvider::class,
         FluentKit\Providers\EventServiceProvider::class,
         FluentKit\Providers\RouteServiceProvider::class,
+        FluentKit\Providers\AdminServiceProvider::class,
 
     ],
 

@@ -10,32 +10,26 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i&display=swap" />
     </head>
     <body>
-        <div class="flex h-screen">
+        <div id="admin" class="flex h-screen">
             <section class="flex-none bg-gray-800">
                 <div class="bg-gradient h-16 flex items-center shadow-md">
                     <img class="flex w-10 h-auto ml-3 mr-2" src="http://fluentkit.io/images/master-logo1000x1000-white-trans.png" />
                     <h1 class="flex text-2xl uppercase mr-5">Fluent<strong>Kit</strong></h1>
                 </div>
                 <ul class="flex flex-col text-gray-300">
-                    @foreach([['label' => 'Blog', 'icon' => 'fa-home', 'children' => [['label' => 'Add New']]], ['label' => 'Pages', 'icon' => 'fa-file', 'children' => [['label' => 'Add New']]]] as $menu)
-                        <li class="flex flex-col">
-                            <a href="#" class="px-5 pt-2 pb-2 hover:bg-gray-900">
-                                <i class="fas {{ $menu['icon'] }} mr-2"></i>
-                                {{ $menu['label'] }}
-                            </a>
-                            @if (!empty($menu['children']))
-                                <ul class="flex flex-col text-gray-500">
-                                    @foreach($menu['children'] as $child)
-                                        <li>
-                                            <a href="#" class="block pl-12 pr-5 py-1 text-sm hover:bg-gray-900">
-                                                {{ $child['label'] }}
-                                            </a>
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            @endif
-                        </li>
-                    @endforeach
+                    <li v-for="section in sections" :key="section.id" :id="'section-'+section.id" class="flex flex-col">
+                        <router-link :to="{ name: section.id }" class="px-5 pt-2 pb-2 hover:bg-gray-900">
+                            <i class="fas mr-2" :class="section.icon"></i>
+                            @{{ section.label }}
+                        </router-link>
+                        <ul v-if="Object.keys(section.screens).length" class="flex flex-col text-gray-500">
+                            <li v-for="screen in section.screens" :key="screen.id" :id="'screen-'+screen.id">
+                                <router-link :to="{ name: section.id+'.'+screen.id }" class="block pl-12 pr-5 py-1 text-sm hover:bg-gray-900">
+                                    @{{ screen.label }}
+                                </router-link>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
             </section>
             <section class="flex-grow flex-column bg-gray-200">
@@ -53,8 +47,13 @@
                         bazzer
                     </div>
                 </div>
+                <router-view></router-view>
             </section>
         </div>
+
+        <script>
+            window.fkAdminConfig = @json($admin)
+        </script>
 
         <script src="{{ mix('/js/manifest.js') }}"></script>
         <script src="{{ mix('/js/vendor.js') }}"></script>
