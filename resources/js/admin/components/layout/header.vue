@@ -1,5 +1,5 @@
 <template>
-    <nav class="flex items-center h-16 px-12 bg-white shadow-md">
+    <nav class="flex items-center h-16 px-12 bg-white shadow-md fixed top-0 w-full z-10">
         <i v-if="$section" class="fas mr-2" :class="$section.icon" />
         <span v-for="(title, index) in titles" class="mr-2">
             <i v-if="index !== 0" class="fas mr-1 fa-chevron-right" /> {{ title }}

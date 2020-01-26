@@ -11,9 +11,9 @@
     </head>
     <body>
         <div id="admin" class="flex h-screen">
-            <section class="flex-none bg-gray-800">
+            <section class="flex-none bg-gray-800 h-screen">
                 <div class="bg-gradient h-16 flex items-center shadow-md">
-                    <img class="flex w-10 h-auto ml-3 mr-2" src="http://fluentkit.io/images/master-logo1000x1000-white-trans.png" />
+                    <img class="flex w-10 h-auto ml-3 mr-2" src="{{ asset('storage/logo.png') }}" />
                     <h1 class="flex text-2xl uppercase mr-5">Fluent<strong>Kit</strong></h1>
                 </div>
                 <ul class="flex flex-col text-gray-300">
@@ -32,7 +32,7 @@
                     </li>
                 </ul>
             </section>
-            <section class="flex-grow flex-column bg-gray-200">
+            <section class="flex-col bg-gray-200 h-screen w-full overflow-auto pt-16">
                 <fk-admin-header></fk-admin-header>
                 <div id="screen-container" class="flex">
                     <router-view></router-view>

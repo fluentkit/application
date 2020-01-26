@@ -1,11 +1,12 @@
 <script>
     import url from '../../utils/url';
+    import background from '../components/layout/background';
 
 	export default {
 		name: 'fk-admin-screen-html',
         data () {
             return {
-                template: '<div class="flex-1 bg-white shadow-md rounded p-10 m-4 text-center">Loading...</div>',
+                template: `<fk-admin-background />`,
                 templateData: {}
             }
         },
@@ -26,12 +27,15 @@
         render (createElement) {
 		    const { templateData = {} } = this.$data || {};
 		    return createElement({
+                components: {
+                    [background.name]: background
+                },
                 data () {
                     return {
                         ...templateData
                     }
                 },
-                template: `<div class="flex flex-grow m-10">${this.template}</div>`
+                template: `<div class="flex flex-col flex-grow flex-wrap m-10">${this.template}</div>`
             });
         }
 	}

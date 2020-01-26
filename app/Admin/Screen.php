@@ -43,6 +43,11 @@ class Screen implements ScreenInterface
         return $this->type;
     }
 
+    public function getComponent(): string
+    {
+        return 'fk-admin-screen-' . $this->getType();
+    }
+
     public function toArray(): array
     {
         return [
@@ -51,6 +56,7 @@ class Screen implements ScreenInterface
             'icon' => $this->getIcon(),
             'label' => $this->getLabel(),
             'type' => $this->getType(),
+            'component' => $this->getComponent(),
         ];
     }
 
@@ -59,13 +65,13 @@ class Screen implements ScreenInterface
         return [
             'data' => [
                 'template' => '
-                    <div class="flex-1 bg-white shadow-md rounded p-10 m-4">
+                    <div class="flex-1 bg-white shadow-md rounded p-10 mb-10">
                         im from {{ foo }}
                     </div>
-                    <div class="flex-1 bg-white shadow-md rounded p-10 m-4" @click="$success(\'look at me!\')">
-                        <pre>{{ $data }}{{ $section }}{{ $screen }}</pre>
+                    <div class="flex-1 bg-white shadow-md rounded p-10 mb-10" @click="$success(\'look at me!\')">
+                        <pre>{{ $data }}{{ $section }}{{ $screen }}{{ $data }}{{ $section }}{{ $screen }}</pre>
                     </div>
-                    <div class="flex-1 bg-white shadow-md rounded p-10 m-4">
+                    <div class="flex-1 bg-white shadow-md rounded p-10">
                         '.get_called_class().'
                     </div>
                 ',

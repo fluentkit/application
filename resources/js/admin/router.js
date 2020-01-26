@@ -4,11 +4,6 @@ import Router from 'vue-router';
 // Base screen components
 import HtmlScreen from './screens/html';
 
-Vue.use(Router);
-
-// Register base screen components
-Vue.component(HtmlScreen.name, HtmlScreen);
-
 const createRoutes = ({ sections }) => {
     const routes = Object.keys(sections)
         .map(id => sections[id])
@@ -22,10 +17,7 @@ const createRoutes = ({ sections }) => {
                     redirect: {
                         name: `${id}.${screens[Object.keys(screens)[0]].id}`
                     },
-                    name: id,
-                    meta: {
-                        section
-                    }
+                    name: id
                 },
                 // Generate routes for each screen
                 ...Object.keys(screens)
@@ -34,7 +26,7 @@ const createRoutes = ({ sections }) => {
                         return {
                             path: `/${id}/${screen.id}`,
                             component: {
-                                template: `<component :is="'fk-admin-screen-'+$screen.type" />`
+                                template: `<component :is="$screen.component" />`
                             },
                             name: `${id}.${screen.id}`,
                             meta: {
@@ -62,6 +54,11 @@ const createRoutes = ({ sections }) => {
 };
 
 export default (config, progress) => {
+    Vue.use(Router);
+
+    // Register base screen components
+    Vue.component(HtmlScreen.name, HtmlScreen);
+
     const router = new Router({
         routes: createRoutes(config),
         mode: 'history',

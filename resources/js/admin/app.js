@@ -22,6 +22,9 @@ export default config => {
     Vue.mixin(progressMixin);
     Vue.mixin(toastMixin);
 
+    // Apply filters
+    Vue.filter('url', path => config.assetUrl+path);
+
     return new Admin({
         router: createRouter(config, progress),
         components: {

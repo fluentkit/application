@@ -26,7 +26,8 @@ final class Area
             'sections' => collect($this->sections)
                 ->map(fn (SectionInterface $screen) => $screen->toArray())
                 ->sortBy('priority')
-                ->toArray()
+                ->toArray(),
+            'assetUrl' => asset('/')
         ];
     }
 }

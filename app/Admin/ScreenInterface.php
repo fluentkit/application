@@ -16,5 +16,7 @@ interface ScreenInterface
 
     public function getType(): string;
 
+    public function getComponent(): string;
+
     public function toArray(): array;
 }
