@@ -8,6 +8,7 @@
 
 html {
     font-family: 'Open Sans', sans-serif;
+    @apply .text-gray-800;
 }
 
 .bg-gradient {

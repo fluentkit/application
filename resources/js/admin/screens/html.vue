@@ -35,7 +35,7 @@
                         ...templateData
                     }
                 },
-                template: `<div class="flex flex-col flex-grow flex-wrap m-10">${this.template}</div>`
+                template: this.template
             });
         }
 	}

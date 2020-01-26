@@ -17,7 +17,7 @@
             </section>
             <section class="flex-col bg-gray-200 h-screen w-full overflow-auto pt-16">
                 <fk-admin-header></fk-admin-header>
-                <div id="screen-container" class="flex">
+                <div id="screen-container" class="flex p-10 pb-0">
                     <router-view></router-view>
                 </div>
             </section>
