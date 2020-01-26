@@ -9,7 +9,7 @@ use FluentKit\Admin\Section;
 
 final class Dashboards extends Section
 {
-    public const SECTION_ID = 'dashboard';
+    public const SECTION_ID = 'dashboards';
 
     protected int $priority = 10;
 

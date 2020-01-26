@@ -7,6 +7,8 @@ import createRouter from './router'
 
 NProgress.configure({ parent: '#screen-container' });
 
+const Bus = new Vue();
+
 Vue.use(Router);
 
 Vue.mixin({
@@ -16,6 +18,9 @@ Vue.mixin({
         },
         progress () {
             return NProgress;
+        },
+        bus () {
+            return Bus;
         }
     }
 });
@@ -57,9 +62,29 @@ export default config => {
     // });
 
     return new Admin({
+        router,
         data () {
             return config;
         },
-        router
+        computed: {
+            headerTitles () {
+                const { section, screen } = this.$route.meta;
+
+                if (!section || !screen) {
+                    return [];
+                }
+
+                if (section.id === 'dashboards') {
+                    return [
+                        screen.label
+                    ];
+                }
+
+                return [
+                    section.label,
+                    screen.label
+                ]
+            }
+        }
     });
 }
