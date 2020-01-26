@@ -12,25 +12,8 @@
     <body>
         <div id="admin" class="flex h-screen">
             <section class="flex-none bg-gray-800 h-screen">
-                <div class="bg-gradient h-16 flex items-center shadow-md">
-                    <img class="flex w-10 h-auto ml-3 mr-2" src="{{ asset('storage/logo.png') }}" />
-                    <h1 class="flex text-2xl uppercase mr-5">Fluent<strong>Kit</strong></h1>
-                </div>
-                <ul class="flex flex-col text-gray-300">
-                    <li v-for="section in sections" :key="section.id" :id="'section-'+section.id" class="flex flex-col">
-                        <router-link :to="{ name: section.id }" class="px-5 pt-2 pb-2 hover:bg-gray-900">
-                            <i class="fas mr-2" :class="section.icon"></i>
-                            @{{ section.label }}
-                        </router-link>
-                        <ul v-if="Object.keys(section.screens).length" class="flex flex-col text-gray-500">
-                            <li v-for="screen in section.screens" :key="screen.id" :id="'screen-'+screen.id">
-                                <router-link :to="{ name: section.id+'.'+screen.id }" class="block pl-12 pr-5 py-1 text-sm hover:bg-gray-900">
-                                    @{{ screen.label }}
-                                </router-link>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
+                <fk-admin-sidebar-header></fk-admin-sidebar-header>
+                <fk-admin-sidebar-menu :sections="sections"></fk-admin-sidebar-menu>
             </section>
             <section class="flex-col bg-gray-200 h-screen w-full overflow-auto pt-16">
                 <fk-admin-header></fk-admin-header>

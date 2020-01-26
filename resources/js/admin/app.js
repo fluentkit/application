@@ -10,6 +10,8 @@ import toastMixin from './mixins/global/toast';
 
 // Global components
 import header from './components/layout/header';
+import sidebarHeader from './components/layout/sidebar/header';
+import sidebarMenu from './components/layout/sidebar/menu';
 
 // Export app creator
 export default config => {
@@ -28,7 +30,9 @@ export default config => {
     return new Admin({
         router: createRouter(config, progress),
         components: {
-            [header.name]: header
+            [header.name]: header,
+            [sidebarHeader.name]: sidebarHeader,
+            [sidebarMenu.name]: sidebarMenu
         },
         data () {
             return config;
