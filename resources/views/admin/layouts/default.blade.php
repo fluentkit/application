@@ -35,7 +35,7 @@
             <section class="flex-grow flex-column bg-gray-200">
                 <nav class="flex items-center h-16 px-12 bg-white shadow-md">
                     <i v-if="$route.meta.section" class="fas mr-2" :class="$route.meta.section.icon"></i>
-                    <span v-for="(title, index) in headerTitles" class="mr-2"><i v-if="index !== 0" class="fas mr-2 fa-chevron-right"></i> @{{ title }}</span>
+                    <span v-for="(title, index) in headerTitles" class="mr-2"><i v-if="index !== 0" class="fas mr-1 fa-chevron-right"></i> @{{ title }}</span>
                 </nav>
                 <div id="screen-container" class="flex">
                     <router-view></router-view>

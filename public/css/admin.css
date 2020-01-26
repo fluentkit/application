@@ -11490,6 +11490,67 @@ html {
   color: #fff;
 }
 
+.toasted-container.bottom-right {
+  min-width: 32rem !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  margin-right: 1rem !important;
+  margin-bottom: 1rem !important;
+  max-width: 100% !important;
+}
+
+.fluentkit.toasted {
+  border-radius: 0.25rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  color: #fff;
+  background-color: #a0aec0;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  width: 100% !important;
+  -webkit-box-pack: start !important;
+          justify-content: flex-start !important;
+}
+
+.fluentkit.toasted .action {
+  padding: 0 !important;
+  margin: 0 !important;
+  padding-left: 1rem !important;
+  text-decoration: none !important;
+}
+
+.fluentkit.toasted .action:first-of-type {
+  margin-left: auto !important;
+}
+
+.fluentkit.toasted .action:hover {
+  color: #e2e8f0;
+}
+
+.fluentkit.toasted .fa {
+  margin: 0 !important;
+  padding: 0 !important;
+  padding-right: 1rem !important;
+}
+
+.fluentkit.toasted .fa.after {
+  padding-right: 0 !important;
+  padding-left: 1rem !important;
+}
+
+.fluentkit.toasted.info {
+  background-color: #4299e1;
+}
+
+.fluentkit.toasted.success {
+  background-color: #48bb78;
+}
+
+.fluentkit.toasted.error {
+  background-color: #f56565;
+}
+
 @media (min-width: 640px) {
   .sm\:sr-only {
     position: absolute;

@@ -21,3 +21,36 @@ html {
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#177aa2', endColorstr='#6cbe58',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
     color: #fff;
 }
+
+.toasted-container.bottom-right {
+    min-width: 32rem !important;
+    @apply .right-0 .bottom-0 .mr-4 .mb-4 .max-w-full !important;
+}
+.fluentkit.toasted {
+    @apply .rounded .shadow-md .text-white .bg-gray-500 .py-3 .px-4;
+    @apply .w-full .justify-start !important;
+}
+.fluentkit.toasted .action {
+    @apply .p-0 .m-0 .pl-4 .no-underline !important;
+}
+.fluentkit.toasted .action:first-of-type {
+    @apply .ml-auto !important;
+}
+.fluentkit.toasted .action:hover {
+    @apply .text-gray-300;
+}
+.fluentkit.toasted .fa {
+    @apply .m-0 .p-0 .pr-4 !important;
+}
+.fluentkit.toasted .fa.after {
+    @apply .pr-0 .pl-4 !important;
+}
+.fluentkit.toasted.info {
+    @apply .bg-blue-500;
+}
+.fluentkit.toasted.success {
+    @apply .bg-green-500;
+}
+.fluentkit.toasted.error {
+    @apply .bg-red-500;
+}

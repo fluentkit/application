@@ -25,7 +25,7 @@ const createRoutes = ({ sections }) => {
                         return {
                             path: `/${id}/${screen.id}`,
                             component: {
-                                template: `<component :is="'screen-type-'+$route.meta.screen.type" />`
+                                template: `<component :is="'fk-admin-screen-'+$route.meta.screen.type" />`
                             },
                             name: `${id}.${screen.id}`,
                             meta: {
