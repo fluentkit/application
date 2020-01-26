@@ -58,17 +58,20 @@ class Screen implements ScreenInterface
     {
         return [
             'data' => [
-                'html' => '
+                'template' => '
                     <div class="flex-1 bg-white shadow-md rounded p-10 m-4">
-                        im
+                        im from {{ foo }}
                     </div>
-                    <div class="flex-1 bg-white shadow-md rounded p-10 m-4">
-                        from
+                    <div class="flex-1 bg-white shadow-md rounded p-10 m-4" @click="$success(\'look at me!\')">
+                        <pre>{{ $data }}{{ $section }}{{ $screen }}</pre>
                     </div>
                     <div class="flex-1 bg-white shadow-md rounded p-10 m-4">
                         '.get_called_class().'
                     </div>
                 ',
+                'data' => [
+                    'foo' => 'bar'
+                ]
             ],
         ];
     }
