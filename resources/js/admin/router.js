@@ -3,6 +3,7 @@ import Router from 'vue-router';
 
 // Base screen components
 import HtmlScreen from './screens/html';
+import FormScreen from './screens/form';
 
 const createRoutes = ({ sections }) => {
     const routes = Object.keys(sections)
@@ -58,6 +59,7 @@ export default (config, progress) => {
 
     // Register base screen components
     Vue.component(HtmlScreen.name, HtmlScreen);
+    Vue.component(FormScreen.name, FormScreen);
 
     const router = new Router({
         routes: createRoutes(config),

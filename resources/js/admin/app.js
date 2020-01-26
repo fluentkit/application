@@ -12,6 +12,7 @@ import toastMixin from './mixins/global/toast';
 import header from './components/layout/header';
 import sidebarHeader from './components/layout/sidebar/header';
 import sidebarMenu from './components/layout/sidebar/menu';
+import background from './components/layout/background';
 
 // Element components
 import title from './components/elements/title';
@@ -20,6 +21,7 @@ import button from './components/elements/button';
 
 // Field components
 import fieldRow from './components/elements/field/row';
+import fieldPanel from './components/elements/field/panel';
 import fieldLabel from './components/elements/field/label';
 import fieldInput from './components/elements/field/input';
 
@@ -37,6 +39,9 @@ export default config => {
     // Apply filters
     Vue.filter('url', path => config.assetUrl+path);
 
+    // Register layout components
+    Vue.component(background.name, background);
+
     // Register element components
     Vue.component(title.name, title);
     Vue.component(panel.name, panel);
@@ -44,6 +49,7 @@ export default config => {
 
     // Register field components
     Vue.component(fieldRow.name, fieldRow);
+    Vue.component(fieldPanel.name, fieldPanel);
     Vue.component(fieldLabel.name, fieldLabel);
     Vue.component(fieldInput.name, fieldInput);
 

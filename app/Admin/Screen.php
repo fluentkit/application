@@ -18,6 +18,8 @@ class Screen implements ScreenInterface
 
     protected string $type = 'html';
 
+    protected array $fields = [];
+
     public function getId(): string
     {
         return static::SCREEN_ID;
@@ -43,6 +45,11 @@ class Screen implements ScreenInterface
         return $this->type;
     }
 
+    public function getFields(): array
+    {
+        return $this->fields;
+    }
+
     public function getComponent(): string
     {
         return 'fk-admin-screen-' . $this->getType();
@@ -56,6 +63,7 @@ class Screen implements ScreenInterface
             'icon' => $this->getIcon(),
             'label' => $this->getLabel(),
             'type' => $this->getType(),
+            'fields' => $this->getFields(),
             'component' => $this->getComponent(),
         ];
     }
