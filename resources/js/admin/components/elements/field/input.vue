@@ -3,8 +3,8 @@
         :type="type"
         :id="'field-'+id"
         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-        :value="value"
-        @input="$emit('input', $event.target.value)"
+        :value="value[id]"
+        @input="updateValue($event.target.value)"
     />
 </template>
 
@@ -22,6 +22,15 @@
                 required: true
             },
             value: {}
+        },
+        methods: {
+            updateValue (value) {
+                const payload = {
+                    ...this.value,
+                    [this.id]: value
+                };
+                this.$emit('input', payload);
+            }
         }
     }
 </script>

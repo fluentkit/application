@@ -1,7 +1,7 @@
 <template>
     <fk-admin-background v-if="!attributes"/>
     <div v-else class="flex flex-col flex-grow">
-        <fk-admin-field-row v-for="field in $screen.fields" :key="field.id" :field="field" v-model="attributes[field.id]"/>
+        <fk-admin-field-row v-for="field in $screen.fields" :key="field.id" :field="field" v-model="attributes"/>
         <div class="flex flex-row">
             <fk-admin-button type="info" @click="saveForm">Save Changes</fk-admin-button>
         </div>

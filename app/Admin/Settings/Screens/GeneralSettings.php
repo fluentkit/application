@@ -77,15 +77,11 @@ final class GeneralSettings extends FormScreen
         return [
             'data' => [
                 'attributes' => [
-                    'panel1' => [
-                        'email1' => 'foo',
-                        'text1' => 'text field'
-                    ],
+                    'email1' => 'foo',
+                    'text1' => 'text field',
                     'text2' => 'bar',
-                    'panel2' => [
-                        'email3' => 'foo',
-                        'text3' => 'text field'
-                    ],
+                    'email3' => 'foo',
+                    'text3' => 'text field',
                 ]
             ]
         ];

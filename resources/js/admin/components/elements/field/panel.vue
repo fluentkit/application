@@ -7,8 +7,8 @@
                 v-for="field in field.fields"
                 :key="field.id"
                 :field="field"
-                :value="value[field.id]"
-                @input="updateValue(field.id, $event)"
+                :value="value"
+                @input="$emit('input', $event)"
             />
         </fk-admin-panel>
     </div>
@@ -25,15 +25,6 @@
             value: {
                 type: Object,
                 required: true
-            }
-        },
-        methods: {
-            updateValue (fieldId, value) {
-                const payload = {
-                    ...this.value,
-                    [fieldId]: value
-                };
-                this.$emit('input', payload);
             }
         }
     }
