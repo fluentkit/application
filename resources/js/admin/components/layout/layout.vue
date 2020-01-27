@@ -116,10 +116,17 @@
 
     .fk-admin-layout .sidebar {
         @apply .flex-none .bg-gray-800 .h-screen;
+        width: 210px;
     }
 
     .fk-admin-layout .main {
         @apply .flex-col .bg-gray-200 .h-screen .w-full .overflow-auto .pt-16;
+        width: calc(100% - 210px);
+        min-width: 578px;
+    }
+    .fk-admin-layout .main > .fk-admin-header {
+        width: calc(100% - 210px);
+        min-width: 578px;
     }
 
     .fk-admin-layout .main #progress-container {

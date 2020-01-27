@@ -20,7 +20,6 @@
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   position: fixed;
   top: 0;
-  width: 100%;
   z-index: 10;
 }
 .fk-admin-header > .fas {
@@ -31,6 +30,12 @@
 }
 .fk-admin-header > .title > .fas {
   margin-right: 0.25rem;
+}
+.fk-admin-header .user {
+  display: flex;
+  width: 2.5rem;
+  height: auto;
+  margin-left: auto;
 }
 .fk-admin-sidebar-header {
   height: 4rem;
@@ -788,6 +793,7 @@ html {
   flex: none;
   background-color: #2d3748;
   height: 100vh;
+  width: 210px;
 }
 .fk-admin-layout .main {
   flex-direction: column;
@@ -796,6 +802,12 @@ html {
   width: 100%;
   overflow: auto;
   padding-top: 4rem;
+  width: calc(100% - 210px);
+  min-width: 578px;
+}
+.fk-admin-layout .main > .fk-admin-header {
+  width: calc(100% - 210px);
+  min-width: 578px;
 }
 .fk-admin-layout .main #progress-container {
   height: 2.5rem;
