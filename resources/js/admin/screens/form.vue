@@ -3,7 +3,7 @@
     <div v-else class="flex flex-col flex-grow">
         <fk-admin-field-row v-for="field in $screen.fields" :key="field.id" :field="field" v-model="attributes"/>
         <div class="flex flex-row">
-            <fk-admin-button type="info" @click="saveForm">Save Changes</fk-admin-button>
+            <fk-admin-button type="info" :disabled="saveDisabled" @click="saveForm">{{ buttonText }}</fk-admin-button>
         </div>
     </div>
 </template>
@@ -15,7 +15,9 @@
 		name: 'fk-admin-screen-form',
         data () {
             return {
-                attributes: null
+                attributes: null,
+                buttonText: 'Save Changes',
+                saveDisabled: false
             }
         },
         async created () {
@@ -34,6 +36,8 @@
         methods: {
 		    async saveForm () {
                 try {
+                    this.saveDisabled = true;
+                    this.buttonText = 'Saving';
                     this.$progress().start();
                     const { $section, $screen } = this;
                     const {
@@ -44,6 +48,8 @@
                 } catch (e) {
                     this.$error(e);
                 } finally {
+                    this.saveDisabled = false;
+                    this.buttonText = 'Save Changes';
                     this.$progress().done();
                 }
             }
