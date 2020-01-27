@@ -1,7 +1,7 @@
 <template>
-    <div>
+    <div class="fk-admin-field-panel">
         <fk-admin-title>{{ field.label }}</fk-admin-title>
-        <p v-if="field.description" class="text-gray-600 italic mb-4">{{ field.description }}</p>
+        <p v-if="field.description" class="description">{{ field.description }}</p>
         <fk-admin-panel>
             <fk-admin-field-row
                 v-for="field in field.fields"
@@ -29,3 +29,9 @@
         }
     }
 </script>
+
+<style>
+    .fk-admin-field-panel > .description {
+        @apply .text-gray-600 .italic .mb-4;
+    }
+</style>

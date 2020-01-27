@@ -1,6 +1,6 @@
 <template>
     <button
-        class="cursor-pointer text-center font-semibold py-3 px-6 rounded shadow-md w-auto mb-10"
+        class="fk-admin-button"
         :class="buttonClasses"
         :disabled="disabled"
         @click.prevent="onClick"
@@ -25,24 +25,7 @@
         },
         computed: {
             buttonClasses () {
-                return {
-                    default: {
-                        disabled: ['bg-white', 'hover:bg-gray-300'],
-                        enabled: ['bg-white', 'hover:bg-gray-300']
-                    },
-                    info: {
-                        disabled: ['bg-blue-700', 'text-gray-300'],
-                        enabled: ['bg-blue-500', 'hover:bg-blue-600', 'text-white']
-                    },
-                    success: {
-                        disabled: ['bg-green-700', 'text-gray-300'],
-                        enabled: ['bg-green-500', 'hover:bg-green-600', 'text-white']
-                    },
-                    danger: {
-                        disabled: ['bg-red-700', 'text-gray-300'],
-                        enabled: ['bg-red-500', 'hover:bg-red-600', 'text-white']
-                    }
-                }[this.type][this.disabled ? 'disabled' : 'enabled'];
+                return [this.type];
             }
         },
         methods: {
@@ -56,3 +39,65 @@
         }
     }
 </script>
+
+<style>
+    .fk-admin-button {
+        @apply .cursor-pointer .text-center .font-semibold .py-3 .px-6 .rounded .shadow-md .w-auto .mb-10;
+    }
+
+    /**
+     * Default
+     */
+    .fk-admin-button.default {
+        @apply .bg-white;
+    }
+    .fk-admin-button.default:hover {
+        @apply .bg-gray-300;
+    }
+    .fk-admin-button.default[disabled],
+    .fk-admin-button.default[disabled]:hover{
+        @apply .bg-gray-500;
+    }
+
+    /**
+     * Info
+     */
+    .fk-admin-button.info {
+        @apply .bg-blue-500 .text-white;
+    }
+    .fk-admin-button.info:hover {
+        @apply .bg-blue-600;
+    }
+    .fk-admin-button.info[disabled],
+    .fk-admin-button.info[disabled]:hover{
+        @apply .bg-blue-700 .text-gray-300;
+    }
+
+    /**
+     * Success
+     */
+    .fk-admin-button.success {
+        @apply .bg-green-500 .text-white;
+    }
+    .fk-admin-button.success:hover {
+        @apply .bg-green-600;
+    }
+    .fk-admin-button.success[disabled],
+    .fk-admin-button.success[disabled]:hover{
+        @apply .bg-green-700 .text-gray-300;
+    }
+
+    /**
+     * Danger
+     */
+    .fk-admin-button.danger {
+        @apply .bg-red-500 .text-white;
+    }
+    .fk-admin-button.danger:hover {
+        @apply .bg-red-600;
+    }
+    .fk-admin-button.danger[disabled],
+    .fk-admin-button.danger[disabled]:hover{
+        @apply .bg-red-700 .text-gray-300;
+    }
+</style>

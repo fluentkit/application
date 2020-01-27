@@ -1,7 +1,7 @@
 <template>
-    <div class="bg-gradient h-16 flex items-center shadow-md">
-        <img class="flex w-10 h-auto ml-3 mr-2" :src="'storage/logo.png' | url" />
-        <h1 class="flex text-2xl uppercase mr-5">Fluent<strong>Kit</strong></h1>
+    <div class="fk-admin-sidebar-header bg-gradient">
+        <img :src="'storage/logo.png' | url" />
+        <h1>Fluent<strong>Kit</strong></h1>
     </div>
 </template>
 
@@ -10,3 +10,15 @@
         name: 'fk-admin-sidebar-header'
     }
 </script>
+
+<style>
+    .fk-admin-sidebar-header {
+        @apply .h-16 .flex .items-center .shadow-md .text-white;
+    }
+    .fk-admin-sidebar-header img {
+        @apply .flex .w-10 .h-auto .ml-3 .mr-2;
+    }
+    .fk-admin-sidebar-header h1 {
+        @apply .flex .text-2xl .uppercase .mr-5;
+    }
+</style>

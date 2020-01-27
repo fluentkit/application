@@ -27,7 +27,9 @@ const createRoutes = ({ sections }) => {
                         return {
                             path: `/${id}/${screen.id}`,
                             component: {
-                                template: `<component :is="$screen.component" />`
+                                render (createElement) {
+                                    return createElement(this.$screen.component);
+                                }
                             },
                             name: `${id}.${screen.id}`,
                             meta: {
@@ -54,7 +56,7 @@ const createRoutes = ({ sections }) => {
     ]
 };
 
-export default (config, progress) => {
+export default config => {
     Vue.use(Router);
 
     // Register base screen components
@@ -66,18 +68,6 @@ export default (config, progress) => {
         mode: 'history',
         base: '/admin/'
     });
-
-    router.beforeResolve((to, from, next) => {
-        if (to.name) {
-            progress.start();
-        }
-        next();
-    });
-
-    // each screen component is responsible for indicating its finished loading.
-    // router.afterEach((to, from) => {
-    //     NProgress.done();
-    // });
 
     return router;
 };

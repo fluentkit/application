@@ -1,6 +1,6 @@
 <template>
-    <div class="flex w-full h-screen justify-center items-center">
-        <img class="w-32 h-auto" style="opacity: 0.04;" :src="'storage/logo-inverted.png' | url" />
+    <div class="fk-admin-background">
+        <img :src="'storage/logo-inverted.png' | url" />
     </div>
 </template>
 
@@ -9,3 +9,13 @@
         name: 'fk-admin-background'
     }
 </script>
+
+<style>
+    .fk-admin-background {
+        @apply .flex .w-full .h-screen .justify-center .items-center;
+    }
+    .fk-admin-background img {
+        @apply .w-32 .h-auto;
+        opacity: 0.04;
+    }
+</style>

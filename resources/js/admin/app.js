@@ -5,13 +5,11 @@ import createRouter from './router';
 import requestMixin from './mixins/global/request';
 import busMixin from './mixins/global/bus';
 import screenMixin from './mixins/global/screen';
-import { default as progressMixin, progress } from './mixins/global/progress';
+import progressMixin from './mixins/global/progress';
 import toastMixin from './mixins/global/toast';
 
 // Global components
-import header from './components/layout/header';
-import sidebarHeader from './components/layout/sidebar/header';
-import sidebarMenu from './components/layout/sidebar/menu';
+import layout from './components/layout/layout';
 import background from './components/layout/background';
 
 // Element components
@@ -54,14 +52,16 @@ export default config => {
     Vue.component(fieldInput.name, fieldInput);
 
     return new Admin({
-        router: createRouter(config, progress),
+        router: createRouter(config),
         components: {
-            [header.name]: header,
-            [sidebarHeader.name]: sidebarHeader,
-            [sidebarMenu.name]: sidebarMenu
+            [layout.name]: layout
         },
         data () {
             return config;
+        },
+        render (createElement) {
+            const { sections } = this;
+            return createElement('fk-admin-layout', { props: { sections } });
         }
     });
 }

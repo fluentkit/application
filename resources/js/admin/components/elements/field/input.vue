@@ -2,7 +2,7 @@
     <input
         :type="type"
         :id="'field-'+id"
-        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        class="fk-admin-field-input"
         :value="value[id]"
         @input="updateValue($event.target.value)"
     />
@@ -34,3 +34,12 @@
         }
     }
 </script>
+
+<style>
+    .fk-admin-field-input {
+        @apply .shadow .appearance-none .border .rounded .w-full .py-2 .px-3 .text-gray-700 .leading-tight;
+    }
+    .fk-admin-field-input:focus {
+        @apply .outline-none .shadow-outline;
+    }
+</style>

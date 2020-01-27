@@ -73,7 +73,7 @@ class Screen implements ScreenInterface
         return [
             'data' => [
                 'template' => '
-                    <div class="flex flex-col flex-grow">
+                    <div>
                         <fk-admin-title>Foo bar</fk-admin-title>
                         <fk-admin-panel>
                             im from {{ foo }}
@@ -88,7 +88,7 @@ class Screen implements ScreenInterface
                         <fk-admin-panel>
                             '.get_called_class(). '
                         </fk-admin-panel>
-                        <div class="flex flex-row">
+                        <div>
                             <fk-admin-button @click="$toast(\'look at me!\')">Save Changes</fk-admin-button>
                             <fk-admin-button type="info" @click="$info(\'look at me!\')">Save Changes Much Longer Button</fk-admin-button>
                             <fk-admin-button type="success" @click="$success(\'look at me!\')">Save Changes</fk-admin-button>

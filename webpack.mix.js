@@ -14,15 +14,18 @@ const mix = require('laravel-mix');
 // hack because mix looks for artisan binary?
 mix.setPublicPath('public');
 
+mix.options({
+    extractVueStyles: 'public/css/admin.css',
+    postCss: [
+        require('postcss-preset-env'),
+        require('tailwindcss'),
+    ],
+});
+
 mix.js('resources/js/app.js', 'public/js')
     .js('resources/js/admin.js', 'public/js')
     .extract(['vue'])
     .sourceMaps();
-
-mix.postCss('resources/css/admin.css', 'public/css', [
-    require('postcss-preset-env'),
-    require('tailwindcss'),
-]);
 
 if (mix.inProduction()) {
     mix.version();

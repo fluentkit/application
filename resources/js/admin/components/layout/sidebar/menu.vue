@@ -1,13 +1,13 @@
 <template>
-    <ul class="flex flex-col text-gray-300">
-        <li v-for="section in sections" :key="section.id" :id="'section-'+section.id" class="flex flex-col">
-            <router-link :to="{ name: section.id }" class="px-5 pt-2 pb-2 hover:bg-gray-900">
+    <ul class="fk-admin-sidebar-menu">
+        <li v-for="section in sections" :key="section.id" :id="'section-'+section.id" class="item">
+            <router-link :to="{ name: section.id }">
                 <i class="fas mr-2" :class="section.icon" />
                 {{ section.label }}
             </router-link>
-            <ul v-if="Object.keys(section.screens).length" class="flex flex-col text-gray-500">
-                <li v-for="screen in section.screens" :key="screen.id" :id="'screen-'+screen.id">
-                    <router-link :to="{ name: section.id+'.'+screen.id }" class="block pl-12 pr-5 py-1 text-sm hover:bg-gray-900">
+            <ul v-if="Object.keys(section.screens).length" class="sub-menu">
+                <li v-for="screen in section.screens" :key="screen.id" :id="'screen-'+screen.id" class="item">
+                    <router-link :to="{ name: section.id+'.'+screen.id }">
                         {{ screen.label }}
                     </router-link>
                 </li>
@@ -27,3 +27,27 @@
         }
     }
 </script>
+
+<style>
+    .fk-admin-sidebar-menu {
+        @apply .flex .flex-col .text-gray-300;
+    }
+    .fk-admin-sidebar-menu > .item {
+        @apply .flex .flex-col;
+    }
+    .fk-admin-sidebar-menu > .item > a {
+        @apply .px-5 .pt-2 .pb-2;
+    }
+    .fk-admin-sidebar-menu > .item > a:hover {
+        @apply .bg-gray-900;
+    }
+    .fk-admin-sidebar-menu > .item > .sub-menu {
+        @apply .flex .flex-col .text-gray-500;
+    }
+    .fk-admin-sidebar-menu > .item > .sub-menu > .item a {
+        @apply .block .pl-12 .pr-5 .py-1 .text-sm;
+    }
+    .fk-admin-sidebar-menu > .item > .sub-menu > .item a:hover {
+        @apply .bg-gray-900;
+    }
+</style>
