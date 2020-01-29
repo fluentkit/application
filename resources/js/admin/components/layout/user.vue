@@ -5,7 +5,7 @@
         </button>
         <button v-if="menuOpen" class="clickaway" @click="closeMenu" />
         <div v-if="menuOpen" class="menu">
-            <a v-for="(link, index) in links" :key="index" :class="link.type || ''" @click.prevent="link.click()">{{ link.text }}</a>
+            <a v-for="(link, index) in links" :key="index" :class="link.type || ''" @click.prevent="clickLink(link)">{{ link.text }}</a>
         </div>
     </div>
 </template>
@@ -34,6 +34,10 @@
             },
             closeMenu () {
                 this.menuOpen = false;
+            },
+            clickLink (link) {
+                this.closeMenu();
+                link.click();
             }
         }
     }

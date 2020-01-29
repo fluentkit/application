@@ -31,7 +31,7 @@ class AdminServiceProvider extends ServiceProvider
         $admin->registerSection(new Dashboards());
         $admin->registerSection(new Settings());
 
-        $admin->registerUserLink(new UserLink('profile', 'My Profile', 'foobar'));
+        $admin->registerUserLink(new UserLink('profile', 'My Profile', 'dashboards'));
         $admin->registerUserLink(UserLink::divider('logout-divider'));
         $admin->registerUserLink(new UserLink('logout', 'Logout', 'logout'));
 

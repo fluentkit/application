@@ -2389,6 +2389,10 @@ __webpack_require__.r(__webpack_exports__);
     },
     closeMenu: function closeMenu() {
       this.menuOpen = false;
+    },
+    clickLink: function clickLink(link) {
+      this.closeMenu();
+      link.click();
     }
   }
 });
@@ -5070,7 +5074,7 @@ var render = function() {
                 on: {
                   click: function($event) {
                     $event.preventDefault()
-                    return link.click()
+                    return _vm.clickLink(link)
                   }
                 }
               },
