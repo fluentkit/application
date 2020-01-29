@@ -34,7 +34,7 @@
                     return [];
                 }
 
-                if ($section.id === 'dashboards') {
+                if ($screen.hideSectionTitle) {
                     return [
                         $screen.label
                     ];

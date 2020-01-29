@@ -13,4 +13,6 @@ final class MainDashboard extends Screen
     protected int $priority = 10;
 
     protected string $label = 'Dashboard';
+
+    protected bool $hideSectionTitle = true;
 }

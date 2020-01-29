@@ -16,6 +16,8 @@ class Screen implements ScreenInterface
 
     protected string $label = '';
 
+    protected bool $hideSectionTitle = false;
+
     protected string $type = 'html';
 
     protected array $fields = [];
@@ -40,6 +42,11 @@ class Screen implements ScreenInterface
         return trans($this->label);
     }
 
+    public function getHideSectionTitle(): bool
+    {
+        return $this->hideSectionTitle;
+    }
+
     public function getType(): string
     {
         return $this->type;
@@ -62,6 +69,7 @@ class Screen implements ScreenInterface
             'priority' => $this->getPriority(),
             'icon' => $this->getIcon(),
             'label' => $this->getLabel(),
+            'hideSectionTitle' => $this->getHideSectionTitle(),
             'type' => $this->getType(),
             'fields' => $this->getFields(),
             'component' => $this->getComponent(),

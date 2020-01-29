@@ -84,11 +84,12 @@ const createRoutes = ({ sections, user }) => {
                 section: {
                     id: '404',
                     priority: 10,
-                    icon: 'fa-home',
+                    icon: 'fa-exclamation-triangle',
                     label: 'Not Found'
                 },
                 screen: {
-                    label: 'Not Found'
+                    label: 'Not Found',
+                    hideSectionTitle: true
                 },
                 user
             }

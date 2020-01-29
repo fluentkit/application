@@ -2170,7 +2170,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         return [];
       }
 
-      if ($section.id === 'dashboards') {
+      if ($screen.hideSectionTitle) {
         return [$screen.label];
       }
 
@@ -9726,11 +9726,12 @@ var createRoutes = function createRoutes(_ref) {
       section: {
         id: '404',
         priority: 10,
-        icon: 'fa-home',
+        icon: 'fa-exclamation-triangle',
         label: 'Not Found'
       },
       screen: {
-        label: 'Not Found'
+        label: 'Not Found',
+        hideSectionTitle: true
       },
       user: user
     }
