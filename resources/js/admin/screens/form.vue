@@ -1,7 +1,7 @@
 <template>
-    <fk-admin-background v-if="!attributes"/>
+    <fk-admin-background v-if="!attributes || !fields"/>
     <div v-else class="flex flex-col flex-grow">
-        <fk-admin-field-row v-for="field in $screen.fields" :key="field.id" :field="field" v-model="attributes"/>
+        <fk-admin-field-row v-for="field in fields" :key="field.id" :field="field" v-model="attributes"/>
         <div class="flex flex-row">
             <fk-admin-button type="info" :disabled="$form.processing" @click="saveForm">{{ buttonText }}</fk-admin-button>
         </div>
@@ -21,6 +21,7 @@
         mixins: [request, form, screen, progress, toast],
         data () {
             return {
+                fields: null,
                 attributes: null,
                 buttonText: 'Save Changes'
             }
@@ -28,9 +29,16 @@
         async created () {
             try {
                 const { $section, $screen } = this;
-                const {
-                    data: { data: { attributes } }
-                } = await this.$request().post(url`/admin/${$section.id}/${$screen.id}/getAttributes`);
+
+                const [fieldRequest, attributeRequest] = await Promise.all([
+                    this.$request().post(url`/admin/${$section.id}/${$screen.id}/getFields`),
+                    this.$request().post(url`/admin/${$section.id}/${$screen.id}/getAttributes`),
+                ]);
+
+                const { data: { fields = {} } } = fieldRequest;
+                this.fields = fields;
+
+                const { data: { attributes = {} } } = attributeRequest;
                 this.attributes = attributes;
             } catch (e) {
                 this.$error(e);
@@ -47,7 +55,6 @@
                     const {
                         data: { data: { request, message } }
                     } = await this.$form.post(url`/admin/${$section.id}/${$screen.id}/saveAttributes`, { attributes: this.attributes });
-                    console.log(request);
                     this.$success(message);
                 } catch (e) {
                     this.$error(e);

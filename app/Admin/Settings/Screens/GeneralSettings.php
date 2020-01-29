@@ -75,14 +75,12 @@ final class GeneralSettings extends FormScreen
     public function getAttributes(Request $request): array
     {
         return [
-            'data' => [
-                'attributes' => [
-                    'email1' => 'foo',
-                    'text1' => 'text field',
-                    'text2' => 'bar',
-                    'email3' => 'foo',
-                    'text3' => 'text field',
-                ]
+            'attributes' => [
+                'email1' => 'foo',
+                'text1' => 'text field',
+                'text2' => 'bar',
+                'email3' => 'foo',
+                'text3' => 'text field',
             ]
         ];
     }

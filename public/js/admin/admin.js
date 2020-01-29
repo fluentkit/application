@@ -2427,8 +2427,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _mixins_toast__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../mixins/toast */ "./resources/js/admin/mixins/toast.js");
 
 
-function _templateObject2() {
+function _templateObject3() {
   var data = _taggedTemplateLiteral(["/admin/", "/", "/saveAttributes"]);
+
+  _templateObject3 = function _templateObject3() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject2() {
+  var data = _taggedTemplateLiteral(["/admin/", "/", "/getAttributes"]);
 
   _templateObject2 = function _templateObject2() {
     return data;
@@ -2438,7 +2448,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["/admin/", "/", "/getAttributes"]);
+  var data = _taggedTemplateLiteral(["/admin/", "/", "/getFields"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -2448,6 +2458,14 @@ function _templateObject() {
 }
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
@@ -2474,6 +2492,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   mixins: [_mixins_request__WEBPACK_IMPORTED_MODULE_2__["default"], _mixins_form__WEBPACK_IMPORTED_MODULE_3__["default"], _mixins_screen__WEBPACK_IMPORTED_MODULE_4__["default"], _mixins_progress__WEBPACK_IMPORTED_MODULE_5__["default"], _mixins_toast__WEBPACK_IMPORTED_MODULE_6__["default"]],
   data: function data() {
     return {
+      fields: null,
       attributes: null,
       buttonText: 'Save Changes'
     };
@@ -2482,7 +2501,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     var _created = _asyncToGenerator(
     /*#__PURE__*/
     _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-      var $section, $screen, _ref, attributes;
+      var $section, $screen, _ref, _ref2, fieldRequest, attributeRequest, _fieldRequest$data$fi, fields, _attributeRequest$dat, attributes;
 
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
         while (1) {
@@ -2491,31 +2510,36 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               _context.prev = 0;
               $section = this.$section, $screen = this.$screen;
               _context.next = 4;
-              return this.$request().post(Object(_utils_url__WEBPACK_IMPORTED_MODULE_1__["default"])(_templateObject(), $section.id, $screen.id));
+              return Promise.all([this.$request().post(Object(_utils_url__WEBPACK_IMPORTED_MODULE_1__["default"])(_templateObject(), $section.id, $screen.id)), this.$request().post(Object(_utils_url__WEBPACK_IMPORTED_MODULE_1__["default"])(_templateObject2(), $section.id, $screen.id))]);
 
             case 4:
               _ref = _context.sent;
-              attributes = _ref.data.data.attributes;
+              _ref2 = _slicedToArray(_ref, 2);
+              fieldRequest = _ref2[0];
+              attributeRequest = _ref2[1];
+              _fieldRequest$data$fi = fieldRequest.data.fields, fields = _fieldRequest$data$fi === void 0 ? {} : _fieldRequest$data$fi;
+              this.fields = fields;
+              _attributeRequest$dat = attributeRequest.data.attributes, attributes = _attributeRequest$dat === void 0 ? {} : _attributeRequest$dat;
               this.attributes = attributes;
-              _context.next = 12;
+              _context.next = 17;
               break;
 
-            case 9:
-              _context.prev = 9;
+            case 14:
+              _context.prev = 14;
               _context.t0 = _context["catch"](0);
               this.$error(_context.t0);
 
-            case 12:
-              _context.prev = 12;
+            case 17:
+              _context.prev = 17;
               this.$progress().done();
-              return _context.finish(12);
+              return _context.finish(17);
 
-            case 15:
+            case 20:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, this, [[0, 9, 12, 15]]);
+      }, _callee, this, [[0, 14, 17, 20]]);
     }));
 
     function created() {
@@ -2529,7 +2553,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _saveForm = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-        var $section, $screen, _ref2, _ref2$data$data, _request, message;
+        var $section, $screen, _ref3, _ref3$data$data, _request, message;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
           while (1) {
@@ -2540,37 +2564,36 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 this.$progress().start();
                 $section = this.$section, $screen = this.$screen;
                 _context2.next = 6;
-                return this.$form.post(Object(_utils_url__WEBPACK_IMPORTED_MODULE_1__["default"])(_templateObject2(), $section.id, $screen.id), {
+                return this.$form.post(Object(_utils_url__WEBPACK_IMPORTED_MODULE_1__["default"])(_templateObject3(), $section.id, $screen.id), {
                   attributes: this.attributes
                 });
 
               case 6:
-                _ref2 = _context2.sent;
-                _ref2$data$data = _ref2.data.data;
-                _request = _ref2$data$data.request;
-                message = _ref2$data$data.message;
-                console.log(_request);
+                _ref3 = _context2.sent;
+                _ref3$data$data = _ref3.data.data;
+                _request = _ref3$data$data.request;
+                message = _ref3$data$data.message;
                 this.$success(message);
-                _context2.next = 17;
+                _context2.next = 16;
                 break;
 
-              case 14:
-                _context2.prev = 14;
+              case 13:
+                _context2.prev = 13;
                 _context2.t0 = _context2["catch"](0);
                 this.$error(_context2.t0);
 
-              case 17:
-                _context2.prev = 17;
+              case 16:
+                _context2.prev = 16;
                 this.buttonText = 'Save Changes';
                 this.$progress().done();
-                return _context2.finish(17);
+                return _context2.finish(16);
 
-              case 21:
+              case 20:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, this, [[0, 14, 17, 21]]);
+        }, _callee2, this, [[0, 13, 16, 20]]);
       }));
 
       function saveForm() {
@@ -2609,8 +2632,18 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+function _templateObject2() {
+  var data = _taggedTemplateLiteral(["/admin/", "/", "/getAttributes"]);
+
+  _templateObject2 = function _templateObject2() {
+    return data;
+  };
+
+  return data;
+}
+
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["/admin/", "/", "/getHtml"]);
+  var data = _taggedTemplateLiteral(["/admin/", "/", "/getTemplate"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -2620,6 +2653,14 @@ function _templateObject() {
 }
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
@@ -2637,14 +2678,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       template: "<fk-admin-background />",
-      templateData: {}
+      templateData: {
+        attributes: {}
+      }
     };
   },
   created: function () {
     var _created = _asyncToGenerator(
     /*#__PURE__*/
     _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-      var $section, $screen, _ref, _ref$data$data, template, data;
+      var $section, $screen, _ref, _ref2, templateRequest, attributeRequest, template, attributes;
 
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
         while (1) {
@@ -2653,34 +2696,36 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               _context.prev = 0;
               $section = this.$section, $screen = this.$screen;
               _context.next = 4;
-              return this.$request().post(Object(_utils_url__WEBPACK_IMPORTED_MODULE_1__["default"])(_templateObject(), $section.id, $screen.id));
+              return Promise.all([this.$request().post(Object(_utils_url__WEBPACK_IMPORTED_MODULE_1__["default"])(_templateObject(), $section.id, $screen.id)), this.$request().post(Object(_utils_url__WEBPACK_IMPORTED_MODULE_1__["default"])(_templateObject2(), $section.id, $screen.id))]);
 
             case 4:
               _ref = _context.sent;
-              _ref$data$data = _ref.data.data;
-              template = _ref$data$data.template;
-              data = _ref$data$data.data;
+              _ref2 = _slicedToArray(_ref, 2);
+              templateRequest = _ref2[0];
+              attributeRequest = _ref2[1];
+              template = templateRequest.data.template;
+              attributes = attributeRequest.data.attributes;
               this.template = template;
-              this.templateData = data;
-              _context.next = 15;
+              this.templateData.attributes = attributes;
+              _context.next = 17;
               break;
 
-            case 12:
-              _context.prev = 12;
+            case 14:
+              _context.prev = 14;
               _context.t0 = _context["catch"](0);
               this.$error(_context.t0);
 
-            case 15:
-              _context.prev = 15;
+            case 17:
+              _context.prev = 17;
               this.$progress().done();
-              return _context.finish(15);
+              return _context.finish(17);
 
-            case 18:
+            case 20:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, this, [[0, 12, 15, 18]]);
+      }, _callee, this, [[0, 14, 17, 20]]);
     }));
 
     function created() {
@@ -2690,9 +2735,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     return created;
   }(),
   render: function render(createElement) {
-    var _ref2 = this.$data || {},
-        _ref2$templateData = _ref2.templateData,
-        templateData = _ref2$templateData === void 0 ? {} : _ref2$templateData;
+    var _ref3 = this.$data || {},
+        _ref3$templateData = _ref3.templateData,
+        templateData = _ref3$templateData === void 0 ? {} : _ref3$templateData;
 
     return createElement({
       mixins: [_mixins_request__WEBPACK_IMPORTED_MODULE_2__["default"], _mixins_screen__WEBPACK_IMPORTED_MODULE_3__["default"], _mixins_progress__WEBPACK_IMPORTED_MODULE_4__["default"], _mixins_toast__WEBPACK_IMPORTED_MODULE_5__["default"]],
@@ -5124,13 +5169,13 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return !_vm.attributes
+  return !_vm.attributes || !_vm.fields
     ? _c("fk-admin-background")
     : _c(
         "div",
         { staticClass: "flex flex-col flex-grow" },
         [
-          _vm._l(_vm.$screen.fields, function(field) {
+          _vm._l(_vm.fields, function(field) {
             return _c("fk-admin-field-row", {
               key: field.id,
               attrs: { field: field },

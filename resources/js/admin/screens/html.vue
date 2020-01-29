@@ -12,17 +12,25 @@
         data () {
             return {
                 template: `<fk-admin-background />`,
-                templateData: {}
+                templateData: {
+                    attributes: {}
+                }
             }
         },
         async created () {
             try {
                 const { $section, $screen } = this;
-                const {
-                    data: { data: { template, data } }
-                } = await this.$request().post(url`/admin/${$section.id}/${$screen.id}/getHtml`);
+
+                const [templateRequest, attributeRequest] = await Promise.all([
+                    this.$request().post(url`/admin/${$section.id}/${$screen.id}/getTemplate`),
+                    this.$request().post(url`/admin/${$section.id}/${$screen.id}/getAttributes`),
+                ]);
+
+                const { data: { template } } = templateRequest;
+                const { data: { attributes } } = attributeRequest;
+
                 this.template = template;
-                this.templateData = data;
+                this.templateData.attributes = attributes;
             } catch (e) {
                 this.$error(e);
             } finally {

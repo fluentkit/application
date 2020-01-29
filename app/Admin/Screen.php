@@ -52,11 +52,6 @@ class Screen implements ScreenInterface
         return $this->type;
     }
 
-    public function getFields(): array
-    {
-        return $this->fields;
-    }
-
     public function getComponent(): string
     {
         return 'fk-admin-screen-' . $this->getType();
@@ -71,18 +66,28 @@ class Screen implements ScreenInterface
             'label' => $this->getLabel(),
             'hideSectionTitle' => $this->getHideSectionTitle(),
             'type' => $this->getType(),
-            'fields' => $this->getFields(),
             'component' => $this->getComponent(),
         ];
     }
 
-    public function getHtml(Request $request): array
+    public function getFields(Request $request): array
     {
         return [
-            'data' => [
-                'template' => '',
-                'data' => []
-            ]
+            'fields' => $this->fields
+        ];
+    }
+
+    public function getAttributes(Request $request): array
+    {
+        return [
+            'attributes' => []
+        ];
+    }
+
+    public function getTemplate(Request $request): array
+    {
+        return [
+            'template' => ''
         ];
     }
 }

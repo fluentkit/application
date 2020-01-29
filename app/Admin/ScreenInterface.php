@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace FluentKit\Admin;
 
+use Illuminate\Http\Request;
+
 interface ScreenInterface
 {
     public function getId(): string;
@@ -16,9 +18,11 @@ interface ScreenInterface
 
     public function getType(): string;
 
-    public function getFields(): array;
-
     public function getComponent(): string;
 
     public function toArray(): array;
+
+    public function getFields(Request $request): array;
+
+    public function getAttributes(Request $request): array;
 }
