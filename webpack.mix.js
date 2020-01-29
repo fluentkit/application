@@ -1,4 +1,5 @@
 const mix = require('laravel-mix');
+require('laravel-mix-merge-manifest');
 
 /*
  |--------------------------------------------------------------------------
@@ -14,19 +15,13 @@ const mix = require('laravel-mix');
 // hack because mix looks for artisan binary?
 mix.setPublicPath('public');
 
-mix.options({
-    extractVueStyles: 'public/css/admin.css',
-    postCss: [
-        require('postcss-preset-env'),
-        require('tailwindcss'),
-    ],
-});
-
-mix.js('resources/js/app.js', 'public/js')
-    .js('resources/js/admin.js', 'public/js')
-    .extract(['vue'])
-    .sourceMaps();
+// merge manifest from different configs
+mix.mergeManifest();
 
 if (mix.inProduction()) {
-    mix.version();
+    mix.sourceMaps().version();
+}
+
+if (process.env.section) {
+    require(`${__dirname}/webpack.mix.${process.env.section}.js`);
 }

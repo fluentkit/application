@@ -63,11 +63,9 @@ export default config => {
     Vue.component(HtmlScreen.name, HtmlScreen);
     Vue.component(FormScreen.name, FormScreen);
 
-    const router = new Router({
+    return new Router({
         routes: createRoutes(config),
         mode: 'history',
         base: '/admin/'
     });
-
-    return router;
 };

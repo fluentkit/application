@@ -1,7 +1,10 @@
 {
-    "/js/admin.js": "/js/admin.js",
-    "/css/admin.css": "/css/admin.css",
-    "/js/app.js": "/js/app.js",
-    "/js/manifest.js": "/js/manifest.js",
-    "/js/vendor.js": "/js/vendor.js"
+    "/js/auth/auth.js": "/js/auth/auth.js",
+    "/css/auth/auth.css": "/css/auth/auth.css",
+    "/js/auth/manifest.js": "/js/auth/manifest.js",
+    "/js/auth/vendor.js": "/js/auth/vendor.js",
+    "/js/admin/admin.js": "/js/admin/admin.js",
+    "/css/admin/admin.css": "/css/admin/admin.css",
+    "/js/admin/manifest.js": "/js/admin/manifest.js",
+    "/js/admin/vendor.js": "/js/admin/vendor.js"
 }

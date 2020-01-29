@@ -14,3 +14,5 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::post('/login', [\FluentKit\Http\Controllers\Auth\LoginController::class, 'login']);

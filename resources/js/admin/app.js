@@ -8,8 +8,8 @@ import layout from './components/layout/layout';
 export default config => {
 
     // Apply global mixins
-    Vue.mixin(require('./mixins/global/request').default);
-    Vue.mixin(require('./mixins/global/bus').default);
+    Vue.mixin(require('../mixins/request').default);
+    Vue.mixin(require('../mixins/bus').default);
     Vue.mixin(require('./mixins/global/screen').default);
     Vue.mixin(require('./mixins/global/progress').default);
     Vue.mixin(require('./mixins/global/toast').default);

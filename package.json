@@ -1,18 +1,22 @@
 {
     "private": true,
     "scripts": {
-        "dev": "npm run development",
-        "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-        "watch": "npm run development -- --watch",
-        "watch-poll": "npm run watch -- --watch-poll",
-        "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
-        "prod": "npm run production",
-        "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
+        "dev:admin": "cross-env process.env.section=admin NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "hot:admin": "cross-env process.env.section=admin NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "prod:admin": "cross-env process.env.section=admin NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "watch:admin": "npm run dev:admin -- --watch",
+        "watch-poll:admin": "npm run watch:admin -- --watch-poll",
+        "dev:auth": "cross-env process.env.section=auth NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "hot:auth": "cross-env process.env.section=auth NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "prod:auth": "cross-env process.env.section=auth NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "watch:auth": "npm run dev:auth -- --watch",
+        "watch-poll:auth": "npm run watch:auth -- --watch-poll"
     },
     "devDependencies": {
         "axios": "^0.19",
         "cross-env": "^5.1",
         "laravel-mix": "^5.0.1",
+        "laravel-mix-merge-manifest": "^0.1.2",
         "nprogress": "^0.2.0",
         "postcss-preset-env": "^6.7.0",
         "resolve-url-loader": "^2.3.1",

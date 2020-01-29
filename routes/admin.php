@@ -11,6 +11,9 @@
 |
 */
 
+Route::view('/login', 'auth.layouts.default');
+Route::view('/login/forgot-password', 'auth.layouts.default');
+
 Route::get('/{path?}', function () {
     return view('admin.layouts.default', ['admin' => app(\FluentKit\Admin\Area::class)->toArray()]);
 })->where('path', '(.*?)');

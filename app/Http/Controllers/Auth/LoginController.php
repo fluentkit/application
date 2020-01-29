@@ -1,40 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
 namespace FluentKit\Http\Controllers\Auth;
 
 use FluentKit\Http\Controllers\Controller;
-use FluentKit\Providers\RouteServiceProvider;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use FluentKit\Http\Requests\LoginRequest;
 
-class LoginController extends Controller
+final class LoginController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles authenticating users for the application and
-    | redirecting them to your home screen. The controller uses a trait
-    | to conveniently provide its functionality to your applications.
-    |
-    */
-
-    use AuthenticatesUsers;
-
-    /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
-    protected $redirectTo = RouteServiceProvider::HOME;
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    public function login(LoginRequest $request)
     {
-        $this->middleware('guest')->except('logout');
+        return [
+            'message' => 'Success!',
+            'data' => []
+        ];
     }
 }

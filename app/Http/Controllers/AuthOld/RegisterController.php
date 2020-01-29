@@ -1,6 +1,6 @@
 <?php
 
-namespace FluentKit\Http\Controllers\Auth;
+namespace FluentKit\Http\Controllers\AuthOld;
 
 use FluentKit\Http\Controllers\Controller;
 use FluentKit\Providers\RouteServiceProvider;
