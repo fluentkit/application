@@ -44,7 +44,7 @@ final class Area
         ];
     }
 
-    public function getSections(): array
+    private function getSections(): array
     {
         return collect($this->sections)
             ->map(fn(SectionInterface $screen) => $screen->toArray())
@@ -52,7 +52,7 @@ final class Area
             ->toArray();
     }
 
-    public function getUserLinks(): array
+    private function getUserLinks(): array
     {
         return collect($this->userLinks)
             ->map(fn(UserLinkInterface $link) => $link->toArray())
