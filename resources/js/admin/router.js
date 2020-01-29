@@ -74,7 +74,10 @@ const createRoutes = ({ sections, user }) => {
             name: '404',
             component: {
                 mixins: [progressMixin],
-                template: `<div>Hacky 404 until we built it out</div>`,
+                template: `<fk-admin-background>
+                    <h1>Oops, looks like that page doesn't exist.</h1>
+                    <p>Please choose a link from the menu.</p>
+                </fk-admin-background>`,
                 async mounted () {
                     await this.$nextTick();
                     this.$progress().done();

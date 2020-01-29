@@ -2116,8 +2116,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'fk-admin-background'
+  name: 'fk-admin-background',
+  props: {
+    title: {
+      type: String
+    },
+    content: {
+      type: String
+    }
+  }
 });
 
 /***/ }),
@@ -4818,9 +4827,16 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "fk-admin-background" }, [
-    _c("img", { attrs: { src: _vm._f("url")("storage/logo-inverted.png") } })
-  ])
+  return _c(
+    "div",
+    { staticClass: "fk-admin-background" },
+    [
+      _c("img", { attrs: { src: _vm._f("url")("storage/logo-inverted.png") } }),
+      _vm._v(" "),
+      _vm._t("default")
+    ],
+    2
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -9692,7 +9708,7 @@ var createRoutes = function createRoutes(_ref) {
     name: '404',
     component: {
       mixins: [_mixins_progress__WEBPACK_IMPORTED_MODULE_4__["default"]],
-      template: "<div>Hacky 404 until we built it out</div>",
+      template: "<fk-admin-background>\n                    <h1>Oops, looks like that page doesn't exist.</h1>\n                    <p>Please choose a link from the menu.</p>\n                </fk-admin-background>",
       mounted: function () {
         var _mounted = _asyncToGenerator(
         /*#__PURE__*/

@@ -10,6 +10,12 @@
   height: auto;
   opacity: 0.04;
 }
+.fk-admin-background h1 {
+  font-size: 2.25rem;
+  font-weight: 700;
+}
+.fk-admin-background p {
+}
 .fk-admin-user {
   display: flex;
   display: block;
