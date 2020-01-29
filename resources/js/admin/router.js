@@ -56,7 +56,18 @@ const createRoutes = ({ sections, user }) => {
             },
             name: 'index'
         },
-        ...routes
+        ...routes,
+        // Add a logout route to make it easy to trigger from within the admin class links
+        {
+            path: '/logout',
+            name: 'logout',
+            component: {
+                template: `<div></div>`
+            },
+            beforeEnter () {
+                window.location.href = '/logout';
+            }
+        }
     ]
 };
 

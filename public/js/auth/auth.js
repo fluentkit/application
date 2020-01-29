@@ -1936,6 +1936,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'fk-auth-screen-login',
@@ -3304,94 +3305,106 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "fk-auth-login" }, [
-    _c("label", { attrs: { for: "email" } }, [_vm._v("Email Address")]),
-    _vm._v(" "),
-    _c("input", {
-      directives: [
-        {
-          name: "model",
-          rawName: "v-model",
-          value: _vm.email,
-          expression: "email"
-        }
-      ],
-      staticClass: "fk-auth-login-input",
-      class: { error: _vm.$form.errors.has("email") },
-      attrs: { type: "text", id: "email" },
-      domProps: { value: _vm.email },
+  return _c(
+    "form",
+    {
+      staticClass: "fk-auth-login",
       on: {
-        input: [
-          function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.email = $event.target.value
-          },
-          function($event) {
-            return _vm.$form.errors.clear("email")
-          }
-        ]
-      }
-    }),
-    _vm._v(" "),
-    _vm.$form.errors.has("email")
-      ? _c("p", { staticClass: "error" }, [
-          _vm._v(_vm._s(_vm.$form.errors.first("email")))
-        ])
-      : _vm._e(),
-    _vm._v(" "),
-    _c("label", { attrs: { for: "password" } }, [_vm._v("Password")]),
-    _vm._v(" "),
-    _c("input", {
-      directives: [
-        {
-          name: "model",
-          rawName: "v-model",
-          value: _vm.password,
-          expression: "password"
+        submit: function($event) {
+          $event.preventDefault()
+          return _vm.login($event)
         }
-      ],
-      staticClass: "fk-auth-login-input",
-      class: { error: _vm.$form.errors.has("password") },
-      attrs: { type: "password", id: "password" },
-      domProps: { value: _vm.password },
-      on: {
-        input: [
-          function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.password = $event.target.value
-          },
-          function($event) {
-            return _vm.$form.errors.clear("password")
-          }
-        ]
       }
-    }),
-    _vm._v(" "),
-    _vm.$form.errors.has("password")
-      ? _c("p", { staticClass: "error" }, [
-          _vm._v(_vm._s(_vm.$form.errors.first("password")))
-        ])
-      : _vm._e(),
-    _vm._v(" "),
-    _c(
-      "button",
-      {
-        staticClass: "fk-auth-login-button",
-        attrs: { disabled: _vm.$form.processing },
+    },
+    [
+      _c("label", { attrs: { for: "email" } }, [_vm._v("Email Address")]),
+      _vm._v(" "),
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.email,
+            expression: "email"
+          }
+        ],
+        staticClass: "fk-auth-login-input",
+        class: { error: _vm.$form.errors.has("email") },
+        attrs: { type: "text", id: "email" },
+        domProps: { value: _vm.email },
         on: {
-          click: function($event) {
-            $event.preventDefault()
-            return _vm.login($event)
-          }
+          input: [
+            function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.email = $event.target.value
+            },
+            function($event) {
+              return _vm.$form.errors.clear("email")
+            }
+          ]
         }
-      },
-      [_vm._v("\n        " + _vm._s(_vm.loginText) + "\n    ")]
-    )
-  ])
+      }),
+      _vm._v(" "),
+      _vm.$form.errors.has("email")
+        ? _c("p", { staticClass: "error" }, [
+            _vm._v(_vm._s(_vm.$form.errors.first("email")))
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _c("label", { attrs: { for: "password" } }, [_vm._v("Password")]),
+      _vm._v(" "),
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.password,
+            expression: "password"
+          }
+        ],
+        staticClass: "fk-auth-login-input",
+        class: { error: _vm.$form.errors.has("password") },
+        attrs: { type: "password", id: "password" },
+        domProps: { value: _vm.password },
+        on: {
+          input: [
+            function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.password = $event.target.value
+            },
+            function($event) {
+              return _vm.$form.errors.clear("password")
+            }
+          ]
+        }
+      }),
+      _vm._v(" "),
+      _vm.$form.errors.has("password")
+        ? _c("p", { staticClass: "error" }, [
+            _vm._v(_vm._s(_vm.$form.errors.first("password")))
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "fk-auth-login-button",
+          attrs: { type: "submit", disabled: _vm.$form.processing },
+          on: {
+            click: function($event) {
+              $event.preventDefault()
+              return _vm.login($event)
+            }
+          }
+        },
+        [_vm._v("\n        " + _vm._s(_vm.loginText) + "\n    ")]
+      )
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

@@ -28,7 +28,28 @@ final class Area
                 ->sortBy('priority')
                 ->toArray(),
             'assetUrl' => asset('/'),
-            'user' => request()->user()
+            'user' => request()->user(),
+            'userLinks' => [
+                [
+                    'text' => 'My Profile',
+                    'route' => 'foobar',
+                ],
+                [
+                    'text' => 'My Profile 2',
+                    'route' => 'foobar',
+                ],
+                [
+                    'text' => 'My Profile 3',
+                    'route' => 'foobar',
+                ],
+                [
+                    'type' => 'divider',
+                ],
+                [
+                    'text' => 'Logout',
+                    'route' => 'logout',
+                ],
+            ]
         ];
     }
 }

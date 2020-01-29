@@ -5,7 +5,7 @@
             <fk-admin-sidebar-menu :sections="sections"></fk-admin-sidebar-menu>
         </section>
         <section class="main">
-            <fk-admin-header></fk-admin-header>
+            <fk-admin-header :user-links="mappedUserLinks"></fk-admin-header>
             <div id="progress-container"></div>
             <div id="screen-container">
                 <router-view></router-view>
@@ -37,6 +37,21 @@
             user: {
                 type: Object,
                 required: true
+            },
+            userLinks: {
+                type: Array,
+                default: () => ([])
+            }
+        },
+        computed: {
+            mappedUserLinks () {
+                return this.userLinks.map(({ type = 'link', text, route:name, params = {}, query = {} }) => {
+                    return {
+                        type,
+                        text,
+                        click: () => this.$router.push({ name, params, query })
+                    };
+                });
             }
         },
         mounted () {

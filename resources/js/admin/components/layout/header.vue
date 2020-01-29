@@ -4,19 +4,28 @@
         <span v-for="(title, index) in titles" class="title">
             <i v-if="index !== 0" class="fas fa-chevron-right" /> {{ title }}
         </span>
-        <div class="user" @click="logout">
-            <img :src="$user.avatar" />
-        </div>
+        <fk-admin-user :avatar="$user.avatar" :links="userLinks" />
     </nav>
 </template>
 
 <script>
     import screen from '../../mixins/screen';
-    import user from '../../mixins/user';
+    import userMixin from '../../mixins/user';
+
+    import user from './user';
 
 	export default {
 		name: 'fk-admin-header',
-        mixins: [screen, user],
+        mixins: [screen, userMixin],
+        components: {
+		    [user.name]: user
+        },
+        props: {
+		    userLinks: {
+		        type: Array,
+                default: () => ([])
+            }
+        },
         computed: {
             titles () {
                 const { $section, $screen } = this;
@@ -36,11 +45,6 @@
                     $screen.label
                 ]
             }
-        },
-        methods: {
-		    logout () {
-                window.location.href = '/logout';
-            }
         }
 	}
 </script>
@@ -57,8 +61,5 @@
     }
     .fk-admin-header > .title > .fas {
         @apply .mr-1;
-    }
-    .fk-admin-header .user {
-        @apply .flex .w-10 .h-auto .ml-auto .rounded-full .overflow-hidden;
     }
 </style>
