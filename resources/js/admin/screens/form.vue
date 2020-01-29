@@ -10,11 +10,15 @@
 
 <script>
     import url from '../../utils/url';
+    import request from '../../mixins/request';
     import form from '../../mixins/form';
+    import screen from '../mixins/screen';
+    import progress from '../mixins/progress';
+    import toast from '../mixins/toast';
 
 	export default {
 		name: 'fk-admin-screen-form',
-        mixins: [form],
+        mixins: [request, form, screen, progress, toast],
         data () {
             return {
                 attributes: null,

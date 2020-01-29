@@ -6499,33 +6499,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  // Export app creator
 
 /* harmony default export */ __webpack_exports__["default"] = (function (config) {
-  // Apply global mixins
-  vue__WEBPACK_IMPORTED_MODULE_0___default.a.mixin(__webpack_require__(/*! ../mixins/request */ "./resources/js/mixins/request.js")["default"]);
-  vue__WEBPACK_IMPORTED_MODULE_0___default.a.mixin(__webpack_require__(/*! ../mixins/bus */ "./resources/js/mixins/bus.js")["default"]); // Apply filters
-
+  // Apply filters
   vue__WEBPACK_IMPORTED_MODULE_0___default.a.filter('url', function (path) {
     return config.assetUrl + path;
   });
-
-  var registerComponents = function registerComponents(comps) {
-    return comps.forEach(function (component) {
-      return vue__WEBPACK_IMPORTED_MODULE_0___default.a.component(component.name, component);
-    });
-  }; // registerComponents([
-  //     // layout
-  //     require('./components/layout/background').default,
-  //     // elements
-  //     require('./components/elements/title').default,
-  //     require('./components/elements/panel').default,
-  //     require('./components/elements/button').default,
-  //     // fields
-  //     require('./components/elements/field/row').default,
-  //     require('./components/elements/field/panel').default,
-  //     require('./components/elements/field/label').default,
-  //     require('./components/elements/field/input').default,
-  // ]);
-
-
   return new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
     router: Object(_router__WEBPACK_IMPORTED_MODULE_1__["default"])(config),
     components: _defineProperty({}, _components_layout_layout__WEBPACK_IMPORTED_MODULE_2__["default"].name, _components_layout_layout__WEBPACK_IMPORTED_MODULE_2__["default"]),
@@ -6756,29 +6733,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/mixins/bus.js":
-/*!************************************!*\
-  !*** ./resources/js/mixins/bus.js ***!
-  \************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
-
-var Bus = new vue__WEBPACK_IMPORTED_MODULE_0___default.a();
-/* harmony default export */ __webpack_exports__["default"] = ({
-  methods: {
-    $bus: function $bus() {
-      return Bus;
-    }
-  }
-});
-
-/***/ }),
-
 /***/ "./resources/js/mixins/form.js":
 /*!*************************************!*\
   !*** ./resources/js/mixins/form.js ***!
@@ -6792,6 +6746,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _request__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./request */ "./resources/js/mixins/request.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -6805,10 +6760,12 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       form: new vue__WEBPACK_IMPORTED_MODULE_1___default.a({
+        mixins: [_request__WEBPACK_IMPORTED_MODULE_2__["default"]],
         data: function data() {
           return {
             formErrors: {},

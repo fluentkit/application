@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 
+import screenMixin from './mixins/screen';
+
 // Base screen components
 import HtmlScreen from './screens/html';
 import FormScreen from './screens/form';
@@ -27,6 +29,7 @@ const createRoutes = ({ sections }) => {
                         return {
                             path: `/${id}/${screen.id}`,
                             component: {
+                                mixins: [screenMixin],
                                 render (createElement) {
                                     return createElement(this.$screen.component);
                                 }

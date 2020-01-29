@@ -1,9 +1,11 @@
 import Vue from 'vue';
+import request from './request';
 
 export default {
     data () {
         return {
             form: new Vue({
+                mixins: [request],
                 data () {
                     return {
                         formErrors: {},

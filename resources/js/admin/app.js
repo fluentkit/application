@@ -6,14 +6,6 @@ import layout from './components/layout/layout';
 
 // Export app creator
 export default config => {
-
-    // Apply global mixins
-    Vue.mixin(require('../mixins/request').default);
-    Vue.mixin(require('../mixins/bus').default);
-    Vue.mixin(require('./mixins/global/screen').default);
-    Vue.mixin(require('./mixins/global/progress').default);
-    Vue.mixin(require('./mixins/global/toast').default);
-
     // Apply filters
     Vue.filter('url', path => config.assetUrl+path);
 

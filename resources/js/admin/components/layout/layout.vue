@@ -15,12 +15,15 @@
 </template>
 
 <script>
+    import progress from '../../mixins/progress';
+
     import header from './header';
     import sidebarHeader from './sidebar/header';
     import sidebarMenu from './sidebar/menu';
 
     export default {
         name: 'fk-admin-layout',
+        mixins: [progress],
         components: {
             [header.name]: header,
             [sidebarHeader.name]: sidebarHeader,

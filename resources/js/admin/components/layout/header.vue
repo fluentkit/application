@@ -11,8 +11,11 @@
 </template>
 
 <script>
+    import screen from '../../mixins/screen';
+
 	export default {
 		name: 'fk-admin-header',
+        mixins: [screen],
         computed: {
             titles () {
                 const { $section, $screen } = this;

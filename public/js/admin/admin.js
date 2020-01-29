@@ -2131,6 +2131,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _mixins_screen__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../mixins/screen */ "./resources/js/admin/mixins/screen.js");
 //
 //
 //
@@ -2143,8 +2144,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'fk-admin-header',
+  mixins: [_mixins_screen__WEBPACK_IMPORTED_MODULE_0__["default"]],
   computed: {
     titles: function titles() {
       var $section = this.$section,
@@ -2174,9 +2177,10 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _header__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./header */ "./resources/js/admin/components/layout/header.vue");
-/* harmony import */ var _sidebar_header__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./sidebar/header */ "./resources/js/admin/components/layout/sidebar/header.vue");
-/* harmony import */ var _sidebar_menu__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./sidebar/menu */ "./resources/js/admin/components/layout/sidebar/menu.vue");
+/* harmony import */ var _mixins_progress__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../mixins/progress */ "./resources/js/admin/mixins/progress.js");
+/* harmony import */ var _header__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./header */ "./resources/js/admin/components/layout/header.vue");
+/* harmony import */ var _sidebar_header__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./sidebar/header */ "./resources/js/admin/components/layout/sidebar/header.vue");
+/* harmony import */ var _sidebar_menu__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./sidebar/menu */ "./resources/js/admin/components/layout/sidebar/menu.vue");
 var _components;
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -2200,9 +2204,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'fk-admin-layout',
-  components: (_components = {}, _defineProperty(_components, _header__WEBPACK_IMPORTED_MODULE_0__["default"].name, _header__WEBPACK_IMPORTED_MODULE_0__["default"]), _defineProperty(_components, _sidebar_header__WEBPACK_IMPORTED_MODULE_1__["default"].name, _sidebar_header__WEBPACK_IMPORTED_MODULE_1__["default"]), _defineProperty(_components, _sidebar_menu__WEBPACK_IMPORTED_MODULE_2__["default"].name, _sidebar_menu__WEBPACK_IMPORTED_MODULE_2__["default"]), _components),
+  mixins: [_mixins_progress__WEBPACK_IMPORTED_MODULE_0__["default"]],
+  components: (_components = {}, _defineProperty(_components, _header__WEBPACK_IMPORTED_MODULE_1__["default"].name, _header__WEBPACK_IMPORTED_MODULE_1__["default"]), _defineProperty(_components, _sidebar_header__WEBPACK_IMPORTED_MODULE_2__["default"].name, _sidebar_header__WEBPACK_IMPORTED_MODULE_2__["default"]), _defineProperty(_components, _sidebar_menu__WEBPACK_IMPORTED_MODULE_3__["default"].name, _sidebar_menu__WEBPACK_IMPORTED_MODULE_3__["default"]), _components),
   props: {
     sections: {
       type: Object,
@@ -2301,7 +2307,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _utils_url__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils/url */ "./resources/js/utils/url.js");
-/* harmony import */ var _mixins_form__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../mixins/form */ "./resources/js/mixins/form.js");
+/* harmony import */ var _mixins_request__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../mixins/request */ "./resources/js/mixins/request.js");
+/* harmony import */ var _mixins_form__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../mixins/form */ "./resources/js/mixins/form.js");
+/* harmony import */ var _mixins_screen__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../mixins/screen */ "./resources/js/admin/mixins/screen.js");
+/* harmony import */ var _mixins_progress__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../mixins/progress */ "./resources/js/admin/mixins/progress.js");
+/* harmony import */ var _mixins_toast__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../mixins/toast */ "./resources/js/admin/mixins/toast.js");
 
 
 function _templateObject2() {
@@ -2342,9 +2352,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 
 
+
+
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'fk-admin-screen-form',
-  mixins: [_mixins_form__WEBPACK_IMPORTED_MODULE_2__["default"]],
+  mixins: [_mixins_request__WEBPACK_IMPORTED_MODULE_2__["default"], _mixins_form__WEBPACK_IMPORTED_MODULE_3__["default"], _mixins_screen__WEBPACK_IMPORTED_MODULE_4__["default"], _mixins_progress__WEBPACK_IMPORTED_MODULE_5__["default"], _mixins_toast__WEBPACK_IMPORTED_MODULE_6__["default"]],
   data: function data() {
     return {
       attributes: null,
@@ -2402,7 +2416,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _saveForm = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-        var $section, $screen, _ref2, _ref2$data$data, request, message;
+        var $section, $screen, _ref2, _ref2$data$data, _request, message;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
           while (1) {
@@ -2413,16 +2427,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 this.$progress().start();
                 $section = this.$section, $screen = this.$screen;
                 _context2.next = 6;
-                return this.$post(Object(_utils_url__WEBPACK_IMPORTED_MODULE_1__["default"])(_templateObject2(), $section.id, $screen.id), {
+                return this.$form.post(Object(_utils_url__WEBPACK_IMPORTED_MODULE_1__["default"])(_templateObject2(), $section.id, $screen.id), {
                   attributes: this.attributes
                 });
 
               case 6:
                 _ref2 = _context2.sent;
                 _ref2$data$data = _ref2.data.data;
-                request = _ref2$data$data.request;
+                _request = _ref2$data$data.request;
                 message = _ref2$data$data.message;
-                console.log(request);
+                console.log(_request);
                 this.$success(message);
                 _context2.next = 17;
                 break;
@@ -2469,7 +2483,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _utils_url__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils/url */ "./resources/js/utils/url.js");
-/* harmony import */ var _components_layout_background__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/layout/background */ "./resources/js/admin/components/layout/background.vue");
+/* harmony import */ var _mixins_request__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../mixins/request */ "./resources/js/mixins/request.js");
+/* harmony import */ var _mixins_screen__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../mixins/screen */ "./resources/js/admin/mixins/screen.js");
+/* harmony import */ var _mixins_progress__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../mixins/progress */ "./resources/js/admin/mixins/progress.js");
+/* harmony import */ var _mixins_toast__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../mixins/toast */ "./resources/js/admin/mixins/toast.js");
+/* harmony import */ var _components_layout_background__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/layout/background */ "./resources/js/admin/components/layout/background.vue");
 
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -2496,8 +2514,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 
+
+
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'fk-admin-screen-html',
+  mixins: [_mixins_request__WEBPACK_IMPORTED_MODULE_2__["default"], _mixins_screen__WEBPACK_IMPORTED_MODULE_3__["default"], _mixins_progress__WEBPACK_IMPORTED_MODULE_4__["default"], _mixins_toast__WEBPACK_IMPORTED_MODULE_5__["default"]],
   data: function data() {
     return {
       template: "<fk-admin-background />",
@@ -2559,7 +2582,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         templateData = _ref2$templateData === void 0 ? {} : _ref2$templateData;
 
     return createElement({
-      components: _defineProperty({}, _components_layout_background__WEBPACK_IMPORTED_MODULE_2__["default"].name, _components_layout_background__WEBPACK_IMPORTED_MODULE_2__["default"]),
+      mixins: [_mixins_request__WEBPACK_IMPORTED_MODULE_2__["default"], _mixins_screen__WEBPACK_IMPORTED_MODULE_3__["default"], _mixins_progress__WEBPACK_IMPORTED_MODULE_4__["default"], _mixins_toast__WEBPACK_IMPORTED_MODULE_5__["default"]],
+      components: _defineProperty({}, _components_layout_background__WEBPACK_IMPORTED_MODULE_6__["default"].name, _components_layout_background__WEBPACK_IMPORTED_MODULE_6__["default"]),
       data: function data() {
         return _objectSpread({}, templateData);
       },
@@ -4942,7 +4966,7 @@ var render = function() {
               _c(
                 "fk-admin-button",
                 {
-                  attrs: { type: "info", disabled: _vm.$processing },
+                  attrs: { type: "info", disabled: _vm.$form.processing },
                   on: { click: _vm.saveForm }
                 },
                 [_vm._v(_vm._s(_vm.buttonText))]
@@ -8073,13 +8097,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  // Export app creator
 
 /* harmony default export */ __webpack_exports__["default"] = (function (config) {
-  // Apply global mixins
-  vue__WEBPACK_IMPORTED_MODULE_0___default.a.mixin(__webpack_require__(/*! ../mixins/request */ "./resources/js/mixins/request.js")["default"]);
-  vue__WEBPACK_IMPORTED_MODULE_0___default.a.mixin(__webpack_require__(/*! ../mixins/bus */ "./resources/js/mixins/bus.js")["default"]);
-  vue__WEBPACK_IMPORTED_MODULE_0___default.a.mixin(__webpack_require__(/*! ./mixins/global/screen */ "./resources/js/admin/mixins/global/screen.js")["default"]);
-  vue__WEBPACK_IMPORTED_MODULE_0___default.a.mixin(__webpack_require__(/*! ./mixins/global/progress */ "./resources/js/admin/mixins/global/progress.js")["default"]);
-  vue__WEBPACK_IMPORTED_MODULE_0___default.a.mixin(__webpack_require__(/*! ./mixins/global/toast */ "./resources/js/admin/mixins/global/toast.js")["default"]); // Apply filters
-
+  // Apply filters
   vue__WEBPACK_IMPORTED_MODULE_0___default.a.filter('url', function (path) {
     return config.assetUrl + path;
   });
@@ -9157,10 +9175,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/admin/mixins/global/progress.js":
-/*!******************************************************!*\
-  !*** ./resources/js/admin/mixins/global/progress.js ***!
-  \******************************************************/
+/***/ "./resources/js/admin/mixins/progress.js":
+/*!***********************************************!*\
+  !*** ./resources/js/admin/mixins/progress.js ***!
+  \***********************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -9179,10 +9197,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/admin/mixins/global/screen.js":
-/*!****************************************************!*\
-  !*** ./resources/js/admin/mixins/global/screen.js ***!
-  \****************************************************/
+/***/ "./resources/js/admin/mixins/screen.js":
+/*!*********************************************!*\
+  !*** ./resources/js/admin/mixins/screen.js ***!
+  \*********************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -9201,10 +9219,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/admin/mixins/global/toast.js":
-/*!***************************************************!*\
-  !*** ./resources/js/admin/mixins/global/toast.js ***!
-  \***************************************************/
+/***/ "./resources/js/admin/mixins/toast.js":
+/*!********************************************!*\
+  !*** ./resources/js/admin/mixins/toast.js ***!
+  \********************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -9309,8 +9327,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
-/* harmony import */ var _screens_html__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./screens/html */ "./resources/js/admin/screens/html.vue");
-/* harmony import */ var _screens_form__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./screens/form */ "./resources/js/admin/screens/form.vue");
+/* harmony import */ var _mixins_screen__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./mixins/screen */ "./resources/js/admin/mixins/screen.js");
+/* harmony import */ var _screens_html__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./screens/html */ "./resources/js/admin/screens/html.vue");
+/* harmony import */ var _screens_form__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./screens/form */ "./resources/js/admin/screens/form.vue");
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
@@ -9318,6 +9337,7 @@ function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread n
 function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
 
 
  // Base screen components
@@ -9345,6 +9365,7 @@ var createRoutes = function createRoutes(_ref) {
       return {
         path: "/".concat(id, "/").concat(screen.id),
         component: {
+          mixins: [_mixins_screen__WEBPACK_IMPORTED_MODULE_2__["default"]],
           render: function render(createElement) {
             return createElement(this.$screen.component);
           }
@@ -9371,8 +9392,8 @@ var createRoutes = function createRoutes(_ref) {
 /* harmony default export */ __webpack_exports__["default"] = (function (config) {
   vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]); // Register base screen components
 
-  vue__WEBPACK_IMPORTED_MODULE_0___default.a.component(_screens_html__WEBPACK_IMPORTED_MODULE_2__["default"].name, _screens_html__WEBPACK_IMPORTED_MODULE_2__["default"]);
-  vue__WEBPACK_IMPORTED_MODULE_0___default.a.component(_screens_form__WEBPACK_IMPORTED_MODULE_3__["default"].name, _screens_form__WEBPACK_IMPORTED_MODULE_3__["default"]);
+  vue__WEBPACK_IMPORTED_MODULE_0___default.a.component(_screens_html__WEBPACK_IMPORTED_MODULE_3__["default"].name, _screens_html__WEBPACK_IMPORTED_MODULE_3__["default"]);
+  vue__WEBPACK_IMPORTED_MODULE_0___default.a.component(_screens_form__WEBPACK_IMPORTED_MODULE_4__["default"].name, _screens_form__WEBPACK_IMPORTED_MODULE_4__["default"]);
   return new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     routes: createRoutes(config),
     mode: 'history',
@@ -9501,29 +9522,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/mixins/bus.js":
-/*!************************************!*\
-  !*** ./resources/js/mixins/bus.js ***!
-  \************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
-
-var Bus = new vue__WEBPACK_IMPORTED_MODULE_0___default.a();
-/* harmony default export */ __webpack_exports__["default"] = ({
-  methods: {
-    $bus: function $bus() {
-      return Bus;
-    }
-  }
-});
-
-/***/ }),
-
 /***/ "./resources/js/mixins/form.js":
 /*!*************************************!*\
   !*** ./resources/js/mixins/form.js ***!
@@ -9537,6 +9535,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _request__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./request */ "./resources/js/mixins/request.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -9550,230 +9549,261 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      formErrors: new vue__WEBPACK_IMPORTED_MODULE_1___default.a({
+      form: new vue__WEBPACK_IMPORTED_MODULE_1___default.a({
+        mixins: [_request__WEBPACK_IMPORTED_MODULE_2__["default"]],
         data: function data() {
           return {
-            errors: {}
+            formErrors: {},
+            message: null,
+            processing: false
           };
         },
+        computed: {
+          errors: function errors() {
+            return this;
+          }
+        },
         methods: {
-          set: function set(errors) {
-            this.errors = errors;
+          setErrors: function setErrors(errors) {
+            this.formErrors = errors;
           },
           clear: function clear(field) {
             if (field) {
-              var errors = _objectSpread({}, this.errors);
+              var errors = _objectSpread({}, this.formErrors);
 
               delete errors[field];
-              this.set(errors);
+              this.setErrors(errors);
               return;
             }
 
-            this.errors = {};
+            this.formErrors = {};
           },
           all: function all() {
-            return this.errors;
+            return this.formErrors;
           },
           any: function any() {
-            return !!Object.keys(this.errors).length;
+            return !!Object.keys(this.formErrors).length;
           },
           has: function has(field) {
-            return this.errors[field] && this.errors[field].length;
+            return this.formErrors[field] && this.formErrors[field].length;
           },
           get: function get(field) {
-            return this.errors[field] || [];
+            return this.formErrors[field] || [];
           },
           first: function first(field) {
             return this.get(field)[0] || null;
-          }
+          },
+          post: function () {
+            var _post = _asyncToGenerator(
+            /*#__PURE__*/
+            _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(url, data) {
+              var _len,
+                  args,
+                  _key,
+                  _args = arguments;
+
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+                while (1) {
+                  switch (_context.prev = _context.next) {
+                    case 0:
+                      for (_len = _args.length, args = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
+                        args[_key - 2] = _args[_key];
+                      }
+
+                      return _context.abrupt("return", this.submitForm.apply(this, ['post', url, data].concat(args)));
+
+                    case 2:
+                    case "end":
+                      return _context.stop();
+                  }
+                }
+              }, _callee, this);
+            }));
+
+            function post(_x, _x2) {
+              return _post.apply(this, arguments);
+            }
+
+            return post;
+          }(),
+          put: function () {
+            var _put = _asyncToGenerator(
+            /*#__PURE__*/
+            _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(url, data) {
+              var _len2,
+                  args,
+                  _key2,
+                  _args2 = arguments;
+
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+                while (1) {
+                  switch (_context2.prev = _context2.next) {
+                    case 0:
+                      for (_len2 = _args2.length, args = new Array(_len2 > 2 ? _len2 - 2 : 0), _key2 = 2; _key2 < _len2; _key2++) {
+                        args[_key2 - 2] = _args2[_key2];
+                      }
+
+                      return _context2.abrupt("return", this.submitForm.apply(this, ['put', url, data].concat(args)));
+
+                    case 2:
+                    case "end":
+                      return _context2.stop();
+                  }
+                }
+              }, _callee2, this);
+            }));
+
+            function put(_x3, _x4) {
+              return _put.apply(this, arguments);
+            }
+
+            return put;
+          }(),
+          patch: function () {
+            var _patch = _asyncToGenerator(
+            /*#__PURE__*/
+            _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(url, data) {
+              var _len3,
+                  args,
+                  _key3,
+                  _args3 = arguments;
+
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+                while (1) {
+                  switch (_context3.prev = _context3.next) {
+                    case 0:
+                      for (_len3 = _args3.length, args = new Array(_len3 > 2 ? _len3 - 2 : 0), _key3 = 2; _key3 < _len3; _key3++) {
+                        args[_key3 - 2] = _args3[_key3];
+                      }
+
+                      return _context3.abrupt("return", this.submitForm.apply(this, ['patch', url, data].concat(args)));
+
+                    case 2:
+                    case "end":
+                      return _context3.stop();
+                  }
+                }
+              }, _callee3, this);
+            }));
+
+            function patch(_x5, _x6) {
+              return _patch.apply(this, arguments);
+            }
+
+            return patch;
+          }(),
+          "delete": function () {
+            var _delete2 = _asyncToGenerator(
+            /*#__PURE__*/
+            _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4(url, data) {
+              var _len4,
+                  args,
+                  _key4,
+                  _args4 = arguments;
+
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+                while (1) {
+                  switch (_context4.prev = _context4.next) {
+                    case 0:
+                      for (_len4 = _args4.length, args = new Array(_len4 > 2 ? _len4 - 2 : 0), _key4 = 2; _key4 < _len4; _key4++) {
+                        args[_key4 - 2] = _args4[_key4];
+                      }
+
+                      return _context4.abrupt("return", this.submitForm.apply(this, ['delete', url, data].concat(args)));
+
+                    case 2:
+                    case "end":
+                      return _context4.stop();
+                  }
+                }
+              }, _callee4, this);
+            }));
+
+            function _delete(_x7, _x8) {
+              return _delete2.apply(this, arguments);
+            }
+
+            return _delete;
+          }(),
+          submitForm: function () {
+            var _submitForm = _asyncToGenerator(
+            /*#__PURE__*/
+            _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5(method, url, data) {
+              var _this$$request,
+                  _len5,
+                  args,
+                  _key5,
+                  response,
+                  _e$response,
+                  _e$response$status,
+                  status,
+                  _e$response$data,
+                  _e$response$data$mess,
+                  message,
+                  _e$response$data$erro,
+                  errors,
+                  _args5 = arguments;
+
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
+                while (1) {
+                  switch (_context5.prev = _context5.next) {
+                    case 0:
+                      _context5.prev = 0;
+                      this.clear();
+                      this.processing = true;
+                      this.message = null;
+
+                      for (_len5 = _args5.length, args = new Array(_len5 > 3 ? _len5 - 3 : 0), _key5 = 3; _key5 < _len5; _key5++) {
+                        args[_key5 - 3] = _args5[_key5];
+                      }
+
+                      _context5.next = 7;
+                      return (_this$$request = this.$request())[method].apply(_this$$request, [url, data].concat(args));
+
+                    case 7:
+                      response = _context5.sent;
+                      this.processing = false;
+                      return _context5.abrupt("return", response);
+
+                    case 12:
+                      _context5.prev = 12;
+                      _context5.t0 = _context5["catch"](0);
+                      this.processing = false;
+                      _e$response = _context5.t0.response, _e$response$status = _e$response.status, status = _e$response$status === void 0 ? 500 : _e$response$status, _e$response$data = _e$response.data, _e$response$data$mess = _e$response$data.message, message = _e$response$data$mess === void 0 ? null : _e$response$data$mess, _e$response$data$erro = _e$response$data.errors, errors = _e$response$data$erro === void 0 ? {} : _e$response$data$erro;
+
+                      if (status === 422) {
+                        this.setErrors(errors);
+                        this.message = message;
+                      }
+
+                      throw _context5.t0;
+
+                    case 18:
+                    case "end":
+                      return _context5.stop();
+                  }
+                }
+              }, _callee5, this, [[0, 12]]);
+            }));
+
+            function submitForm(_x9, _x10, _x11) {
+              return _submitForm.apply(this, arguments);
+            }
+
+            return submitForm;
+          }()
         }
-      }),
-      formMessage: null,
-      formProcessing: false
+      })
     };
   },
   computed: {
-    $processing: function $processing() {
-      return this.formProcessing;
-    },
-    $message: function $message() {
-      return this.formMessage;
-    },
-    $errors: function $errors() {
-      return this.formErrors;
+    $form: function $form() {
+      return this.form;
     }
-  },
-  methods: {
-    $post: function () {
-      var _$post = _asyncToGenerator(
-      /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(url, data) {
-        var _len,
-            args,
-            _key,
-            _args = arguments;
-
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                for (_len = _args.length, args = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
-                  args[_key - 2] = _args[_key];
-                }
-
-                return _context.abrupt("return", this.$submitForm.apply(this, ['post', url, data].concat(args)));
-
-              case 2:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee, this);
-      }));
-
-      function $post(_x, _x2) {
-        return _$post.apply(this, arguments);
-      }
-
-      return $post;
-    }(),
-    $put: function () {
-      var _$put = _asyncToGenerator(
-      /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(url, data) {
-        var _len2,
-            args,
-            _key2,
-            _args2 = arguments;
-
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                for (_len2 = _args2.length, args = new Array(_len2 > 2 ? _len2 - 2 : 0), _key2 = 2; _key2 < _len2; _key2++) {
-                  args[_key2 - 2] = _args2[_key2];
-                }
-
-                return _context2.abrupt("return", this.$submitForm.apply(this, ['put', url, data].concat(args)));
-
-              case 2:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2, this);
-      }));
-
-      function $put(_x3, _x4) {
-        return _$put.apply(this, arguments);
-      }
-
-      return $put;
-    }(),
-    $patch: function () {
-      var _$patch = _asyncToGenerator(
-      /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(url, data) {
-        var _len3,
-            args,
-            _key3,
-            _args3 = arguments;
-
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
-          while (1) {
-            switch (_context3.prev = _context3.next) {
-              case 0:
-                for (_len3 = _args3.length, args = new Array(_len3 > 2 ? _len3 - 2 : 0), _key3 = 2; _key3 < _len3; _key3++) {
-                  args[_key3 - 2] = _args3[_key3];
-                }
-
-                return _context3.abrupt("return", this.$submitForm.apply(this, ['patch', url, data].concat(args)));
-
-              case 2:
-              case "end":
-                return _context3.stop();
-            }
-          }
-        }, _callee3, this);
-      }));
-
-      function $patch(_x5, _x6) {
-        return _$patch.apply(this, arguments);
-      }
-
-      return $patch;
-    }(),
-    // async $delete (url, data, ...args) {
-    //     return this.$submitForm('delete', url, data, ...args);
-    // },
-    $submitForm: function () {
-      var _$submitForm = _asyncToGenerator(
-      /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4(method, url, data) {
-        var _this$$request,
-            _len4,
-            args,
-            _key4,
-            response,
-            _e$response,
-            _e$response$status,
-            status,
-            _e$response$data,
-            message,
-            errors,
-            _args4 = arguments;
-
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
-          while (1) {
-            switch (_context4.prev = _context4.next) {
-              case 0:
-                _context4.prev = 0;
-                this.formErrors.clear();
-                this.formProcessing = true;
-                this.formMessage = null;
-
-                for (_len4 = _args4.length, args = new Array(_len4 > 3 ? _len4 - 3 : 0), _key4 = 3; _key4 < _len4; _key4++) {
-                  args[_key4 - 3] = _args4[_key4];
-                }
-
-                _context4.next = 7;
-                return (_this$$request = this.$request())[method].apply(_this$$request, [url, data].concat(args));
-
-              case 7:
-                response = _context4.sent;
-                this.formProcessing = false;
-                return _context4.abrupt("return", response);
-
-              case 12:
-                _context4.prev = 12;
-                _context4.t0 = _context4["catch"](0);
-                this.formProcessing = false;
-                _e$response = _context4.t0.response, _e$response$status = _e$response.status, status = _e$response$status === void 0 ? 500 : _e$response$status, _e$response$data = _e$response.data, message = _e$response$data.message, errors = _e$response$data.errors;
-
-                if (status === 422) {
-                  this.formErrors.set(errors);
-                  this.formMessage = message;
-                }
-
-                throw _context4.t0;
-
-              case 18:
-              case "end":
-                return _context4.stop();
-            }
-          }
-        }, _callee4, this, [[0, 12]]);
-      }));
-
-      function $submitForm(_x7, _x8, _x9) {
-        return _$submitForm.apply(this, arguments);
-      }
-
-      return $submitForm;
-    }()
   }
 });
 
