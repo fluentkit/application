@@ -7,7 +7,7 @@ import screenMixin from './mixins/screen';
 import HtmlScreen from './screens/html';
 import FormScreen from './screens/form';
 
-const createRoutes = ({ sections }) => {
+const createRoutes = ({ sections, user }) => {
     const routes = Object.keys(sections)
         .map(id => sections[id])
         .map(section => {
@@ -37,7 +37,8 @@ const createRoutes = ({ sections }) => {
                             name: `${id}.${screen.id}`,
                             meta: {
                                 section,
-                                screen
+                                screen,
+                                user
                             }
                         }
                     })

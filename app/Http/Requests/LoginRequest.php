@@ -27,11 +27,13 @@ class LoginRequest extends FormRequest
         return [
             'email' => [
                 'required',
+                'string',
                 'email',
                 Rule::exists('users')
             ],
             'password' => [
                 'required',
+                'string',
                 'min:10'
             ]
         ];

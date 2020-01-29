@@ -36,6 +36,8 @@
   width: 2.5rem;
   height: auto;
   margin-left: auto;
+  border-radius: 9999px;
+  overflow: hidden;
 }
 .fk-admin-sidebar-header {
   height: 4rem;

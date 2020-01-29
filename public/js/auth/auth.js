@@ -1952,7 +1952,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _login = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var _ref, _ref$data, message, data, _message;
+        var _ref, _ref$data, message, redirect, _message, responseMessage;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
@@ -1970,33 +1970,35 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _ref = _context.sent;
                 _ref$data = _ref.data;
                 message = _ref$data.message;
-                data = _ref$data.data;
-                this.loginText = 'Redirecting...';
-                _context.next = 15;
+                redirect = _ref$data.data.redirect;
+                this.loginText = message;
+                window.location.href = redirect;
+                _context.next = 17;
                 break;
 
-              case 11:
-                _context.prev = 11;
+              case 12:
+                _context.prev = 12;
                 _context.t0 = _context["catch"](0);
                 _message = _context.t0.message;
+                responseMessage = _context.t0.response.data.message;
 
                 if (!this.$form.errors.any()) {
-                  this.$form.errors.set({
-                    email: [_message]
+                  this.$form.errors.setErrors({
+                    email: [responseMessage || _message]
                   });
                 }
 
-              case 15:
-                _context.prev = 15;
+              case 17:
+                _context.prev = 17;
                 this.loginText = 'Login';
-                return _context.finish(15);
+                return _context.finish(17);
 
-              case 18:
+              case 20:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this, [[0, 11, 15, 18]]);
+        }, _callee, this, [[0, 12, 17, 20]]);
       }));
 
       function login() {

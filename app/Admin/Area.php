@@ -27,7 +27,8 @@ final class Area
                 ->map(fn (SectionInterface $screen) => $screen->toArray())
                 ->sortBy('priority')
                 ->toArray(),
-            'assetUrl' => asset('/')
+            'assetUrl' => asset('/'),
+            'user' => request()->user()
         ];
     }
 }

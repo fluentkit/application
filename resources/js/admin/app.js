@@ -34,8 +34,8 @@ export default config => {
             return config;
         },
         render (createElement) {
-            const { sections } = this;
-            return createElement('fk-admin-layout', { props: { sections } });
+            const { sections, user } = this;
+            return createElement('fk-admin-layout', { props: { sections, user } });
         }
     });
 }

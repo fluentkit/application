@@ -4,18 +4,19 @@
         <span v-for="(title, index) in titles" class="title">
             <i v-if="index !== 0" class="fas fa-chevron-right" /> {{ title }}
         </span>
-        <div class="user">
-            <img :src="'storage/logo-inverted.png' | url" />
+        <div class="user" @click="logout">
+            <img :src="$user.avatar" />
         </div>
     </nav>
 </template>
 
 <script>
     import screen from '../../mixins/screen';
+    import user from '../../mixins/user';
 
 	export default {
 		name: 'fk-admin-header',
-        mixins: [screen],
+        mixins: [screen, user],
         computed: {
             titles () {
                 const { $section, $screen } = this;
@@ -35,6 +36,11 @@
                     $screen.label
                 ]
             }
+        },
+        methods: {
+		    logout () {
+                window.location.href = '/logout';
+            }
         }
 	}
 </script>
@@ -53,6 +59,6 @@
         @apply .mr-1;
     }
     .fk-admin-header .user {
-        @apply .flex .w-10 .h-auto .ml-auto;
+        @apply .flex .w-10 .h-auto .ml-auto .rounded-full .overflow-hidden;
     }
 </style>

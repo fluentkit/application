@@ -12,7 +12,19 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return '@todo';
+})->name('home');
 
-Route::post('/login', [\FluentKit\Http\Controllers\Auth\LoginController::class, 'login']);
+Route::get('/login', function () {
+    return 'login page';
+})
+    ->middleware('guest')
+    ->name('login');
+
+Route::post('/login', [\FluentKit\Http\Controllers\Auth\LoginController::class, 'login'])
+    ->middleware('guest', 'throttle:3,1')
+    ->name('login');
+
+Route::get('/logout', [\FluentKit\Http\Controllers\Auth\LoginController::class, 'logout'])
+    ->middleware('auth')
+    ->name('logout');

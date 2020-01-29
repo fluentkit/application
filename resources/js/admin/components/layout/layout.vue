@@ -33,6 +33,10 @@
             sections: {
                 type: Object,
                 required: true
+            },
+            user: {
+                type: Object,
+                required: true
             }
         },
         mounted () {

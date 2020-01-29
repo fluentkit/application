@@ -11,11 +11,18 @@
 |
 */
 
-Route::view('/login', 'auth.layouts.default');
-Route::view('/login/forgot-password', 'auth.layouts.default');
+Route::middleware('guest')->group(function () {
+    Route::view('/login', 'auth.layouts.default')
+        ->name('login');
 
-Route::get('/{path?}', function () {
-    return view('admin.layouts.default', ['admin' => app(\FluentKit\Admin\Area::class)->toArray()]);
-})->where('path', '(.*?)');
+    Route::view('/login/forgot-password', 'auth.layouts.default')
+        ->name('forgot-password');
+});
 
-Route::post('/{section}/{screen}/{action}', [\FluentKit\Admin\Http\Controllers\Actions\ScreenActionsController::class, 'postAction']);
+Route::middleware('auth')->group(function () {
+    Route::get('/{path?}', function () {
+        return view('admin.layouts.default', ['admin' => app(\FluentKit\Admin\Area::class)->toArray()]);
+    })->where('path', '(.*?)')->name('home');
+
+    Route::post('/{section}/{screen}/{action}', [\FluentKit\Admin\Http\Controllers\Actions\ScreenActionsController::class, 'postAction']);
+});

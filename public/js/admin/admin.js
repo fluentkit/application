@@ -2132,6 +2132,7 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _mixins_screen__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../mixins/screen */ "./resources/js/admin/mixins/screen.js");
+/* harmony import */ var _mixins_user__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../mixins/user */ "./resources/js/admin/mixins/user.js");
 //
 //
 //
@@ -2145,9 +2146,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'fk-admin-header',
-  mixins: [_mixins_screen__WEBPACK_IMPORTED_MODULE_0__["default"]],
+  mixins: [_mixins_screen__WEBPACK_IMPORTED_MODULE_0__["default"], _mixins_user__WEBPACK_IMPORTED_MODULE_1__["default"]],
   computed: {
     titles: function titles() {
       var $section = this.$section,
@@ -2162,6 +2164,11 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       return [$section.label, $screen.label];
+    }
+  },
+  methods: {
+    logout: function logout() {
+      window.location.href = '/logout';
     }
   }
 });
@@ -2211,6 +2218,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   components: (_components = {}, _defineProperty(_components, _header__WEBPACK_IMPORTED_MODULE_1__["default"].name, _header__WEBPACK_IMPORTED_MODULE_1__["default"]), _defineProperty(_components, _sidebar_header__WEBPACK_IMPORTED_MODULE_2__["default"].name, _sidebar_header__WEBPACK_IMPORTED_MODULE_2__["default"]), _defineProperty(_components, _sidebar_menu__WEBPACK_IMPORTED_MODULE_3__["default"].name, _sidebar_menu__WEBPACK_IMPORTED_MODULE_3__["default"]), _components),
   props: {
     sections: {
+      type: Object,
+      required: true
+    },
+    user: {
       type: Object,
       required: true
     }
@@ -4746,10 +4757,8 @@ var render = function() {
         ])
       }),
       _vm._v(" "),
-      _c("div", { staticClass: "user" }, [
-        _c("img", {
-          attrs: { src: _vm._f("url")("storage/logo-inverted.png") }
-        })
+      _c("div", { staticClass: "user", on: { click: _vm.logout } }, [
+        _c("img", { attrs: { src: _vm.$user.avatar } })
       ])
     ],
     2
@@ -8119,10 +8128,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return config;
     },
     render: function render(createElement) {
-      var sections = this.sections;
+      var sections = this.sections,
+          user = this.user;
       return createElement('fk-admin-layout', {
         props: {
-          sections: sections
+          sections: sections,
+          user: user
         }
       });
     }
@@ -9315,6 +9326,25 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_toasted__WEBPACK_IMPORTED_MOD
 
 /***/ }),
 
+/***/ "./resources/js/admin/mixins/user.js":
+/*!*******************************************!*\
+  !*** ./resources/js/admin/mixins/user.js ***!
+  \*******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  computed: {
+    $user: function $user() {
+      return this.$route.meta.user;
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./resources/js/admin/router.js":
 /*!**************************************!*\
   !*** ./resources/js/admin/router.js ***!
@@ -9346,7 +9376,8 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
 
 var createRoutes = function createRoutes(_ref) {
-  var sections = _ref.sections;
+  var sections = _ref.sections,
+      user = _ref.user;
   var routes = Object.keys(sections).map(function (id) {
     return sections[id];
   }).map(function (section) {
@@ -9373,7 +9404,8 @@ var createRoutes = function createRoutes(_ref) {
         name: "".concat(id, ".").concat(screen.id),
         meta: {
           section: section,
-          screen: screen
+          screen: screen,
+          user: user
         }
       };
     })));

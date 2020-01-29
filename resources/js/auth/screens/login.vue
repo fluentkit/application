@@ -48,15 +48,16 @@
                 try {
                     this.loginText = 'Logging In...';
                     const {
-                        data: { message, data }
+                        data: { message, data: { redirect } }
                     } = await this.$form.post('/login', {
                         email: this.email,
                         password: this.password
                     });
-                    this.loginText = 'Redirecting...';
-                } catch ({ message }) {
+                    this.loginText = message;
+                    window.location.href = redirect;
+                } catch ({ message, response: { data: { message: responseMessage } } }) {
                     if (!this.$form.errors.any()) {
-                        this.$form.errors.set({ email: [message] });
+                        this.$form.errors.setErrors({ email: [responseMessage || message] });
                     }
                 } finally {
                     this.loginText = 'Login';
