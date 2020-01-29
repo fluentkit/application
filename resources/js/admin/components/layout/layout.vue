@@ -45,7 +45,7 @@
         },
         computed: {
             mappedUserLinks () {
-                return this.userLinks.map(({ type = 'link', text, route:name, params = {}, query = {} }) => {
+                return this.userLinks.map(({ type = 'link', text, name, params = {}, query = {} }) => {
                     return {
                         type,
                         text,

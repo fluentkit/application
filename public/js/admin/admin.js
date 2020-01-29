@@ -2246,7 +2246,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         var _ref$type = _ref.type,
             type = _ref$type === void 0 ? 'link' : _ref$type,
             text = _ref.text,
-            name = _ref.route,
+            name = _ref.name,
             _ref$params = _ref.params,
             params = _ref$params === void 0 ? {} : _ref$params,
             _ref$query = _ref.query,
@@ -9662,7 +9662,7 @@ var createRoutes = function createRoutes(_ref) {
     redirect: {
       name: "".concat(routes[0].name)
     },
-    name: 'index'
+    name: 'home'
   }].concat(_toConsumableArray(routes), [// Add a logout route to make it easy to trigger from within the admin class links
   {
     path: '/logout',

@@ -8,6 +8,8 @@ final class Area
 {
     private array $sections = [];
 
+    private array $userLinks = [];
+
     public function registerSection(SectionInterface $screen): self
     {
         $this->sections[$screen->getId()] = $screen;
@@ -20,36 +22,42 @@ final class Area
         return $this->sections[$id] ?? null;
     }
 
+    public function registerUserLink(UserLinkInterface $link): self
+    {
+        $this->userLinks[$link->getId()] = $link;
+
+        return $this;
+    }
+
+    public function getUserLink(string $id): ?UserLinkInterface
+    {
+        return $this->userLinks[$id] ?? null;
+    }
+
     public function toArray(): array
     {
         return [
-            'sections' => collect($this->sections)
-                ->map(fn (SectionInterface $screen) => $screen->toArray())
-                ->sortBy('priority')
-                ->toArray(),
+            'sections' => $this->getSections(),
             'assetUrl' => asset('/'),
             'user' => request()->user(),
-            'userLinks' => [
-                [
-                    'text' => 'My Profile',
-                    'route' => 'foobar',
-                ],
-                [
-                    'text' => 'My Profile 2',
-                    'route' => 'foobar',
-                ],
-                [
-                    'text' => 'My Profile 3',
-                    'route' => 'foobar',
-                ],
-                [
-                    'type' => 'divider',
-                ],
-                [
-                    'text' => 'Logout',
-                    'route' => 'logout',
-                ],
-            ]
+            'userLinks' => $this->getUserLinks()
         ];
+    }
+
+    public function getSections(): array
+    {
+        return collect($this->sections)
+            ->map(fn(SectionInterface $screen) => $screen->toArray())
+            ->sortBy('priority')
+            ->toArray();
+    }
+
+    public function getUserLinks(): array
+    {
+        return collect($this->userLinks)
+            ->map(fn(UserLinkInterface $link) => $link->toArray())
+            ->sortBy('priority')
+            ->values()
+            ->toArray();
     }
 }

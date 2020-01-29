@@ -5,6 +5,7 @@ namespace FluentKit\Providers;
 use FluentKit\Admin\Area;
 use FluentKit\Admin\Dashboard\Dashboards;
 use FluentKit\Admin\Settings\Settings;
+use FluentKit\Admin\UserLink;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 
@@ -29,6 +30,10 @@ class AdminServiceProvider extends ServiceProvider
     {
         $admin->registerSection(new Dashboards());
         $admin->registerSection(new Settings());
+
+        $admin->registerUserLink(new UserLink('profile', 'My Profile', 'foobar'));
+        $admin->registerUserLink(UserLink::divider('logout-divider'));
+        $admin->registerUserLink(new UserLink('logout', 'Logout', 'logout'));
 
         if (!$this->app->routesAreCached()) {
             Route::prefix('admin')

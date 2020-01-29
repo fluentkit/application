@@ -54,7 +54,7 @@ const createRoutes = ({ sections, user }) => {
             redirect: {
                 name: `${routes[0].name}`
             },
-            name: 'index'
+            name: 'home'
         },
         ...routes,
         // Add a logout route to make it easy to trigger from within the admin class links
