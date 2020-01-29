@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 
 interface ScreenInterface
 {
+    public function addField(FieldInterface $field): self;
+
     public function getId(): string;
 
     public function getPriority(): int;

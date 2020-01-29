@@ -24,6 +24,13 @@ class Screen implements ScreenInterface
 
     protected array $actions = [];
 
+    public function addField(FieldInterface $field): ScreenInterface
+    {
+        $this->fields[$field->getId()] = $field;
+
+        return $this;
+    }
+
     public function getId(): string
     {
         return static::SCREEN_ID;
@@ -75,7 +82,9 @@ class Screen implements ScreenInterface
     public function getFields(Request $request): array
     {
         return [
-            'fields' => $this->fields
+            'fields' => collect($this->fields)
+                            ->map(fn (FieldInterface $field) => $field->toArray($request))
+                            ->toArray()
         ];
     }
 
