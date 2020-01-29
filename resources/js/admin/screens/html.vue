@@ -13,7 +13,8 @@
             return {
                 template: `<fk-admin-background />`,
                 templateData: {
-                    attributes: {}
+                    attributes: {},
+                    actions: {}
                 }
             }
         },
@@ -21,16 +22,19 @@
             try {
                 const { $section, $screen } = this;
 
-                const [templateRequest, attributeRequest] = await Promise.all([
+                const [templateRequest, attributeRequest, actionRequest] = await Promise.all([
                     this.$request().post(url`/admin/${$section.id}/${$screen.id}/getTemplate`),
                     this.$request().post(url`/admin/${$section.id}/${$screen.id}/getAttributes`),
+                    this.$request().post(url`/admin/${$section.id}/${$screen.id}/getActions`),
                 ]);
 
                 const { data: { template } } = templateRequest;
                 const { data: { attributes } } = attributeRequest;
+                const { data: { actions } } = actionRequest;
 
                 this.template = template;
                 this.templateData.attributes = attributes;
+                this.templateData.actions = actions;
             } catch (e) {
                 this.$error(e);
             } finally {

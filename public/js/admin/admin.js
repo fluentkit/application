@@ -2059,6 +2059,42 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/admin/components/elements/form-actions.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/admin/components/elements/form-actions.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'fk-admin-form-actions',
+  props: {
+    actions: {
+      type: Array,
+      required: true
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/admin/components/elements/panel.vue?vue&type=script&lang=js&":
 /*!*******************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/admin/components/elements/panel.vue?vue&type=script&lang=js& ***!
@@ -2427,8 +2463,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _mixins_toast__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../mixins/toast */ "./resources/js/admin/mixins/toast.js");
 
 
+function _templateObject4() {
+  var data = _taggedTemplateLiteral(["/admin/", "/", "/", ""]);
+
+  _templateObject4 = function _templateObject4() {
+    return data;
+  };
+
+  return data;
+}
+
 function _templateObject3() {
-  var data = _taggedTemplateLiteral(["/admin/", "/", "/saveAttributes"]);
+  var data = _taggedTemplateLiteral(["/admin/", "/", "/getActions"]);
 
   _templateObject3 = function _templateObject3() {
     return data;
@@ -2479,8 +2525,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
 
 
 
@@ -2494,6 +2538,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     return {
       fields: null,
       attributes: null,
+      actions: null,
       buttonText: 'Save Changes'
     };
   },
@@ -2501,7 +2546,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     var _created = _asyncToGenerator(
     /*#__PURE__*/
     _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-      var $section, $screen, _ref, _ref2, fieldRequest, attributeRequest, _fieldRequest$data$fi, fields, _attributeRequest$dat, attributes;
+      var $section, $screen, _ref, _ref2, fieldRequest, attributeRequest, actionRequest, _fieldRequest$data$fi, fields, _attributeRequest$dat, attributes, actions;
 
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
         while (1) {
@@ -2510,36 +2555,39 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               _context.prev = 0;
               $section = this.$section, $screen = this.$screen;
               _context.next = 4;
-              return Promise.all([this.$request().post(Object(_utils_url__WEBPACK_IMPORTED_MODULE_1__["default"])(_templateObject(), $section.id, $screen.id)), this.$request().post(Object(_utils_url__WEBPACK_IMPORTED_MODULE_1__["default"])(_templateObject2(), $section.id, $screen.id))]);
+              return Promise.all([this.$request().post(Object(_utils_url__WEBPACK_IMPORTED_MODULE_1__["default"])(_templateObject(), $section.id, $screen.id)), this.$request().post(Object(_utils_url__WEBPACK_IMPORTED_MODULE_1__["default"])(_templateObject2(), $section.id, $screen.id)), this.$request().post(Object(_utils_url__WEBPACK_IMPORTED_MODULE_1__["default"])(_templateObject3(), $section.id, $screen.id))]);
 
             case 4:
               _ref = _context.sent;
-              _ref2 = _slicedToArray(_ref, 2);
+              _ref2 = _slicedToArray(_ref, 3);
               fieldRequest = _ref2[0];
               attributeRequest = _ref2[1];
+              actionRequest = _ref2[2];
               _fieldRequest$data$fi = fieldRequest.data.fields, fields = _fieldRequest$data$fi === void 0 ? {} : _fieldRequest$data$fi;
-              this.fields = fields;
               _attributeRequest$dat = attributeRequest.data.attributes, attributes = _attributeRequest$dat === void 0 ? {} : _attributeRequest$dat;
+              actions = actionRequest.data.actions;
+              this.fields = fields;
               this.attributes = attributes;
-              _context.next = 17;
+              this.actions = actions;
+              _context.next = 20;
               break;
-
-            case 14:
-              _context.prev = 14;
-              _context.t0 = _context["catch"](0);
-              this.$error(_context.t0);
 
             case 17:
               _context.prev = 17;
-              this.$progress().done();
-              return _context.finish(17);
+              _context.t0 = _context["catch"](0);
+              this.$error(_context.t0);
 
             case 20:
+              _context.prev = 20;
+              this.$progress().done();
+              return _context.finish(20);
+
+            case 23:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, this, [[0, 14, 17, 20]]);
+      }, _callee, this, [[0, 17, 20, 23]]);
     }));
 
     function created() {
@@ -2549,58 +2597,60 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     return created;
   }(),
   methods: {
-    saveForm: function () {
-      var _saveForm = _asyncToGenerator(
+    performAction: function () {
+      var _performAction = _asyncToGenerator(
       /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-        var $section, $screen, _ref3, _ref3$data$data, _request, message;
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(action) {
+        var $section, $screen, _ref3, _ref3$data, message, type, attributes;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.prev = 0;
-                this.buttonText = 'Saving';
+                action.disabled = true;
                 this.$progress().start();
                 $section = this.$section, $screen = this.$screen;
                 _context2.next = 6;
-                return this.$form.post(Object(_utils_url__WEBPACK_IMPORTED_MODULE_1__["default"])(_templateObject3(), $section.id, $screen.id), {
+                return this.$form.post(Object(_utils_url__WEBPACK_IMPORTED_MODULE_1__["default"])(_templateObject4(), $section.id, $screen.id, action.action), {
                   attributes: this.attributes
                 });
 
               case 6:
                 _ref3 = _context2.sent;
-                _ref3$data$data = _ref3.data.data;
-                _request = _ref3$data$data.request;
-                message = _ref3$data$data.message;
-                this.$success(message);
-                _context2.next = 16;
+                _ref3$data = _ref3.data;
+                message = _ref3$data.message;
+                type = _ref3$data.type;
+                attributes = _ref3$data.attributes;
+                this['$' + type](message);
+                this.attributes = attributes;
+                _context2.next = 18;
                 break;
 
-              case 13:
-                _context2.prev = 13;
+              case 15:
+                _context2.prev = 15;
                 _context2.t0 = _context2["catch"](0);
                 this.$error(_context2.t0);
 
-              case 16:
-                _context2.prev = 16;
-                this.buttonText = 'Save Changes';
+              case 18:
+                _context2.prev = 18;
+                action.disabled = false;
                 this.$progress().done();
-                return _context2.finish(16);
+                return _context2.finish(18);
 
-              case 20:
+              case 22:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, this, [[0, 13, 16, 20]]);
+        }, _callee2, this, [[0, 15, 18, 22]]);
       }));
 
-      function saveForm() {
-        return _saveForm.apply(this, arguments);
+      function performAction(_x) {
+        return _performAction.apply(this, arguments);
       }
 
-      return saveForm;
+      return performAction;
     }()
   }
 });
@@ -2631,6 +2681,16 @@ function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (O
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _templateObject3() {
+  var data = _taggedTemplateLiteral(["/admin/", "/", "/getActions"]);
+
+  _templateObject3 = function _templateObject3() {
+    return data;
+  };
+
+  return data;
+}
 
 function _templateObject2() {
   var data = _taggedTemplateLiteral(["/admin/", "/", "/getAttributes"]);
@@ -2679,7 +2739,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     return {
       template: "<fk-admin-background />",
       templateData: {
-        attributes: {}
+        attributes: {},
+        actions: {}
       }
     };
   },
@@ -2687,7 +2748,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     var _created = _asyncToGenerator(
     /*#__PURE__*/
     _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-      var $section, $screen, _ref, _ref2, templateRequest, attributeRequest, template, attributes;
+      var $section, $screen, _ref, _ref2, templateRequest, attributeRequest, actionRequest, template, attributes, actions;
 
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
         while (1) {
@@ -2696,36 +2757,39 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               _context.prev = 0;
               $section = this.$section, $screen = this.$screen;
               _context.next = 4;
-              return Promise.all([this.$request().post(Object(_utils_url__WEBPACK_IMPORTED_MODULE_1__["default"])(_templateObject(), $section.id, $screen.id)), this.$request().post(Object(_utils_url__WEBPACK_IMPORTED_MODULE_1__["default"])(_templateObject2(), $section.id, $screen.id))]);
+              return Promise.all([this.$request().post(Object(_utils_url__WEBPACK_IMPORTED_MODULE_1__["default"])(_templateObject(), $section.id, $screen.id)), this.$request().post(Object(_utils_url__WEBPACK_IMPORTED_MODULE_1__["default"])(_templateObject2(), $section.id, $screen.id)), this.$request().post(Object(_utils_url__WEBPACK_IMPORTED_MODULE_1__["default"])(_templateObject3(), $section.id, $screen.id))]);
 
             case 4:
               _ref = _context.sent;
-              _ref2 = _slicedToArray(_ref, 2);
+              _ref2 = _slicedToArray(_ref, 3);
               templateRequest = _ref2[0];
               attributeRequest = _ref2[1];
+              actionRequest = _ref2[2];
               template = templateRequest.data.template;
               attributes = attributeRequest.data.attributes;
+              actions = actionRequest.data.actions;
               this.template = template;
               this.templateData.attributes = attributes;
-              _context.next = 17;
+              this.templateData.actions = actions;
+              _context.next = 20;
               break;
-
-            case 14:
-              _context.prev = 14;
-              _context.t0 = _context["catch"](0);
-              this.$error(_context.t0);
 
             case 17:
               _context.prev = 17;
-              this.$progress().done();
-              return _context.finish(17);
+              _context.t0 = _context["catch"](0);
+              this.$error(_context.t0);
 
             case 20:
+              _context.prev = 20;
+              this.$progress().done();
+              return _context.finish(20);
+
+            case 23:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, this, [[0, 14, 17, 20]]);
+      }, _callee, this, [[0, 17, 20, 23]]);
     }));
 
     function created() {
@@ -2800,6 +2864,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 /*!******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/extract-text-webpack-plugin/dist/loader.js??ref--5-0!./node_modules/style-loader!./node_modules/css-loader??ref--5-2!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--5-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/admin/components/elements/field/row.vue?vue&type=style&index=0&lang=css& ***!
   \******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ "./node_modules/extract-text-webpack-plugin/dist/loader.js?!./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/admin/components/elements/form-actions.vue?vue&type=style&index=0&lang=css&":
+/*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/extract-text-webpack-plugin/dist/loader.js??ref--5-0!./node_modules/style-loader!./node_modules/css-loader??ref--5-2!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--5-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/admin/components/elements/form-actions.vue?vue&type=style&index=0&lang=css& ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -4809,6 +4884,54 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/admin/components/elements/form-actions.vue?vue&type=template&id=07f2aa11&":
+/*!******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/admin/components/elements/form-actions.vue?vue&type=template&id=07f2aa11& ***!
+  \******************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "fk-admin-form-actions" },
+    _vm._l(_vm.actions, function(action) {
+      return _c(
+        "fk-admin-button",
+        {
+          key: action.id,
+          attrs: { type: action.buttonType, disabled: action.disabled },
+          on: {
+            click: function($event) {
+              return _vm.$emit("click", action)
+            }
+          }
+        },
+        [
+          action.icon
+            ? _c("i", { staticClass: "fa", class: action.icon })
+            : _vm._e(),
+          _vm._v("\n        " + _vm._s(action.label) + "\n    ")
+        ]
+      )
+    }),
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/admin/components/elements/panel.vue?vue&type=template&id=5428cc92&":
 /*!***********************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/admin/components/elements/panel.vue?vue&type=template&id=5428cc92& ***!
@@ -5169,7 +5292,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return !_vm.attributes || !_vm.fields
+  return !_vm.attributes || !_vm.fields || !_vm.actions
     ? _c("fk-admin-background")
     : _c(
         "div",
@@ -5189,21 +5312,10 @@ var render = function() {
             })
           }),
           _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "flex flex-row" },
-            [
-              _c(
-                "fk-admin-button",
-                {
-                  attrs: { type: "info", disabled: _vm.$form.processing },
-                  on: { click: _vm.saveForm }
-                },
-                [_vm._v(_vm._s(_vm.buttonText))]
-              )
-            ],
-            1
-          )
+          _c("fk-admin-form-actions", {
+            attrs: { actions: _vm.actions },
+            on: { click: _vm.performAction }
+          })
         ],
         2
       )
@@ -8341,7 +8453,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   registerComponents([// layout
   __webpack_require__(/*! ./components/layout/background */ "./resources/js/admin/components/layout/background.vue")["default"], // elements
   __webpack_require__(/*! ./components/elements/title */ "./resources/js/admin/components/elements/title.vue")["default"], __webpack_require__(/*! ./components/elements/panel */ "./resources/js/admin/components/elements/panel.vue")["default"], __webpack_require__(/*! ./components/elements/button */ "./resources/js/admin/components/elements/button.vue")["default"], // fields
-  __webpack_require__(/*! ./components/elements/field/row */ "./resources/js/admin/components/elements/field/row.vue")["default"], __webpack_require__(/*! ./components/elements/field/panel */ "./resources/js/admin/components/elements/field/panel.vue")["default"], __webpack_require__(/*! ./components/elements/field/label */ "./resources/js/admin/components/elements/field/label.vue")["default"], __webpack_require__(/*! ./components/elements/field/input */ "./resources/js/admin/components/elements/field/input.vue")["default"]]);
+  __webpack_require__(/*! ./components/elements/field/row */ "./resources/js/admin/components/elements/field/row.vue")["default"], __webpack_require__(/*! ./components/elements/field/panel */ "./resources/js/admin/components/elements/field/panel.vue")["default"], __webpack_require__(/*! ./components/elements/field/label */ "./resources/js/admin/components/elements/field/label.vue")["default"], __webpack_require__(/*! ./components/elements/field/input */ "./resources/js/admin/components/elements/field/input.vue")["default"], // form
+  __webpack_require__(/*! ./components/elements/form-actions */ "./resources/js/admin/components/elements/form-actions.vue")["default"]]);
   return new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
     router: Object(_router__WEBPACK_IMPORTED_MODULE_1__["default"])(config),
     components: _defineProperty({}, _components_layout_layout__WEBPACK_IMPORTED_MODULE_2__["default"].name, _components_layout_layout__WEBPACK_IMPORTED_MODULE_2__["default"]),
@@ -8795,6 +8908,93 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_row_vue_vue_type_template_id_b426a610___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_row_vue_vue_type_template_id_b426a610___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/admin/components/elements/form-actions.vue":
+/*!*****************************************************************!*\
+  !*** ./resources/js/admin/components/elements/form-actions.vue ***!
+  \*****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _form_actions_vue_vue_type_template_id_07f2aa11___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./form-actions.vue?vue&type=template&id=07f2aa11& */ "./resources/js/admin/components/elements/form-actions.vue?vue&type=template&id=07f2aa11&");
+/* harmony import */ var _form_actions_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./form-actions.vue?vue&type=script&lang=js& */ "./resources/js/admin/components/elements/form-actions.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _form_actions_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./form-actions.vue?vue&type=style&index=0&lang=css& */ "./resources/js/admin/components/elements/form-actions.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _form_actions_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _form_actions_vue_vue_type_template_id_07f2aa11___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _form_actions_vue_vue_type_template_id_07f2aa11___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/admin/components/elements/form-actions.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/admin/components/elements/form-actions.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************!*\
+  !*** ./resources/js/admin/components/elements/form-actions.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_form_actions_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./form-actions.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/admin/components/elements/form-actions.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_form_actions_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/admin/components/elements/form-actions.vue?vue&type=style&index=0&lang=css&":
+/*!**************************************************************************************************!*\
+  !*** ./resources/js/admin/components/elements/form-actions.vue?vue&type=style&index=0&lang=css& ***!
+  \**************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_extract_text_webpack_plugin_dist_loader_js_ref_5_0_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_5_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_5_3_node_modules_vue_loader_lib_index_js_vue_loader_options_form_actions_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/extract-text-webpack-plugin/dist/loader.js??ref--5-0!../../../../../node_modules/style-loader!../../../../../node_modules/css-loader??ref--5-2!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--5-3!../../../../../node_modules/vue-loader/lib??vue-loader-options!./form-actions.vue?vue&type=style&index=0&lang=css& */ "./node_modules/extract-text-webpack-plugin/dist/loader.js?!./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/admin/components/elements/form-actions.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_extract_text_webpack_plugin_dist_loader_js_ref_5_0_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_5_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_5_3_node_modules_vue_loader_lib_index_js_vue_loader_options_form_actions_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_extract_text_webpack_plugin_dist_loader_js_ref_5_0_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_5_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_5_3_node_modules_vue_loader_lib_index_js_vue_loader_options_form_actions_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_extract_text_webpack_plugin_dist_loader_js_ref_5_0_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_5_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_5_3_node_modules_vue_loader_lib_index_js_vue_loader_options_form_actions_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_extract_text_webpack_plugin_dist_loader_js_ref_5_0_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_5_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_5_3_node_modules_vue_loader_lib_index_js_vue_loader_options_form_actions_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_extract_text_webpack_plugin_dist_loader_js_ref_5_0_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_5_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_5_3_node_modules_vue_loader_lib_index_js_vue_loader_options_form_actions_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./resources/js/admin/components/elements/form-actions.vue?vue&type=template&id=07f2aa11&":
+/*!************************************************************************************************!*\
+  !*** ./resources/js/admin/components/elements/form-actions.vue?vue&type=template&id=07f2aa11& ***!
+  \************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_form_actions_vue_vue_type_template_id_07f2aa11___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./form-actions.vue?vue&type=template&id=07f2aa11& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/admin/components/elements/form-actions.vue?vue&type=template&id=07f2aa11&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_form_actions_vue_vue_type_template_id_07f2aa11___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_form_actions_vue_vue_type_template_id_07f2aa11___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

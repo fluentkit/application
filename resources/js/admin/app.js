@@ -23,6 +23,8 @@ export default config => {
         require('./components/elements/field/panel').default,
         require('./components/elements/field/label').default,
         require('./components/elements/field/input').default,
+        // form
+        require('./components/elements/form-actions').default,
     ]);
 
     return new Vue({

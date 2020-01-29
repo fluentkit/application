@@ -25,4 +25,6 @@ interface ScreenInterface
     public function getFields(Request $request): array;
 
     public function getAttributes(Request $request): array;
+
+    public function getActions(Request $request): array;
 }

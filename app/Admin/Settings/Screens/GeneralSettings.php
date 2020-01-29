@@ -70,6 +70,17 @@ final class GeneralSettings extends FormScreen
                 ],
             ],
         ];
+
+        $this->actions = [
+            'save' => [
+                'id' => 'save',
+                'label' => 'Save Changes',
+                'buttonType' => 'info',
+                'priority' => 10,
+                'disabled' => false,
+                'action' => 'saveAttributes'
+            ],
+        ];
     }
 
     public function getAttributes(Request $request): array
@@ -87,11 +98,12 @@ final class GeneralSettings extends FormScreen
 
     public function saveAttributes(Request $request)
     {
-        return [
-            'data' => [
-                'request' => $request->all(),
-                'message' => 'Settings Updated!'
+        return array_merge(
+            [
+                'message' => 'Settings Updated!',
+                'type' => 'success',
             ],
-        ];
+            $this->getAttributes($request)
+        );
     }
 }

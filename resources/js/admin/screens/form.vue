@@ -1,10 +1,8 @@
 <template>
-    <fk-admin-background v-if="!attributes || !fields"/>
+    <fk-admin-background v-if="!attributes || !fields || !actions"/>
     <div v-else class="flex flex-col flex-grow">
         <fk-admin-field-row v-for="field in fields" :key="field.id" :field="field" v-model="attributes"/>
-        <div class="flex flex-row">
-            <fk-admin-button type="info" :disabled="$form.processing" @click="saveForm">{{ buttonText }}</fk-admin-button>
-        </div>
+        <fk-admin-form-actions :actions="actions" @click="performAction"/>
     </div>
 </template>
 
@@ -23,6 +21,7 @@
             return {
                 fields: null,
                 attributes: null,
+                actions: null,
                 buttonText: 'Save Changes'
             }
         },
@@ -30,16 +29,18 @@
             try {
                 const { $section, $screen } = this;
 
-                const [fieldRequest, attributeRequest] = await Promise.all([
+                const [fieldRequest, attributeRequest, actionRequest] = await Promise.all([
                     this.$request().post(url`/admin/${$section.id}/${$screen.id}/getFields`),
                     this.$request().post(url`/admin/${$section.id}/${$screen.id}/getAttributes`),
+                    this.$request().post(url`/admin/${$section.id}/${$screen.id}/getActions`),
                 ]);
 
                 const { data: { fields = {} } } = fieldRequest;
-                this.fields = fields;
-
                 const { data: { attributes = {} } } = attributeRequest;
+                const { data: { actions } } = actionRequest;
+                this.fields = fields;
                 this.attributes = attributes;
+                this.actions = actions;
             } catch (e) {
                 this.$error(e);
             } finally {
@@ -47,19 +48,20 @@
             }
         },
         methods: {
-		    async saveForm () {
+		    async performAction (action) {
                 try {
-                    this.buttonText = 'Saving';
+                    action.disabled = true;
                     this.$progress().start();
                     const { $section, $screen } = this;
                     const {
-                        data: { data: { request, message } }
-                    } = await this.$form.post(url`/admin/${$section.id}/${$screen.id}/saveAttributes`, { attributes: this.attributes });
-                    this.$success(message);
+                        data: { message, type, attributes }
+                    } = await this.$form.post(url`/admin/${$section.id}/${$screen.id}/${action.action}`, { attributes: this.attributes });
+                    this['$'+type](message);
+                    this.attributes = attributes;
                 } catch (e) {
                     this.$error(e);
                 } finally {
-                    this.buttonText = 'Save Changes';
+                    action.disabled = false;
                     this.$progress().done();
                 }
             }

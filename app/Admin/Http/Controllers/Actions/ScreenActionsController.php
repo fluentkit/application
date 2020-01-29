@@ -21,7 +21,7 @@ final class ScreenActionsController extends Controller
     {
         $section = $this->admin->getSection($section);
         $screen = $section->getScreen($screen);
-        sleep(2);
+        sleep(1);
         return response()->json($screen->{$action}($request));
     }
 }

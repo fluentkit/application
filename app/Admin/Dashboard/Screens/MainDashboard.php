@@ -17,6 +17,38 @@ final class MainDashboard extends Screen
 
     protected bool $hideSectionTitle = true;
 
+    public function __construct()
+    {
+        $this->actions = [
+            'save' => [
+                'id' => 'save',
+                'label' => 'Save Changes',
+                'buttonType' => 'default',
+                'priority' => 10,
+                'disabled' => false,
+                'action' => 'getAttributes'
+            ],
+            'draft' => [
+                'id' => 'draft',
+                'label' => 'Save Draft',
+                'buttonType' => 'info',
+                'icon' => 'fa-cog',
+                'priority' => 5,
+                'disabled' => false,
+                'action' => 'draft'
+            ],
+            'discard' => [
+                'id' => 'discard',
+                'label' => 'Discard Changes',
+                'buttonType' => 'danger',
+                'icon' => 'fa-cog',
+                'priority' => 10,
+                'disabled' => false,
+                'action' => 'bazzer'
+            ],
+        ];
+    }
+
     public function getAttributes(Request $request): array
     {
         return [
@@ -63,12 +95,7 @@ final class MainDashboard extends Screen
                         <fk-admin-panel>
                             '.get_called_class(). '
                         </fk-admin-panel>
-                        <div>
-                            <fk-admin-button @click="$toast(\'look at me!\')">Save Changes</fk-admin-button>
-                            <fk-admin-button type="info" @click="$info(\'look at me!\')">Save Changes Much Longer Button</fk-admin-button>
-                            <fk-admin-button type="success" @click="$success(\'look at me!\')">Save Changes</fk-admin-button>
-                            <fk-admin-button type="danger" @click="$error(\'look at me!\')"><i class="fa fa-home"></i></fk-admin-button>
-                        </div>
+                        <fk-admin-form-actions :actions="actions"/>
                     </div>
                 '
         ];

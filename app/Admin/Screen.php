@@ -22,6 +22,8 @@ class Screen implements ScreenInterface
 
     protected array $fields = [];
 
+    protected array $actions = [];
+
     public function getId(): string
     {
         return static::SCREEN_ID;
@@ -81,6 +83,16 @@ class Screen implements ScreenInterface
     {
         return [
             'attributes' => []
+        ];
+    }
+
+    public function getActions(Request $request): array
+    {
+        return [
+            'actions' => collect($this->actions)
+                            ->sortBy('priority')
+                            ->values()
+                            ->toArray()
         ];
     }
 
