@@ -1,5 +1,5 @@
 <template>
-    <div class="fk-auth-login">
+    <form class="fk-auth-login" @submit.prevent="login">
         <label for="email">Email Address</label>
         <input
             type="text"
@@ -21,13 +21,14 @@
         />
         <p v-if="$form.errors.has('password')" class="error">{{ $form.errors.first('password') }}</p>
         <button
+            type="submit"
             class="fk-auth-login-button"
             :disabled="$form.processing"
             @click.prevent="login"
         >
             {{ loginText }}
         </button>
-    </div>
+    </form>
 </template>
 
 <script>
