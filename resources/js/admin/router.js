@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 
 import screenMixin from './mixins/screen';
+import progressMixin from './mixins/progress';
 
 // Base screen components
 import HtmlScreen from './screens/html';
@@ -66,6 +67,30 @@ const createRoutes = ({ sections, user }) => {
             },
             beforeEnter () {
                 window.location.href = '/logout';
+            }
+        },
+        {
+            path: '*',
+            name: '404',
+            component: {
+                mixins: [progressMixin],
+                template: `<div>Hacky 404 until we built it out</div>`,
+                async mounted () {
+                    await this.$nextTick();
+                    this.$progress().done();
+                }
+            },
+            meta: {
+                section: {
+                    id: '404',
+                    priority: 10,
+                    icon: 'fa-home',
+                    label: 'Not Found'
+                },
+                screen: {
+                    label: 'Not Found'
+                },
+                user
             }
         }
     ]

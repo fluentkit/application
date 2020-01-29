@@ -9599,12 +9599,21 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
-/* harmony import */ var _mixins_screen__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./mixins/screen */ "./resources/js/admin/mixins/screen.js");
-/* harmony import */ var _screens_html__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./screens/html */ "./resources/js/admin/screens/html.vue");
-/* harmony import */ var _screens_form__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./screens/form */ "./resources/js/admin/screens/form.vue");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
+/* harmony import */ var _mixins_screen__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./mixins/screen */ "./resources/js/admin/mixins/screen.js");
+/* harmony import */ var _mixins_progress__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./mixins/progress */ "./resources/js/admin/mixins/progress.js");
+/* harmony import */ var _screens_html__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./screens/html */ "./resources/js/admin/screens/html.vue");
+/* harmony import */ var _screens_form__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./screens/form */ "./resources/js/admin/screens/form.vue");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
@@ -9612,6 +9621,7 @@ function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread n
 function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
 
 
 
@@ -9641,7 +9651,7 @@ var createRoutes = function createRoutes(_ref) {
       return {
         path: "/".concat(id, "/").concat(screen.id),
         component: {
-          mixins: [_mixins_screen__WEBPACK_IMPORTED_MODULE_2__["default"]],
+          mixins: [_mixins_screen__WEBPACK_IMPORTED_MODULE_3__["default"]],
           render: function render(createElement) {
             return createElement(this.$screen.component);
           }
@@ -9673,15 +9683,62 @@ var createRoutes = function createRoutes(_ref) {
     beforeEnter: function beforeEnter() {
       window.location.href = '/logout';
     }
+  }, {
+    path: '*',
+    name: '404',
+    component: {
+      mixins: [_mixins_progress__WEBPACK_IMPORTED_MODULE_4__["default"]],
+      template: "<div>Hacky 404 until we built it out</div>",
+      mounted: function () {
+        var _mounted = _asyncToGenerator(
+        /*#__PURE__*/
+        _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+            while (1) {
+              switch (_context.prev = _context.next) {
+                case 0:
+                  _context.next = 2;
+                  return this.$nextTick();
+
+                case 2:
+                  this.$progress().done();
+
+                case 3:
+                case "end":
+                  return _context.stop();
+              }
+            }
+          }, _callee, this);
+        }));
+
+        function mounted() {
+          return _mounted.apply(this, arguments);
+        }
+
+        return mounted;
+      }()
+    },
+    meta: {
+      section: {
+        id: '404',
+        priority: 10,
+        icon: 'fa-home',
+        label: 'Not Found'
+      },
+      screen: {
+        label: 'Not Found'
+      },
+      user: user
+    }
   }]);
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (function (config) {
-  vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]); // Register base screen components
+  vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_2__["default"]); // Register base screen components
 
-  vue__WEBPACK_IMPORTED_MODULE_0___default.a.component(_screens_html__WEBPACK_IMPORTED_MODULE_3__["default"].name, _screens_html__WEBPACK_IMPORTED_MODULE_3__["default"]);
-  vue__WEBPACK_IMPORTED_MODULE_0___default.a.component(_screens_form__WEBPACK_IMPORTED_MODULE_4__["default"].name, _screens_form__WEBPACK_IMPORTED_MODULE_4__["default"]);
-  return new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
+  vue__WEBPACK_IMPORTED_MODULE_1___default.a.component(_screens_html__WEBPACK_IMPORTED_MODULE_5__["default"].name, _screens_html__WEBPACK_IMPORTED_MODULE_5__["default"]);
+  vue__WEBPACK_IMPORTED_MODULE_1___default.a.component(_screens_form__WEBPACK_IMPORTED_MODULE_6__["default"].name, _screens_form__WEBPACK_IMPORTED_MODULE_6__["default"]);
+  return new vue_router__WEBPACK_IMPORTED_MODULE_2__["default"]({
     routes: createRoutes(config),
     mode: 'history',
     base: '/admin/'
