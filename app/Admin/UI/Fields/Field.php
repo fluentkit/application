@@ -5,13 +5,14 @@ declare(strict_types=1);
 namespace FluentKit\Admin\UI\Fields;
 
 use FluentKit\Admin\UI\FieldInterface;
+use FluentKit\Admin\UI\Traits\HasId;
+use FluentKit\Admin\UI\Traits\HasLabel;
+use FluentKit\Admin\UI\Traits\HasPriority;
 use Illuminate\Http\Request;
 
 abstract class Field implements FieldInterface
 {
-    protected ?string $id;
-
-    protected ?string $label;
+    use HasId, HasLabel, HasPriority;
 
     protected ?string $description;
 
@@ -27,8 +28,9 @@ abstract class Field implements FieldInterface
 
     public function __construct(string $id, string $label, string $description = '')
     {
-        $this->id = $id;
-        $this->label = $label;
+        $this->setId($id);
+        $this->setLabel($label);
+
         $this->description = $description;
 
         $this->requiredCallback = fn (Request $request) => false;
@@ -53,18 +55,14 @@ abstract class Field implements FieldInterface
         return [$this->getId() => array_unique(array_merge($this->rules, $this->defaultRules))];
     }
 
-    public function getId(): string
-    {
-        return $this->id;
-    }
-
     public function toArray(Request $request): array
     {
         $rules = $this->getRules()[$this->getId()] ?? [];
 
         return [
             'id' => $this->getId(),
-            'label' => $this->label,
+            'priority' => $this->getPriority(),
+            'label' => $this->getLabel(),
             'required' => in_array('required', $rules) || call_user_func($this->requiredCallback, $request),
             'type' => static::FIELD_TYPE,
             'description' => $this->description,

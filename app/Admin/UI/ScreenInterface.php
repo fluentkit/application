@@ -8,7 +8,13 @@ use Illuminate\Http\Request;
 
 interface ScreenInterface
 {
-    public function addField(FieldInterface $field): self;
+    public function setId(string $id);
+
+    public function setPriority(int $priority);
+
+    public function setLabel(string $label);
+
+    public function addField(FieldInterface $field);
 
     public function getId(): string;
 
@@ -23,6 +29,8 @@ interface ScreenInterface
     public function getComponent(): string;
 
     public function toArray(): array;
+
+    public function getField(string $id): ?FieldInterface;
 
     public function getFields(Request $request): array;
 

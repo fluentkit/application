@@ -9,16 +9,12 @@ use FluentKit\Admin\UI\Section;
 
 final class Dashboards extends Section
 {
-    public const SECTION_ID = 'dashboards';
-
-    protected int $priority = 10;
-
-    protected string $icon = 'fa-home';
-
-    protected string $label = 'Dashboard';
-
     public function __construct()
     {
+        $this->setId('dashboards');
+        $this->setIcon('fa-home');
+        $this->setLabel('Dashboard');
+
         $this->registerScreen(new MainDashboard());
     }
 }

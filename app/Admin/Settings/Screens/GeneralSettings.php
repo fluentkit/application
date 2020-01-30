@@ -14,14 +14,12 @@ use Illuminate\Http\Request;
 
 final class GeneralSettings extends FormScreen
 {
-    public const SCREEN_ID = 'general';
-
-    protected int $priority = 10;
-
-    protected string $label = 'General Settings';
-
     public function __construct()
     {
+        $this->setId('general');
+        $this->setIcon('fa-cog');
+        $this->setLabel('General Settings');
+
         $this->addField(
             (new Text('text1', 'Text Field', 'Text field description'))
                 ->rules(['required'])

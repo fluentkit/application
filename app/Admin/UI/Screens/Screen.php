@@ -6,52 +6,22 @@ namespace FluentKit\Admin\UI\Screens;
 
 use FluentKit\Admin\UI\FieldInterface;
 use FluentKit\Admin\UI\ScreenInterface;
+use FluentKit\Admin\UI\Traits\HasFields;
+use FluentKit\Admin\UI\Traits\HasIcon;
+use FluentKit\Admin\UI\Traits\HasId;
+use FluentKit\Admin\UI\Traits\HasLabel;
+use FluentKit\Admin\UI\Traits\HasPriority;
 use Illuminate\Http\Request;
 
 class Screen implements ScreenInterface
 {
-    public const SCREEN_ID = 'screen';
-
-    protected int $priority = 10;
-
-    protected string $icon = 'fa-home';
-
-    protected string $label = '';
+    use HasId, HasIcon, HasLabel, HasPriority, HasFields;
 
     protected bool $hideSectionTitle = false;
 
     protected string $type = 'html';
 
-    protected array $fields = [];
-
     protected array $actions = [];
-
-    public function addField(FieldInterface $field): ScreenInterface
-    {
-        $this->fields[$field->getId()] = $field;
-
-        return $this;
-    }
-
-    public function getId(): string
-    {
-        return static::SCREEN_ID;
-    }
-
-    public function getPriority(): int
-    {
-        return $this->priority;
-    }
-
-    public function getIcon(): string
-    {
-        return $this->icon;
-    }
-
-    public function getLabel(): string
-    {
-        return trans($this->label);
-    }
 
     public function getHideSectionTitle(): bool
     {
@@ -78,15 +48,6 @@ class Screen implements ScreenInterface
             'hideSectionTitle' => $this->getHideSectionTitle(),
             'type' => $this->getType(),
             'component' => $this->getComponent(),
-        ];
-    }
-
-    public function getFields(Request $request): array
-    {
-        return [
-            'fields' => collect($this->fields)
-                            ->map(fn (FieldInterface $field) => $field->toArray($request))
-                            ->toArray()
         ];
     }
 

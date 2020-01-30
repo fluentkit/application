@@ -6,6 +6,12 @@ namespace FluentKit\Admin\UI;
 
 interface SectionInterface
 {
+    public function setId(string $id);
+
+    public function setPriority(int $priority);
+
+    public function setLabel(string $label);
+
     public function getId(): string;
 
     public function getPriority(): int;

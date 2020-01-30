@@ -4,37 +4,16 @@ declare(strict_types=1);
 
 namespace FluentKit\Admin\UI;
 
+use FluentKit\Admin\UI\Traits\HasIcon;
+use FluentKit\Admin\UI\Traits\HasId;
+use FluentKit\Admin\UI\Traits\HasLabel;
+use FluentKit\Admin\UI\Traits\HasPriority;
+
 class Section implements SectionInterface
 {
-    public const SECTION_ID = 'section';
-
-    protected int $priority = 10;
-
-    protected string $icon = 'fa-home';
-
-    protected string $label = '';
+    use HasId, HasIcon, HasLabel, HasPriority;
 
     protected array $screens = [];
-
-    public function getId(): string
-    {
-        return static::SECTION_ID;
-    }
-
-    public function getPriority(): int
-    {
-        return $this->priority;
-    }
-
-    public function getIcon(): string
-    {
-        return $this->icon;
-    }
-
-    public function getLabel(): string
-    {
-        return trans($this->label);
-    }
 
     public function registerScreen(ScreenInterface $screen): SectionInterface
     {

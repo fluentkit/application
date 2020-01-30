@@ -5079,8 +5079,8 @@ var render = function() {
     "nav",
     { staticClass: "fk-admin-header" },
     [
-      _vm.$section
-        ? _c("i", { staticClass: "fas", class: _vm.$section.icon })
+      _vm.$screen
+        ? _c("i", { staticClass: "fas", class: _vm.$screen.icon })
         : _vm._e(),
       _vm._v(" "),
       _vm._l(_vm.titles, function(title, index) {

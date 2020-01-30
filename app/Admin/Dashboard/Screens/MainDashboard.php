@@ -9,16 +9,14 @@ use Illuminate\Http\Request;
 
 final class MainDashboard extends Screen
 {
-    public const SCREEN_ID = 'main';
-
-    protected int $priority = 10;
-
-    protected string $label = 'Dashboard';
-
     protected bool $hideSectionTitle = true;
 
     public function __construct()
     {
+        $this->setId('main');
+        $this->setIcon('fa-home');
+        $this->setLabel('Dashboard');
+
         $this->actions = [
             'save' => [
                 'id' => 'save',
