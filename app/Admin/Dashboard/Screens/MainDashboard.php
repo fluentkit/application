@@ -15,86 +15,52 @@ final class MainDashboard extends Screen
     {
         $this->setId('main');
         $this->setLabel('Dashboard');
-
-        $this->actions = [
-            'save' => [
-                'id' => 'save',
-                'label' => 'Save Changes',
-                'buttonType' => 'default',
-                'priority' => 10,
-                'disabled' => false,
-                'action' => 'getAttributes'
-            ],
-            'draft' => [
-                'id' => 'draft',
-                'label' => 'Save Draft',
-                'buttonType' => 'info',
-                'icon' => 'fa-cog',
-                'priority' => 5,
-                'disabled' => false,
-                'action' => 'draft'
-            ],
-            'discard' => [
-                'id' => 'discard',
-                'label' => 'Discard Changes',
-                'buttonType' => 'danger',
-                'icon' => 'fa-cog',
-                'priority' => 10,
-                'disabled' => false,
-                'action' => 'bazzer'
-            ],
-        ];
     }
 
     public function getAttributes(Request $request): array
     {
         return [
+            'foo' => 'bar',
+            'email' => [
+                'id' => 'email',
+                'label' => 'Email Address',
+                'type' => 'text',
+                'required' => true,
+                'description' => 'foo bar bazzer!',
+            ],
+            'text' => [
+                'id' => 'text',
+                'label' => 'Text',
+                'type' => 'text',
+                'required' => false,
+                'description' => 'foo bar bazzer!',
+            ],
             'attributes' => [
-                'foo' => 'bar',
-                'email' => [
-                    'id' => 'email',
-                    'label' => 'Email Address',
-                    'type' => 'text',
-                    'required' => true,
-                    'description' => 'foo bar bazzer!',
-                ],
-                'text' => [
-                    'id' => 'text',
-                    'label' => 'Text',
-                    'type' => 'text',
-                    'required' => false,
-                    'description' => 'foo bar bazzer!',
-                ],
-                'attributes' => [
-                    'email' => 'foo',
-                    'text' => 'bar'
-                ]
-            ]
+                'email' => 'foo',
+                'text' => 'bar'
+            ],
         ];
     }
 
-    public function getTemplate(Request $request): array
+    public function getTemplate(Request $request): string
     {
-        return [
-            'template' => '
-                    <div>
-                        <fk-admin-title>Foo bar</fk-admin-title>
-                        <fk-admin-panel>
-                            im from {{ attributes.foo }}
-                        </fk-admin-panel>
-                        <fk-admin-title>Bazzer</fk-admin-title>
-                        <fk-admin-panel>
-                            <fk-admin-field-row :field="attributes.email" v-model="attributes.attributes.email"/>
-                            <fk-admin-field-row :field="attributes.text" v-model="attributes.attributes.text"/>
-                        </fk-admin-panel>
+        return '
+                <div>
+                    <fk-admin-title>Foo bar</fk-admin-title>
+                    <fk-admin-panel>
+                        im from {{ attributes.foo }}
+                    </fk-admin-panel>
+                    <fk-admin-title>Bazzer</fk-admin-title>
+                    <fk-admin-panel>
                         <fk-admin-field-row :field="attributes.email" v-model="attributes.attributes.email"/>
-                        <fk-admin-title>User Details</fk-admin-title>
-                        <fk-admin-panel>
-                            '.get_called_class(). '
-                        </fk-admin-panel>
-                        <fk-admin-form-actions :actions="actions"/>
-                    </div>
-                '
-        ];
+                        <fk-admin-field-row :field="attributes.text" v-model="attributes.attributes.text"/>
+                    </fk-admin-panel>
+                    <fk-admin-field-row :field="attributes.email" v-model="attributes.attributes.email"/>
+                    <fk-admin-title>User Details</fk-admin-title>
+                    <fk-admin-panel>
+                        '.get_called_class(). '
+                    </fk-admin-panel>
+                </div>
+            ';
     }
 }

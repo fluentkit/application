@@ -28,6 +28,9 @@ final class Panel extends Field
 
     public function toArray(Request $request): array
     {
-        return array_merge(parent::toArray($request), $this->getFields($request));
+        $data = parent::toArray($request);
+        $data['fields'] = $this->getFields($request);
+
+        return $data;
     }
 }

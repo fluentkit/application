@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace FluentKit\Admin\Settings\Screens;
 
+use FluentKit\Admin\UI\Actions\SaveAction;
 use FluentKit\Admin\UI\Fields\Email;
 use FluentKit\Admin\UI\Fields\Number;
 use FluentKit\Admin\UI\Fields\Panel;
@@ -37,39 +38,25 @@ final class GeneralSettings extends FormScreen
                 ->addField(new Password('password1', 'Password1 Field', 'Password1 field description'))
         );
 
-        $this->actions = [
-            'save' => [
-                'id' => 'save',
-                'label' => 'Save Changes',
-                'buttonType' => 'info',
-                'priority' => 10,
-                'disabled' => false,
-                'action' => 'saveAttributes'
-            ],
-        ];
+        $this->addAction(
+            (new SaveAction('save', 'Save Changes'))
+                ->saveCallback([$this, 'save'])
+        );
     }
 
     public function getAttributes(Request $request): array
     {
         return [
-            'attributes' => [
-                'email1' => 'foo',
-                'text1' => 'text field',
-                'text2' => 'bar',
-                'number1' => 10,
-                'password1' => 'foobar'
-            ]
+            'email1' => 'foo',
+            'text1' => 'text field',
+            'text2' => 'bar',
+            'number1' => 10,
+            'password1' => 'foobar',
         ];
     }
 
-    public function save(Request $request): array
+    public function save(Request $request): void
     {
-        return array_merge(
-            [
-                'message' => 'Settings Updated!',
-                'type' => 'success',
-            ],
-            $this->getAttributes($request)
-        );
+
     }
 }

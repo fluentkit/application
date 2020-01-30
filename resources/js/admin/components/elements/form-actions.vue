@@ -3,11 +3,11 @@
         <fk-admin-button
             v-for="action in actions"
             :key="action.id"
-            :type="action.buttonType"
+            :type="action.meta.button.type"
             :disabled="action.disabled"
             @click="$emit('click', action)"
         >
-            <i v-if="action.icon" class="fa" :class="action.icon"></i>
+            <i v-if="action.meta.button.icon" class="fa" :class="action.meta.button.icon"></i>
             {{ action.label }}
         </fk-admin-button>
     </div>
@@ -18,7 +18,7 @@
         name: 'fk-admin-form-actions',
         props: {
             actions: {
-                type: Array,
+                type: Object,
                 required: true
             }
         }

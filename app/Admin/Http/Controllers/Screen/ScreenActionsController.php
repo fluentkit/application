@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace FluentKit\Admin\Http\Controllers\Actions;
+namespace FluentKit\Admin\Http\Controllers\Screen;
 
 use FluentKit\Admin\Area;
 use FluentKit\Http\Controllers\Controller;
@@ -17,11 +17,12 @@ final class ScreenActionsController extends Controller
         $this->admin = $admin;
     }
 
-    public function postAction($section, $screen, $action = null, Request $request)
+    public function postAction($section, $screen, $action, Request $request)
     {
         $section = $this->admin->getSection($section);
         $screen = $section->getScreen($screen);
+        $action = $screen->getAction($action);
 
-        return response()->json($screen->{$action}($request));
+        return response()->json($action->handle($request, $screen));
     }
 }

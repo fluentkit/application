@@ -16,6 +16,8 @@ interface ScreenInterface
 
     public function addField(FieldInterface $field);
 
+    public function addAction(ActionInterface $action);
+
     public function getId(): string;
 
     public function getPriority(): int;
@@ -35,6 +37,8 @@ interface ScreenInterface
     public function getFields(Request $request): array;
 
     public function getAttributes(Request $request): array;
+
+    public function getAction(string $id): ?ActionInterface;
 
     public function getActions(Request $request): array;
 }

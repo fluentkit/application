@@ -23,9 +23,9 @@
                 const { $section, $screen } = this;
 
                 const [templateRequest, attributeRequest, actionRequest] = await Promise.all([
-                    this.$request().post(url`/admin/${$section.id}/${$screen.id}/getTemplate`),
-                    this.$request().post(url`/admin/${$section.id}/${$screen.id}/getAttributes`),
-                    this.$request().post(url`/admin/${$section.id}/${$screen.id}/getActions`),
+                    this.$request().get(url`/admin/${$section.id}/${$screen.id}/template`),
+                    this.$request().get(url`/admin/${$section.id}/${$screen.id}/attributes`),
+                    this.$request().get(url`/admin/${$section.id}/${$screen.id}/actions`),
                 ]);
 
                 const { data: { template } } = templateRequest;

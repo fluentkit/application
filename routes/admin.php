@@ -20,9 +20,15 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
+
+    Route::get('/{section}/{screen}/fields', [\FluentKit\Admin\Http\Controllers\Screen\ScreenDataController::class, 'getFields']);
+    Route::get('/{section}/{screen}/attributes', [\FluentKit\Admin\Http\Controllers\Screen\ScreenDataController::class, 'getAttributes']);
+    Route::get('/{section}/{screen}/actions', [\FluentKit\Admin\Http\Controllers\Screen\ScreenDataController::class, 'getActions']);
+    Route::get('/{section}/{screen}/template', [\FluentKit\Admin\Http\Controllers\Screen\ScreenDataController::class, 'getTemplate']);
+
+    Route::post('/{section}/{screen}/{action}', [\FluentKit\Admin\Http\Controllers\Screen\ScreenActionsController::class, 'postAction']);
+
     Route::get('/{path?}', function () {
         return view('admin.layouts.default', ['admin' => app(\FluentKit\Admin\Area::class)->toArray()]);
     })->where('path', '(.*?)')->name('home');
-
-    Route::post('/{section}/{screen}/{action}', [\FluentKit\Admin\Http\Controllers\Actions\ScreenActionsController::class, 'postAction']);
 });

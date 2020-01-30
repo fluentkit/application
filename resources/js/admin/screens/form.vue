@@ -30,9 +30,9 @@
                 const { $section, $screen } = this;
 
                 const [fieldRequest, attributeRequest, actionRequest] = await Promise.all([
-                    this.$request().post(url`/admin/${$section.id}/${$screen.id}/getFields`),
-                    this.$request().post(url`/admin/${$section.id}/${$screen.id}/getAttributes`),
-                    this.$request().post(url`/admin/${$section.id}/${$screen.id}/getActions`),
+                    this.$request().get(url`/admin/${$section.id}/${$screen.id}/fields`),
+                    this.$request().get(url`/admin/${$section.id}/${$screen.id}/attributes`),
+                    this.$request().get(url`/admin/${$section.id}/${$screen.id}/actions`),
                 ]);
 
                 const { data: { fields = {} } } = fieldRequest;
@@ -55,7 +55,7 @@
                     const { $section, $screen } = this;
                     const {
                         data: { message, type, attributes }
-                    } = await this.$form.post(url`/admin/${$section.id}/${$screen.id}/${action.action}`, { attributes: this.attributes });
+                    } = await this.$form.post(url`/admin/${$section.id}/${$screen.id}/${action.id}`, { attributes: this.attributes });
                     this['$'+type](message);
                     this.attributes = attributes;
                 } catch (e) {

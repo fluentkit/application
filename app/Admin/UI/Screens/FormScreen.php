@@ -13,7 +13,7 @@ abstract class FormScreen extends Screen implements ScreenInterface
 {
     protected string $type = 'form';
 
-    public function saveAttributes(Request $request): array
+    public function validateAttributes(Request $request): void
     {
         $fields = collect($this->fields)
             ->reduce(function (array $fields, FieldInterface $field) {
@@ -21,9 +21,5 @@ abstract class FormScreen extends Screen implements ScreenInterface
             }, []);
 
         Validator::make($request->get('attributes'), $fields)->validate();
-
-        return $this->save($request);
     }
-
-    abstract public function save(Request $request): array;
 }

@@ -2106,7 +2106,7 @@ __webpack_require__.r(__webpack_exports__);
   name: 'fk-admin-form-actions',
   props: {
     actions: {
-      type: Array,
+      type: Object,
       required: true
     }
   }
@@ -2503,7 +2503,7 @@ function _templateObject4() {
 }
 
 function _templateObject3() {
-  var data = _taggedTemplateLiteral(["/admin/", "/", "/getActions"]);
+  var data = _taggedTemplateLiteral(["/admin/", "/", "/actions"]);
 
   _templateObject3 = function _templateObject3() {
     return data;
@@ -2513,7 +2513,7 @@ function _templateObject3() {
 }
 
 function _templateObject2() {
-  var data = _taggedTemplateLiteral(["/admin/", "/", "/getAttributes"]);
+  var data = _taggedTemplateLiteral(["/admin/", "/", "/attributes"]);
 
   _templateObject2 = function _templateObject2() {
     return data;
@@ -2523,7 +2523,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["/admin/", "/", "/getFields"]);
+  var data = _taggedTemplateLiteral(["/admin/", "/", "/fields"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -2584,7 +2584,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               _context.prev = 0;
               $section = this.$section, $screen = this.$screen;
               _context.next = 4;
-              return Promise.all([this.$request().post(Object(_utils_url__WEBPACK_IMPORTED_MODULE_1__["default"])(_templateObject(), $section.id, $screen.id)), this.$request().post(Object(_utils_url__WEBPACK_IMPORTED_MODULE_1__["default"])(_templateObject2(), $section.id, $screen.id)), this.$request().post(Object(_utils_url__WEBPACK_IMPORTED_MODULE_1__["default"])(_templateObject3(), $section.id, $screen.id))]);
+              return Promise.all([this.$request().get(Object(_utils_url__WEBPACK_IMPORTED_MODULE_1__["default"])(_templateObject(), $section.id, $screen.id)), this.$request().get(Object(_utils_url__WEBPACK_IMPORTED_MODULE_1__["default"])(_templateObject2(), $section.id, $screen.id)), this.$request().get(Object(_utils_url__WEBPACK_IMPORTED_MODULE_1__["default"])(_templateObject3(), $section.id, $screen.id))]);
 
             case 4:
               _ref = _context.sent;
@@ -2641,7 +2641,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 this.$progress().start();
                 $section = this.$section, $screen = this.$screen;
                 _context2.next = 6;
-                return this.$form.post(Object(_utils_url__WEBPACK_IMPORTED_MODULE_1__["default"])(_templateObject4(), $section.id, $screen.id, action.action), {
+                return this.$form.post(Object(_utils_url__WEBPACK_IMPORTED_MODULE_1__["default"])(_templateObject4(), $section.id, $screen.id, action.id), {
                   attributes: this.attributes
                 });
 
@@ -2717,7 +2717,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _templateObject3() {
-  var data = _taggedTemplateLiteral(["/admin/", "/", "/getActions"]);
+  var data = _taggedTemplateLiteral(["/admin/", "/", "/actions"]);
 
   _templateObject3 = function _templateObject3() {
     return data;
@@ -2727,7 +2727,7 @@ function _templateObject3() {
 }
 
 function _templateObject2() {
-  var data = _taggedTemplateLiteral(["/admin/", "/", "/getAttributes"]);
+  var data = _taggedTemplateLiteral(["/admin/", "/", "/attributes"]);
 
   _templateObject2 = function _templateObject2() {
     return data;
@@ -2737,7 +2737,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["/admin/", "/", "/getTemplate"]);
+  var data = _taggedTemplateLiteral(["/admin/", "/", "/template"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -2791,7 +2791,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               _context.prev = 0;
               $section = this.$section, $screen = this.$screen;
               _context.next = 4;
-              return Promise.all([this.$request().post(Object(_utils_url__WEBPACK_IMPORTED_MODULE_1__["default"])(_templateObject(), $section.id, $screen.id)), this.$request().post(Object(_utils_url__WEBPACK_IMPORTED_MODULE_1__["default"])(_templateObject2(), $section.id, $screen.id)), this.$request().post(Object(_utils_url__WEBPACK_IMPORTED_MODULE_1__["default"])(_templateObject3(), $section.id, $screen.id))]);
+              return Promise.all([this.$request().get(Object(_utils_url__WEBPACK_IMPORTED_MODULE_1__["default"])(_templateObject(), $section.id, $screen.id)), this.$request().get(Object(_utils_url__WEBPACK_IMPORTED_MODULE_1__["default"])(_templateObject2(), $section.id, $screen.id)), this.$request().get(Object(_utils_url__WEBPACK_IMPORTED_MODULE_1__["default"])(_templateObject3(), $section.id, $screen.id))]);
 
             case 4:
               _ref = _context.sent;
@@ -4964,7 +4964,7 @@ var render = function() {
         "fk-admin-button",
         {
           key: action.id,
-          attrs: { type: action.buttonType, disabled: action.disabled },
+          attrs: { type: action.meta.button.type, disabled: action.disabled },
           on: {
             click: function($event) {
               return _vm.$emit("click", action)
@@ -4972,8 +4972,8 @@ var render = function() {
           }
         },
         [
-          action.icon
-            ? _c("i", { staticClass: "fa", class: action.icon })
+          action.meta.button.icon
+            ? _c("i", { staticClass: "fa", class: action.meta.button.icon })
             : _vm._e(),
           _vm._v("\n        " + _vm._s(action.label) + "\n    ")
         ]

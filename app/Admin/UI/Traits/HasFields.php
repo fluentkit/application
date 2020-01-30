@@ -25,11 +25,9 @@ trait HasFields
 
     public function getFields(Request $request): array
     {
-        return [
-            'fields' => collect($this->fields)
-                ->map(fn (FieldInterface $field) => $field->toArray($request))
-                ->sortBy('priority')
-                ->toArray()
-        ];
+        return collect($this->fields)
+            ->map(fn (FieldInterface $field) => $field->toArray($request))
+            ->sortBy('priority')
+            ->toArray();
     }
 }
