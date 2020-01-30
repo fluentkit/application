@@ -54,6 +54,9 @@ export default {
             }
             options = this._mergeToastOptions(options, { icon: 'exclamation', duration: null });
             return this.$toasted.error(message, options);
+        },
+        $clearToasts () {
+            return this.$toasted.clear();
         }
     }
 }

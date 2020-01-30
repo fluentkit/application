@@ -16,6 +16,16 @@
 }
 .fk-admin-background p {
 }
+.fk-admin-screen-form > .fk-admin-field-row {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+.fk-admin-screen-form > .fk-admin-field-row.error {
+  margin-left: -2.5rem;
+  margin-right: -2.5rem;
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+}
 .fk-admin-user {
   display: flex;
   display: block;
@@ -908,10 +918,19 @@ html {
   background-color: #fff;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   border-radius: 0.25rem;
-  padding: 2.5rem;
   margin-bottom: 2.5rem;
 }
+.fk-admin-panel > * {
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+.fk-admin-panel > *:first-child {
+  padding-top: 2.5rem;
+}
 .fk-admin-panel > *:last-child {
+  padding-bottom: 2.5rem;
   margin-bottom: 0;
 }
 .fk-admin-button {
@@ -993,7 +1012,9 @@ html {
   display: flex;
   flex-direction: row;
   align-items: baseline;
-  margin-bottom: 2.5rem;
+}
+.fk-admin-field-row.error {
+  background-color: #fff5f5;
 }
 .fk-admin-field-row > .input {
   display: flex;
@@ -1002,6 +1023,12 @@ html {
 }
 .fk-admin-field-row > .input > .description {
   color: #718096;
+  font-style: italic;
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+}
+.fk-admin-field-row > .input > .error {
+  color: #f56565;
   font-style: italic;
   margin-top: 0.5rem;
 }

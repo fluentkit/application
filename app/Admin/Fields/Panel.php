@@ -20,6 +20,14 @@ final class Panel extends Field
         return $this;
     }
 
+    public function getRules(): array
+    {
+        return collect($this->fields)
+                ->reduce(function (array $fields, FieldInterface $field) {
+                    return array_merge($fields, $field->getRules());
+                }, []);
+    }
+
     public function toArray(Request $request): array
     {
         $field = parent::toArray($request);

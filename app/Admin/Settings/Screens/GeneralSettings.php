@@ -22,11 +22,20 @@ final class GeneralSettings extends FormScreen
 
     public function __construct()
     {
-        $this->addField(new Text('text1', 'Text Field', 'Text field description'));
+        $this->addField(
+            (new Text('text1', 'Text Field', 'Text field description'))
+                ->rules(['required'])
+        );
         $this->addField(
             (new Panel('panel1', 'Panel 1', 'Panel description.'))
-                ->addField(new Text('text2', 'Text2 Field', 'Text2 field description'))
-                ->addField(new Email('email1', 'Email1 Field', 'Email1 field description'))
+                ->addField(
+                    (new Text('text2', 'Text2 Field', 'Text2 field description'))
+                        ->rules(['required'])
+                )
+                ->addField(
+                    (new Email('email1', 'Email1 Field', 'Email1 field description'))
+                        ->rules(['required'])
+                )
                 ->addField(new Number('number1', 'Number1 Field', 'Number1 field description'))
                 ->addField(new Password('password1', 'Password1 Field', 'Password1 field description'))
         );
@@ -56,7 +65,7 @@ final class GeneralSettings extends FormScreen
         ];
     }
 
-    public function saveAttributes(Request $request)
+    public function save(Request $request): array
     {
         return array_merge(
             [

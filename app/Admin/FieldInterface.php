@@ -12,7 +12,11 @@ interface FieldInterface
 
     public function required(callable $callback): self;
 
+    public function rules(array $rules): self;
+
     public function getId(): string;
+
+    public function getRules(): array;
 
     public function toArray(Request $request): array;
 }

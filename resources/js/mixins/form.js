@@ -30,6 +30,7 @@ export default {
                             return;
                         }
 
+                        if (this.$toasted) this.$toasted.clear();
                         this.formErrors = {};
                     },
                     all () {
@@ -69,8 +70,8 @@ export default {
                             return response;
                         } catch (e) {
                             this.processing = false;
-                            const { response: { status = 500, data: { message = null, errors = {} } } } = e;
-                            if (status === 422) {
+                            if (this.$isValidationError(e)) {
+                                const { response: { status = 500, data: { message = null, errors = {} } } } = e;
                                 this.setErrors(errors);
                                 this.message = message;
                             }

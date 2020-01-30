@@ -7,6 +7,7 @@
                 v-for="field in field.fields"
                 :key="field.id"
                 :field="field"
+                :errors="errors"
                 :value="value"
                 @input="$emit('input', $event)"
             />
@@ -19,6 +20,10 @@
         name: 'fk-admin-field-panel',
         props: {
             field: {
+                type: Object,
+                required: true
+            },
+            errors: {
                 type: Object,
                 required: true
             },

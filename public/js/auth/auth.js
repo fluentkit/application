@@ -6806,6 +6806,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
               return;
             }
 
+            if (this.$toasted) this.$toasted.clear();
             this.formErrors = {};
           },
           all: function all() {
@@ -6999,16 +7000,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                       _context5.prev = 12;
                       _context5.t0 = _context5["catch"](0);
                       this.processing = false;
-                      _e$response = _context5.t0.response, _e$response$status = _e$response.status, status = _e$response$status === void 0 ? 500 : _e$response$status, _e$response$data = _e$response.data, _e$response$data$mess = _e$response$data.message, message = _e$response$data$mess === void 0 ? null : _e$response$data$mess, _e$response$data$erro = _e$response$data.errors, errors = _e$response$data$erro === void 0 ? {} : _e$response$data$erro;
 
-                      if (status === 422) {
+                      if (this.$isValidationError(_context5.t0)) {
+                        _e$response = _context5.t0.response, _e$response$status = _e$response.status, status = _e$response$status === void 0 ? 500 : _e$response$status, _e$response$data = _e$response.data, _e$response$data$mess = _e$response$data.message, message = _e$response$data$mess === void 0 ? null : _e$response$data$mess, _e$response$data$erro = _e$response$data.errors, errors = _e$response$data$erro === void 0 ? {} : _e$response$data$erro;
                         this.setErrors(errors);
                         this.message = message;
                       }
 
                       throw _context5.t0;
 
-                    case 18:
+                    case 17:
                     case "end":
                       return _context5.stop();
                   }
@@ -7051,6 +7052,17 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     $request: function $request() {
       return axios__WEBPACK_IMPORTED_MODULE_0___default.a;
+    },
+    $isValidationError: function $isValidationError(error) {
+      var _error$response = error.response,
+          _error$response$statu = _error$response.status,
+          status = _error$response$statu === void 0 ? 500 : _error$response$statu,
+          _error$response$data = _error$response.data,
+          _error$response$data$ = _error$response$data.message,
+          message = _error$response$data$ === void 0 ? null : _error$response$data$,
+          _error$response$data$2 = _error$response$data.errors,
+          errors = _error$response$data$2 === void 0 ? null : _error$response$data$2;
+      return status === 422 && message && errors;
     }
   }
 });

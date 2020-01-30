@@ -1,7 +1,7 @@
 <template>
     <fk-admin-background v-if="!attributes || !fields || !actions"/>
-    <div v-else class="flex flex-col flex-grow">
-        <fk-admin-field-row v-for="field in fields" :key="field.id" :field="field" v-model="attributes"/>
+    <div v-else class="fk-admin-screen-form">
+        <fk-admin-field-row v-for="field in fields" :key="field.id" :field="field" :errors="$form.errors" v-model="attributes"/>
         <fk-admin-form-actions :actions="actions" @click="performAction"/>
     </div>
 </template>
@@ -59,7 +59,11 @@
                     this['$'+type](message);
                     this.attributes = attributes;
                 } catch (e) {
-                    this.$error(e);
+                    if (this.$isValidationError(e)) {
+                        this.$error(this.$form.message);
+                    } else {
+                        this.$error(e);
+                    }
                 } finally {
                     action.disabled = false;
                     this.$progress().done();
@@ -68,3 +72,12 @@
         }
 	}
 </script>
+
+<style>
+    .fk-admin-screen-form > .fk-admin-field-row {
+        @apply .py-6;
+    }
+    .fk-admin-screen-form > .fk-admin-field-row.error {
+        @apply .-mx-10 .px-10;
+    }
+</style>
