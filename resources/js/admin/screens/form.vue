@@ -54,9 +54,11 @@
                     this.$progress().start();
                     const { $section, $screen } = this;
                     const {
-                        data: { message, type, attributes }
+                        data: { message, type, meta, attributes }
                     } = await this.$form.post(url`/admin/${$section.id}/${$screen.id}/${action.id}`, { attributes: this.attributes });
-                    this['$'+type](message);
+                    if (type === 'notification') {
+                        this['$'+meta.toast.type](message);
+                    }
                     this.attributes = attributes;
                 } catch (e) {
                     if (this.$isValidationError(e)) {

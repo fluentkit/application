@@ -8,12 +8,13 @@ use FluentKit\Admin\UI\ActionInterface;
 use FluentKit\Admin\UI\ScreenInterface;
 use FluentKit\Admin\UI\Traits\HasId;
 use FluentKit\Admin\UI\Traits\HasLabel;
+use FluentKit\Admin\UI\Traits\HasMeta;
 use FluentKit\Admin\UI\Traits\HasPriority;
 use Illuminate\Http\Request;
 
 abstract class Action
 {
-    use HasId, HasLabel, HasPriority;
+    use HasId, HasLabel, HasPriority, HasMeta;
 
     protected array $meta = [
         'button' => [
@@ -26,22 +27,6 @@ abstract class Action
     {
         $this->setId($id);
         $this->setLabel($label);
-    }
-
-    public function setMeta(string $key, $value): ActionInterface
-    {
-        data_set($this->meta, $key, $value);
-
-        return $this;
-    }
-
-    public function getMeta(string $key = null): array
-    {
-        if ($key) {
-            return data_get($this->meta, $key);
-        }
-
-        return $this->meta;
     }
 
     public function toArray(Request $request): array

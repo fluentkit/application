@@ -16,7 +16,7 @@ interface ActionInterface
 
     public function setPriority(int $priority);
 
-    public function setMeta(string $key, $value): self;
+    public function setMeta(string $key, $value);
 
     public function getId(): string;
 

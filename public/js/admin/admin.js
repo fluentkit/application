@@ -2630,7 +2630,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _performAction = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(action) {
-        var $section, $screen, _ref3, _ref3$data, message, type, attributes;
+        var $section, $screen, _ref3, _ref3$data, message, type, meta, attributes;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
           while (1) {
@@ -2650,14 +2650,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _ref3$data = _ref3.data;
                 message = _ref3$data.message;
                 type = _ref3$data.type;
+                meta = _ref3$data.meta;
                 attributes = _ref3$data.attributes;
-                this['$' + type](message);
+
+                if (type === 'notification') {
+                  this['$' + meta.toast.type](message);
+                }
+
                 this.attributes = attributes;
-                _context2.next = 18;
+                _context2.next = 19;
                 break;
 
-              case 15:
-                _context2.prev = 15;
+              case 16:
+                _context2.prev = 16;
                 _context2.t0 = _context2["catch"](0);
 
                 if (this.$isValidationError(_context2.t0)) {
@@ -2666,18 +2671,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   this.$error(_context2.t0);
                 }
 
-              case 18:
-                _context2.prev = 18;
+              case 19:
+                _context2.prev = 19;
                 action.disabled = false;
                 this.$progress().done();
-                return _context2.finish(18);
+                return _context2.finish(19);
 
-              case 22:
+              case 23:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, this, [[0, 15, 18, 22]]);
+        }, _callee2, this, [[0, 16, 19, 23]]);
       }));
 
       function performAction(_x) {

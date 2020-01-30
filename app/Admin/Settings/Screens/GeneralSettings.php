@@ -10,6 +10,7 @@ use FluentKit\Admin\UI\Fields\Number;
 use FluentKit\Admin\UI\Fields\Panel;
 use FluentKit\Admin\UI\Fields\Password;
 use FluentKit\Admin\UI\Fields\Text;
+use FluentKit\Admin\UI\Responses\Notification;
 use FluentKit\Admin\UI\Screens\FormScreen;
 use Illuminate\Http\Request;
 
@@ -55,8 +56,8 @@ final class GeneralSettings extends FormScreen
         ];
     }
 
-    public function save(Request $request): void
+    public function save(Request $request)
     {
-
+        //return Notification::info('hello');
     }
 }
