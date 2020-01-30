@@ -4,7 +4,7 @@
         <p v-if="field.description" class="description">{{ field.description }}</p>
         <fk-admin-panel>
             <fk-admin-field-row
-                v-for="field in field.fields"
+                v-for="field in fields"
                 :key="field.id"
                 :field="field"
                 :errors="errors"
@@ -30,6 +30,23 @@
             value: {
                 type: Object,
                 required: true
+            }
+        },
+        computed: {
+            fields () {
+                if (!this.field.disabled) {
+                    return this.field.fields;
+                }
+
+                const fields = {};
+                Object.keys(this.field.fields).forEach(field => {
+                    fields[field] = {
+                        ...this.field.fields[field],
+                        disabled: true
+                    };
+                });
+
+                return fields;
             }
         }
     }

@@ -20,11 +20,15 @@ interface FieldInterface
 
     public function rules(array $rules): self;
 
+    public function disable($disabled);
+
     public function getId(): string;
 
     public function getLabel(): string;
 
     public function getRules(): array;
+
+    public function getDisabled(Request $request): bool;
 
     public function toArray(Request $request): array;
 }

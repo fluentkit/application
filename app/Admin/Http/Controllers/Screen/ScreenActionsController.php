@@ -6,6 +6,7 @@ namespace FluentKit\Admin\Http\Controllers\Screen;
 
 use FluentKit\Admin\Area;
 use FluentKit\Http\Controllers\Controller;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 
 final class ScreenActionsController extends Controller
@@ -22,6 +23,10 @@ final class ScreenActionsController extends Controller
         $section = $this->admin->getSection($section);
         $screen = $section->getScreen($screen);
         $action = $screen->getAction($action);
+
+        if ($action->getDisabled($request) === true) {
+            throw new AuthorizationException('You cannot perform this action!');
+        }
 
         return response()->json($action->handle($request, $screen));
     }

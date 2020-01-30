@@ -24,6 +24,7 @@ final class GeneralSettings extends FormScreen
         $this->addField(
             (new Text('text1', 'Text Field', 'Text field description'))
                 ->rules(['required'])
+                ->disable()
         );
         $this->addField(
             (new Panel('panel1', 'Panel 1', 'Panel description.'))

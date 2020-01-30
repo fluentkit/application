@@ -5,6 +5,7 @@
         class="fk-admin-field-input"
         :class="{ error: errors.has(field.id) }"
         :value="value[field.id]"
+        :disabled="field.disabled"
         @input="updateValue($event.target.value)"
     />
 </template>
@@ -49,6 +50,9 @@
     }
     .fk-admin-field-input:focus {
         @apply .outline-none .shadow-outline;
+    }
+    .fk-admin-field-input[disabled] {
+        @apply .bg-gray-300 .cursor-not-allowed;
     }
     .fk-admin-field-input.error {
         @apply .border-red-500;

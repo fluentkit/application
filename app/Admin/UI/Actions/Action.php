@@ -6,6 +6,7 @@ namespace FluentKit\Admin\UI\Actions;
 
 use FluentKit\Admin\UI\ActionInterface;
 use FluentKit\Admin\UI\ScreenInterface;
+use FluentKit\Admin\UI\Traits\CanBeDisabled;
 use FluentKit\Admin\UI\Traits\HasId;
 use FluentKit\Admin\UI\Traits\HasLabel;
 use FluentKit\Admin\UI\Traits\HasMeta;
@@ -14,7 +15,7 @@ use Illuminate\Http\Request;
 
 abstract class Action
 {
-    use HasId, HasLabel, HasPriority, HasMeta;
+    use HasId, HasLabel, HasPriority, HasMeta, CanBeDisabled;
 
     protected array $meta = [
         'button' => [
@@ -35,7 +36,7 @@ abstract class Action
             'id' => $this->getId(),
             'priority' => $this->getPriority(),
             'label' => $this->getLabel(),
-            'disabled' => false,
+            'disabled' => $this->getDisabled($request),
             'meta' => $this->getMeta(),
         ];
     }

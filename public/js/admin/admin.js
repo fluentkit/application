@@ -1928,6 +1928,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'fk-admin-field-input',
   props: {
@@ -2000,6 +2001,12 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -2031,6 +2038,23 @@ __webpack_require__.r(__webpack_exports__);
     value: {
       type: Object,
       required: true
+    }
+  },
+  computed: {
+    fields: function fields() {
+      var _this = this;
+
+      if (!this.field.disabled) {
+        return this.field.fields;
+      }
+
+      var fields = {};
+      Object.keys(this.field.fields).forEach(function (field) {
+        fields[field] = _objectSpread({}, _this.field.fields[field], {
+          disabled: true
+        });
+      });
+      return fields;
     }
   }
 });
@@ -4769,7 +4793,11 @@ var render = function() {
   return _c("input", {
     staticClass: "fk-admin-field-input",
     class: { error: _vm.errors.has(_vm.field.id) },
-    attrs: { type: _vm.field.type, id: "field-" + _vm.field.id },
+    attrs: {
+      type: _vm.field.type,
+      id: "field-" + _vm.field.id,
+      disabled: _vm.field.disabled
+    },
     domProps: { value: _vm.value[_vm.field.id] },
     on: {
       input: function($event) {
@@ -4843,7 +4871,7 @@ var render = function() {
       _vm._v(" "),
       _c(
         "fk-admin-panel",
-        _vm._l(_vm.field.fields, function(field) {
+        _vm._l(_vm.fields, function(field) {
           return _c("fk-admin-field-row", {
             key: field.id,
             attrs: { field: field, errors: _vm.errors, value: _vm.value },

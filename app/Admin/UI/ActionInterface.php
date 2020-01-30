@@ -18,6 +18,8 @@ interface ActionInterface
 
     public function setMeta(string $key, $value);
 
+    public function disable($disabled);
+
     public function getId(): string;
 
     public function getLabel(): string;
@@ -25,6 +27,8 @@ interface ActionInterface
     public function getPriority(): int;
 
     public function getMeta(string $key = null): array;
+
+    public function getDisabled(Request $request): bool;
 
     public function toArray(Request $request): array;
 

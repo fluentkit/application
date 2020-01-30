@@ -1063,6 +1063,10 @@ html {
   outline: 0;
   box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
 }
+.fk-admin-field-input[disabled] {
+  background-color: #e2e8f0;
+  cursor: not-allowed;
+}
 .fk-admin-field-input.error {
   border-color: #f56565;
 }
