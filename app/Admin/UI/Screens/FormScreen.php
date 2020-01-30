@@ -2,8 +2,10 @@
 
 declare(strict_types=1);
 
-namespace FluentKit\Admin;
+namespace FluentKit\Admin\UI\Screens;
 
+use FluentKit\Admin\UI\FieldInterface;
+use FluentKit\Admin\UI\ScreenInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 

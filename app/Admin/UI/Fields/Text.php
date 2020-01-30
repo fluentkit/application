@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace FluentKit\Admin\Fields;
+namespace FluentKit\Admin\UI\Fields;
 
 class Text extends Field
 {

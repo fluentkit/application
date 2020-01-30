@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace FluentKit\Admin\Settings\Screens;
 
-use FluentKit\Admin\Fields\Email;
-use FluentKit\Admin\Fields\Number;
-use FluentKit\Admin\Fields\Panel;
-use FluentKit\Admin\Fields\Password;
-use FluentKit\Admin\Fields\Text;
-use FluentKit\Admin\FormScreen;
+use FluentKit\Admin\UI\Fields\Email;
+use FluentKit\Admin\UI\Fields\Number;
+use FluentKit\Admin\UI\Fields\Panel;
+use FluentKit\Admin\UI\Fields\Password;
+use FluentKit\Admin\UI\Fields\Text;
+use FluentKit\Admin\UI\Screens\FormScreen;
 use Illuminate\Http\Request;
 
 final class GeneralSettings extends FormScreen

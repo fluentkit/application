@@ -5,7 +5,7 @@ namespace FluentKit\Providers;
 use FluentKit\Admin\Area;
 use FluentKit\Admin\Dashboard\Dashboards;
 use FluentKit\Admin\Settings\Settings;
-use FluentKit\Admin\UserLink;
+use FluentKit\Admin\UI\UserLink;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 

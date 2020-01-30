@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace FluentKit\Admin\Dashboard\Screens;
 
-use FluentKit\Admin\Screen;
+use FluentKit\Admin\UI\Screens\Screen;
 use Illuminate\Http\Request;
 
 final class MainDashboard extends Screen

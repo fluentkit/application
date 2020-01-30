@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace FluentKit\Admin\Settings;
 
-use FluentKit\Admin\Section;
+use FluentKit\Admin\UI\Section;
 use FluentKit\Admin\Settings\Screens\GeneralSettings;
 
 final class Settings extends Section

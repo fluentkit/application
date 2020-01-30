@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace FluentKit\Admin\Fields;
+namespace FluentKit\Admin\UI\Fields;
 
-use FluentKit\Admin\FieldInterface;
+use FluentKit\Admin\UI\FieldInterface;
 use Illuminate\Http\Request;
 
 abstract class Field implements FieldInterface

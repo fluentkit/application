@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace FluentKit\Admin;
+namespace FluentKit\Admin\UI;
 
 interface SectionInterface
 {
