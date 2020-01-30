@@ -17,7 +17,6 @@ final class GeneralSettings extends FormScreen
     public function __construct()
     {
         $this->setId('general');
-        $this->setIcon('fa-cog');
         $this->setLabel('General Settings');
 
         $this->addField(

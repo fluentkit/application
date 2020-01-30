@@ -14,7 +14,6 @@ final class MainDashboard extends Screen
     public function __construct()
     {
         $this->setId('main');
-        $this->setIcon('fa-home');
         $this->setLabel('Dashboard');
 
         $this->actions = [

@@ -2239,6 +2239,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
 
       return [$section.label, $screen.label];
+    },
+    icon: function icon() {
+      var $section = this.$section,
+          $screen = this.$screen;
+
+      if (!$section || !$screen) {
+        return '';
+      }
+
+      return $screen.icon !== '' ? $screen.icon : $section.icon;
     }
   }
 });
@@ -5079,9 +5089,7 @@ var render = function() {
     "nav",
     { staticClass: "fk-admin-header" },
     [
-      _vm.$screen
-        ? _c("i", { staticClass: "fas", class: _vm.$screen.icon })
-        : _vm._e(),
+      _vm.icon ? _c("i", { staticClass: "fas", class: _vm.icon }) : _vm._e(),
       _vm._v(" "),
       _vm._l(_vm.titles, function(title, index) {
         return _c("span", { staticClass: "title" }, [

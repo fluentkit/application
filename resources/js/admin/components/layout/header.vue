@@ -1,6 +1,6 @@
 <template>
     <nav class="fk-admin-header">
-        <i v-if="$section" class="fas" :class="$section.icon" />
+        <i v-if="icon" class="fas" :class="icon" />
         <span v-for="(title, index) in titles" class="title">
             <i v-if="index !== 0" class="fas fa-chevron-right" /> {{ title }}
         </span>
@@ -44,6 +44,15 @@
                     $section.label,
                     $screen.label
                 ]
+            },
+            icon () {
+                const { $section, $screen } = this;
+
+                if (!$section || !$screen) {
+                    return '';
+                }
+
+                return $screen.icon !== '' ? $screen.icon : $section.icon;
             }
         }
 	}
