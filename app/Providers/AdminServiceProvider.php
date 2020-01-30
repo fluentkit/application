@@ -28,17 +28,19 @@ class AdminServiceProvider extends ServiceProvider
      */
     public function boot(Area $admin)
     {
-        $admin->registerSection(new Dashboards());
-        $admin->registerSection(new Settings());
+        $admin->serving(function (Area $admin) {
+            $admin->registerSection(new Dashboards());
+            $admin->registerSection(new Settings());
 
-        $admin->registerUserLink(new UserLink('profile', 'My Profile', 'dashboards'));
-        $admin->registerUserLink(UserLink::divider('logout-divider'));
-        $admin->registerUserLink(new UserLink('logout', 'Logout', 'logout'));
+            $admin->registerUserLink(new UserLink('profile', 'My Profile', 'dashboards'));
+            $admin->registerUserLink(UserLink::divider('logout-divider'));
+            $admin->registerUserLink(new UserLink('logout', 'Logout', 'logout'));
+        });
 
         if (!$this->app->routesAreCached()) {
             Route::prefix('admin')
                 ->name('admin.')
-                ->middleware('web')
+                ->middleware('admin')
                 ->group(base_path('routes/admin.php'));
         }
     }

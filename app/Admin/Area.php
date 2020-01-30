@@ -9,9 +9,25 @@ use FluentKit\Admin\UI\UserLinkInterface;
 
 final class Area
 {
+    private array $servingCallbacks = [];
+
     private array $sections = [];
 
     private array $userLinks = [];
+
+    public function serving(callable $callback): self
+    {
+        $this->servingCallbacks[] = $callback;
+
+        return $this;
+    }
+
+    public function serve(): void
+    {
+        foreach ($this->servingCallbacks as $callback) {
+            $callback($this);
+        }
+    }
 
     public function registerSection(SectionInterface $screen): self
     {
