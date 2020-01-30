@@ -1,9 +1,10 @@
 <template>
     <input
-        :type="type"
-        :id="'field-'+id"
+        :type="field.type"
+        :id="'field-'+field.id"
         class="fk-admin-field-input"
-        :value="value[id]"
+        :class="{ error: errors.has(field.id) }"
+        :value="value[field.id]"
         @input="updateValue($event.target.value)"
     />
 </template>
@@ -12,22 +13,29 @@
     export default {
         name: 'fk-admin-field-input',
         props: {
-            type: {
-                type: String,
-                required: true,
-                validator: value => ['text', 'email', 'number', 'password', 'textarea'].includes(value)
-            },
-            id: {
-                type: String,
+            field: {
+                type: Object,
                 required: true
             },
-            value: {}
+            errors: {
+                type: Object,
+                required: true
+            },
+            value: {
+                type: Object,
+                required: true
+            }
+        },
+        created () {
+            if (!['text', 'email', 'number', 'password'].includes(this.field.type)) {
+                throw new Error('Invalid field type supplied!');
+            }
         },
         methods: {
             updateValue (value) {
                 const payload = {
                     ...this.value,
-                    [this.id]: value
+                    [this.field.id]: value
                 };
                 this.$emit('input', payload);
             }
@@ -41,5 +49,8 @@
     }
     .fk-admin-field-input:focus {
         @apply .outline-none .shadow-outline;
+    }
+    .fk-admin-field-input.error {
+        @apply .border-red-500;
     }
 </style>

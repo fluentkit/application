@@ -1,9 +1,9 @@
 <template>
-    <fk-admin-field-panel v-if="field.type === 'panel'" :field="field" :errors="errors" :value="value" @input="$emit('input', $event)" />
+    <component v-if="field.providesOwnLayout" :is="field.component" :field="field" :errors="errors" :value="value" @input="$emit('input', $event)" />
     <div v-else class="fk-admin-field-row" :class="{ error: errors.has(field.id) }">
         <fk-admin-field-label :label="field.label" :required="field.required" />
         <div class="input">
-            <fk-admin-field-input :type="field.type" :id="field.id" :value="value" @input="$emit('input', $event)" />
+            <component :is="field.component" :field="field" :errors="errors" :value="value" @input="$emit('input', $event)" />
             <p v-if="errors.has(field.id)" class="error">{{ errors.first(field.id) }}</p>
             <p v-if="field.description" class="description">{{ field.description }}</p>
         </div>
@@ -22,7 +22,10 @@
                 type: Object,
                 required: true
             },
-            value: {}
+            value: {
+                type: Object,
+                required: true
+            }
         }
     }
 </script>

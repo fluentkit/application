@@ -1927,25 +1927,31 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'fk-admin-field-input',
   props: {
-    type: {
-      type: String,
-      required: true,
-      validator: function validator(value) {
-        return ['text', 'email', 'number', 'password', 'textarea'].includes(value);
-      }
-    },
-    id: {
-      type: String,
+    field: {
+      type: Object,
       required: true
     },
-    value: {}
+    errors: {
+      type: Object,
+      required: true
+    },
+    value: {
+      type: Object,
+      required: true
+    }
+  },
+  created: function created() {
+    if (!['text', 'email', 'number', 'password'].includes(this.field.type)) {
+      throw new Error('Invalid field type supplied!');
+    }
   },
   methods: {
     updateValue: function updateValue(value) {
-      var payload = _objectSpread({}, this.value, _defineProperty({}, this.id, value));
+      var payload = _objectSpread({}, this.value, _defineProperty({}, this.field.id, value));
 
       this.$emit('input', payload);
     }
@@ -2063,7 +2069,10 @@ __webpack_require__.r(__webpack_exports__);
       type: Object,
       required: true
     },
-    value: {}
+    value: {
+      type: Object,
+      required: true
+    }
   }
 });
 
@@ -4744,8 +4753,9 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("input", {
     staticClass: "fk-admin-field-input",
-    attrs: { type: _vm.type, id: "field-" + _vm.id },
-    domProps: { value: _vm.value[_vm.id] },
+    class: { error: _vm.errors.has(_vm.field.id) },
+    attrs: { type: _vm.field.type, id: "field-" + _vm.field.id },
+    domProps: { value: _vm.value[_vm.field.id] },
     on: {
       input: function($event) {
         return _vm.updateValue($event.target.value)
@@ -4857,8 +4867,9 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.field.type === "panel"
-    ? _c("fk-admin-field-panel", {
+  return _vm.field.providesOwnLayout
+    ? _c(_vm.field.component, {
+        tag: "component",
         attrs: { field: _vm.field, errors: _vm.errors, value: _vm.value },
         on: {
           input: function($event) {
@@ -4881,10 +4892,11 @@ var render = function() {
             "div",
             { staticClass: "input" },
             [
-              _c("fk-admin-field-input", {
+              _c(_vm.field.component, {
+                tag: "component",
                 attrs: {
-                  type: _vm.field.type,
-                  id: _vm.field.id,
+                  field: _vm.field,
+                  errors: _vm.errors,
                   value: _vm.value
                 },
                 on: {

@@ -15,6 +15,10 @@ abstract class Field implements FieldInterface
 
     protected ?string $description;
 
+    protected bool $providesOwnLayout = false;
+
+    protected string $component = 'fk-admin-field-input';
+
     protected $requiredCallback;
 
     protected array $rules = [];
@@ -64,6 +68,8 @@ abstract class Field implements FieldInterface
             'required' => in_array('required', $rules) || call_user_func($this->requiredCallback, $request),
             'type' => static::FIELD_TYPE,
             'description' => $this->description,
+            'providesOwnLayout' => $this->providesOwnLayout,
+            'component' => $this->component,
         ];
     }
 

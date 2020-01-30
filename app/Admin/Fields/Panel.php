@@ -11,6 +11,10 @@ final class Panel extends Field
 {
     public const FIELD_TYPE = 'panel';
 
+    protected bool $providesOwnLayout = true;
+
+    protected string $component = 'fk-admin-field-panel';
+
     protected array $fields = [];
 
     public function addField(FieldInterface $field): FieldInterface
