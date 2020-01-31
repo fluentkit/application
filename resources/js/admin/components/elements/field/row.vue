@@ -1,6 +1,6 @@
 <template>
     <div v-else class="fk-admin-field-row" :class="{ error: errors.has(field.id) }">
-        <fk-admin-field-label :label="field.label" :required="field.required" />
+        <fk-admin-field-label :label="field.label" :required="field.required && !field.readOnly && !field.disabled" />
         <div class="input">
             <slot />
             <p v-if="errors.has(field.id)" class="error">{{ errors.first(field.id) }}</p>

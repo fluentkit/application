@@ -4938,7 +4938,11 @@ var render = function() {
     },
     [
       _c("fk-admin-field-label", {
-        attrs: { label: _vm.field.label, required: _vm.field.required }
+        attrs: {
+          label: _vm.field.label,
+          required:
+            _vm.field.required && !_vm.field.readOnly && !_vm.field.disabled
+        }
       }),
       _vm._v(" "),
       _c(
