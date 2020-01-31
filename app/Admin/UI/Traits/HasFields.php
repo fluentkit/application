@@ -38,4 +38,18 @@ trait HasFields
                 return array_merge($fields, $field->getRules());
             }, []);
     }
+
+    public function getFieldLabels(): array
+    {
+        return collect($this->fields)
+            ->reduce(function (array $fields, FieldInterface $field) {
+                if (method_exists($field, 'getFieldLabels')) {
+                    $labels = $field->getFieldLabels();
+                } else {
+                    $labels = [$field->getId() => $field->getLabel()];
+                }
+
+                return array_merge($fields, $labels);
+            }, []);
+    }
 }
