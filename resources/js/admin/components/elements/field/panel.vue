@@ -43,8 +43,8 @@
                 Object.keys(this.field.fields).forEach(field => {
                     fields[field] = {
                         ...this.field.fields[field],
-                        disabled: this.field.disabled,
-                        readOnly: this.field.readOnly
+                        disabled: this.field.fields[field].disabled || this.field.disabled,
+                        readOnly: this.field.fields[field].readOnly || this.field.readOnly
                     };
                 });
 

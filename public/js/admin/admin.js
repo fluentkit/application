@@ -2064,8 +2064,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var fields = {};
       Object.keys(this.field.fields).forEach(function (field) {
         fields[field] = _objectSpread({}, _this.field.fields[field], {
-          disabled: _this.field.disabled,
-          readOnly: _this.field.readOnly
+          disabled: _this.field.fields[field].disabled || _this.field.disabled,
+          readOnly: _this.field.fields[field].readOnly || _this.field.readOnly
         });
       });
       return fields;

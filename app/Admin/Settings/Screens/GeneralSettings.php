@@ -40,6 +40,21 @@ final class GeneralSettings extends FormScreen
                 ->addField(new Number('number1', 'Number1 Field', 'Number1 field description'))
                 ->addField(new Password('password1', 'Password1 Field', 'Password1 field description'))
         );
+        $this->addField(
+            (new Panel('panel2', 'Panel 2', 'Panel description.'))
+                ->addField(
+                    (new Text('text2', 'Text2 Field', 'Text2 field description'))
+                        ->rules(['required'])
+                )
+                ->addField(
+                    (new Email('email1', 'Email1 Field', 'Email1 field description'))
+                        ->rules(['required'])
+                        ->readOnly()
+                )
+                ->addField(new Number('number1', 'Number1 Field', 'Number1 field description'))
+                ->addField(new Password('password1', 'Password1 Field', 'Password1 field description'))
+                ->disable()
+        );
 
         $this->addAction(
             (new SaveAction('save', 'Save Changes'))
