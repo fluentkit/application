@@ -1,5 +1,5 @@
 <template>
-    <div v-else class="fk-admin-field-row" :class="{ error: errors.has(field.id) }">
+    <div v-else class="fk-admin-field-row" :class="{ error: errors.has(field.id), [field.layout]: true }">
         <fk-admin-field-label :label="field.label" :required="field.required && !field.readOnly && !field.disabled" />
         <div class="input">
             <slot />
@@ -31,6 +31,16 @@
     }
     .fk-admin-field-row.error {
         @apply .bg-red-100;
+    }
+
+    .fk-admin-field-row.stacked {
+        @apply .flex-col;
+    }
+    .fk-admin-field-row.stacked > * {
+        @apply .w-full;
+    }
+    .fk-admin-field-row.stacked > .fk-admin-field-label {
+        @apply .mb-4;
     }
 
     .fk-admin-field-row > .input {

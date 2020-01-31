@@ -4927,6 +4927,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
 var render = function() {
+  var _obj
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -4934,7 +4935,10 @@ var render = function() {
     "div",
     {
       staticClass: "fk-admin-field-row",
-      class: { error: _vm.errors.has(_vm.field.id) }
+      class:
+        ((_obj = { error: _vm.errors.has(_vm.field.id) }),
+        (_obj[_vm.field.layout] = true),
+        _obj)
     },
     [
       _c("fk-admin-field-label", {

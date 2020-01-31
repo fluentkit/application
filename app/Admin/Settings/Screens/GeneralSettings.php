@@ -37,7 +37,10 @@ final class GeneralSettings extends FormScreen
                     (new Email('email1', 'Email1 Field', 'Email1 field description'))
                         ->rules(['required'])
                 )
-                ->addField(new Number('number1', 'Number1 Field', 'Number1 field description'))
+                ->addField(
+                    (new Number('number1', 'Number1 Field', 'Number1 field description'))
+                        ->layout('stacked')
+                )
                 ->addField(new Password('password1', 'Password1 Field', 'Password1 field description'))
         );
         $this->addField(
@@ -70,6 +73,7 @@ final class GeneralSettings extends FormScreen
             'text2' => 'bar',
             'number1' => 10,
             'password1' => 'foobar',
+            'multi' => ['one', 'two', 'three']
         ];
     }
 

@@ -1016,6 +1016,15 @@ html {
 .fk-admin-field-row.error {
   background-color: #fff5f5;
 }
+.fk-admin-field-row.stacked {
+  flex-direction: column;
+}
+.fk-admin-field-row.stacked > * {
+  width: 100%;
+}
+.fk-admin-field-row.stacked > .fk-admin-field-label {
+  margin-bottom: 1rem;
+}
 .fk-admin-field-row > .input {
   display: flex;
   flex-direction: column;

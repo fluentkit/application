@@ -18,6 +18,8 @@ abstract class Field implements FieldInterface
 
     protected ?string $description;
 
+    protected string $layout = 'left';
+
     protected string $component = 'fk-admin-field-input';
 
     protected $requiredCallback;
@@ -36,6 +38,13 @@ abstract class Field implements FieldInterface
         $this->requiredCallback = fn (Request $request) => false;
     }
 
+    public function layout(string $layout): FieldInterface
+    {
+        $this->layout = $layout;
+
+        return $this;
+    }
+
     public function rules(array $rules): FieldInterface
     {
         $this->rules = $rules;
@@ -48,6 +57,11 @@ abstract class Field implements FieldInterface
         $this->requiredCallback = $callback;
 
         return $this;
+    }
+
+    public function getLayout(): string
+    {
+        return $this->layout;
     }
 
     public function getRules(): array
@@ -63,6 +77,7 @@ abstract class Field implements FieldInterface
             'id' => $this->getId(),
             'priority' => $this->getPriority(),
             'label' => $this->getLabel(),
+            'layout' => $this->getLayout(),
             'required' => in_array('required', $rules) || call_user_func($this->requiredCallback, $request),
             'disabled' => $this->getDisabled($request),
             'readOnly' => $this->getReadOnly($request),

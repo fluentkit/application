@@ -16,6 +16,8 @@ interface FieldInterface
 
     public function setLabel(string $label);
 
+    public function layout(string $layout): self;
+
     public function required(callable $callback): self;
 
     public function rules(array $rules): self;
@@ -27,6 +29,8 @@ interface FieldInterface
     public function getId(): string;
 
     public function getLabel(): string;
+
+    public function getLayout(): string;
 
     public function getRules(): array;
 
