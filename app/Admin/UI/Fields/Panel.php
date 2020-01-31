@@ -14,8 +14,6 @@ final class Panel extends Field
 
     public const FIELD_TYPE = 'panel';
 
-    protected bool $providesOwnLayout = true;
-
     protected string $component = 'fk-admin-field-panel';
 
     public function getRules(): array

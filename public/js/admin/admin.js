@@ -1936,6 +1936,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'fk-admin-field-input',
   props: {
@@ -2031,6 +2036,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'fk-admin-field-panel',
   props: {
@@ -2089,7 +2095,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'fk-admin-field-row',
   props: {
@@ -2098,10 +2103,6 @@ __webpack_require__.r(__webpack_exports__);
       required: true
     },
     errors: {
-      type: Object,
-      required: true
-    },
-    value: {
       type: Object,
       required: true
     }
@@ -4798,25 +4799,31 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.field.readOnly
-    ? _c("div", { staticClass: "fk-admin-field-input" }, [
-        _vm._v("\n    " + _vm._s(_vm.value[_vm.field.id]) + "\n")
-      ])
-    : _c("input", {
-        staticClass: "fk-admin-field-input",
-        class: { error: _vm.errors.has(_vm.field.id) },
-        attrs: {
-          type: _vm.field.type,
-          id: "field-" + _vm.field.id,
-          disabled: _vm.field.disabled
-        },
-        domProps: { value: _vm.value[_vm.field.id] },
-        on: {
-          input: function($event) {
-            return _vm.updateValue($event.target.value)
-          }
-        }
-      })
+  return _c(
+    "fk-admin-field-row",
+    { attrs: { field: _vm.field, errors: _vm.errors } },
+    [
+      _vm.field.readOnly
+        ? _c("div", { staticClass: "fk-admin-field-input" }, [
+            _vm._v("\n        " + _vm._s(_vm.value[_vm.field.id]) + "\n    ")
+          ])
+        : _c("input", {
+            staticClass: "fk-admin-field-input",
+            class: { error: _vm.errors.has(_vm.field.id) },
+            attrs: {
+              type: _vm.field.type,
+              id: "field-" + _vm.field.id,
+              disabled: _vm.field.disabled
+            },
+            domProps: { value: _vm.value[_vm.field.id] },
+            on: {
+              input: function($event) {
+                return _vm.updateValue($event.target.value)
+              }
+            }
+          })
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -4884,8 +4891,9 @@ var render = function() {
       _c(
         "fk-admin-panel",
         _vm._l(_vm.fields, function(field) {
-          return _c("fk-admin-field-row", {
+          return _c(field.component, {
             key: field.id,
+            tag: "component",
             attrs: { field: field, errors: _vm.errors, value: _vm.value },
             on: {
               input: function($event) {
@@ -4922,62 +4930,40 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.field.providesOwnLayout
-    ? _c(_vm.field.component, {
-        tag: "component",
-        attrs: { field: _vm.field, errors: _vm.errors, value: _vm.value },
-        on: {
-          input: function($event) {
-            return _vm.$emit("input", $event)
-          }
-        }
-      })
-    : _c(
+  return _c(
+    "div",
+    {
+      staticClass: "fk-admin-field-row",
+      class: { error: _vm.errors.has(_vm.field.id) }
+    },
+    [
+      _c("fk-admin-field-label", {
+        attrs: { label: _vm.field.label, required: _vm.field.required }
+      }),
+      _vm._v(" "),
+      _c(
         "div",
-        {
-          staticClass: "fk-admin-field-row",
-          class: { error: _vm.errors.has(_vm.field.id) }
-        },
+        { staticClass: "input" },
         [
-          _c("fk-admin-field-label", {
-            attrs: { label: _vm.field.label, required: _vm.field.required }
-          }),
+          _vm._t("default"),
           _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "input" },
-            [
-              _c(_vm.field.component, {
-                tag: "component",
-                attrs: {
-                  field: _vm.field,
-                  errors: _vm.errors,
-                  value: _vm.value
-                },
-                on: {
-                  input: function($event) {
-                    return _vm.$emit("input", $event)
-                  }
-                }
-              }),
-              _vm._v(" "),
-              _vm.errors.has(_vm.field.id)
-                ? _c("p", { staticClass: "error" }, [
-                    _vm._v(_vm._s(_vm.errors.first(_vm.field.id)))
-                  ])
-                : _vm._e(),
-              _vm._v(" "),
-              _vm.field.description
-                ? _c("p", { staticClass: "description" }, [
-                    _vm._v(_vm._s(_vm.field.description))
-                  ])
-                : _vm._e()
-            ],
-            1
-          )
+          _vm.errors.has(_vm.field.id)
+            ? _c("p", { staticClass: "error" }, [
+                _vm._v(_vm._s(_vm.errors.first(_vm.field.id)))
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.field.description
+            ? _c("p", { staticClass: "description" }, [
+                _vm._v(_vm._s(_vm.field.description))
+              ])
+            : _vm._e()
         ],
-        1
+        2
       )
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -5399,8 +5385,9 @@ var render = function() {
         { staticClass: "fk-admin-screen-form" },
         [
           _vm._l(_vm.fields, function(field) {
-            return _c("fk-admin-field-row", {
+            return _c(field.component, {
               key: field.id,
+              tag: "component",
               attrs: { field: field, errors: _vm.$form.errors },
               model: {
                 value: _vm.attributes,

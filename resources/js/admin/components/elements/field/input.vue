@@ -1,20 +1,25 @@
 <template>
-    <div
-        v-if="field.readOnly"
-        class="fk-admin-field-input"
+    <fk-admin-field-row
+        :field="field"
+        :errors="errors"
     >
-        {{ value[field.id] }}
-    </div>
-    <input
-        v-else
-        :type="field.type"
-        :id="'field-'+field.id"
-        class="fk-admin-field-input"
-        :class="{ error: errors.has(field.id) }"
-        :value="value[field.id]"
-        :disabled="field.disabled"
-        @input="updateValue($event.target.value)"
-    />
+        <div
+            v-if="field.readOnly"
+            class="fk-admin-field-input"
+        >
+            {{ value[field.id] }}
+        </div>
+        <input
+            v-else
+            :type="field.type"
+            :id="'field-'+field.id"
+            class="fk-admin-field-input"
+            :class="{ error: errors.has(field.id) }"
+            :value="value[field.id]"
+            :disabled="field.disabled"
+            @input="updateValue($event.target.value)"
+        />
+    </fk-admin-field-row>
 </template>
 
 <script>

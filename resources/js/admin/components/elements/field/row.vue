@@ -1,9 +1,8 @@
 <template>
-    <component v-if="field.providesOwnLayout" :is="field.component" :field="field" :errors="errors" :value="value" @input="$emit('input', $event)" />
     <div v-else class="fk-admin-field-row" :class="{ error: errors.has(field.id) }">
         <fk-admin-field-label :label="field.label" :required="field.required" />
         <div class="input">
-            <component :is="field.component" :field="field" :errors="errors" :value="value" @input="$emit('input', $event)" />
+            <slot />
             <p v-if="errors.has(field.id)" class="error">{{ errors.first(field.id) }}</p>
             <p v-if="field.description" class="description">{{ field.description }}</p>
         </div>
@@ -19,10 +18,6 @@
                 required: true
             },
             errors: {
-                type: Object,
-                required: true
-            },
-            value: {
                 type: Object,
                 required: true
             }

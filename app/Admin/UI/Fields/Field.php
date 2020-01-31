@@ -18,8 +18,6 @@ abstract class Field implements FieldInterface
 
     protected ?string $description;
 
-    protected bool $providesOwnLayout = false;
-
     protected string $component = 'fk-admin-field-input';
 
     protected $requiredCallback;
@@ -70,7 +68,6 @@ abstract class Field implements FieldInterface
             'readOnly' => $this->getReadOnly($request),
             'type' => static::FIELD_TYPE,
             'description' => $this->description,
-            'providesOwnLayout' => $this->providesOwnLayout,
             'component' => $this->component,
         ];
     }

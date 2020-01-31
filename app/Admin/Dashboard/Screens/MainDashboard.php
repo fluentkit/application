@@ -52,10 +52,8 @@ final class MainDashboard extends Screen
                     </fk-admin-panel>
                     <fk-admin-title>Bazzer</fk-admin-title>
                     <fk-admin-panel>
-                        <fk-admin-field-row :field="attributes.email" v-model="attributes.attributes.email"/>
-                        <fk-admin-field-row :field="attributes.text" v-model="attributes.attributes.text"/>
+                        <pre>{{ attributes }}</pre>
                     </fk-admin-panel>
-                    <fk-admin-field-row :field="attributes.email" v-model="attributes.attributes.email"/>
                     <fk-admin-title>User Details</fk-admin-title>
                     <fk-admin-panel>
                         '.get_called_class(). '
