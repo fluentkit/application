@@ -1046,7 +1046,9 @@ html {
   color: #f56565;
   margin-left: 0.5rem;
 }
-.fk-admin-field-input {
+div.fk-admin-field-input {
+}
+input.fk-admin-field-input {
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
   appearance: none;
   border-width: 1px;
@@ -1059,15 +1061,15 @@ html {
   color: #4a5568;
   line-height: 1.25;
 }
-.fk-admin-field-input:focus {
+input.fk-admin-field-input:focus {
   outline: 0;
   box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
 }
-.fk-admin-field-input[disabled] {
+input.fk-admin-field-input[disabled] {
   background-color: #e2e8f0;
   cursor: not-allowed;
 }
-.fk-admin-field-input.error {
+input.fk-admin-field-input.error {
   border-color: #f56565;
 }
 .fk-admin-form-actions > .fk-admin-button {

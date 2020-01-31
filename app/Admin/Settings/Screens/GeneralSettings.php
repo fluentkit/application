@@ -31,6 +31,7 @@ final class GeneralSettings extends FormScreen
                 ->addField(
                     (new Text('text2', 'Text2 Field', 'Text2 field description'))
                         ->rules(['required'])
+                        ->readOnly()
                 )
                 ->addField(
                     (new Email('email1', 'Email1 Field', 'Email1 field description'))

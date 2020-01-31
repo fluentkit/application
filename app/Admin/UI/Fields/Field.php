@@ -6,6 +6,7 @@ namespace FluentKit\Admin\UI\Fields;
 
 use FluentKit\Admin\UI\FieldInterface;
 use FluentKit\Admin\UI\Traits\CanBeDisabled;
+use FluentKit\Admin\UI\Traits\CanBeReadOnly;
 use FluentKit\Admin\UI\Traits\HasId;
 use FluentKit\Admin\UI\Traits\HasLabel;
 use FluentKit\Admin\UI\Traits\HasPriority;
@@ -13,7 +14,7 @@ use Illuminate\Http\Request;
 
 abstract class Field implements FieldInterface
 {
-    use HasId, HasLabel, HasPriority, CanBeDisabled;
+    use HasId, HasLabel, HasPriority, CanBeDisabled, CanBeReadOnly;
 
     protected ?string $description;
 
@@ -66,6 +67,7 @@ abstract class Field implements FieldInterface
             'label' => $this->getLabel(),
             'required' => in_array('required', $rules) || call_user_func($this->requiredCallback, $request),
             'disabled' => $this->getDisabled($request),
+            'readOnly' => $this->getReadOnly($request),
             'type' => static::FIELD_TYPE,
             'description' => $this->description,
             'providesOwnLayout' => $this->providesOwnLayout,

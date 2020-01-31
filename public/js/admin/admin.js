@@ -1929,6 +1929,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'fk-admin-field-input',
   props: {
@@ -2044,14 +2051,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     fields: function fields() {
       var _this = this;
 
-      if (!this.field.disabled) {
+      if (!this.field.disabled && !this.field.readOnly) {
         return this.field.fields;
       }
 
       var fields = {};
       Object.keys(this.field.fields).forEach(function (field) {
         fields[field] = _objectSpread({}, _this.field.fields[field], {
-          disabled: true
+          disabled: _this.field.disabled,
+          readOnly: _this.field.readOnly
         });
       });
       return fields;
@@ -4790,21 +4798,25 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("input", {
-    staticClass: "fk-admin-field-input",
-    class: { error: _vm.errors.has(_vm.field.id) },
-    attrs: {
-      type: _vm.field.type,
-      id: "field-" + _vm.field.id,
-      disabled: _vm.field.disabled
-    },
-    domProps: { value: _vm.value[_vm.field.id] },
-    on: {
-      input: function($event) {
-        return _vm.updateValue($event.target.value)
-      }
-    }
-  })
+  return _vm.field.readOnly
+    ? _c("div", { staticClass: "fk-admin-field-input" }, [
+        _vm._v("\n    " + _vm._s(_vm.value[_vm.field.id]) + "\n")
+      ])
+    : _c("input", {
+        staticClass: "fk-admin-field-input",
+        class: { error: _vm.errors.has(_vm.field.id) },
+        attrs: {
+          type: _vm.field.type,
+          id: "field-" + _vm.field.id,
+          disabled: _vm.field.disabled
+        },
+        domProps: { value: _vm.value[_vm.field.id] },
+        on: {
+          input: function($event) {
+            return _vm.updateValue($event.target.value)
+          }
+        }
+      })
 }
 var staticRenderFns = []
 render._withStripped = true

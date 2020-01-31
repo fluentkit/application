@@ -34,7 +34,7 @@
         },
         computed: {
             fields () {
-                if (!this.field.disabled) {
+                if (!this.field.disabled && !this.field.readOnly) {
                     return this.field.fields;
                 }
 
@@ -42,7 +42,8 @@
                 Object.keys(this.field.fields).forEach(field => {
                     fields[field] = {
                         ...this.field.fields[field],
-                        disabled: true
+                        disabled: this.field.disabled,
+                        readOnly: this.field.readOnly
                     };
                 });
 

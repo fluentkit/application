@@ -1,5 +1,12 @@
 <template>
+    <div
+        v-if="field.readOnly"
+        class="fk-admin-field-input"
+    >
+        {{ value[field.id] }}
+    </div>
     <input
+        v-else
         :type="field.type"
         :id="'field-'+field.id"
         class="fk-admin-field-input"
@@ -45,16 +52,19 @@
 </script>
 
 <style>
-    .fk-admin-field-input {
+    div.fk-admin-field-input {
+
+    }
+    input.fk-admin-field-input {
         @apply .shadow .appearance-none .border .rounded .w-full .py-2 .px-3 .text-gray-700 .leading-tight;
     }
-    .fk-admin-field-input:focus {
+    input.fk-admin-field-input:focus {
         @apply .outline-none .shadow-outline;
     }
-    .fk-admin-field-input[disabled] {
+    input.fk-admin-field-input[disabled] {
         @apply .bg-gray-300 .cursor-not-allowed;
     }
-    .fk-admin-field-input.error {
+    input.fk-admin-field-input.error {
         @apply .border-red-500;
     }
 </style>
