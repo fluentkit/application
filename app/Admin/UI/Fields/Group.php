@@ -8,13 +8,13 @@ use FluentKit\Admin\UI\FieldInterface;
 use FluentKit\Admin\UI\Traits\HasFields;
 use Illuminate\Http\Request;
 
-final class Panel extends Field
+final class Group extends Field
 {
     use HasFields;
 
-    public const FIELD_TYPE = 'panel';
+    public const FIELD_TYPE = 'group';
 
-    protected string $component = 'fk-admin-field-panel';
+    protected string $component = 'fk-admin-field-group';
 
     public function getRules(): array
     {

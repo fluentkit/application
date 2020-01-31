@@ -6,6 +6,7 @@ namespace FluentKit\Admin\Settings\Screens;
 
 use FluentKit\Admin\UI\Actions\SaveAction;
 use FluentKit\Admin\UI\Fields\Email;
+use FluentKit\Admin\UI\Fields\Group;
 use FluentKit\Admin\UI\Fields\Number;
 use FluentKit\Admin\UI\Fields\Panel;
 use FluentKit\Admin\UI\Fields\Password;
@@ -21,11 +22,24 @@ final class GeneralSettings extends FormScreen
         $this->setId('general');
         $this->setLabel('General Settings');
 
+        $group = (new Group('group1', 'Grouped Field'))
+            ->addField(
+                (new Text('text1', 'Text Field', 'Text field description'))
+                    ->rules(['required'])
+                    ->disable()
+            )
+            ->addField(
+                (new Email('email1', 'Email1 Field', 'Email1 field description'))
+                    ->rules(['required'])
+                    ->layout('stacked')
+            );
+
         $this->addField(
             (new Text('text1', 'Text Field', 'Text field description'))
                 ->rules(['required'])
                 ->disable()
         );
+        $this->addField($group);
         $this->addField(
             (new Panel('panel1', 'Panel 1', 'Panel description.'))
                 ->addField(
@@ -40,7 +54,9 @@ final class GeneralSettings extends FormScreen
                 ->addField(
                     (new Number('number1', 'Number1 Field', 'Number1 field description'))
                         ->layout('stacked')
+                        ->rules(['required'])
                 )
+                ->addField($group)
                 ->addField(new Password('password1', 'Password1 Field', 'Password1 field description'))
         );
         $this->addField(
@@ -54,7 +70,10 @@ final class GeneralSettings extends FormScreen
                         ->rules(['required'])
                         ->readOnly()
                 )
-                ->addField(new Number('number1', 'Number1 Field', 'Number1 field description'))
+                ->addField(
+                    (new Number('number1', 'Number1 Field Label', 'Number1 field description'))
+                        ->rules(['required'])
+                )
                 ->addField(new Password('password1', 'Password1 Field', 'Password1 field description'))
                 ->disable()
         );

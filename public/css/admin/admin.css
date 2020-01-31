@@ -1046,6 +1046,23 @@ html {
   font-style: italic;
   margin-bottom: 1rem;
 }
+.fk-admin-field-group > * {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+.fk-admin-field-group > *:first-child {
+  padding-top: 0;
+}
+.fk-admin-field-group > *:last-child {
+  padding-bottom: 1.5rem;
+  margin-bottom: -1.5rem;
+}
+.fk-admin-field-group > .error {
+  margin-left: -2.5rem;
+  margin-right: -2.5rem;
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+}
 .fk-admin-field-label {
   display: flex;
   width: 16rem;

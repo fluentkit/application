@@ -30,4 +30,12 @@ trait HasFields
             ->sortBy('priority')
             ->toArray();
     }
+
+    public function getFieldRules(): array
+    {
+        return collect($this->fields)
+            ->reduce(function (array $fields, FieldInterface $field) {
+                return array_merge($fields, $field->getRules());
+            }, []);
+    }
 }

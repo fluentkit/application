@@ -21,6 +21,7 @@ export default config => {
         // fields
         require('./components/elements/field/row').default,
         require('./components/elements/field/panel').default,
+        require('./components/elements/field/group').default,
         require('./components/elements/field/label').default,
         require('./components/elements/field/input').default,
         // form

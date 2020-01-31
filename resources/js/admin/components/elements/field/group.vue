@@ -1,8 +1,9 @@
 <template>
-    <div class="fk-admin-field-panel">
-        <fk-admin-title>{{ field.label }}</fk-admin-title>
-        <p v-if="field.description" class="description">{{ field.description }}</p>
-        <fk-admin-panel>
+    <fk-admin-field-row
+        :field="field"
+        :errors="errors"
+    >
+        <div class="fk-admin-field-group">
             <component
                 v-for="field in fields"
                 :key="field.id"
@@ -12,13 +13,13 @@
                 :value="value"
                 @input="$emit('input', $event)"
             />
-        </fk-admin-panel>
-    </div>
+        </div>
+    </fk-admin-field-row>
 </template>
 
 <script>
     export default {
-        name: 'fk-admin-field-panel',
+        name: 'fk-admin-field-group',
         props: {
             field: {
                 type: Object,
@@ -51,7 +52,18 @@
 </script>
 
 <style>
-    .fk-admin-field-panel > .description {
-        @apply .text-gray-600 .italic .mb-4;
+    .fk-admin-field-group > * {
+        @apply .py-6;
+    }
+
+    .fk-admin-field-group > *:first-child {
+        @apply .pt-0;
+    }
+    .fk-admin-field-group > *:last-child {
+        @apply .pb-6 .-mb-6;
+    }
+
+    .fk-admin-field-group > .error {
+        @apply .-mx-10 .px-10;
     }
 </style>
