@@ -2889,6 +2889,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       buttonText: 'Save Changes'
     };
   },
+  computed: {
+    requestQuery: function requestQuery() {
+      var params = [];
+
+      for (var param in this.$route.params) {
+        if (this.$route.params.hasOwnProperty(param)) {
+          params.push("".concat(param, "=").concat(this.$route.params[param]));
+        }
+      }
+
+      if (!params.length) {
+        return '';
+      }
+
+      return "?".concat(params.join('&'));
+    }
+  },
   created: function () {
     var _created = _asyncToGenerator(
     /*#__PURE__*/
@@ -2902,7 +2919,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               _context.prev = 0;
               $section = this.$section, $screen = this.$screen;
               _context.next = 4;
-              return Promise.all([this.$request().get(Object(_utils_url__WEBPACK_IMPORTED_MODULE_1__["default"])(_templateObject(), $section.id, $screen.id)), this.$request().get(Object(_utils_url__WEBPACK_IMPORTED_MODULE_1__["default"])(_templateObject2(), $section.id, $screen.id)), this.$request().get(Object(_utils_url__WEBPACK_IMPORTED_MODULE_1__["default"])(_templateObject3(), $section.id, $screen.id))]);
+              return Promise.all([this.$request().get(Object(_utils_url__WEBPACK_IMPORTED_MODULE_1__["default"])(_templateObject(), $section.id, $screen.id) + this.requestQuery), this.$request().get(Object(_utils_url__WEBPACK_IMPORTED_MODULE_1__["default"])(_templateObject2(), $section.id, $screen.id) + this.requestQuery), this.$request().get(Object(_utils_url__WEBPACK_IMPORTED_MODULE_1__["default"])(_templateObject3(), $section.id, $screen.id) + this.requestQuery)]);
 
             case 4:
               _ref = _context.sent;
@@ -2959,7 +2976,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 this.$progress().start();
                 $section = this.$section, $screen = this.$screen;
                 _context2.next = 6;
-                return this.$form.post(Object(_utils_url__WEBPACK_IMPORTED_MODULE_1__["default"])(_templateObject4(), $section.id, $screen.id, action.id), {
+                return this.$form.post(Object(_utils_url__WEBPACK_IMPORTED_MODULE_1__["default"])(_templateObject4(), $section.id, $screen.id, action.id) + this.requestQuery, {
                   attributes: this.attributes
                 });
 
@@ -5654,7 +5671,12 @@ var render = function() {
         _vm._v(" "),
         _c("div", { attrs: { id: "progress-container" } }),
         _vm._v(" "),
-        _c("div", { attrs: { id: "screen-container" } }, [_c("router-view")], 1)
+        _c(
+          "div",
+          { attrs: { id: "screen-container" } },
+          [_c("router-view", { key: _vm.$route.fullPath })],
+          1
+        )
       ],
       1
     )
@@ -10651,8 +10673,9 @@ var createRoutes = function createRoutes(_ref) {
     }].concat(_toConsumableArray(Object.keys(screens).map(function (_id) {
       return screens[_id];
     }).map(function (screen) {
+      var path = ["/".concat(id, "/").concat(screen.id)].concat(_toConsumableArray(screen.routeParams)).join('/');
       return {
-        path: "/".concat(id, "/").concat(screen.id),
+        path: path,
         component: {
           mixins: [_mixins_screen__WEBPACK_IMPORTED_MODULE_3__["default"]],
           render: function render(createElement) {

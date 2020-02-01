@@ -14,7 +14,7 @@ final class Settings extends Section
         $this->setId('settings');
         $this->setIcon('fa-cog');
         $this->setLabel('Settings');
-        $this->setPriority(20);
+        $this->setPriority(100);
 
         $this->registerScreen(new GeneralSettings());
     }

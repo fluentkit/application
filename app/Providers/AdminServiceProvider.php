@@ -6,6 +6,7 @@ use FluentKit\Admin\Area;
 use FluentKit\Admin\Dashboard\Dashboards;
 use FluentKit\Admin\Settings\Settings;
 use FluentKit\Admin\UI\UserLink;
+use FluentKit\Admin\Users\Users;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 
@@ -30,9 +31,13 @@ class AdminServiceProvider extends ServiceProvider
     {
         $admin->serving(function (Area $admin) {
             $admin->registerSection(new Dashboards());
+            $admin->registerSection(new Users());
             $admin->registerSection(new Settings());
 
-            $admin->registerUserLink(new UserLink('profile', 'My Profile', 'dashboards'));
+            $admin->registerUserLink(
+                (new UserLink('profile', 'My Profile', 'users.edit'))
+                    ->setParams(['id' => request()->user()->id])
+            );
             $admin->registerUserLink(UserLink::divider('logout-divider'));
             $admin->registerUserLink(new UserLink('logout', 'Logout', 'logout'));
         });

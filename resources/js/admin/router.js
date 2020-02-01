@@ -27,8 +27,10 @@ const createRoutes = ({ sections, user }) => {
                 ...Object.keys(screens)
                     .map(_id => screens[_id])
                     .map(screen => {
+                        const path = [`/${id}/${screen.id}`, ...screen.routeParams].join('/');
+
                         return {
-                            path: `/${id}/${screen.id}`,
+                            path,
                             component: {
                                 mixins: [screenMixin],
                                 render (createElement) {

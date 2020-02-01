@@ -52,4 +52,18 @@ trait HasFields
                 return array_merge($fields, $labels);
             }, []);
     }
+
+    public function getFieldKeys(Request $request): ?array
+    {
+        return collect($this->fields)
+            ->reduce(function (array $fields, FieldInterface $field) use ($request) {
+                if (method_exists($field, 'getFieldKeys')) {
+                    $ids = $field->getFieldKeys($request);
+                } else {
+                    $ids = [$field->getId()];
+                }
+
+                return array_merge($fields, $ids);
+            }, []);
+    }
 }

@@ -25,14 +25,30 @@
                 buttonText: 'Save Changes'
             }
         },
+        computed: {
+		    requestQuery () {
+		        const params = [];
+		        for (const param in this.$route.params) {
+		            if (this.$route.params.hasOwnProperty(param)) {
+                        params.push(`${param}=${this.$route.params[param]}`)
+                    }
+                }
+
+		        if (!params.length) {
+		            return '';
+                }
+
+		        return `?${params.join('&')}`;
+            }
+        },
         async created () {
             try {
                 const { $section, $screen } = this;
 
                 const [fieldRequest, attributeRequest, actionRequest] = await Promise.all([
-                    this.$request().get(url`/admin/${$section.id}/${$screen.id}/fields`),
-                    this.$request().get(url`/admin/${$section.id}/${$screen.id}/attributes`),
-                    this.$request().get(url`/admin/${$section.id}/${$screen.id}/actions`),
+                    this.$request().get(url`/admin/${$section.id}/${$screen.id}/fields`+this.requestQuery),
+                    this.$request().get(url`/admin/${$section.id}/${$screen.id}/attributes`+this.requestQuery),
+                    this.$request().get(url`/admin/${$section.id}/${$screen.id}/actions`+this.requestQuery),
                 ]);
 
                 const { data: { fields = {} } } = fieldRequest;
@@ -55,7 +71,7 @@
                     const { $section, $screen } = this;
                     const {
                         data: { message, type, meta, attributes }
-                    } = await this.$form.post(url`/admin/${$section.id}/${$screen.id}/${action.id}`, { attributes: this.attributes });
+                    } = await this.$form.post(url`/admin/${$section.id}/${$screen.id}/${action.id}`+this.requestQuery, { attributes: this.attributes });
                     if (type === 'notification') {
                         this['$'+meta.toast.type](message);
                     }

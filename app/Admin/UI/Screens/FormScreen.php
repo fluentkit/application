@@ -8,6 +8,7 @@ use FluentKit\Admin\UI\FieldInterface;
 use FluentKit\Admin\UI\ScreenInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 abstract class FormScreen extends Screen implements ScreenInterface
 {
@@ -18,6 +19,12 @@ abstract class FormScreen extends Screen implements ScreenInterface
         $fields = $this->getFieldRules();
         $fieldNames = $this->getFieldLabels();
 
-        Validator::make($request->get('attributes'), $fields, [], $fieldNames)->validate();
+        $rules = collect($fields)->map(function (array $rules) use ($request) {
+            return collect($rules)->map(function ($rule) use ($request) {
+                return str_replace('{$id}', $request->get('id'), (string) $rule);
+            })->toArray();
+        })->toArray();
+
+        Validator::make($request->get('attributes'), $rules, [], $fieldNames)->validate();
     }
 }

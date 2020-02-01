@@ -22,6 +22,8 @@ class Screen implements ScreenInterface
 
     protected string $type = 'html';
 
+    protected array $routeParams = [];
+
     protected array $actions = [];
 
     public function getHideSectionTitle(): bool
@@ -49,6 +51,7 @@ class Screen implements ScreenInterface
             'hideSectionTitle' => $this->getHideSectionTitle(),
             'type' => $this->getType(),
             'component' => $this->getComponent(),
+            'routeParams' => $this->routeParams,
         ];
     }
 
