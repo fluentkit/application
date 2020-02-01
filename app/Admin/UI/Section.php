@@ -8,6 +8,7 @@ use FluentKit\Admin\UI\Traits\HasIcon;
 use FluentKit\Admin\UI\Traits\HasId;
 use FluentKit\Admin\UI\Traits\HasLabel;
 use FluentKit\Admin\UI\Traits\HasPriority;
+use Illuminate\Http\Request;
 
 class Section implements SectionInterface
 {
@@ -27,7 +28,7 @@ class Section implements SectionInterface
         return $this->screens[$id] ?? null;
     }
 
-    public function toArray(): array
+    public function toArray(Request $request): array
     {
         return [
             'id' => $this->getId(),
@@ -35,7 +36,7 @@ class Section implements SectionInterface
             'icon' => $this->getIcon(),
             'label' => $this->getLabel(),
             'screens' => collect($this->screens)
-                ->map(fn (ScreenInterface $screen) => $screen->toArray())
+                ->map(fn (ScreenInterface $screen) => $screen->toArray($request))
                 ->sortBy('priority')
                 ->toArray()
         ];

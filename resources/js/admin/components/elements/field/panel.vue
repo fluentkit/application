@@ -7,6 +7,7 @@
                 v-for="field in fields"
                 :key="field.id"
                 :is="field.component"
+                v-if="!field.hidden"
                 :field="field"
                 :errors="errors"
                 :value="value"

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace FluentKit\Admin\UI;
 
+use Illuminate\Http\Request;
+
 interface UserLinkInterface
 {
     public function getId(): string;
@@ -12,5 +14,5 @@ interface UserLinkInterface
 
     public function setQuery(array $query): self;
 
-    public function toArray(): array;
+    public function toArray(Request $request): array;
 }

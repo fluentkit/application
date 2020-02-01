@@ -13,12 +13,16 @@ use FluentKit\User;
 
 final class Edit extends ModelScreen
 {
+    protected string $id = 'edit';
+
+    protected string $label = 'Edit User';
+
+    protected $hidden = true;
+
+    protected string $model = User::class;
+
     public function __construct()
     {
-        $this->setId('edit');
-        $this->setLabel('Edit User');
-        $this->setModel(User::class);
-
         $this->addField(
             (new Panel('details', 'User Details', ''))
                 ->addField(

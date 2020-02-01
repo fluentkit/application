@@ -6,6 +6,7 @@ namespace FluentKit\Admin\UI\Screens;
 
 use FluentKit\Admin\UI\FieldInterface;
 use FluentKit\Admin\UI\ScreenInterface;
+use FluentKit\Admin\UI\Traits\CanBeHidden;
 use FluentKit\Admin\UI\Traits\HasActions;
 use FluentKit\Admin\UI\Traits\HasFields;
 use FluentKit\Admin\UI\Traits\HasIcon;
@@ -16,7 +17,7 @@ use Illuminate\Http\Request;
 
 class Screen implements ScreenInterface
 {
-    use HasId, HasIcon, HasLabel, HasPriority, HasFields, HasActions;
+    use HasId, HasIcon, HasLabel, HasPriority, HasFields, HasActions, CanBeHidden;
 
     protected bool $hideSectionTitle = false;
 
@@ -41,7 +42,7 @@ class Screen implements ScreenInterface
         return 'fk-admin-screen-' . $this->getType();
     }
 
-    public function toArray(): array
+    public function toArray(Request $request): array
     {
         return [
             'id' => $this->getId(),
@@ -49,6 +50,7 @@ class Screen implements ScreenInterface
             'icon' => $this->getIcon(),
             'label' => $this->getLabel(),
             'hideSectionTitle' => $this->getHideSectionTitle(),
+            'hidden' => $this->getHidden($request),
             'type' => $this->getType(),
             'component' => $this->getComponent(),
             'routeParams' => $this->routeParams,

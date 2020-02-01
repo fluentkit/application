@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace FluentKit\Admin\Http\Middleware;
 
 use FluentKit\Admin\Area;
+use Illuminate\Http\Request;
 
 final class AdminMiddleware
 {
@@ -15,9 +16,9 @@ final class AdminMiddleware
         $this->admin = $admin;
     }
 
-    public function handle($request, \Closure $next)
+    public function handle(Request $request, \Closure $next)
     {
-        $this->admin->serve();
+        $this->admin->serve($request);
 
         return $next($request);
     }

@@ -31,7 +31,7 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/{section}/{screen}/{action}', [\FluentKit\Admin\Http\Controllers\Screen\ScreenActionsController::class, 'postAction']);
 
-    Route::get('/{path?}', function () {
-        return view('admin.layouts.default', ['admin' => app(\FluentKit\Admin\Area::class)->toArray()]);
+    Route::get('/{path?}', function (\Illuminate\Http\Request $request) {
+        return view('admin.layouts.default', ['admin' => app(\FluentKit\Admin\Area::class)->toArray($request)]);
     })->where('path', '(.*?)')->name('home');
 });

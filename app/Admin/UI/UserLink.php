@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace FluentKit\Admin\UI;
 
+use Illuminate\Http\Request;
+
 final class UserLink implements UserLinkInterface
 {
     private ?string $id;
@@ -53,7 +55,7 @@ final class UserLink implements UserLinkInterface
         return $this;
     }
 
-    public function toArray(): array
+    public function toArray(Request $request): array
     {
         return [
             'id' => $this->id,

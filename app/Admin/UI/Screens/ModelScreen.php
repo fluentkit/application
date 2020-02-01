@@ -57,9 +57,9 @@ abstract class ModelScreen extends FormScreen implements ScreenInterface
         return Notification::success($this->getModelLabel() . ' Saved!');
     }
 
-    public function toArray(): array
+    public function toArray(Request $request): array
     {
-        $screen = parent::toArray();
+        $screen = parent::toArray($request);
         $screen['model'] = $this->getModel();
         $screen['modelLabel'] = $this->getModelLabel();
 

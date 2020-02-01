@@ -6,6 +6,7 @@ namespace FluentKit\Admin;
 
 use FluentKit\Admin\UI\SectionInterface;
 use FluentKit\Admin\UI\UserLinkInterface;
+use Illuminate\Http\Request;
 
 final class Area
 {
@@ -22,7 +23,7 @@ final class Area
         return $this;
     }
 
-    public function serve(): void
+    public function serve(Request $request): void
     {
         foreach ($this->servingCallbacks as $callback) {
             $callback($this);
@@ -53,28 +54,28 @@ final class Area
         return $this->userLinks[$id] ?? null;
     }
 
-    public function toArray(): array
+    public function toArray(Request $request): array
     {
         return [
-            'sections' => $this->getSections(),
+            'sections' => $this->getSections($request),
             'assetUrl' => asset('/'),
             'user' => request()->user(),
-            'userLinks' => $this->getUserLinks()
+            'userLinks' => $this->getUserLinks($request)
         ];
     }
 
-    private function getSections(): array
+    private function getSections(Request $request): array
     {
         return collect($this->sections)
-            ->map(fn(SectionInterface $screen) => $screen->toArray())
+            ->map(fn(SectionInterface $section) => $section->toArray($request))
             ->sortBy('priority')
             ->toArray();
     }
 
-    private function getUserLinks(): array
+    private function getUserLinks(Request $request): array
     {
         return collect($this->userLinks)
-            ->map(fn(UserLinkInterface $link) => $link->toArray())
+            ->map(fn(UserLinkInterface $link) => $link->toArray($request))
             ->sortBy('priority')
             ->values()
             ->toArray();

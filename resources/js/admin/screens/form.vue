@@ -1,7 +1,7 @@
 <template>
     <fk-admin-background v-if="!attributes || !fields || !actions"/>
     <div v-else class="fk-admin-screen-form">
-        <component v-for="field in fields" :key="field.id" :is="field.component" :field="field" :errors="$form.errors" v-model="attributes"/>
+        <component v-for="field in fields" :key="field.id" :is="field.component" v-if="!field.hidden" :field="field" :errors="$form.errors" v-model="attributes"/>
         <fk-admin-form-actions :actions="actions" @click="performAction"/>
     </div>
 </template>

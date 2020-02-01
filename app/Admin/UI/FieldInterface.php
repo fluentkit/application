@@ -26,6 +26,8 @@ interface FieldInterface
 
     public function readOnly($readOnly);
 
+    public function hide($hidden = true);
+
     public function getId(): string;
 
     public function getLabel(): string;
@@ -37,6 +39,8 @@ interface FieldInterface
     public function getDisabled(Request $request): bool;
 
     public function getReadOnly(Request $request): bool;
+
+    public function getHidden(Request $request): bool;
 
     public function toArray(Request $request): array;
 }

@@ -18,6 +18,8 @@ interface ScreenInterface
 
     public function addAction(ActionInterface $action);
 
+    public function hide($hidden = true);
+
     public function getId(): string;
 
     public function getPriority(): int;
@@ -30,7 +32,9 @@ interface ScreenInterface
 
     public function getComponent(): string;
 
-    public function toArray(): array;
+    public function toArray(Request $request): array;
+
+    public function getHidden(Request $request): bool;
 
     public function getField(string $id): ?FieldInterface;
 

@@ -1943,6 +1943,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'fk-admin-field-group',
   props: {
@@ -2308,6 +2309,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
 //
 //
 //
@@ -5131,16 +5133,18 @@ var render = function() {
         "div",
         { staticClass: "fk-admin-field-group" },
         _vm._l(_vm.fields, function(field) {
-          return _c(field.component, {
-            key: field.id,
-            tag: "component",
-            attrs: { field: field, errors: _vm.errors, value: _vm.value },
-            on: {
-              input: function($event) {
-                return _vm.$emit("input", $event)
-              }
-            }
-          })
+          return !field.hidden
+            ? _c(field.component, {
+                key: field.id,
+                tag: "component",
+                attrs: { field: field, errors: _vm.errors, value: _vm.value },
+                on: {
+                  input: function($event) {
+                    return _vm.$emit("input", $event)
+                  }
+                }
+              })
+            : _vm._e()
         }),
         1
       )
@@ -5374,16 +5378,18 @@ var render = function() {
       _c(
         "fk-admin-panel",
         _vm._l(_vm.fields, function(field) {
-          return _c(field.component, {
-            key: field.id,
-            tag: "component",
-            attrs: { field: field, errors: _vm.errors, value: _vm.value },
-            on: {
-              input: function($event) {
-                return _vm.$emit("input", $event)
-              }
-            }
-          })
+          return !field.hidden
+            ? _c(field.component, {
+                key: field.id,
+                tag: "component",
+                attrs: { field: field, errors: _vm.errors, value: _vm.value },
+                on: {
+                  input: function($event) {
+                    return _vm.$emit("input", $event)
+                  }
+                }
+              })
+            : _vm._e()
         }),
         1
       )
@@ -5761,30 +5767,34 @@ var render = function() {
                 "ul",
                 { staticClass: "sub-menu" },
                 _vm._l(section.screens, function(screen) {
-                  return _c(
-                    "li",
-                    {
-                      key: screen.id,
-                      staticClass: "item",
-                      attrs: { id: "screen-" + screen.id }
-                    },
-                    [
-                      _c(
-                        "router-link",
+                  return !screen.hidden
+                    ? _c(
+                        "li",
                         {
-                          attrs: { to: { name: section.id + "." + screen.id } }
+                          key: screen.id,
+                          staticClass: "item",
+                          attrs: { id: "screen-" + screen.id }
                         },
                         [
-                          _vm._v(
-                            "\n                    " +
-                              _vm._s(screen.label) +
-                              "\n                "
+                          _c(
+                            "router-link",
+                            {
+                              attrs: {
+                                to: { name: section.id + "." + screen.id }
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "\n                    " +
+                                  _vm._s(screen.label) +
+                                  "\n                "
+                              )
+                            ]
                           )
-                        ]
+                        ],
+                        1
                       )
-                    ],
-                    1
-                  )
+                    : _vm._e()
                 }),
                 0
               )
@@ -5881,18 +5891,20 @@ var render = function() {
         { staticClass: "fk-admin-screen-form" },
         [
           _vm._l(_vm.fields, function(field) {
-            return _c(field.component, {
-              key: field.id,
-              tag: "component",
-              attrs: { field: field, errors: _vm.$form.errors },
-              model: {
-                value: _vm.attributes,
-                callback: function($$v) {
-                  _vm.attributes = $$v
-                },
-                expression: "attributes"
-              }
-            })
+            return !field.hidden
+              ? _c(field.component, {
+                  key: field.id,
+                  tag: "component",
+                  attrs: { field: field, errors: _vm.$form.errors },
+                  model: {
+                    value: _vm.attributes,
+                    callback: function($$v) {
+                      _vm.attributes = $$v
+                    },
+                    expression: "attributes"
+                  }
+                })
+              : _vm._e()
           }),
           _vm._v(" "),
           _c("fk-admin-form-actions", {

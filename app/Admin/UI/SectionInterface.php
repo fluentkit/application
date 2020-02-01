@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace FluentKit\Admin\UI;
 
+use Illuminate\Http\Request;
+
 interface SectionInterface
 {
     public function setId(string $id);
@@ -24,5 +26,5 @@ interface SectionInterface
 
     public function getScreen(string $id): ?ScreenInterface;
 
-    public function toArray(): array;
+    public function toArray(Request $request): array;
 }

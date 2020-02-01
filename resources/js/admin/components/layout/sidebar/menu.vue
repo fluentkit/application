@@ -6,7 +6,7 @@
                 {{ section.label }}
             </router-link>
             <ul v-if="Object.keys(section.screens).length" class="sub-menu">
-                <li v-for="screen in section.screens" :key="screen.id" :id="'screen-'+screen.id" class="item">
+                <li v-for="screen in section.screens" :key="screen.id" v-if="!screen.hidden" :id="'screen-'+screen.id" class="item">
                     <router-link :to="{ name: section.id+'.'+screen.id }">
                         {{ screen.label }}
                     </router-link>
