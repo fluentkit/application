@@ -4,18 +4,44 @@ declare(strict_types=1);
 
 namespace FluentKit\Admin\UI\Screens;
 
+use FluentKit\Admin\UI\Actions\SaveAction;
 use FluentKit\Admin\UI\ResponseInterface;
 use FluentKit\Admin\UI\Responses\Notification;
+use FluentKit\Admin\UI\Responses\Redirect;
 use FluentKit\Admin\UI\ScreenInterface;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 
-abstract class ModelScreen extends FormScreen implements ScreenInterface
+class ModelScreen extends FormScreen implements ScreenInterface
 {
+    protected string $context = 'create';
+
     protected string $model = '';
 
-    protected array $routeParams = [':id'];
+    public function __construct(string $context, string $model)
+    {
+        $this->context = $context;
+        $this->model = $model;
+        $this->setId($context);
+
+        if ($context === 'create') {
+            $this->setLabel('Add New');
+            $this->addAction(
+                (new SaveAction('create', 'Create ' . class_basename($model)))
+                    ->saveCallback([$this, 'createModel'])
+            );
+        } elseif ($context === 'edit') {
+            $this->routeParams = [':id'];
+            $this->setLabel('Edit ' . class_basename($model));
+            $this->hide();
+            $this->addAction(
+                (new SaveAction('update', 'Update ' . class_basename($model)))
+                    ->saveCallback([$this, 'updateModel'])
+            );
+        }
+    }
 
     public function setModel(string $model): self
     {
@@ -41,8 +67,30 @@ abstract class ModelScreen extends FormScreen implements ScreenInterface
 
     public function getAttributes(Request $request): array
     {
-        $model = $this->getQuery()->findOrFail($request->get('id'));
+        if ($this->context === 'create') {
+            $model = new $this->model;
+        } else {
+            $model = $this->getQuery()->findOrFail($request->get('id'));
+        }
+
         return $model->attributesToArray();
+    }
+
+    public function createModel(Request $request): ResponseInterface
+    {
+        $fields = $this->getFieldKeys($request);
+        $model = new $this->model;
+        $forUpdate = Arr::only($request->get('attributes'), $fields);
+
+        $model->fill($forUpdate);
+        $model->save();
+
+        $request->merge(['id' => $model->id]);
+
+        return Redirect::route(
+            Str::plural(Str::snake(class_basename($model))).'.edit',
+            ['id' => $model->id]
+        );
     }
 
     public function updateModel(Request $request): ResponseInterface

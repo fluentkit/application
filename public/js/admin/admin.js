@@ -2967,7 +2967,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _performAction = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(action) {
-        var $section, $screen, _ref3, _ref3$data, message, type, meta, attributes;
+        var $section, $screen, _ref3, _ref3$data, message, type, meta, attributes, _meta$redirect, _url, route, params;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
           while (1) {
@@ -2990,16 +2990,45 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 meta = _ref3$data.meta;
                 attributes = _ref3$data.attributes;
 
-                if (type === 'notification') {
-                  this['$' + meta.toast.type](message);
+                if (!(type === 'notification')) {
+                  _context2.next = 16;
+                  break;
                 }
 
-                this.attributes = attributes;
-                _context2.next = 19;
+                this['$' + meta.toast.type](message);
+                _context2.next = 23;
                 break;
 
               case 16:
-                _context2.prev = 16;
+                if (!(type === 'redirect')) {
+                  _context2.next = 23;
+                  break;
+                }
+
+                _meta$redirect = meta.redirect, _url = _meta$redirect.url, route = _meta$redirect.route, params = _meta$redirect.params;
+
+                if (!_url) {
+                  _context2.next = 21;
+                  break;
+                }
+
+                window.location.href = _url;
+                return _context2.abrupt("return");
+
+              case 21:
+                this.$router.push({
+                  name: route,
+                  params: params
+                });
+                return _context2.abrupt("return");
+
+              case 23:
+                this.attributes = attributes;
+                _context2.next = 29;
+                break;
+
+              case 26:
+                _context2.prev = 26;
                 _context2.t0 = _context2["catch"](0);
 
                 if (this.$isValidationError(_context2.t0)) {
@@ -3008,18 +3037,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   this.$error(_context2.t0);
                 }
 
-              case 19:
-                _context2.prev = 19;
+              case 29:
+                _context2.prev = 29;
                 action.disabled = false;
                 this.$progress().done();
-                return _context2.finish(19);
+                return _context2.finish(29);
 
-              case 23:
+              case 33:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, this, [[0, 16, 19, 23]]);
+        }, _callee2, this, [[0, 26, 29, 33]]);
       }));
 
       function performAction(_x) {

@@ -5,8 +5,13 @@ namespace FluentKit\Providers;
 use FluentKit\Admin\Area;
 use FluentKit\Admin\Dashboard\Dashboards;
 use FluentKit\Admin\Settings\Settings;
+use FluentKit\Admin\UI\Fields\Email;
+use FluentKit\Admin\UI\Fields\Panel;
+use FluentKit\Admin\UI\Fields\Text;
+use FluentKit\Admin\UI\ModelSection;
 use FluentKit\Admin\UI\UserLink;
 use FluentKit\Admin\Users\Users;
+use FluentKit\User;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 

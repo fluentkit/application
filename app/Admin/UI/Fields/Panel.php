@@ -16,6 +16,15 @@ final class Panel extends Field
 
     protected string $component = 'fk-admin-field-panel';
 
+    public function __construct(string $id, string $label, string $description = '', array $fields = [])
+    {
+        parent::__construct($id, $label, $description);
+
+        foreach ($fields as $field) {
+            $this->addField($field);
+        }
+    }
+
     public function getRules(): array
     {
         return $this->getFieldRules();

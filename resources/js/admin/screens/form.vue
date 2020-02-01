@@ -74,6 +74,15 @@
                     } = await this.$form.post(url`/admin/${$section.id}/${$screen.id}/${action.id}`+this.requestQuery, { attributes: this.attributes });
                     if (type === 'notification') {
                         this['$'+meta.toast.type](message);
+                    } else if (type === 'redirect') {
+                        const { redirect: { url, route, params } } = meta;
+                        if (url) {
+                            window.location.href = url;
+                            return;
+                        }
+
+                        this.$router.push({ name: route, params });
+                        return;
                     }
                     this.attributes = attributes;
                 } catch (e) {
