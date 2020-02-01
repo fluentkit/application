@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace FluentKit\Http\Controllers\Auth;
 
 use FluentKit\Http\Controllers\Controller;
-use FluentKit\Http\Requests\LoginRequest;
+use FluentKit\Http\Requests\Auth\LoginRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;

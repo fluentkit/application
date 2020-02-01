@@ -75,5 +75,31 @@
         @apply .text-gray-300;
     }
 
+    .fk-auth-layout .main > * {
+        @apply .flex .flex-col .w-full;
+    }
+
+    .fk-auth-layout .main label {
+        @apply .flex .mb-2;
+    }
+
+    .fk-auth-layout .main .success { }
+
+    .fk-auth-layout .main p.error {
+        @apply .text-red-500 .text-xs .italic .h-5;
+    }
+
+    .fk-auth-button {
+        @apply .cursor-pointer .text-center .font-semibold .py-3 .px-6 .rounded .shadow-md .mt-2;
+        @apply .bg-green-500 .text-white;
+    }
+    .fk-auth-button:hover {
+        @apply .bg-green-600;
+    }
+    .fk-auth-button[disabled],
+    .fk-auth-button[disabled]:hover{
+        @apply .bg-green-700 .text-gray-300;
+    }
+
     /*@tailwind utilities;*/
 </style>

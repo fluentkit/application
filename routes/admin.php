@@ -15,8 +15,11 @@ Route::middleware('guest')->group(function () {
     Route::view('/login', 'auth.layouts.default')
         ->name('login');
 
-    Route::view('/login/forgot-password', 'auth.layouts.default')
+    Route::view('/forgot-password', 'auth.layouts.default')
         ->name('forgot-password');
+
+    Route::view('/reset-password/{token}', 'auth.layouts.default')
+        ->name('password.reset');
 });
 
 Route::middleware('auth')->group(function () {

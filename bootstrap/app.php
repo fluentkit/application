@@ -1,6 +1,8 @@
 <?php
 
-define('ARTISAN_BINARY', 'fluentkit');
+if (!defined('ARTISAN_BINARY')) {
+    define('ARTISAN_BINARY', 'fluentkit');
+}
 
 /*
 |--------------------------------------------------------------------------

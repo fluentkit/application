@@ -12,18 +12,33 @@
 */
 
 Route::get('/', function () {
+    dd(config('mail'));
     return '@todo';
 })->name('home');
 
-Route::get('/login', function () {
-    return 'login page';
-})
-    ->middleware('guest')
-    ->name('login');
+Route::middleware('guest')->group(function () {
+    Route::get('/login', function () {
+            return 'login page';
+        })
+        ->name('login');
 
-Route::post('/login', [\FluentKit\Http\Controllers\Auth\LoginController::class, 'login'])
-    ->middleware('guest', 'throttle:10,1')
-    ->name('login');
+    Route::post('/login', [\FluentKit\Http\Controllers\Auth\LoginController::class, 'login'])
+        ->middleware('throttle:10,1')
+        ->name('login.post');
+
+    Route::post('/forgot-password', [\FluentKit\Http\Controllers\Auth\PasswordController::class, 'sendReset'])
+        ->middleware('throttle:10,1')
+        ->name('password.forgot.post');
+
+    Route::get('/reset-password/{token}', function (\Illuminate\Http\Request $request, $token) {
+            return redirect()->route('admin.password.reset', ['token' => $token] + $request->query());
+        })
+        ->name('password.reset');
+
+    Route::post('/reset-password', [\FluentKit\Http\Controllers\Auth\PasswordController::class, 'resetPassword'])
+        ->middleware('throttle:10,1')
+        ->name('password.reset.post');
+});
 
 Route::get('/logout', [\FluentKit\Http\Controllers\Auth\LoginController::class, 'logout'])
     ->middleware('auth')

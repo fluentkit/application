@@ -1,11 +1,11 @@
 <?php
 
-namespace FluentKit\Http\Requests;
+namespace FluentKit\Http\Requests\Auth;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class LoginRequest extends FormRequest
+class ResetRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -31,11 +31,17 @@ class LoginRequest extends FormRequest
                 'email',
                 Rule::exists('users')
             ],
+            'token' => [
+                'required',
+                'string',
+                Rule::exists('users', 'reset_token')
+            ],
             'password' => [
                 'required',
                 'string',
-                'min:10'
-            ]
+                'min:10',
+                'confirmed'
+            ],
         ];
     }
 }

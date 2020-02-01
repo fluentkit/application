@@ -29,7 +29,10 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
+        'remember_token',
+        'reset_token',
+        'last_reset_request'
     ];
 
     /**
@@ -39,6 +42,7 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'last_reset_request' => 'datetime',
     ];
 
     protected $appends = [

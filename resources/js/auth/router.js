@@ -1,7 +1,9 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 
-import loginScreen from './screens/login'
+import loginScreen from './screens/login';
+import forgotScreen from './screens/forgot';
+import resetScreen from './screens/reset';
 
 const createRoutes = config => {
     return [
@@ -11,11 +13,14 @@ const createRoutes = config => {
             component: loginScreen
         },
         {
-            path: '/login/forgot-password',
+            path: '/forgot-password',
             name: 'login.forgot',
-            component: {
-                template: `<div>forgot</div>`
-            }
+            component: forgotScreen
+        },
+        {
+            path: '/reset-password/:token',
+            name: 'login.reset',
+            component: resetScreen
         }
     ];
 };
