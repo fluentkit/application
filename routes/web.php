@@ -22,7 +22,7 @@ Route::get('/login', function () {
     ->name('login');
 
 Route::post('/login', [\FluentKit\Http\Controllers\Auth\LoginController::class, 'login'])
-    ->middleware('guest', 'throttle:3,1')
+    ->middleware('guest', 'throttle:10,1')
     ->name('login');
 
 Route::get('/logout', [\FluentKit\Http\Controllers\Auth\LoginController::class, 'logout'])

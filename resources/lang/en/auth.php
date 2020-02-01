@@ -15,5 +15,6 @@ return [
 
     'failed' => 'These credentials do not match our records.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
-
+    'verify' => 'You must verify your email address before logging in.',
+    'success' => 'Success! Redirecting...'
 ];

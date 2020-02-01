@@ -26,12 +26,19 @@ final class LoginController extends Controller
             ]);
         }
 
+        if ($authenticated && !$request->user()->hasVerifiedEmail()) {
+            Auth::guard()->logout();
+            throw ValidationException::withMessages([
+                'email' => [trans('auth.verify')],
+            ]);
+        }
+
         $request->session()->regenerate();
 
         $redirect = $request->session()->pull('url.intended', route('home'));
 
         return [
-            'message' => 'Success! Redirecting...',
+            'message' => trans('auth.success'),
             'data' => [
                 'redirect' => $redirect
             ]
