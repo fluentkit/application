@@ -31,7 +31,7 @@ trait HasFields
             ->toArray();
     }
 
-    public function getFieldRules(): array
+    public function getFieldRules(array $parentRules = []): array
     {
         return collect($this->fields)
             ->reduce(function (array $fields, FieldInterface $field) {

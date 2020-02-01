@@ -7,6 +7,7 @@ namespace FluentKit\Admin\Settings\Screens;
 use FluentKit\Admin\UI\Actions\SaveAction;
 use FluentKit\Admin\UI\Fields\Email;
 use FluentKit\Admin\UI\Fields\Group;
+use FluentKit\Admin\UI\Fields\KeyValue;
 use FluentKit\Admin\UI\Fields\Number;
 use FluentKit\Admin\UI\Fields\Panel;
 use FluentKit\Admin\UI\Fields\Password;
@@ -22,60 +23,163 @@ final class GeneralSettings extends FormScreen
         $this->setId('general');
         $this->setLabel('General Settings');
 
-        $group = (new Group('group1', 'Grouped Field'))
-            ->addField(
-                (new Text('text1', 'Text Field', 'Text field description'))
-                    ->rules(['required'])
-                    ->disable()
-            )
-            ->addField(
-                (new Email('email1', 'Email1 Field', 'Email1 field description'))
-                    ->rules(['required'])
-                    ->layout('stacked')
-            );
+        $this->addField(
+            (new Panel('panel', 'Field Types', 'Panel fields can/should be used to group fields.'))
+                ->addField(new Text('text', 'Text', 'Basic text field.'))
+                ->addField(new Number('number', 'Number', 'Basic number field.'))
+                ->addField(new Password('password', 'Password', 'Basic number field.'))
+                ->addField(new Email('email', 'Email', 'Basic email field.'))
+                ->addField(
+                    (new Group('group', 'Group', 'Group fields can be used to group similar fields.'))
+                        ->addField(new Text('group-text', 'Text'))
+                        ->addField(new Number('group-number', 'Number'))
+                        ->addField(
+                            (new Password('group-password', 'Password', 'Fields can also be stacked'))->layout('stacked')
+                        )
+                        ->addField(
+                            (new Email('group-email', 'Email'))->layout('stacked')
+                        )
+                )
+                ->addField(
+                    (new KeyValue('key-value', 'Key Value', 'Key value fields can be used to enter json object values.'))
+                        ->setKeyLabel('Custom Key Label')
+                        ->setValueLabel('Custom Value Label')
+                        ->setAddLabel('Custom Add New Text')
+                        ->setValueField(Email::class)
+                )
+        );
+
+        $this->addField(new Text('outside-text', 'Outside Text', 'Fields can also live outside of panels.'));
 
         $this->addField(
-            (new Text('text1', 'Text Field', 'Text field description'))
-                ->rules(['required'])
-                ->disable()
+            (new Panel('panel-required', 'Field Validation', 'Fields can have their own validation rules.'))
+                ->addField(
+                    (new Text('required-text', 'Text', 'Basic text field.'))
+                        ->rules(['required', 'string', 'min:10'])
+                )
+                ->addField(
+                    (new Number('required-number', 'Number', 'Basic number field.'))
+                        ->rules(['required', 'min:50', 'max:51'])
+                )
+                ->addField(
+                    (new Password('required-password', 'Password', 'Basic number field.'))
+                        ->rules(['required'])
+                )
+                ->addField(
+                    (new Email('required-email', 'Email', 'Basic email field.'))
+                        ->rules(['required'])
+                )
+                ->addField(
+                    (new Group('required-group', 'Group', 'Group fields can be used to group similar fields.'))
+                        ->addField(
+                            (new Text('required-group-text', 'Text'))
+                                ->rules(['required', 'ends_with:foo'])
+                        )
+                        ->addField(
+                            (new Number('required-group-number', 'Number'))
+                                ->rules(['required', 'max:2'])
+                        )
+                        ->addField(
+                            (new Password('required-group-password', 'Password', 'Fields can also be stacked'))
+                                ->layout('stacked')
+                                ->rules(['required'])
+                        )
+                        ->addField(
+                            (new Email('required-group-email', 'Email'))
+                                ->layout('stacked')
+                                ->rules(['required'])
+                        )
+                )
+                ->addField(
+                    (new KeyValue('required-key-value', 'Key Value', 'Key value fields can be used to enter json object values.'))
+                        ->setKeyLabel('Custom Key Label')
+                        ->setValueLabel('Custom Value Label')
+                        ->setAddLabel('Custom Add New Text')
+                        ->setValueField(Email::class)
+                        ->rules(['required', 'starts_with:foo'])
+                )
         );
-        $this->addField($group);
+
         $this->addField(
-            (new Panel('panel1', 'Panel 1', 'Panel description.'))
+            (new Panel('panel-disabled', 'Disabled Fields', 'Fields can be disabled, individually or at panel/group level.'))
                 ->addField(
-                    (new Text('text2', 'Text2 Field', 'Text2 field description'))
-                        ->rules(['required'])
-                        ->readOnly()
+                    (new Text('disabled-text', 'Text', 'Basic text field.'))
                 )
                 ->addField(
-                    (new Email('email1', 'Email1 Field', 'Email1 field description'))
-                        ->rules(['required'])
+                    (new Number('disabled-number', 'Number', 'Basic number field.'))
                 )
                 ->addField(
-                    (new Number('number1', 'Number1 Field', 'Number1 field description'))
-                        ->layout('stacked')
-                        ->rules(['required'])
+                    (new Password('disabled-password', 'Password', 'Basic number field.'))
                 )
-                ->addField($group)
-                ->addField(new Password('password1', 'Password1 Field', 'Password1 field description'))
+                ->addField(
+                    (new Email('disabled-email', 'Email', 'Basic email field.'))
+                )
+                ->addField(
+                    (new Group('disabled-group', 'Group', 'Group fields can be used to group similar fields.'))
+                        ->addField(
+                            (new Text('disabled-group-text', 'Text'))
+                        )
+                        ->addField(
+                            (new Number('disabled-group-number', 'Number'))
+                        )
+                        ->addField(
+                            (new Password('disabled-group-password', 'Password', 'Fields can also be stacked'))
+                                ->layout('stacked')
+                        )
+                        ->addField(
+                            (new Email('disabled-group-email', 'Email'))
+                                ->layout('stacked')
+                        )
+                )
+                ->addField(
+                    (new KeyValue('disabled-key-value', 'Key Value', 'Key value fields can be used to enter json object values.'))
+                        ->setKeyLabel('Custom Key Label')
+                        ->setValueLabel('Custom Value Label')
+                        ->setAddLabel('Custom Add New Text')
+                        ->setValueField(Email::class)
+                )
+                ->disable(fn () => true)
         );
+
         $this->addField(
-            (new Panel('panel2', 'Panel 2', 'Panel description.'))
+            (new Panel('panel-readonly', 'ReadOnly Fields', 'Fields can be readOnly, individually or at panel/group level.'))
                 ->addField(
-                    (new Text('text2', 'Text2 Field', 'Text2 field description'))
-                        ->rules(['required'])
+                    (new Text('readonly-text', 'Text', 'Basic text field.'))
                 )
                 ->addField(
-                    (new Email('email1', 'Email1 Field', 'Email1 field description'))
-                        ->rules(['required'])
-                        ->readOnly()
+                    (new Number('readonly-number', 'Number', 'Basic number field.'))
                 )
                 ->addField(
-                    (new Number('number1', 'Number1 Field Label', 'Number1 field description'))
-                        ->rules(['required'])
+                    (new Password('readonly-password', 'Password', 'Basic number field.'))
                 )
-                ->addField(new Password('password1', 'Password1 Field', 'Password1 field description'))
-                ->disable()
+                ->addField(
+                    (new Email('readonly-email', 'Email', 'Basic email field.'))
+                )
+                ->addField(
+                    (new Group('readonly-group', 'Group', 'Group fields can be used to group similar fields.'))
+                        ->addField(
+                            (new Text('readonly-group-text', 'Text'))
+                        )
+                        ->addField(
+                            (new Number('readonly-group-number', 'Number'))
+                        )
+                        ->addField(
+                            (new Password('readonly-group-password', 'Password', 'Fields can also be stacked'))
+                                ->layout('stacked')
+                        )
+                        ->addField(
+                            (new Email('readonly-group-email', 'Email'))
+                                ->layout('stacked')
+                        )
+                )
+                ->addField(
+                    (new KeyValue('readonly-key-value', 'Key Value', 'Key value fields can be used to enter json object values.'))
+                        ->setKeyLabel('Custom Key Label')
+                        ->setValueLabel('Custom Value Label')
+                        ->setAddLabel('Custom Add New Text')
+                        ->setValueField(Email::class)
+                )
+                ->readOnly(fn () => true)
         );
 
         $this->addAction(
@@ -87,12 +191,43 @@ final class GeneralSettings extends FormScreen
     public function getAttributes(Request $request): array
     {
         return [
-            'email1' => 'foo',
-            'text1' => 'text field',
-            'text2' => 'bar',
-            'number1' => 10,
-            'password1' => 'foobar',
-            'multi' => ['one', 'two', 'three']
+            'text' => 'text field',
+            'number' => 10,
+            'password' => 'foobar',
+            'email' => 'email@example.com',
+            'group-text' => 'text',
+            'group-number' => 20,
+            'group-password' => 'bazzer',
+            'group-email' => 'email@example2.com',
+            'key-value' => ['one' => 'two', 'three' => 'four'],
+            'outside-text' => 'outside text field',
+            'required-text' => 'text field',
+            'required-number' => 10,
+            'required-password' => 'foobar',
+            'required-email' => 'email@example.com',
+            'required-group-text' => 'text',
+            'required-group-number' => 20,
+            'required-group-password' => 'bazzer',
+            'required-group-email' => 'email@example2.com',
+            'required-key-value' => ['one' => 'two', 'three' => 'four'],
+            'disabled-text' => 'text field',
+            'disabled-number' => 10,
+            'disabled-password' => 'foobar',
+            'disabled-email' => 'email@example.com',
+            'disabled-group-text' => 'text',
+            'disabled-group-number' => 20,
+            'disabled-group-password' => 'bazzer',
+            'disabled-group-email' => 'email@example2.com',
+            'disabled-key-value' => ['one' => 'two', 'three' => 'four'],
+            'readonly-text' => 'text field',
+            'readonly-number' => 10,
+            'readonly-password' => 'foobar',
+            'readonly-email' => 'email@example.com',
+            'readonly-group-text' => 'text',
+            'readonly-group-number' => 20,
+            'readonly-group-password' => 'bazzer',
+            'readonly-group-email' => 'email@example2.com',
+            'readonly-key-value' => ['one' => 'two', 'three' => 'four'],
         ];
     }
 

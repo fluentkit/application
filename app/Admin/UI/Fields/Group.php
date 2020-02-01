@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace FluentKit\Admin\UI\Fields;
 
-use FluentKit\Admin\UI\FieldInterface;
 use FluentKit\Admin\UI\Traits\HasFields;
 use Illuminate\Http\Request;
 

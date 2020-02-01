@@ -1,5 +1,5 @@
 <template>
-    <div v-else class="fk-admin-field-row" :class="{ error: errors.has(field.id), [field.layout]: true }">
+    <div class="fk-admin-field-row" :class="{ error: errors.has(field.id), [field.layout]: true }">
         <fk-admin-field-label :label="field.label" :required="field.required && !field.readOnly && !field.disabled" />
         <div class="input">
             <slot />

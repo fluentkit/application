@@ -16,16 +16,21 @@
             type: {
                 type: String,
                 default: 'default',
-                validator: value => ['default', 'info', 'success', 'danger'].includes(value)
+                validator: value => ['default', 'transparent', 'info', 'success', 'danger'].includes(value)
             },
             disabled: {
                 type: Boolean,
                 default: false
+            },
+            size: {
+                type: String,
+                default: 'md',
+                validator: value => ['sm', 'md', 'lg'].includes(value)
             }
         },
         computed: {
             buttonClasses () {
-                return [this.type];
+                return [this.type, this.size];
             }
         },
         methods: {
@@ -42,14 +47,18 @@
 
 <style>
     .fk-admin-button {
-        @apply .cursor-pointer .text-center .font-semibold .py-3 .px-6 .rounded .shadow-md .w-auto .mb-10;
+        @apply .cursor-pointer .text-center .font-semibold .py-3 .px-6 .rounded .shadow .w-auto .mb-10;
     }
+
+    .fk-admin-button.sm {
+        @apply .py-2 .px-3;
+     }
 
     /**
      * Default
      */
     .fk-admin-button.default {
-        @apply .bg-white;
+        @apply .bg-white .border;
     }
     .fk-admin-button.default:hover {
         @apply .bg-gray-300;
@@ -57,6 +66,20 @@
     .fk-admin-button.default[disabled],
     .fk-admin-button.default[disabled]:hover{
         @apply .bg-gray-500;
+    }
+
+    /**
+     * Transparent
+     */
+    .fk-admin-button.transparent {
+        @apply .shadow-none;
+    }
+    .fk-admin-button.transparent:hover {
+        @apply .bg-gray-300;
+    }
+    .fk-admin-button.transparent[disabled],
+    .fk-admin-button.transparent[disabled]:hover{
+        @apply .bg-gray-400;
     }
 
     /**

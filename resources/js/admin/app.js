@@ -24,6 +24,7 @@ export default config => {
         require('./components/elements/field/group').default,
         require('./components/elements/field/label').default,
         require('./components/elements/field/input').default,
+        require('./components/elements/field/keyValue').default,
         // form
         require('./components/elements/form-actions').default,
     ]);

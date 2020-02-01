@@ -7,4 +7,6 @@ namespace FluentKit\Admin\UI\Fields;
 final class Number extends Text
 {
     public const FIELD_TYPE = 'number';
+
+    protected array $defaultRules = ['numeric'];
 }

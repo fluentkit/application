@@ -1,7 +1,7 @@
 <template>
     <fk-admin-field-row
         :field="field"
-        :errors="errors"
+        :errors="groupErrors"
     >
         <div class="fk-admin-field-group">
             <component
@@ -35,6 +35,25 @@
             }
         },
         computed: {
+            groupErrors () {
+                return {
+                    has: key => {
+                        if (key === this.field.id) {
+                            for (const field in this.fields) {
+                                if (this.errors.has(this.field.fields[field].id)) {
+                                    return true;
+                                }
+                            }
+
+                            return false;
+                        }
+
+                        return this.errors.has(key);
+                    },
+                    get: this.errors.get,
+                    first: this.errors.first
+                }
+            },
             fields () {
                 const fields = {};
                 Object.keys(this.field.fields).forEach(field => {
@@ -53,7 +72,7 @@
 
 <style>
     .fk-admin-field-group > * {
-        @apply .py-6;
+        @apply .py-3;
     }
 
     .fk-admin-field-group > *:first-child {
@@ -65,5 +84,11 @@
 
     .fk-admin-field-group > .error {
         @apply .-mx-10 .px-10;
+    }
+    .fk-admin-field-group > .error:first-child {
+        @apply .pt-6 .-mt-6;
+    }
+    .fk-admin-field-group > .error:last-child {
+        @apply .pb-6 .-mb-6;
     }
 </style>

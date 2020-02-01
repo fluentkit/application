@@ -942,9 +942,15 @@ html {
   padding-left: 1.5rem;
   padding-right: 1.5rem;
   border-radius: 0.25rem;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
   width: auto;
   margin-bottom: 2.5rem;
+}
+.fk-admin-button.sm {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
 }
 
 /**
@@ -952,6 +958,7 @@ html {
  */
 .fk-admin-button.default {
   background-color: #fff;
+  border-width: 1px;
 }
 .fk-admin-button.default:hover {
   background-color: #e2e8f0;
@@ -959,6 +966,20 @@ html {
 .fk-admin-button.default[disabled],
 .fk-admin-button.default[disabled]:hover{
   background-color: #a0aec0;
+}
+
+/**
+ * Transparent
+ */
+.fk-admin-button.transparent {
+  box-shadow: none;
+}
+.fk-admin-button.transparent:hover {
+  background-color: #e2e8f0;
+}
+.fk-admin-button.transparent[disabled],
+.fk-admin-button.transparent[disabled]:hover{
+  background-color: #cbd5e0;
 }
 
 /**
@@ -1047,8 +1068,8 @@ html {
   margin-bottom: 1rem;
 }
 .fk-admin-field-group > * {
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
 }
 .fk-admin-field-group > *:first-child {
   padding-top: 0;
@@ -1062,6 +1083,14 @@ html {
   margin-right: -2.5rem;
   padding-left: 2.5rem;
   padding-right: 2.5rem;
+}
+.fk-admin-field-group > .error:first-child {
+  padding-top: 1.5rem;
+  margin-top: -1.5rem;
+}
+.fk-admin-field-group > .error:last-child {
+  padding-bottom: 1.5rem;
+  margin-bottom: -1.5rem;
 }
 .fk-admin-field-label {
   display: flex;
@@ -1086,6 +1115,7 @@ input.fk-admin-field-input {
   padding-right: 0.75rem;
   color: #4a5568;
   line-height: 1.25;
+  height: 40px;
 }
 input.fk-admin-field-input:focus {
   outline: 0;
@@ -1097,6 +1127,54 @@ input.fk-admin-field-input[disabled] {
 }
 input.fk-admin-field-input.error {
   border-color: #f56565;
+}
+.fk-admin-field-key-value .headers {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+}
+.fk-admin-field-key-value > .headers > div {
+  margin-bottom: 0;
+  flex-grow: 1;
+}
+.fk-admin-field-key-value > .headers > div:first-child {
+  max-width: 20rem;
+  margin-right: 0.5rem;
+}
+.fk-admin-field-key-value > .values {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  margin-bottom: 0.5rem;
+}
+.fk-admin-field-key-value > .values > * {
+  margin-bottom: 0;
+  flex-grow: 1;
+}
+.fk-admin-field-key-value > .values > div:first-child {
+  max-width: 20rem;
+  margin-right: 0.5rem;
+}
+.fk-admin-field-key-value > .values > .fk-admin-field-row {
+  flex-grow: 1;
+  margin-right: 0.5rem;
+}
+.fk-admin-field-key-value > .values > .fk-admin-field-row > .input > .error {
+  margin-top: 0;
+}
+.fk-admin-field-key-value > .values > .fk-admin-button {
+  margin: 0;
+  flex-grow: 0;
+  color: #a0aec0;
+}
+.fk-admin-field-key-value > .values .fk-admin-field-label {
+  display: none;
+}
+.fk-admin-field-key-value .fk-admin-button {
+  margin-bottom: 0;
 }
 .fk-admin-form-actions > .fk-admin-button {
   margin-right: 0.5rem;
