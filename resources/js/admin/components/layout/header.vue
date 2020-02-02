@@ -9,14 +9,13 @@
 </template>
 
 <script>
-    import screen from '../../mixins/screen';
     import userMixin from '../../mixins/user';
 
     import user from './user';
 
 	export default {
 		name: 'fk-admin-header',
-        mixins: [screen, userMixin],
+        mixins: [userMixin],
         components: {
 		    [user.name]: user
         },
@@ -27,32 +26,27 @@
             }
         },
         computed: {
+            section () {
+                return this.$route.meta.section;
+            },
+            screen () {
+                return this.$route.meta.screen;
+            },
             titles () {
-                const { $section, $screen } = this;
+                const { section, screen } = this;
 
-                if (!$section || !$screen) {
-                    return [];
-                }
+                if (!section || !screen) return [];
 
-                if ($screen.hideSectionTitle) {
-                    return [
-                        $screen.label
-                    ];
-                }
+                if (screen.hideSectionTitle) return [ screen.label ];
 
-                return [
-                    $section.label,
-                    $screen.label
-                ]
+                return [ section.label, screen.label ];
             },
             icon () {
-                const { $section, $screen } = this;
+                const { section, screen } = this;
 
-                if (!$section || !$screen) {
-                    return '';
-                }
+                if (!section || !screen) return '';
 
-                return $screen.icon !== '' ? $screen.icon : $section.icon;
+                return screen.icon !== '' ? screen.icon : section.icon;
             }
         }
 	}

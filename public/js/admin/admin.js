@@ -2597,9 +2597,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _mixins_screen__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../mixins/screen */ "./resources/js/admin/mixins/screen.js");
-/* harmony import */ var _mixins_user__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../mixins/user */ "./resources/js/admin/mixins/user.js");
-/* harmony import */ var _user__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./user */ "./resources/js/admin/components/layout/user.vue");
+/* harmony import */ var _mixins_user__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../mixins/user */ "./resources/js/admin/mixins/user.js");
+/* harmony import */ var _user__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./user */ "./resources/js/admin/components/layout/user.vue");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 //
@@ -2614,11 +2613,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 
 
-
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'fk-admin-header',
-  mixins: [_mixins_screen__WEBPACK_IMPORTED_MODULE_0__["default"], _mixins_user__WEBPACK_IMPORTED_MODULE_1__["default"]],
-  components: _defineProperty({}, _user__WEBPACK_IMPORTED_MODULE_2__["default"].name, _user__WEBPACK_IMPORTED_MODULE_2__["default"]),
+  mixins: [_mixins_user__WEBPACK_IMPORTED_MODULE_0__["default"]],
+  components: _defineProperty({}, _user__WEBPACK_IMPORTED_MODULE_1__["default"].name, _user__WEBPACK_IMPORTED_MODULE_1__["default"]),
   props: {
     userLinks: {
       type: Array,
@@ -2628,29 +2626,24 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   },
   computed: {
+    section: function section() {
+      return this.$route.meta.section;
+    },
+    screen: function screen() {
+      return this.$route.meta.screen;
+    },
     titles: function titles() {
-      var $section = this.$section,
-          $screen = this.$screen;
-
-      if (!$section || !$screen) {
-        return [];
-      }
-
-      if ($screen.hideSectionTitle) {
-        return [$screen.label];
-      }
-
-      return [$section.label, $screen.label];
+      var section = this.section,
+          screen = this.screen;
+      if (!section || !screen) return [];
+      if (screen.hideSectionTitle) return [screen.label];
+      return [section.label, screen.label];
     },
     icon: function icon() {
-      var $section = this.$section,
-          $screen = this.$screen;
-
-      if (!$section || !$screen) {
-        return '';
-      }
-
-      return $screen.icon !== '' ? $screen.icon : $section.icon;
+      var section = this.section,
+          screen = this.screen;
+      if (!section || !screen) return '';
+      return screen.icon !== '' ? screen.icon : section.icon;
     }
   }
 });
@@ -2888,14 +2881,32 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _mixins_request__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../mixins/request */ "./resources/js/mixins/request.js");
 /* harmony import */ var _mixins_form__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../mixins/form */ "./resources/js/mixins/form.js");
-/* harmony import */ var _mixins_screen__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../mixins/screen */ "./resources/js/admin/mixins/screen.js");
-/* harmony import */ var _mixins_progress__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../mixins/progress */ "./resources/js/admin/mixins/progress.js");
-/* harmony import */ var _mixins_toast__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../mixins/toast */ "./resources/js/admin/mixins/toast.js");
+/* harmony import */ var _mixins_progress__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../mixins/progress */ "./resources/js/admin/mixins/progress.js");
+/* harmony import */ var _mixins_toast__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../mixins/toast */ "./resources/js/admin/mixins/toast.js");
+/* harmony import */ var _utils_url__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../utils/url */ "./resources/js/utils/url.js");
 
+
+function _templateObject() {
+  var data = _taggedTemplateLiteral(["/admin/", "/", "/", ""]);
+
+  _templateObject = function _templateObject() {
+    return data;
+  };
+
+  return data;
+}
+
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
 
@@ -2903,7 +2914,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  mixins: [_mixins_request__WEBPACK_IMPORTED_MODULE_1__["default"], _mixins_form__WEBPACK_IMPORTED_MODULE_2__["default"], _mixins_screen__WEBPACK_IMPORTED_MODULE_3__["default"], _mixins_progress__WEBPACK_IMPORTED_MODULE_4__["default"], _mixins_toast__WEBPACK_IMPORTED_MODULE_5__["default"]],
+  mixins: [_mixins_request__WEBPACK_IMPORTED_MODULE_1__["default"], _mixins_form__WEBPACK_IMPORTED_MODULE_2__["default"], _mixins_progress__WEBPACK_IMPORTED_MODULE_3__["default"], _mixins_toast__WEBPACK_IMPORTED_MODULE_4__["default"]],
   data: function data() {
     return {
       fields: null,
@@ -2911,71 +2922,114 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       actions: null
     };
   },
+  computed: {
+    $section: function $section() {
+      return this.$route.meta.section;
+    },
+    $screen: function $screen() {
+      return _objectSpread({}, this.$route.meta.screen, {
+        get: this.getScreenData
+      });
+    }
+  },
   methods: {
+    getScreenData: function () {
+      var _getScreenData = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(key) {
+        var $section, $screen, _ref, data;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                $section = this.$section, $screen = this.$screen;
+                _context.next = 3;
+                return this.$request().get(Object(_utils_url__WEBPACK_IMPORTED_MODULE_5__["default"])(_templateObject(), $section.id, $screen.id, key) + this.requestQuery);
+
+              case 3:
+                _ref = _context.sent;
+                data = _ref.data;
+                return _context.abrupt("return", data[key]);
+
+              case 6:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function getScreenData(_x) {
+        return _getScreenData.apply(this, arguments);
+      }
+
+      return getScreenData;
+    }(),
     initScreen: function () {
       var _initScreen = _asyncToGenerator(
       /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
         var _this = this;
 
         var data,
             cb,
             responses,
-            _args2 = arguments;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+            _args3 = arguments;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
           while (1) {
-            switch (_context2.prev = _context2.next) {
+            switch (_context3.prev = _context3.next) {
               case 0:
-                data = _args2.length > 0 && _args2[0] !== undefined ? _args2[0] : ['fields', 'attributes', 'actions'];
-                cb = _args2.length > 1 && _args2[1] !== undefined ? _args2[1] :
+                data = _args3.length > 0 && _args3[0] !== undefined ? _args3[0] : ['fields', 'attributes', 'actions'];
+                cb = _args3.length > 1 && _args3[1] !== undefined ? _args3[1] :
                 /*#__PURE__*/
                 _asyncToGenerator(
                 /*#__PURE__*/
-                _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-                  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+                _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+                  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
                     while (1) {
-                      switch (_context.prev = _context.next) {
+                      switch (_context2.prev = _context2.next) {
                         case 0:
                         case "end":
-                          return _context.stop();
+                          return _context2.stop();
                       }
                     }
-                  }, _callee);
+                  }, _callee2);
                 }));
-                _context2.prev = 2;
-                _context2.next = 5;
+                _context3.prev = 2;
+                _context3.next = 5;
                 return Promise.all(data.map(function (key) {
                   return _this.$screen.get(key);
                 }));
 
               case 5:
-                responses = _context2.sent;
+                responses = _context3.sent;
                 data.forEach(function (key, index) {
                   _this[key] = responses[index];
                 });
-                _context2.next = 9;
+                _context3.next = 9;
                 return cb();
 
               case 9:
-                _context2.next = 14;
+                _context3.next = 14;
                 break;
 
               case 11:
-                _context2.prev = 11;
-                _context2.t0 = _context2["catch"](2);
-                this.$error(_context2.t0);
+                _context3.prev = 11;
+                _context3.t0 = _context3["catch"](2);
+                this.$error(_context3.t0);
 
               case 14:
-                _context2.prev = 14;
+                _context3.prev = 14;
                 this.$progress().done();
-                return _context2.finish(14);
+                return _context3.finish(14);
 
               case 17:
               case "end":
-                return _context2.stop();
+                return _context3.stop();
             }
           }
-        }, _callee2, this, [[2, 11, 14, 17]]);
+        }, _callee3, this, [[2, 11, 14, 17]]);
       }));
 
       function initScreen() {
@@ -2993,7 +3047,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         this['$' + meta.toast.type](message);
       } else if (type === 'redirect') {
         var _meta$redirect = meta.redirect,
-            url = _meta$redirect.url,
+            _url = _meta$redirect.url,
             route = _meta$redirect.route,
             params = _meta$redirect.params,
             notification = meta.notification;
@@ -3002,8 +3056,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           this.handleActionResponse(notification);
         }
 
-        if (url) {
-          window.location.href = url;
+        if (_url) {
+          window.location.href = _url;
           return;
         }
 
@@ -3171,10 +3225,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./base */ "./resources/js/admin/screens/base.vue");
 /* harmony import */ var _mixins_request__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../mixins/request */ "./resources/js/mixins/request.js");
-/* harmony import */ var _mixins_screen__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../mixins/screen */ "./resources/js/admin/mixins/screen.js");
-/* harmony import */ var _mixins_progress__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../mixins/progress */ "./resources/js/admin/mixins/progress.js");
-/* harmony import */ var _mixins_toast__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../mixins/toast */ "./resources/js/admin/mixins/toast.js");
-/* harmony import */ var _components_layout_background__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/layout/background */ "./resources/js/admin/components/layout/background.vue");
+/* harmony import */ var _mixins_progress__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../mixins/progress */ "./resources/js/admin/mixins/progress.js");
+/* harmony import */ var _mixins_toast__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../mixins/toast */ "./resources/js/admin/mixins/toast.js");
+/* harmony import */ var _components_layout_background__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/layout/background */ "./resources/js/admin/components/layout/background.vue");
 
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -3182,7 +3235,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
 
 
 
@@ -3206,7 +3258,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return this.initScreen(['template', 'attributes', 'actions']);
+              return this.initScreen(['template', 'fields', 'attributes', 'actions']);
 
             case 2:
             case "end":
@@ -3224,16 +3276,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   }(),
   render: function render(createElement) {
     var _ref = this.$data || {},
+        _ref$fields = _ref.fields,
+        fields = _ref$fields === void 0 ? {} : _ref$fields,
         _ref$attributes = _ref.attributes,
         attributes = _ref$attributes === void 0 ? {} : _ref$attributes,
         _ref$actions = _ref.actions,
         actions = _ref$actions === void 0 ? {} : _ref$actions;
 
     return createElement({
-      mixins: [_mixins_request__WEBPACK_IMPORTED_MODULE_2__["default"], _mixins_screen__WEBPACK_IMPORTED_MODULE_3__["default"], _mixins_progress__WEBPACK_IMPORTED_MODULE_4__["default"], _mixins_toast__WEBPACK_IMPORTED_MODULE_5__["default"]],
-      components: _defineProperty({}, _components_layout_background__WEBPACK_IMPORTED_MODULE_6__["default"].name, _components_layout_background__WEBPACK_IMPORTED_MODULE_6__["default"]),
+      mixins: [_mixins_request__WEBPACK_IMPORTED_MODULE_2__["default"], _mixins_progress__WEBPACK_IMPORTED_MODULE_3__["default"], _mixins_toast__WEBPACK_IMPORTED_MODULE_4__["default"]],
+      components: _defineProperty({}, _components_layout_background__WEBPACK_IMPORTED_MODULE_5__["default"].name, _components_layout_background__WEBPACK_IMPORTED_MODULE_5__["default"]),
       data: function data() {
         return {
+          fields: fields,
           attributes: attributes,
           actions: actions
         };
@@ -11128,93 +11183,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/admin/mixins/screen.js":
-/*!*********************************************!*\
-  !*** ./resources/js/admin/mixins/screen.js ***!
-  \*********************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _utils_url__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils/url */ "./resources/js/utils/url.js");
-
-
-function _templateObject() {
-  var data = _taggedTemplateLiteral(["/admin/", "/", "/", ""]);
-
-  _templateObject = function _templateObject() {
-    return data;
-  };
-
-  return data;
-}
-
-function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  computed: {
-    $section: function $section() {
-      return this.$route.meta.section;
-    },
-    $screen: function $screen() {
-      return _objectSpread({}, this.$route.meta.screen, {
-        get: this.getScreenData
-      });
-    }
-  },
-  methods: {
-    getScreenData: function () {
-      var _getScreenData = _asyncToGenerator(
-      /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(key) {
-        var $section, $screen, _ref, data;
-
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                $section = this.$section, $screen = this.$screen;
-                _context.next = 3;
-                return this.$request().get(Object(_utils_url__WEBPACK_IMPORTED_MODULE_1__["default"])(_templateObject(), $section.id, $screen.id, key) + this.requestQuery);
-
-              case 3:
-                _ref = _context.sent;
-                data = _ref.data;
-                return _context.abrupt("return", data[key]);
-
-              case 6:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee, this);
-      }));
-
-      function getScreenData(_x) {
-        return _getScreenData.apply(this, arguments);
-      }
-
-      return getScreenData;
-    }()
-  }
-});
-
-/***/ }),
-
 /***/ "./resources/js/admin/mixins/toast.js":
 /*!********************************************!*\
   !*** ./resources/js/admin/mixins/toast.js ***!
@@ -11347,11 +11315,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
-/* harmony import */ var _mixins_screen__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./mixins/screen */ "./resources/js/admin/mixins/screen.js");
-/* harmony import */ var _mixins_progress__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./mixins/progress */ "./resources/js/admin/mixins/progress.js");
-/* harmony import */ var _screens_html__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./screens/html */ "./resources/js/admin/screens/html.vue");
-/* harmony import */ var _screens_form__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./screens/form */ "./resources/js/admin/screens/form.vue");
-/* harmony import */ var _screens_model_index__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./screens/model-index */ "./resources/js/admin/screens/model-index.vue");
+/* harmony import */ var _mixins_progress__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./mixins/progress */ "./resources/js/admin/mixins/progress.js");
+/* harmony import */ var _screens_html__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./screens/html */ "./resources/js/admin/screens/html.vue");
+/* harmony import */ var _screens_form__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./screens/form */ "./resources/js/admin/screens/form.vue");
+/* harmony import */ var _screens_model_index__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./screens/model-index */ "./resources/js/admin/screens/model-index.vue");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -11365,7 +11332,6 @@ function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread n
 function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
-
 
 
 
@@ -11397,9 +11363,8 @@ var createRoutes = function createRoutes(_ref) {
       return {
         path: path,
         component: {
-          mixins: [_mixins_screen__WEBPACK_IMPORTED_MODULE_3__["default"]],
           render: function render(createElement) {
-            return createElement(this.$screen.component);
+            return createElement(screen.component);
           }
         },
         name: "".concat(id, ".").concat(screen.id),
@@ -11433,7 +11398,7 @@ var createRoutes = function createRoutes(_ref) {
     path: '*',
     name: '404',
     component: {
-      mixins: [_mixins_progress__WEBPACK_IMPORTED_MODULE_4__["default"]],
+      mixins: [_mixins_progress__WEBPACK_IMPORTED_MODULE_3__["default"]],
       template: "<fk-admin-background>\n                    <h1>Oops, looks like that page doesn't exist.</h1>\n                    <p>Please choose a link from the menu.</p>\n                </fk-admin-background>",
       mounted: function () {
         var _mounted = _asyncToGenerator(
@@ -11483,9 +11448,9 @@ var createRoutes = function createRoutes(_ref) {
 /* harmony default export */ __webpack_exports__["default"] = (function (config) {
   vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_2__["default"]); // Register base screen components
 
-  vue__WEBPACK_IMPORTED_MODULE_1___default.a.component(_screens_html__WEBPACK_IMPORTED_MODULE_5__["default"].name, _screens_html__WEBPACK_IMPORTED_MODULE_5__["default"]);
-  vue__WEBPACK_IMPORTED_MODULE_1___default.a.component(_screens_form__WEBPACK_IMPORTED_MODULE_6__["default"].name, _screens_form__WEBPACK_IMPORTED_MODULE_6__["default"]);
-  vue__WEBPACK_IMPORTED_MODULE_1___default.a.component(_screens_model_index__WEBPACK_IMPORTED_MODULE_7__["default"].name, _screens_model_index__WEBPACK_IMPORTED_MODULE_7__["default"]);
+  vue__WEBPACK_IMPORTED_MODULE_1___default.a.component(_screens_html__WEBPACK_IMPORTED_MODULE_4__["default"].name, _screens_html__WEBPACK_IMPORTED_MODULE_4__["default"]);
+  vue__WEBPACK_IMPORTED_MODULE_1___default.a.component(_screens_form__WEBPACK_IMPORTED_MODULE_5__["default"].name, _screens_form__WEBPACK_IMPORTED_MODULE_5__["default"]);
+  vue__WEBPACK_IMPORTED_MODULE_1___default.a.component(_screens_model_index__WEBPACK_IMPORTED_MODULE_6__["default"].name, _screens_model_index__WEBPACK_IMPORTED_MODULE_6__["default"]);
   return new vue_router__WEBPACK_IMPORTED_MODULE_2__["default"]({
     routes: createRoutes(config),
     mode: 'history',

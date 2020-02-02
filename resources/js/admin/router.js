@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 
-import screenMixin from './mixins/screen';
 import progressMixin from './mixins/progress';
 
 // Base screen components
@@ -33,9 +32,8 @@ const createRoutes = ({ sections, user }) => {
                         return {
                             path,
                             component: {
-                                mixins: [screenMixin],
                                 render (createElement) {
-                                    return createElement(this.$screen.component);
+                                    return createElement(screen.component);
                                 }
                             },
                             name: `${id}.${screen.id}`,
