@@ -18,6 +18,7 @@ export default config => {
         require('./components/elements/title').default,
         require('./components/elements/panel').default,
         require('./components/elements/button').default,
+        require('./components/elements/pagination').default,
         // fields
         require('./components/elements/field/row').default,
         require('./components/elements/field/panel').default,

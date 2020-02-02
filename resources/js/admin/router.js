@@ -7,6 +7,7 @@ import progressMixin from './mixins/progress';
 // Base screen components
 import HtmlScreen from './screens/html';
 import FormScreen from './screens/form';
+import ModelIndexScreen from './screens/model-index';
 
 const createRoutes = ({ sections, user }) => {
     const routes = Object.keys(sections)
@@ -108,6 +109,7 @@ export default config => {
     // Register base screen components
     Vue.component(HtmlScreen.name, HtmlScreen);
     Vue.component(FormScreen.name, FormScreen);
+    Vue.component(ModelIndexScreen.name, ModelIndexScreen);
 
     return new Router({
         routes: createRoutes(config),

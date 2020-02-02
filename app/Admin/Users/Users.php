@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace FluentKit\Admin\Users;
 
 use FluentKit\Admin\UI\Fields\Email;
+use FluentKit\Admin\UI\Fields\Number;
 use FluentKit\Admin\UI\Fields\Panel;
 use FluentKit\Admin\UI\Fields\Password;
 use FluentKit\Admin\UI\Fields\Text;
@@ -16,6 +17,13 @@ final class Users extends ModelSection
     public function __construct()
     {
         parent::__construct(User::class, [
+            'index' => [
+                (new Number('id', 'ID')),
+                (new Email('email', 'Email Address')),
+                (new Text('name', 'Name')),
+                (new Text('created_at', 'Created At')),
+                (new Text('updated_at', 'Updated At'))
+            ],
             'create' => [
                 new Panel('details', 'User Details', '', [
                     (new Email('email', 'Email Address'))->rules(['required', 'string', 'unique:users,email']),

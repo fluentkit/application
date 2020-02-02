@@ -11,14 +11,14 @@
             <div v-for="(value, key) in values" class="values">
                 <component
                     :is="field.keyField.component"
-                    :field="{ ...field.keyField, disabled: field.disabled, readOnly: field.readOnly }"
+                    :field="{ ...field.keyField, disabled: field.disabled, readOnly: field.readOnly, withoutLayout: true }"
                     :errors="keyValueErrors(key)"
                     :value="{ key }"
                     @input="updateKey(key, $event)"
                 />
                 <component
                     :is="field.valueField.component"
-                    :field="{ ...field.valueField, disabled: field.disabled, readOnly: field.readOnly }"
+                    :field="{ ...field.valueField, disabled: field.disabled, readOnly: field.readOnly, withoutLayout: true }"
                     :errors="keyValueErrors(key)"
                     :value="{ value }"
                     @input="updateValue(key, $event)"
@@ -200,9 +200,6 @@
         @apply .m-0 .flex-grow-0 .text-gray-500;
     }
 
-    .fk-admin-field-key-value > .values .fk-admin-field-label {
-        @apply .hidden;
-    }
     .fk-admin-field-key-value .fk-admin-button {
         @apply .mb-0;
     }

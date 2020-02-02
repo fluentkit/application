@@ -25,22 +25,6 @@
                 buttonText: 'Save Changes'
             }
         },
-        computed: {
-		    requestQuery () {
-		        const params = [];
-		        for (const param in this.$route.params) {
-		            if (this.$route.params.hasOwnProperty(param)) {
-                        params.push(`${param}=${this.$route.params[param]}`)
-                    }
-                }
-
-		        if (!params.length) {
-		            return '';
-                }
-
-		        return `?${params.join('&')}`;
-            }
-        },
         async created () {
             try {
                 const { $section, $screen } = this;

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace FluentKit\Admin\UI;
 
+use FluentKit\Admin\UI\Screens\ModelIndexScreen;
 use FluentKit\Admin\UI\Screens\ModelScreen;
 use FluentKit\Admin\UI\Traits\HasFields;
 use Illuminate\Support\Str;
@@ -17,8 +18,20 @@ class ModelSection extends Section
         $this->setId(Str::plural(Str::snake(class_basename($model))));
         $this->setLabel(Str::plural(class_basename($model)));
 
+        $this->registerIndex($model, $fields['index']);
         $this->registerCreate($model, $fields['create']);
         $this->registerEdit($model, $fields['edit']);
+    }
+
+    private function registerIndex(string $model, array $fields)
+    {
+        $screen = new ModelIndexScreen($model);
+
+        foreach ($fields as $field) {
+            $screen->addField($field->readOnly());
+        }
+
+        $this->registerScreen($screen);
     }
 
     private function registerCreate(string $model, array $fields)

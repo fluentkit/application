@@ -8,7 +8,7 @@
             <fk-admin-header :user-links="mappedUserLinks"></fk-admin-header>
             <div id="progress-container"></div>
             <div id="screen-container">
-                <router-view :key="$route.fullPath"></router-view>
+                <router-view :key="$route.path"></router-view>
             </div>
         </section>
     </div>

@@ -1,6 +1,6 @@
 <template>
     <div class="fk-admin-field-row" :class="{ error: errors.has(field.id), [field.layout]: true }">
-        <fk-admin-field-label :label="field.label" :required="field.required && !field.readOnly && !field.disabled" />
+        <fk-admin-field-label v-if="!field.withoutLayout" :label="field.label" :required="field.required && !field.readOnly && !field.disabled" />
         <div class="input">
             <slot />
             <p v-if="errors.has(field.id)" class="error">{{ errors.first(field.id) }}</p>

@@ -46,12 +46,18 @@ class User extends Authenticatable
     ];
 
     protected $appends = [
-        'avatar'
+        'avatar',
+        'name'
     ];
 
     public function setPasswordAttribute($pass)
     {
         $this->attributes['password'] = bcrypt($pass);
+    }
+
+    public function getNameAttribute()
+    {
+        return ucwords($this->first_name) . ' ' . ucwords($this->last_name);
     }
 
     public function getAvatarAttribute()
