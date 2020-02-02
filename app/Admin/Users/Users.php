@@ -40,7 +40,7 @@ final class Users extends ModelSection
                     (new Email('email', 'Email Address'))->rules(['required', 'string', 'unique:users,email,{$id}']),
                     (new Text('first_name', 'First Name'))->rules(['required', 'string']),
                     (new Text('last_name', 'Last Name'))->rules(['required', 'string']),
-                    (new Text('email_verified_at', 'Email Verified On'))->readOnly(),
+                    (new Text('email_verified_at', 'Email Verified On'))->rules(['nullable'])->readOnly(),
                     (new Text('created_at', 'Created At'))->readOnly(),
                     (new Text('updated_at', 'Updated At'))->readOnly()
                 ]),

@@ -2,13 +2,12 @@
     <fk-admin-background v-if="!attributes || !fields || !actions"/>
     <div v-else class="fk-admin-screen-form">
         <component v-for="field in fields" :key="field.id" :is="field.component" v-if="!field.hidden" :field="field" :errors="$form.errors" v-model="attributes"/>
-        <fk-admin-form-actions :actions="actions" @click="performAction"/>
+        <fk-admin-form-actions :actions="actions" @click="formAction"/>
     </div>
 </template>
 
 <script>
     import screenBase from './base';
-    import url from '../../utils/url';
 
 	export default {
 		name: 'fk-admin-screen-form',
@@ -22,24 +21,12 @@
             await this.initScreen();
         },
         methods: {
-		    async performAction (action) {
-                try {
-                    action.disabled = true;
-                    this.$progress().start();
-                    const { $section, $screen } = this;
-                    const { data } = await this.$form.post(url`/admin/${$section.id}/${$screen.id}/${action.id}`+this.requestQuery, { attributes: this.attributes });
-                    this.handleActionResponse(data);
-                    this.attributes = data.attributes;
-                } catch (e) {
-                    if (this.$isValidationError(e)) {
-                        this.$error(this.$form.message);
-                    } else {
-                        this.$error(e);
-                    }
-                } finally {
-                    action.disabled = false;
-                    this.$progress().done();
-                }
+		    async formAction (action) {
+		        await this.$screen.action(
+		            action,
+                    { attributes: this.attributes },
+                    async ({ data: { attributes = {} } }) => this.attributes = attributes
+                );
             }
         }
 	}

@@ -2886,6 +2886,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils_url__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../utils/url */ "./resources/js/utils/url.js");
 
 
+function _templateObject2() {
+  var data = _taggedTemplateLiteral(["/admin/", "/", "/", ""]);
+
+  _templateObject2 = function _templateObject2() {
+    return data;
+  };
+
+  return data;
+}
+
 function _templateObject() {
   var data = _taggedTemplateLiteral(["/admin/", "/", "/", ""]);
 
@@ -2928,7 +2938,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     $screen: function $screen() {
       return _objectSpread({}, this.$route.meta.screen, {
-        get: this.getScreenData
+        get: this.getScreenData,
+        action: this.performAction
       });
     }
   },
@@ -3066,7 +3077,86 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           params: params
         });
       }
-    }
+    },
+    performAction: function () {
+      var _performAction = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5(action) {
+        var data,
+            cb,
+            disabled,
+            $section,
+            $screen,
+            response,
+            _args5 = arguments;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
+              case 0:
+                data = _args5.length > 1 && _args5[1] !== undefined ? _args5[1] : {};
+                cb = _args5.length > 2 && _args5[2] !== undefined ? _args5[2] :
+                /*#__PURE__*/
+                _asyncToGenerator(
+                /*#__PURE__*/
+                _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
+                  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+                    while (1) {
+                      switch (_context4.prev = _context4.next) {
+                        case 0:
+                        case "end":
+                          return _context4.stop();
+                      }
+                    }
+                  }, _callee4);
+                }));
+                disabled = action.disabled;
+                _context5.prev = 3;
+                action.disabled = true;
+                this.$progress().start();
+                $section = this.$section, $screen = this.$screen;
+                _context5.next = 9;
+                return this.$form.post(Object(_utils_url__WEBPACK_IMPORTED_MODULE_5__["default"])(_templateObject2(), $section.id, $screen.id, action.id) + this.requestQuery, data);
+
+              case 9:
+                response = _context5.sent;
+                this.handleActionResponse(response.data);
+                _context5.next = 13;
+                return cb(response);
+
+              case 13:
+                _context5.next = 18;
+                break;
+
+              case 15:
+                _context5.prev = 15;
+                _context5.t0 = _context5["catch"](3);
+
+                if (this.$isValidationError(_context5.t0)) {
+                  this.$error(this.$form.message);
+                } else {
+                  this.$error(_context5.t0);
+                }
+
+              case 18:
+                _context5.prev = 18;
+                action.disabled = disabled;
+                this.$progress().done();
+                return _context5.finish(18);
+
+              case 22:
+              case "end":
+                return _context5.stop();
+            }
+          }
+        }, _callee5, this, [[3, 15, 18, 22]]);
+      }));
+
+      function performAction(_x2) {
+        return _performAction.apply(this, arguments);
+      }
+
+      return performAction;
+    }()
   },
   render: function render() {
     return false;
@@ -3087,20 +3177,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./base */ "./resources/js/admin/screens/base.vue");
-/* harmony import */ var _utils_url__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../utils/url */ "./resources/js/utils/url.js");
 
-
-function _templateObject() {
-  var data = _taggedTemplateLiteral(["/admin/", "/", "/", ""]);
-
-  _templateObject = function _templateObject() {
-    return data;
-  };
-
-  return data;
-}
-
-function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
@@ -3114,7 +3191,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'fk-admin-screen-form',
@@ -3150,62 +3226,60 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     return created;
   }(),
   methods: {
-    performAction: function () {
-      var _performAction = _asyncToGenerator(
+    formAction: function () {
+      var _formAction = _asyncToGenerator(
       /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(action) {
-        var $section, $screen, _ref, data;
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(action) {
+        var _this = this;
 
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
           while (1) {
-            switch (_context2.prev = _context2.next) {
+            switch (_context3.prev = _context3.next) {
               case 0:
-                _context2.prev = 0;
-                action.disabled = true;
-                this.$progress().start();
-                $section = this.$section, $screen = this.$screen;
-                _context2.next = 6;
-                return this.$form.post(Object(_utils_url__WEBPACK_IMPORTED_MODULE_2__["default"])(_templateObject(), $section.id, $screen.id, action.id) + this.requestQuery, {
+                _context3.next = 2;
+                return this.$screen.action(action, {
                   attributes: this.attributes
-                });
+                },
+                /*#__PURE__*/
+                function () {
+                  var _ref2 = _asyncToGenerator(
+                  /*#__PURE__*/
+                  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(_ref) {
+                    var _ref$data$attributes, attributes;
 
-              case 6:
-                _ref = _context2.sent;
-                data = _ref.data;
-                this.handleActionResponse(data);
-                this.attributes = data.attributes;
-                _context2.next = 15;
-                break;
+                    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+                      while (1) {
+                        switch (_context2.prev = _context2.next) {
+                          case 0:
+                            _ref$data$attributes = _ref.data.attributes, attributes = _ref$data$attributes === void 0 ? {} : _ref$data$attributes;
+                            return _context2.abrupt("return", _this.attributes = attributes);
 
-              case 12:
-                _context2.prev = 12;
-                _context2.t0 = _context2["catch"](0);
+                          case 2:
+                          case "end":
+                            return _context2.stop();
+                        }
+                      }
+                    }, _callee2);
+                  }));
 
-                if (this.$isValidationError(_context2.t0)) {
-                  this.$error(this.$form.message);
-                } else {
-                  this.$error(_context2.t0);
-                }
+                  return function (_x2) {
+                    return _ref2.apply(this, arguments);
+                  };
+                }());
 
-              case 15:
-                _context2.prev = 15;
-                action.disabled = false;
-                this.$progress().done();
-                return _context2.finish(15);
-
-              case 19:
+              case 2:
               case "end":
-                return _context2.stop();
+                return _context3.stop();
             }
           }
-        }, _callee2, this, [[0, 12, 15, 19]]);
+        }, _callee3, this);
       }));
 
-      function performAction(_x) {
-        return _performAction.apply(this, arguments);
+      function formAction(_x) {
+        return _formAction.apply(this, arguments);
       }
 
-      return performAction;
+      return formAction;
     }()
   }
 });
@@ -3312,20 +3386,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./base */ "./resources/js/admin/screens/base.vue");
-/* harmony import */ var _utils_url__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../utils/url */ "./resources/js/utils/url.js");
 
-
-function _templateObject() {
-  var data = _taggedTemplateLiteral(["/admin/", "/", "/", ""]);
-
-  _templateObject = function _templateObject() {
-    return data;
-  };
-
-  return data;
-}
-
-function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
@@ -3391,7 +3452,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'fk-admin-screen-model-index',
@@ -3475,59 +3535,33 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       return goToPage;
     }(),
-    performAction: function () {
-      var _performAction = _asyncToGenerator(
+    tableAction: function () {
+      var _tableAction = _asyncToGenerator(
       /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(action, model) {
-        var $section, $screen, _ref, data;
-
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(action, _ref) {
+        var id;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
-                _context3.prev = 0;
-                this.$progress().start();
-                $section = this.$section, $screen = this.$screen;
-                _context3.next = 5;
-                return this.$form.post(Object(_utils_url__WEBPACK_IMPORTED_MODULE_2__["default"])(_templateObject(), $section.id, $screen.id, action.id) + this.requestQuery, {
-                  id: model.id
+                id = _ref.id;
+                this.$screen.action(action, {
+                  id: id
                 });
 
-              case 5:
-                _ref = _context3.sent;
-                data = _ref.data;
-                this.handleActionResponse(data);
-                _context3.next = 13;
-                break;
-
-              case 10:
-                _context3.prev = 10;
-                _context3.t0 = _context3["catch"](0);
-
-                if (this.$isValidationError(_context3.t0)) {
-                  this.$error(this.$form.message);
-                } else {
-                  this.$error(_context3.t0);
-                }
-
-              case 13:
-                _context3.prev = 13;
-                this.$progress().done();
-                return _context3.finish(13);
-
-              case 16:
+              case 2:
               case "end":
                 return _context3.stop();
             }
           }
-        }, _callee3, this, [[0, 10, 13, 16]]);
+        }, _callee3, this);
       }));
 
-      function performAction(_x2, _x3) {
-        return _performAction.apply(this, arguments);
+      function tableAction(_x2, _x3) {
+        return _tableAction.apply(this, arguments);
       }
 
-      return performAction;
+      return tableAction;
     }()
   }
 });
@@ -6379,7 +6413,7 @@ var render = function() {
           _vm._v(" "),
           _c("fk-admin-form-actions", {
             attrs: { actions: _vm.actions },
-            on: { click: _vm.performAction }
+            on: { click: _vm.formAction }
           })
         ],
         2
@@ -6467,7 +6501,7 @@ var render = function() {
                           attrs: { type: action.meta.button.type, size: "sm" },
                           on: {
                             click: function($event) {
-                              return _vm.performAction(action, model)
+                              return _vm.tableAction(action, model)
                             }
                           }
                         },

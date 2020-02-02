@@ -21,7 +21,8 @@
             $screen () {
                 return {
                     ...this.$route.meta.screen,
-                    get: this.getScreenData
+                    get: this.getScreenData,
+                    action: this.performAction
                 };
             }
         },
@@ -65,6 +66,26 @@
                     }
 
                     this.$router.push({ name: route, params });
+                }
+            },
+            async performAction (action, data = {}, cb = async () => {}) {
+                const disabled = action.disabled;
+                try {
+                    action.disabled = true;
+                    this.$progress().start();
+                    const { $section, $screen } = this;
+                    const response = await this.$form.post(url`/admin/${$section.id}/${$screen.id}/${action.id}`+this.requestQuery, data);
+                    this.handleActionResponse(response.data);
+                    await cb(response);
+                } catch (e) {
+                    if (this.$isValidationError(e)) {
+                        this.$error(this.$form.message);
+                    } else {
+                        this.$error(e);
+                    }
+                } finally {
+                    action.disabled = disabled;
+                    this.$progress().done();
                 }
             }
         },

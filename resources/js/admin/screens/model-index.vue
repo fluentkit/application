@@ -26,7 +26,7 @@
                             :key="action.id"
                             :type="action.meta.button.type"
                             size="sm"
-                            @click="performAction(action, model)"
+                            @click="tableAction(action, model)"
                         >
                             <i
                                 v-if="action.meta.button.icon"
@@ -54,7 +54,6 @@
 
 <script>
     import screenBase from './base';
-    import url from '../../utils/url';
 
 	export default {
 		name: 'fk-admin-screen-model-index',
@@ -88,21 +87,8 @@
                     this.$progress().done();
                 }
             },
-            async performAction (action, model) {
-                try {
-                    this.$progress().start();
-                    const { $section, $screen } = this;
-                    const { data } = await this.$form.post(url`/admin/${$section.id}/${$screen.id}/${action.id}`+this.requestQuery, { id: model.id });
-                    this.handleActionResponse(data);
-                } catch (e) {
-                    if (this.$isValidationError(e)) {
-                        this.$error(this.$form.message);
-                    } else {
-                        this.$error(e);
-                    }
-                } finally {
-                    this.$progress().done();
-                }
+            async tableAction (action, { id }) {
+		        this.$screen.action(action, { id });
             }
         }
 	}
@@ -134,7 +120,7 @@
     }
 
     .fk-admin-screen-model-index table .fk-admin-button {
-        @apply .mb-0;
+        @apply .mb-0 .text-gray-500;
     }
 
     .fk-admin-screen-model-index > .pagination {
