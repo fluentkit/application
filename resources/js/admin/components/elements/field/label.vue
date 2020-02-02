@@ -22,7 +22,7 @@
 
 <style>
     .fk-admin-field-label {
-        @apply .flex .w-64 .mr-10;
+        @apply .flex .w-48 .mr-10;
     }
     .fk-admin-field-label > .required {
         @apply .text-red-500 .ml-2;

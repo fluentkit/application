@@ -1094,7 +1094,7 @@ html {
 }
 .fk-admin-field-label {
   display: flex;
-  width: 16rem;
+  width: 12rem;
   margin-right: 2.5rem;
 }
 .fk-admin-field-label > .required {

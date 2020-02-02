@@ -35,6 +35,10 @@ final class Users extends ModelSection
                     (new Text('email_verified_at', 'Email Verified On'))->readOnly(),
                     (new Text('created_at', 'Created At'))->readOnly(),
                     (new Text('updated_at', 'Updated At'))->readOnly()
+                ]),
+                new Panel('passwords', 'Password', 'Enter a new password to change the users password.', [
+                    (new Password('password', 'Password'))->rules(['sometimes', 'string', 'min:10', 'confirmed']),
+                    (new Password('password_confirmation', 'Retype Password'))->rules(['sometimes', 'required_with:passwords', 'string', 'min:10']),
                 ])
             ]
         ]);
