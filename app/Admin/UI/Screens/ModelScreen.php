@@ -89,7 +89,8 @@ class ModelScreen extends FormScreen implements ScreenInterface
 
         return Redirect::route(
             Str::plural(Str::snake(class_basename($model))).'.edit',
-            ['id' => $model->id]
+            ['id' => $model->id],
+            Notification::success($this->getModelLabel() . ' Created!')
         );
     }
 

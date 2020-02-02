@@ -14,11 +14,17 @@ final class Redirect extends Response
         'redirect' => [],
     ];
 
-    public static function route(string $route, array $params = []): ResponseInterface
+    public static function route(string $route, array $params = [], Notification $notification = null): ResponseInterface
     {
-        return (new static('redirect'))
+        $response = (new static('redirect'))
             ->setMeta('redirect.route', $route)
             ->setMeta('redirect.params', $params);
+
+        if ($notification) {
+            $response->setMeta('notification', $notification->toArray());
+        }
+
+        return $response;
     }
 
     public static function url(string $url): ResponseInterface

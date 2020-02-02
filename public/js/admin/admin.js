@@ -2967,7 +2967,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _performAction = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(action) {
-        var $section, $screen, _ref3, _ref3$data, message, type, meta, attributes, _meta$redirect, _url, route, params;
+        var $section, $screen, _ref3, data;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
           while (1) {
@@ -2984,51 +2984,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 6:
                 _ref3 = _context2.sent;
-                _ref3$data = _ref3.data;
-                message = _ref3$data.message;
-                type = _ref3$data.type;
-                meta = _ref3$data.meta;
-                attributes = _ref3$data.attributes;
-
-                if (!(type === 'notification')) {
-                  _context2.next = 16;
-                  break;
-                }
-
-                this['$' + meta.toast.type](message);
-                _context2.next = 23;
+                data = _ref3.data;
+                this.handleResponse(data);
+                this.attributes = data.attributes;
+                _context2.next = 15;
                 break;
 
-              case 16:
-                if (!(type === 'redirect')) {
-                  _context2.next = 23;
-                  break;
-                }
-
-                _meta$redirect = meta.redirect, _url = _meta$redirect.url, route = _meta$redirect.route, params = _meta$redirect.params;
-
-                if (!_url) {
-                  _context2.next = 21;
-                  break;
-                }
-
-                window.location.href = _url;
-                return _context2.abrupt("return");
-
-              case 21:
-                this.$router.push({
-                  name: route,
-                  params: params
-                });
-                return _context2.abrupt("return");
-
-              case 23:
-                this.attributes = attributes;
-                _context2.next = 29;
-                break;
-
-              case 26:
-                _context2.prev = 26;
+              case 12:
+                _context2.prev = 12;
                 _context2.t0 = _context2["catch"](0);
 
                 if (this.$isValidationError(_context2.t0)) {
@@ -3037,18 +3000,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   this.$error(_context2.t0);
                 }
 
-              case 29:
-                _context2.prev = 29;
+              case 15:
+                _context2.prev = 15;
                 action.disabled = false;
                 this.$progress().done();
-                return _context2.finish(29);
+                return _context2.finish(15);
 
-              case 33:
+              case 19:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, this, [[0, 26, 29, 33]]);
+        }, _callee2, this, [[0, 12, 15, 19]]);
       }));
 
       function performAction(_x) {
@@ -3056,7 +3019,36 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
 
       return performAction;
-    }()
+    }(),
+    handleResponse: function handleResponse(data) {
+      var message = data.message,
+          type = data.type,
+          meta = data.meta;
+
+      if (type === 'notification') {
+        this['$' + meta.toast.type](message);
+      } else if (type === 'redirect') {
+        var _meta$redirect = meta.redirect,
+            _url = _meta$redirect.url,
+            route = _meta$redirect.route,
+            params = _meta$redirect.params,
+            notification = meta.notification;
+
+        if (notification) {
+          this.handleResponse(notification);
+        }
+
+        if (_url) {
+          window.location.href = _url;
+          return;
+        }
+
+        this.$router.push({
+          name: route,
+          params: params
+        });
+      }
+    }
   }
 });
 
@@ -11266,7 +11258,7 @@ __webpack_require__.r(__webpack_exports__);
           message = _error$response$data$ === void 0 ? null : _error$response$data$,
           _error$response$data$2 = _error$response$data.errors,
           errors = _error$response$data$2 === void 0 ? null : _error$response$data$2;
-      return status === 422 && message && errors;
+      return status && status === 422 && message && errors;
     }
   }
 });
