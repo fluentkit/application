@@ -1,5 +1,5 @@
 <script>
-    import url from '../../utils/url';
+    import screenBase from './base';
     import request from '../../mixins/request';
     import screen from '../mixins/screen';
     import progress from '../mixins/progress';
@@ -8,41 +8,18 @@
 
 	export default {
 		name: 'fk-admin-screen-html',
-        mixins: [request, screen, progress, toast],
+        extends: screenBase,
         data () {
             return {
                 template: `<fk-admin-background />`,
-                templateData: {
-                    attributes: {},
-                    actions: {}
-                }
             }
         },
         async created () {
-            try {
-                const { $section, $screen } = this;
-
-                const [templateRequest, attributeRequest, actionRequest] = await Promise.all([
-                    this.$request().get(url`/admin/${$section.id}/${$screen.id}/template`),
-                    this.$request().get(url`/admin/${$section.id}/${$screen.id}/attributes`),
-                    this.$request().get(url`/admin/${$section.id}/${$screen.id}/actions`),
-                ]);
-
-                const { data: { template } } = templateRequest;
-                const { data: { attributes } } = attributeRequest;
-                const { data: { actions } } = actionRequest;
-
-                this.template = template;
-                this.templateData.attributes = attributes;
-                this.templateData.actions = actions;
-            } catch (e) {
-                this.$error(e);
-            } finally {
-                this.$progress().done();
-            }
+            await this.initScreen(['template', 'attributes', 'actions']);
         },
         render (createElement) {
-		    const { templateData = {} } = this.$data || {};
+		    const { attributes = {}, actions = {} } = this.$data || {};
+
 		    return createElement({
                 mixins: [request, screen, progress, toast],
                 components: {
@@ -50,7 +27,8 @@
                 },
                 data () {
                     return {
-                        ...templateData
+                        attributes,
+                        actions
                     }
                 },
                 template: this.template

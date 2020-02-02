@@ -53,52 +53,19 @@
 </template>
 
 <script>
+    import screenBase from './base';
     import url from '../../utils/url';
-    import request from '../../mixins/request';
-    import form from '../../mixins/form';
-    import screen from '../mixins/screen';
-    import progress from '../mixins/progress';
-    import toast from '../mixins/toast';
-    import FkAdminButton from "../components/elements/button";
-    import FkAdminPagination from "../components/elements/pagination";
 
 	export default {
 		name: 'fk-admin-screen-model-index',
-        components: {FkAdminPagination, FkAdminButton},
-        mixins: [request, form, screen, progress, toast],
-        data () {
-            return {
-                fields: null,
-                attributes: null,
-                actions: null,
-            }
-        },
+        extends: screenBase,
         computed: {
             models () {
 		        return this.attributes.data;
             }
         },
         async created () {
-            try {
-                const { $section, $screen } = this;
-
-                const [fieldRequest, attributeRequest, actionRequest] = await Promise.all([
-                    this.$request().get(url`/admin/${$section.id}/${$screen.id}/fields`+this.requestQuery),
-                    this.$request().get(url`/admin/${$section.id}/${$screen.id}/attributes`+this.requestQuery),
-                    this.$request().get(url`/admin/${$section.id}/${$screen.id}/actions`+this.requestQuery),
-                ]);
-
-                const { data: { fields = {} } } = fieldRequest;
-                const { data: { attributes = {} } } = attributeRequest;
-                const { data: { actions } } = actionRequest;
-                this.fields = fields;
-                this.attributes = attributes;
-                this.actions = actions;
-            } catch (e) {
-                this.$error(e);
-            } finally {
-                this.$progress().done();
-            }
+            await this.initScreen();
         },
         methods: {
 		    async goToPage (page) {
@@ -113,9 +80,8 @@
                             page
                         }
                     });
-                    const { $section, $screen } = this;
-                    const { data: { attributes = {} } } = await this.$request().get(url`/admin/${$section.id}/${$screen.id}/attributes`+this.requestQuery);
-                    this.attributes = attributes;
+
+                    this.attributes = await this.$screen.get('attributes');
                 } catch (e) {
                     this.$error(e);
                 } finally {

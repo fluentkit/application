@@ -26,126 +26,6 @@
   padding-left: 2.5rem;
   padding-right: 2.5rem;
 }
-.fk-admin-button {
-  cursor: pointer;
-  text-align: center;
-  font-weight: 600;
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
-  border-radius: 0.25rem;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-  width: auto;
-  margin-bottom: 2.5rem;
-}
-.fk-admin-button.sm {
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  padding-left: 0.75rem;
-  padding-right: 0.75rem;
-}
-
-/**
- * Default
- */
-.fk-admin-button.default {
-  background-color: #fff;
-  border-width: 1px;
-}
-.fk-admin-button.default:hover {
-  background-color: #e2e8f0;
-}
-.fk-admin-button.default[disabled],
-.fk-admin-button.default[disabled]:hover{
-  background-color: #a0aec0;
-}
-
-/**
- * Transparent
- */
-.fk-admin-button.transparent {
-  box-shadow: none;
-}
-.fk-admin-button.transparent:hover {
-  background-color: #e2e8f0;
-}
-.fk-admin-button.transparent[disabled],
-.fk-admin-button.transparent[disabled]:hover{
-  background-color: #cbd5e0;
-}
-
-/**
- * Info
- */
-.fk-admin-button.info {
-  background-color: #4299e1;
-  color: #fff;
-}
-.fk-admin-button.info:hover {
-  background-color: #3182ce;
-}
-.fk-admin-button.info[disabled],
-.fk-admin-button.info[disabled]:hover{
-  background-color: #2b6cb0;
-  color: #e2e8f0;
-}
-
-/**
- * Success
- */
-.fk-admin-button.success {
-  background-color: #48bb78;
-  color: #fff;
-}
-.fk-admin-button.success:hover {
-  background-color: #38a169;
-}
-.fk-admin-button.success[disabled],
-.fk-admin-button.success[disabled]:hover{
-  background-color: #2f855a;
-  color: #e2e8f0;
-}
-
-/**
- * Danger
- */
-.fk-admin-button.danger {
-  background-color: #f56565;
-  color: #fff;
-}
-.fk-admin-button.danger:hover {
-  background-color: #e53e3e;
-}
-.fk-admin-button.danger[disabled],
-.fk-admin-button.danger[disabled]:hover{
-  background-color: #c53030;
-  color: #e2e8f0;
-}
-.fk-admin-pagination {
-  display: flex;
-}
-.fk-admin-pagination a {
-  display: inline-block;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
-  border-right-width: 1px;
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: #4299e1;
-  cursor: pointer;
-}
-.fk-admin-pagination a:hover {
-  background-color: #edf2f7;
-}
-.fk-admin-pagination a.active {
-  color: #718096;
-}
-.fk-admin-pagination a[disabled] {
-  color: #cbd5e0;
-}
 .fk-admin-screen-model-index > .actions {
   padding: 1rem;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
@@ -1109,6 +989,126 @@ html {
 .fk-admin-panel > *:last-child {
   padding-bottom: 2.5rem;
   margin-bottom: 0;
+}
+.fk-admin-button {
+  cursor: pointer;
+  text-align: center;
+  font-weight: 600;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  border-radius: 0.25rem;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  width: auto;
+  margin-bottom: 2.5rem;
+}
+.fk-admin-button.sm {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+
+/**
+ * Default
+ */
+.fk-admin-button.default {
+  background-color: #fff;
+  border-width: 1px;
+}
+.fk-admin-button.default:hover {
+  background-color: #e2e8f0;
+}
+.fk-admin-button.default[disabled],
+.fk-admin-button.default[disabled]:hover{
+  background-color: #a0aec0;
+}
+
+/**
+ * Transparent
+ */
+.fk-admin-button.transparent {
+  box-shadow: none;
+}
+.fk-admin-button.transparent:hover {
+  background-color: #e2e8f0;
+}
+.fk-admin-button.transparent[disabled],
+.fk-admin-button.transparent[disabled]:hover{
+  background-color: #cbd5e0;
+}
+
+/**
+ * Info
+ */
+.fk-admin-button.info {
+  background-color: #4299e1;
+  color: #fff;
+}
+.fk-admin-button.info:hover {
+  background-color: #3182ce;
+}
+.fk-admin-button.info[disabled],
+.fk-admin-button.info[disabled]:hover{
+  background-color: #2b6cb0;
+  color: #e2e8f0;
+}
+
+/**
+ * Success
+ */
+.fk-admin-button.success {
+  background-color: #48bb78;
+  color: #fff;
+}
+.fk-admin-button.success:hover {
+  background-color: #38a169;
+}
+.fk-admin-button.success[disabled],
+.fk-admin-button.success[disabled]:hover{
+  background-color: #2f855a;
+  color: #e2e8f0;
+}
+
+/**
+ * Danger
+ */
+.fk-admin-button.danger {
+  background-color: #f56565;
+  color: #fff;
+}
+.fk-admin-button.danger:hover {
+  background-color: #e53e3e;
+}
+.fk-admin-button.danger[disabled],
+.fk-admin-button.danger[disabled]:hover{
+  background-color: #c53030;
+  color: #e2e8f0;
+}
+.fk-admin-pagination {
+  display: flex;
+}
+.fk-admin-pagination a {
+  display: inline-block;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  border-right-width: 1px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #4299e1;
+  cursor: pointer;
+}
+.fk-admin-pagination a:hover {
+  background-color: #edf2f7;
+}
+.fk-admin-pagination a.active {
+  color: #718096;
+}
+.fk-admin-pagination a[disabled] {
+  color: #cbd5e0;
 }
 .fk-admin-field-row {
   display: flex;

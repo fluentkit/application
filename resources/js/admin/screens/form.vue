@@ -7,45 +7,19 @@
 </template>
 
 <script>
+    import screenBase from './base';
     import url from '../../utils/url';
-    import request from '../../mixins/request';
-    import form from '../../mixins/form';
-    import screen from '../mixins/screen';
-    import progress from '../mixins/progress';
-    import toast from '../mixins/toast';
 
 	export default {
 		name: 'fk-admin-screen-form',
-        mixins: [request, form, screen, progress, toast],
+        extends: screenBase,
         data () {
             return {
-                fields: null,
-                attributes: null,
-                actions: null,
                 buttonText: 'Save Changes'
             }
         },
         async created () {
-            try {
-                const { $section, $screen } = this;
-
-                const [fieldRequest, attributeRequest, actionRequest] = await Promise.all([
-                    this.$request().get(url`/admin/${$section.id}/${$screen.id}/fields`+this.requestQuery),
-                    this.$request().get(url`/admin/${$section.id}/${$screen.id}/attributes`+this.requestQuery),
-                    this.$request().get(url`/admin/${$section.id}/${$screen.id}/actions`+this.requestQuery),
-                ]);
-
-                const { data: { fields = {} } } = fieldRequest;
-                const { data: { attributes = {} } } = attributeRequest;
-                const { data: { actions } } = actionRequest;
-                this.fields = fields;
-                this.attributes = attributes;
-                this.actions = actions;
-            } catch (e) {
-                this.$error(e);
-            } finally {
-                this.$progress().done();
-            }
+            await this.initScreen();
         },
         methods: {
 		    async performAction (action) {

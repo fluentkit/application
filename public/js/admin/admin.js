@@ -2875,6 +2875,123 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/admin/screens/base.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/admin/screens/base.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _mixins_request__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../mixins/request */ "./resources/js/mixins/request.js");
+/* harmony import */ var _mixins_form__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../mixins/form */ "./resources/js/mixins/form.js");
+/* harmony import */ var _mixins_screen__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../mixins/screen */ "./resources/js/admin/mixins/screen.js");
+/* harmony import */ var _mixins_progress__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../mixins/progress */ "./resources/js/admin/mixins/progress.js");
+/* harmony import */ var _mixins_toast__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../mixins/toast */ "./resources/js/admin/mixins/toast.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  mixins: [_mixins_request__WEBPACK_IMPORTED_MODULE_1__["default"], _mixins_form__WEBPACK_IMPORTED_MODULE_2__["default"], _mixins_screen__WEBPACK_IMPORTED_MODULE_3__["default"], _mixins_progress__WEBPACK_IMPORTED_MODULE_4__["default"], _mixins_toast__WEBPACK_IMPORTED_MODULE_5__["default"]],
+  data: function data() {
+    return {
+      fields: null,
+      attributes: null,
+      actions: null
+    };
+  },
+  methods: {
+    initScreen: function () {
+      var _initScreen = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        var _this = this;
+
+        var data,
+            cb,
+            responses,
+            _args2 = arguments;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                data = _args2.length > 0 && _args2[0] !== undefined ? _args2[0] : ['fields', 'attributes', 'actions'];
+                cb = _args2.length > 1 && _args2[1] !== undefined ? _args2[1] :
+                /*#__PURE__*/
+                _asyncToGenerator(
+                /*#__PURE__*/
+                _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+                  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+                    while (1) {
+                      switch (_context.prev = _context.next) {
+                        case 0:
+                        case "end":
+                          return _context.stop();
+                      }
+                    }
+                  }, _callee);
+                }));
+                _context2.prev = 2;
+                _context2.next = 5;
+                return Promise.all(data.map(function (key) {
+                  return _this.$screen.get(key);
+                }));
+
+              case 5:
+                responses = _context2.sent;
+                data.forEach(function (key, index) {
+                  _this[key] = responses[index];
+                });
+                _context2.next = 9;
+                return cb();
+
+              case 9:
+                _context2.next = 14;
+                break;
+
+              case 11:
+                _context2.prev = 11;
+                _context2.t0 = _context2["catch"](2);
+                this.$error(_context2.t0);
+
+              case 14:
+                _context2.prev = 14;
+                this.$progress().done();
+                return _context2.finish(14);
+
+              case 17:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this, [[2, 11, 14, 17]]);
+      }));
+
+      function initScreen() {
+        return _initScreen.apply(this, arguments);
+      }
+
+      return initScreen;
+    }()
+  },
+  render: function render() {
+    return false;
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/admin/screens/form.vue?vue&type=script&lang=js&":
 /*!******************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/admin/screens/form.vue?vue&type=script&lang=js& ***!
@@ -2886,46 +3003,12 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _utils_url__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils/url */ "./resources/js/utils/url.js");
-/* harmony import */ var _mixins_request__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../mixins/request */ "./resources/js/mixins/request.js");
-/* harmony import */ var _mixins_form__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../mixins/form */ "./resources/js/mixins/form.js");
-/* harmony import */ var _mixins_screen__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../mixins/screen */ "./resources/js/admin/mixins/screen.js");
-/* harmony import */ var _mixins_progress__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../mixins/progress */ "./resources/js/admin/mixins/progress.js");
-/* harmony import */ var _mixins_toast__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../mixins/toast */ "./resources/js/admin/mixins/toast.js");
+/* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./base */ "./resources/js/admin/screens/base.vue");
+/* harmony import */ var _utils_url__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../utils/url */ "./resources/js/utils/url.js");
 
-
-function _templateObject4() {
-  var data = _taggedTemplateLiteral(["/admin/", "/", "/", ""]);
-
-  _templateObject4 = function _templateObject4() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject3() {
-  var data = _taggedTemplateLiteral(["/admin/", "/", "/actions"]);
-
-  _templateObject3 = function _templateObject3() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject2() {
-  var data = _taggedTemplateLiteral(["/admin/", "/", "/attributes"]);
-
-  _templateObject2 = function _templateObject2() {
-    return data;
-  };
-
-  return data;
-}
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["/admin/", "/", "/fields"]);
+  var data = _taggedTemplateLiteral(["/admin/", "/", "/", ""]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -2935,14 +3018,6 @@ function _templateObject() {
 }
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
-
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
-
-function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
@@ -2958,18 +3033,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 
 
-
-
-
-
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'fk-admin-screen-form',
-  mixins: [_mixins_request__WEBPACK_IMPORTED_MODULE_2__["default"], _mixins_form__WEBPACK_IMPORTED_MODULE_3__["default"], _mixins_screen__WEBPACK_IMPORTED_MODULE_4__["default"], _mixins_progress__WEBPACK_IMPORTED_MODULE_5__["default"], _mixins_toast__WEBPACK_IMPORTED_MODULE_6__["default"]],
+  "extends": _base__WEBPACK_IMPORTED_MODULE_1__["default"],
   data: function data() {
     return {
-      fields: null,
-      attributes: null,
-      actions: null,
       buttonText: 'Save Changes'
     };
   },
@@ -2977,48 +3045,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     var _created = _asyncToGenerator(
     /*#__PURE__*/
     _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-      var $section, $screen, _ref, _ref2, fieldRequest, attributeRequest, actionRequest, _fieldRequest$data$fi, fields, _attributeRequest$dat, attributes, actions;
-
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _context.prev = 0;
-              $section = this.$section, $screen = this.$screen;
-              _context.next = 4;
-              return Promise.all([this.$request().get(Object(_utils_url__WEBPACK_IMPORTED_MODULE_1__["default"])(_templateObject(), $section.id, $screen.id) + this.requestQuery), this.$request().get(Object(_utils_url__WEBPACK_IMPORTED_MODULE_1__["default"])(_templateObject2(), $section.id, $screen.id) + this.requestQuery), this.$request().get(Object(_utils_url__WEBPACK_IMPORTED_MODULE_1__["default"])(_templateObject3(), $section.id, $screen.id) + this.requestQuery)]);
+              _context.next = 2;
+              return this.initScreen();
 
-            case 4:
-              _ref = _context.sent;
-              _ref2 = _slicedToArray(_ref, 3);
-              fieldRequest = _ref2[0];
-              attributeRequest = _ref2[1];
-              actionRequest = _ref2[2];
-              _fieldRequest$data$fi = fieldRequest.data.fields, fields = _fieldRequest$data$fi === void 0 ? {} : _fieldRequest$data$fi;
-              _attributeRequest$dat = attributeRequest.data.attributes, attributes = _attributeRequest$dat === void 0 ? {} : _attributeRequest$dat;
-              actions = actionRequest.data.actions;
-              this.fields = fields;
-              this.attributes = attributes;
-              this.actions = actions;
-              _context.next = 20;
-              break;
-
-            case 17:
-              _context.prev = 17;
-              _context.t0 = _context["catch"](0);
-              this.$error(_context.t0);
-
-            case 20:
-              _context.prev = 20;
-              this.$progress().done();
-              return _context.finish(20);
-
-            case 23:
+            case 2:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, this, [[0, 17, 20, 23]]);
+      }, _callee, this);
     }));
 
     function created() {
@@ -3032,7 +3071,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _performAction = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(action) {
-        var $section, $screen, _ref3, data;
+        var $section, $screen, _ref, data;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
           while (1) {
@@ -3043,13 +3082,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 this.$progress().start();
                 $section = this.$section, $screen = this.$screen;
                 _context2.next = 6;
-                return this.$form.post(Object(_utils_url__WEBPACK_IMPORTED_MODULE_1__["default"])(_templateObject4(), $section.id, $screen.id, action.id) + this.requestQuery, {
+                return this.$form.post(Object(_utils_url__WEBPACK_IMPORTED_MODULE_2__["default"])(_templateObject(), $section.id, $screen.id, action.id) + this.requestQuery, {
                   attributes: this.attributes
                 });
 
               case 6:
-                _ref3 = _context2.sent;
-                data = _ref3.data;
+                _ref = _context2.sent;
+                data = _ref.data;
                 this.handleResponse(data);
                 this.attributes = data.attributes;
                 _context2.next = 15;
@@ -3130,7 +3169,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _utils_url__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils/url */ "./resources/js/utils/url.js");
+/* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./base */ "./resources/js/admin/screens/base.vue");
 /* harmony import */ var _mixins_request__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../mixins/request */ "./resources/js/mixins/request.js");
 /* harmony import */ var _mixins_screen__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../mixins/screen */ "./resources/js/admin/mixins/screen.js");
 /* harmony import */ var _mixins_progress__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../mixins/progress */ "./resources/js/admin/mixins/progress.js");
@@ -3138,51 +3177,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_layout_background__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/layout/background */ "./resources/js/admin/components/layout/background.vue");
 
 
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _templateObject3() {
-  var data = _taggedTemplateLiteral(["/admin/", "/", "/actions"]);
-
-  _templateObject3 = function _templateObject3() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject2() {
-  var data = _taggedTemplateLiteral(["/admin/", "/", "/attributes"]);
-
-  _templateObject2 = function _templateObject2() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject() {
-  var data = _taggedTemplateLiteral(["/admin/", "/", "/template"]);
-
-  _templateObject = function _templateObject() {
-    return data;
-  };
-
-  return data;
-}
-
-function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
-
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
-
-function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
@@ -3196,62 +3191,29 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'fk-admin-screen-html',
-  mixins: [_mixins_request__WEBPACK_IMPORTED_MODULE_2__["default"], _mixins_screen__WEBPACK_IMPORTED_MODULE_3__["default"], _mixins_progress__WEBPACK_IMPORTED_MODULE_4__["default"], _mixins_toast__WEBPACK_IMPORTED_MODULE_5__["default"]],
+  "extends": _base__WEBPACK_IMPORTED_MODULE_1__["default"],
   data: function data() {
     return {
-      template: "<fk-admin-background />",
-      templateData: {
-        attributes: {},
-        actions: {}
-      }
+      template: "<fk-admin-background />"
     };
   },
   created: function () {
     var _created = _asyncToGenerator(
     /*#__PURE__*/
     _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-      var $section, $screen, _ref, _ref2, templateRequest, attributeRequest, actionRequest, template, attributes, actions;
-
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _context.prev = 0;
-              $section = this.$section, $screen = this.$screen;
-              _context.next = 4;
-              return Promise.all([this.$request().get(Object(_utils_url__WEBPACK_IMPORTED_MODULE_1__["default"])(_templateObject(), $section.id, $screen.id)), this.$request().get(Object(_utils_url__WEBPACK_IMPORTED_MODULE_1__["default"])(_templateObject2(), $section.id, $screen.id)), this.$request().get(Object(_utils_url__WEBPACK_IMPORTED_MODULE_1__["default"])(_templateObject3(), $section.id, $screen.id))]);
+              _context.next = 2;
+              return this.initScreen(['template', 'attributes', 'actions']);
 
-            case 4:
-              _ref = _context.sent;
-              _ref2 = _slicedToArray(_ref, 3);
-              templateRequest = _ref2[0];
-              attributeRequest = _ref2[1];
-              actionRequest = _ref2[2];
-              template = templateRequest.data.template;
-              attributes = attributeRequest.data.attributes;
-              actions = actionRequest.data.actions;
-              this.template = template;
-              this.templateData.attributes = attributes;
-              this.templateData.actions = actions;
-              _context.next = 20;
-              break;
-
-            case 17:
-              _context.prev = 17;
-              _context.t0 = _context["catch"](0);
-              this.$error(_context.t0);
-
-            case 20:
-              _context.prev = 20;
-              this.$progress().done();
-              return _context.finish(20);
-
-            case 23:
+            case 2:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, this, [[0, 17, 20, 23]]);
+      }, _callee, this);
     }));
 
     function created() {
@@ -3261,15 +3223,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     return created;
   }(),
   render: function render(createElement) {
-    var _ref3 = this.$data || {},
-        _ref3$templateData = _ref3.templateData,
-        templateData = _ref3$templateData === void 0 ? {} : _ref3$templateData;
+    var _ref = this.$data || {},
+        _ref$attributes = _ref.attributes,
+        attributes = _ref$attributes === void 0 ? {} : _ref$attributes,
+        _ref$actions = _ref.actions,
+        actions = _ref$actions === void 0 ? {} : _ref$actions;
 
     return createElement({
       mixins: [_mixins_request__WEBPACK_IMPORTED_MODULE_2__["default"], _mixins_screen__WEBPACK_IMPORTED_MODULE_3__["default"], _mixins_progress__WEBPACK_IMPORTED_MODULE_4__["default"], _mixins_toast__WEBPACK_IMPORTED_MODULE_5__["default"]],
       components: _defineProperty({}, _components_layout_background__WEBPACK_IMPORTED_MODULE_6__["default"].name, _components_layout_background__WEBPACK_IMPORTED_MODULE_6__["default"]),
       data: function data() {
-        return _objectSpread({}, templateData);
+        return {
+          attributes: attributes,
+          actions: actions
+        };
       },
       template: this.template
     });
@@ -3289,64 +3256,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _utils_url__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils/url */ "./resources/js/utils/url.js");
-/* harmony import */ var _mixins_request__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../mixins/request */ "./resources/js/mixins/request.js");
-/* harmony import */ var _mixins_form__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../mixins/form */ "./resources/js/mixins/form.js");
-/* harmony import */ var _mixins_screen__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../mixins/screen */ "./resources/js/admin/mixins/screen.js");
-/* harmony import */ var _mixins_progress__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../mixins/progress */ "./resources/js/admin/mixins/progress.js");
-/* harmony import */ var _mixins_toast__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../mixins/toast */ "./resources/js/admin/mixins/toast.js");
-/* harmony import */ var _components_elements_button__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/elements/button */ "./resources/js/admin/components/elements/button.vue");
-/* harmony import */ var _components_elements_pagination__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/elements/pagination */ "./resources/js/admin/components/elements/pagination.vue");
+/* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./base */ "./resources/js/admin/screens/base.vue");
+/* harmony import */ var _utils_url__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../utils/url */ "./resources/js/utils/url.js");
 
-
-function _templateObject5() {
-  var data = _taggedTemplateLiteral(["/admin/", "/", "/", ""]);
-
-  _templateObject5 = function _templateObject5() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject4() {
-  var data = _taggedTemplateLiteral(["/admin/", "/", "/attributes"]);
-
-  _templateObject4 = function _templateObject4() {
-    return data;
-  };
-
-  return data;
-}
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _templateObject3() {
-  var data = _taggedTemplateLiteral(["/admin/", "/", "/actions"]);
-
-  _templateObject3 = function _templateObject3() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject2() {
-  var data = _taggedTemplateLiteral(["/admin/", "/", "/attributes"]);
-
-  _templateObject2 = function _templateObject2() {
-    return data;
-  };
-
-  return data;
-}
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["/admin/", "/", "/fields"]);
+  var data = _taggedTemplateLiteral(["/admin/", "/", "/", ""]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -3357,13 +3272,11 @@ function _templateObject() {
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
-function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
@@ -3425,26 +3338,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 
 
-
-
-
-
-
-
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'fk-admin-screen-model-index',
-  components: {
-    FkAdminPagination: _components_elements_pagination__WEBPACK_IMPORTED_MODULE_8__["default"],
-    FkAdminButton: _components_elements_button__WEBPACK_IMPORTED_MODULE_7__["default"]
-  },
-  mixins: [_mixins_request__WEBPACK_IMPORTED_MODULE_2__["default"], _mixins_form__WEBPACK_IMPORTED_MODULE_3__["default"], _mixins_screen__WEBPACK_IMPORTED_MODULE_4__["default"], _mixins_progress__WEBPACK_IMPORTED_MODULE_5__["default"], _mixins_toast__WEBPACK_IMPORTED_MODULE_6__["default"]],
-  data: function data() {
-    return {
-      fields: null,
-      attributes: null,
-      actions: null
-    };
-  },
+  "extends": _base__WEBPACK_IMPORTED_MODULE_1__["default"],
   computed: {
     models: function models() {
       return this.attributes.data;
@@ -3454,48 +3350,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     var _created = _asyncToGenerator(
     /*#__PURE__*/
     _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-      var $section, $screen, _ref, _ref2, fieldRequest, attributeRequest, actionRequest, _fieldRequest$data$fi, fields, _attributeRequest$dat, attributes, actions;
-
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _context.prev = 0;
-              $section = this.$section, $screen = this.$screen;
-              _context.next = 4;
-              return Promise.all([this.$request().get(Object(_utils_url__WEBPACK_IMPORTED_MODULE_1__["default"])(_templateObject(), $section.id, $screen.id) + this.requestQuery), this.$request().get(Object(_utils_url__WEBPACK_IMPORTED_MODULE_1__["default"])(_templateObject2(), $section.id, $screen.id) + this.requestQuery), this.$request().get(Object(_utils_url__WEBPACK_IMPORTED_MODULE_1__["default"])(_templateObject3(), $section.id, $screen.id) + this.requestQuery)]);
+              _context.next = 2;
+              return this.initScreen();
 
-            case 4:
-              _ref = _context.sent;
-              _ref2 = _slicedToArray(_ref, 3);
-              fieldRequest = _ref2[0];
-              attributeRequest = _ref2[1];
-              actionRequest = _ref2[2];
-              _fieldRequest$data$fi = fieldRequest.data.fields, fields = _fieldRequest$data$fi === void 0 ? {} : _fieldRequest$data$fi;
-              _attributeRequest$dat = attributeRequest.data.attributes, attributes = _attributeRequest$dat === void 0 ? {} : _attributeRequest$dat;
-              actions = actionRequest.data.actions;
-              this.fields = fields;
-              this.attributes = attributes;
-              this.actions = actions;
-              _context.next = 20;
-              break;
-
-            case 17:
-              _context.prev = 17;
-              _context.t0 = _context["catch"](0);
-              this.$error(_context.t0);
-
-            case 20:
-              _context.prev = 20;
-              this.$progress().done();
-              return _context.finish(20);
-
-            case 23:
+            case 2:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, this, [[0, 17, 20, 23]]);
+      }, _callee, this);
     }));
 
     function created() {
@@ -3509,8 +3376,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _goToPage = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(page) {
-        var $section, $screen, _ref3, _ref3$data$attributes, attributes;
-
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
@@ -3523,34 +3388,30 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     page: page
                   })
                 });
-                $section = this.$section, $screen = this.$screen;
-                _context2.next = 5;
-                return this.$request().get(Object(_utils_url__WEBPACK_IMPORTED_MODULE_1__["default"])(_templateObject4(), $section.id, $screen.id) + this.requestQuery);
+                _context2.next = 4;
+                return this.$screen.get('attributes');
 
-              case 5:
-                _ref3 = _context2.sent;
-                _ref3$data$attributes = _ref3.data.attributes;
-                attributes = _ref3$data$attributes === void 0 ? {} : _ref3$data$attributes;
-                this.attributes = attributes;
-                _context2.next = 14;
+              case 4:
+                this.attributes = _context2.sent;
+                _context2.next = 10;
                 break;
 
-              case 11:
-                _context2.prev = 11;
+              case 7:
+                _context2.prev = 7;
                 _context2.t0 = _context2["catch"](0);
                 this.$error(_context2.t0);
 
-              case 14:
-                _context2.prev = 14;
+              case 10:
+                _context2.prev = 10;
                 this.$progress().done();
-                return _context2.finish(14);
+                return _context2.finish(10);
 
-              case 17:
+              case 13:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, this, [[0, 11, 14, 17]]);
+        }, _callee2, this, [[0, 7, 10, 13]]);
       }));
 
       function goToPage(_x) {
@@ -3563,7 +3424,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _performAction = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(action, model) {
-        var $section, $screen, _ref4, data;
+        var $section, $screen, _ref, data;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
           while (1) {
@@ -3573,13 +3434,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 this.$progress().start();
                 $section = this.$section, $screen = this.$screen;
                 _context3.next = 5;
-                return this.$request().post(Object(_utils_url__WEBPACK_IMPORTED_MODULE_1__["default"])(_templateObject5(), $section.id, $screen.id, action.id) + this.requestQuery, {
+                return this.$request().post(Object(_utils_url__WEBPACK_IMPORTED_MODULE_2__["default"])(_templateObject(), $section.id, $screen.id, action.id) + this.requestQuery, {
                   id: model.id
                 });
 
               case 5:
-                _ref4 = _context3.sent;
-                data = _ref4.data;
+                _ref = _context3.sent;
+                data = _ref.data;
                 this.handleResponse(data);
                 _context3.next = 13;
                 break;
@@ -11305,14 +11166,79 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _utils_url__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils/url */ "./resources/js/utils/url.js");
+
+
+function _templateObject() {
+  var data = _taggedTemplateLiteral(["/admin/", "/", "/", ""]);
+
+  _templateObject = function _templateObject() {
+    return data;
+  };
+
+  return data;
+}
+
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   computed: {
     $section: function $section() {
       return this.$route.meta.section;
     },
     $screen: function $screen() {
-      return this.$route.meta.screen;
+      return _objectSpread({}, this.$route.meta.screen, {
+        get: this.getScreenData
+      });
     }
+  },
+  methods: {
+    getScreenData: function () {
+      var _getScreenData = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(key) {
+        var $section, $screen, _ref, data;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                $section = this.$section, $screen = this.$screen;
+                _context.next = 3;
+                return this.$request().get(Object(_utils_url__WEBPACK_IMPORTED_MODULE_1__["default"])(_templateObject(), $section.id, $screen.id, key) + this.requestQuery);
+
+              case 3:
+                _ref = _context.sent;
+                data = _ref.data;
+                return _context.abrupt("return", data[key]);
+
+              case 6:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function getScreenData(_x) {
+        return _getScreenData.apply(this, arguments);
+      }
+
+      return getScreenData;
+    }()
   }
 });
 
@@ -11595,6 +11521,56 @@ var createRoutes = function createRoutes(_ref) {
     base: '/admin/'
   });
 });
+
+/***/ }),
+
+/***/ "./resources/js/admin/screens/base.vue":
+/*!*********************************************!*\
+  !*** ./resources/js/admin/screens/base.vue ***!
+  \*********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _base_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./base.vue?vue&type=script&lang=js& */ "./resources/js/admin/screens/base.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+var render, staticRenderFns
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
+  _base_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"],
+  render,
+  staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/admin/screens/base.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/admin/screens/base.vue?vue&type=script&lang=js&":
+/*!**********************************************************************!*\
+  !*** ./resources/js/admin/screens/base.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_base_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./base.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/admin/screens/base.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_base_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
