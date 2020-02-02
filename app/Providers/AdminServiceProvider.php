@@ -50,7 +50,6 @@ class AdminServiceProvider extends ServiceProvider
         if (!$this->app->routesAreCached()) {
             Route::prefix('admin')
                 ->name('admin.')
-                ->middleware('admin')
                 ->group(base_path('routes/admin.php'));
         }
     }

@@ -38,6 +38,7 @@ class Kernel extends HttpKernel
         ],
         'admin' => [
             'web',
+            'auth',
             \FluentKit\Admin\Http\Middleware\AdminMiddleware::class
         ],
         'api' => [

@@ -22,7 +22,7 @@ Route::middleware('guest')->group(function () {
         ->name('password.reset');
 });
 
-Route::middleware('auth')->group(function () {
+Route::middleware('admin')->group(function () {
 
     Route::get('/{section}/{screen}/fields', [\FluentKit\Admin\Http\Controllers\Screen\ScreenDataController::class, 'getFields']);
     Route::get('/{section}/{screen}/attributes', [\FluentKit\Admin\Http\Controllers\Screen\ScreenDataController::class, 'getAttributes']);
