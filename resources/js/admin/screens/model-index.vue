@@ -92,8 +92,8 @@
                 try {
                     this.$progress().start();
                     const { $section, $screen } = this;
-                    const { data } = await this.$request().post(url`/admin/${$section.id}/${$screen.id}/${action.id}`+this.requestQuery, { id: model.id });
-                    this.handleResponse(data);
+                    const { data } = await this.$form.post(url`/admin/${$section.id}/${$screen.id}/${action.id}`+this.requestQuery, { id: model.id });
+                    this.handleActionResponse(data);
                 } catch (e) {
                     if (this.$isValidationError(e)) {
                         this.$error(this.$form.message);
@@ -102,25 +102,6 @@
                     }
                 } finally {
                     this.$progress().done();
-                }
-            },
-            handleResponse (data) {
-                const { message, type, meta } = data;
-                if (type === 'notification') {
-                    this['$'+meta.toast.type](message);
-                } else if (type === 'redirect') {
-                    const { redirect: { url, route, params }, notification } = meta;
-
-                    if (notification) {
-                        this.handleResponse(notification);
-                    }
-
-                    if (url) {
-                        window.location.href = url;
-                        return;
-                    }
-
-                    this.$router.push({ name: route, params });
                 }
             }
         }

@@ -29,6 +29,25 @@
                 } finally {
                     this.$progress().done();
                 }
+            },
+            handleActionResponse (data) {
+                const { message, type, meta } = data;
+                if (type === 'notification') {
+                    this['$'+meta.toast.type](message);
+                } else if (type === 'redirect') {
+                    const { redirect: { url, route, params }, notification } = meta;
+
+                    if (notification) {
+                        this.handleActionResponse(notification);
+                    }
+
+                    if (url) {
+                        window.location.href = url;
+                        return;
+                    }
+
+                    this.$router.push({ name: route, params });
+                }
             }
         },
         render () {

@@ -2983,7 +2983,36 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
 
       return initScreen;
-    }()
+    }(),
+    handleActionResponse: function handleActionResponse(data) {
+      var message = data.message,
+          type = data.type,
+          meta = data.meta;
+
+      if (type === 'notification') {
+        this['$' + meta.toast.type](message);
+      } else if (type === 'redirect') {
+        var _meta$redirect = meta.redirect,
+            url = _meta$redirect.url,
+            route = _meta$redirect.route,
+            params = _meta$redirect.params,
+            notification = meta.notification;
+
+        if (notification) {
+          this.handleActionResponse(notification);
+        }
+
+        if (url) {
+          window.location.href = url;
+          return;
+        }
+
+        this.$router.push({
+          name: route,
+          params: params
+        });
+      }
+    }
   },
   render: function render() {
     return false;
@@ -3089,7 +3118,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 6:
                 _ref = _context2.sent;
                 data = _ref.data;
-                this.handleResponse(data);
+                this.handleActionResponse(data);
                 this.attributes = data.attributes;
                 _context2.next = 15;
                 break;
@@ -3123,36 +3152,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
 
       return performAction;
-    }(),
-    handleResponse: function handleResponse(data) {
-      var message = data.message,
-          type = data.type,
-          meta = data.meta;
-
-      if (type === 'notification') {
-        this['$' + meta.toast.type](message);
-      } else if (type === 'redirect') {
-        var _meta$redirect = meta.redirect,
-            _url = _meta$redirect.url,
-            route = _meta$redirect.route,
-            params = _meta$redirect.params,
-            notification = meta.notification;
-
-        if (notification) {
-          this.handleResponse(notification);
-        }
-
-        if (_url) {
-          window.location.href = _url;
-          return;
-        }
-
-        this.$router.push({
-          name: route,
-          params: params
-        });
-      }
-    }
+    }()
   }
 });
 
@@ -3434,14 +3434,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 this.$progress().start();
                 $section = this.$section, $screen = this.$screen;
                 _context3.next = 5;
-                return this.$request().post(Object(_utils_url__WEBPACK_IMPORTED_MODULE_2__["default"])(_templateObject(), $section.id, $screen.id, action.id) + this.requestQuery, {
+                return this.$form.post(Object(_utils_url__WEBPACK_IMPORTED_MODULE_2__["default"])(_templateObject(), $section.id, $screen.id, action.id) + this.requestQuery, {
                   id: model.id
                 });
 
               case 5:
                 _ref = _context3.sent;
                 data = _ref.data;
-                this.handleResponse(data);
+                this.handleActionResponse(data);
                 _context3.next = 13;
                 break;
 
@@ -3473,36 +3473,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
 
       return performAction;
-    }(),
-    handleResponse: function handleResponse(data) {
-      var message = data.message,
-          type = data.type,
-          meta = data.meta;
-
-      if (type === 'notification') {
-        this['$' + meta.toast.type](message);
-      } else if (type === 'redirect') {
-        var _meta$redirect = meta.redirect,
-            _url = _meta$redirect.url,
-            route = _meta$redirect.route,
-            params = _meta$redirect.params,
-            notification = meta.notification;
-
-        if (notification) {
-          this.handleResponse(notification);
-        }
-
-        if (_url) {
-          window.location.href = _url;
-          return;
-        }
-
-        this.$router.push({
-          name: route,
-          params: params
-        });
-      }
-    }
+    }()
   }
 });
 

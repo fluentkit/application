@@ -28,7 +28,7 @@
                     this.$progress().start();
                     const { $section, $screen } = this;
                     const { data } = await this.$form.post(url`/admin/${$section.id}/${$screen.id}/${action.id}`+this.requestQuery, { attributes: this.attributes });
-                    this.handleResponse(data);
+                    this.handleActionResponse(data);
                     this.attributes = data.attributes;
                 } catch (e) {
                     if (this.$isValidationError(e)) {
@@ -39,25 +39,6 @@
                 } finally {
                     action.disabled = false;
                     this.$progress().done();
-                }
-            },
-            handleResponse (data) {
-                const { message, type, meta } = data;
-                if (type === 'notification') {
-                    this['$'+meta.toast.type](message);
-                } else if (type === 'redirect') {
-                    const { redirect: { url, route, params }, notification } = meta;
-
-                    if (notification) {
-                        this.handleResponse(notification);
-                    }
-
-                    if (url) {
-                        window.location.href = url;
-                        return;
-                    }
-
-                    this.$router.push({ name: route, params });
                 }
             }
         }
