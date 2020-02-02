@@ -3051,35 +3051,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       return initScreen;
     }(),
-    handleActionResponse: function handleActionResponse(data) {
-      var message = data.message,
-          type = data.type,
-          meta = data.meta;
-
-      if (type === 'notification') {
-        this['$' + meta.toast.type](message);
-      } else if (type === 'redirect') {
-        var _meta$redirect = meta.redirect,
-            _url = _meta$redirect.url,
-            route = _meta$redirect.route,
-            params = _meta$redirect.params,
-            notification = meta.notification;
-
-        if (notification) {
-          this.handleActionResponse(notification);
-        }
-
-        if (_url) {
-          window.location.href = _url;
-          return;
-        }
-
-        this.$router.push({
-          name: route,
-          params: params
-        });
-      }
-    },
     performAction: function () {
       var _performAction = _asyncToGenerator(
       /*#__PURE__*/
@@ -3121,16 +3092,24 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
               case 9:
                 response = _context5.sent;
-                this.handleActionResponse(response.data);
-                _context5.next = 13;
+                _context5.next = 12;
+                return this.handleActionResponse(response.data);
+
+              case 12:
+                _context5.next = 14;
+                return this.$screen.get('attributes');
+
+              case 14:
+                this.attributes = _context5.sent;
+                _context5.next = 17;
                 return cb(response);
 
-              case 13:
-                _context5.next = 18;
+              case 17:
+                _context5.next = 22;
                 break;
 
-              case 15:
-                _context5.prev = 15;
+              case 19:
+                _context5.prev = 19;
                 _context5.t0 = _context5["catch"](3);
 
                 if (this.$isValidationError(_context5.t0)) {
@@ -3139,18 +3118,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                   this.$error(_context5.t0);
                 }
 
-              case 18:
-                _context5.prev = 18;
+              case 22:
+                _context5.prev = 22;
                 action.disabled = disabled;
                 this.$progress().done();
-                return _context5.finish(18);
+                return _context5.finish(22);
 
-              case 22:
+              case 26:
               case "end":
                 return _context5.stop();
             }
           }
-        }, _callee5, this, [[3, 15, 18, 22]]);
+        }, _callee5, this, [[3, 19, 22, 26]]);
       }));
 
       function performAction(_x2) {
@@ -3158,6 +3137,77 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
 
       return performAction;
+    }(),
+    handleActionResponse: function () {
+      var _handleActionResponse = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee6(data) {
+        var message, type, meta, _meta$redirect, _url, route, params, notification;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee6$(_context6) {
+          while (1) {
+            switch (_context6.prev = _context6.next) {
+              case 0:
+                message = data.message, type = data.type, meta = data.meta;
+
+                if (!(type === 'notification')) {
+                  _context6.next = 5;
+                  break;
+                }
+
+                this['$' + meta.toast.type](message);
+                _context6.next = 18;
+                break;
+
+              case 5:
+                if (!(type === 'redirect')) {
+                  _context6.next = 18;
+                  break;
+                }
+
+                _meta$redirect = meta.redirect, _url = _meta$redirect.url, route = _meta$redirect.route, params = _meta$redirect.params, notification = meta.notification;
+
+                if (notification) {
+                  this.handleActionResponse(notification);
+                }
+
+                if (!_url) {
+                  _context6.next = 11;
+                  break;
+                }
+
+                window.location.href = _url;
+                return _context6.abrupt("return");
+
+              case 11:
+                _context6.prev = 11;
+                _context6.next = 14;
+                return this.$router.push({
+                  name: route,
+                  params: params
+                });
+
+              case 14:
+                _context6.next = 18;
+                break;
+
+              case 16:
+                _context6.prev = 16;
+                _context6.t0 = _context6["catch"](11);
+
+              case 18:
+              case "end":
+                return _context6.stop();
+            }
+          }
+        }, _callee6, this, [[11, 16]]);
+      }));
+
+      function handleActionResponse(_x3) {
+        return _handleActionResponse.apply(this, arguments);
+      }
+
+      return handleActionResponse;
     }()
   },
   render: function render() {
@@ -3231,50 +3281,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     formAction: function () {
       var _formAction = _asyncToGenerator(
       /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(action) {
-        var _this = this;
-
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(action) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
           while (1) {
-            switch (_context3.prev = _context3.next) {
+            switch (_context2.prev = _context2.next) {
               case 0:
-                _context3.next = 2;
+                _context2.next = 2;
                 return this.$screen.action(action, {
                   attributes: this.attributes
-                },
-                /*#__PURE__*/
-                function () {
-                  var _ref2 = _asyncToGenerator(
-                  /*#__PURE__*/
-                  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(_ref) {
-                    var _ref$data$attributes, attributes;
-
-                    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
-                      while (1) {
-                        switch (_context2.prev = _context2.next) {
-                          case 0:
-                            _ref$data$attributes = _ref.data.attributes, attributes = _ref$data$attributes === void 0 ? {} : _ref$data$attributes;
-                            return _context2.abrupt("return", _this.attributes = attributes);
-
-                          case 2:
-                          case "end":
-                            return _context2.stop();
-                        }
-                      }
-                    }, _callee2);
-                  }));
-
-                  return function (_x2) {
-                    return _ref2.apply(this, arguments);
-                  };
-                }());
+                });
 
               case 2:
               case "end":
-                return _context3.stop();
+                return _context2.stop();
             }
           }
-        }, _callee3, this);
+        }, _callee2, this);
       }));
 
       function formAction(_x) {
@@ -3388,6 +3410,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./base */ "./resources/js/admin/screens/base.vue");
+/* harmony import */ var _components_elements_button__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/elements/button */ "./resources/js/admin/components/elements/button.vue");
 
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -3454,9 +3477,31 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'fk-admin-screen-model-index',
+  components: {
+    FkAdminButton: _components_elements_button__WEBPACK_IMPORTED_MODULE_2__["default"]
+  },
   "extends": _base__WEBPACK_IMPORTED_MODULE_1__["default"],
   computed: {
     models: function models() {
@@ -3498,37 +3543,40 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.prev = 0;
-                this.$router.push({
+                _context2.next = 3;
+                return this.$router.push({
                   name: this.$route.name,
                   params: _objectSpread({}, this.$route.params),
                   query: _objectSpread({}, this.$route.query, {
                     page: page
                   })
                 });
-                _context2.next = 4;
+
+              case 3:
+                _context2.next = 5;
                 return this.$screen.get('attributes');
 
-              case 4:
+              case 5:
                 this.attributes = _context2.sent;
-                _context2.next = 10;
+                _context2.next = 11;
                 break;
 
-              case 7:
-                _context2.prev = 7;
+              case 8:
+                _context2.prev = 8;
                 _context2.t0 = _context2["catch"](0);
                 this.$error(_context2.t0);
 
-              case 10:
-                _context2.prev = 10;
+              case 11:
+                _context2.prev = 11;
                 this.$progress().done();
-                return _context2.finish(10);
+                return _context2.finish(11);
 
-              case 13:
+              case 14:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, this, [[0, 7, 10, 13]]);
+        }, _callee2, this, [[0, 8, 11, 14]]);
       }));
 
       function goToPage(_x) {
@@ -6454,6 +6502,42 @@ var render = function() {
   return !_vm.attributes || !_vm.fields || !_vm.actions
     ? _c("fk-admin-background")
     : _c("div", { staticClass: "fk-admin-screen-model-index" }, [
+        _c(
+          "div",
+          { staticClass: "header" },
+          [
+            _c("fk-admin-title", [
+              _vm._v(
+                "\n            " +
+                  _vm._s(_vm.$screen.modelPluralLabel) +
+                  "\n        "
+              )
+            ]),
+            _vm._v(" "),
+            _c(
+              "fk-admin-button",
+              {
+                attrs: { type: "info" },
+                on: {
+                  click: function($event) {
+                    return _vm.$router.push({
+                      name: _vm.$section.id + ".create"
+                    })
+                  }
+                }
+              },
+              [
+                _vm._v(
+                  "\n            Add " +
+                    _vm._s(_vm.$screen.modelLabel) +
+                    "\n        "
+                )
+              ]
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
         _c("div", { staticClass: "actions" }),
         _vm._v(" "),
         _c("table", [
@@ -6465,7 +6549,7 @@ var render = function() {
                   return _c("th", [_vm._v(_vm._s(field.label))])
                 }),
                 _vm._v(" "),
-                _c("th")
+                _c("th", { staticClass: "actions" })
               ],
               2
             )
@@ -6473,70 +6557,90 @@ var render = function() {
           _vm._v(" "),
           _c(
             "tbody",
-            _vm._l(_vm.models, function(model) {
-              return _c(
-                "tr",
-                { key: model.id },
-                [
-                  _vm._l(_vm.fields, function(field) {
+            [
+              _vm.models.length
+                ? _vm._l(_vm.models, function(model) {
                     return _c(
-                      "td",
-                      { key: field.id },
+                      "tr",
+                      { key: model.id },
                       [
-                        !field.hidden
-                          ? _c(field.component, {
-                              tag: "component",
-                              attrs: {
-                                field: Object.assign({}, field, {
-                                  withoutLayout: true
-                                }),
-                                errors: _vm.$form.errors,
-                                value: model
-                              }
-                            })
-                          : _vm._e()
-                      ],
-                      1
-                    )
-                  }),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    { staticClass: "actions" },
-                    _vm._l(_vm.actions, function(action) {
-                      return _c(
-                        "fk-admin-button",
-                        {
-                          key: action.id,
-                          attrs: { type: action.meta.button.type, size: "sm" },
-                          on: {
-                            click: function($event) {
-                              return _vm.tableAction(action, model)
-                            }
-                          }
-                        },
-                        [
-                          action.meta.button.icon
-                            ? _c("i", {
-                                staticClass: "fa",
-                                class: action.meta.button.icon
-                              })
-                            : _vm._e(),
-                          _vm._v(
-                            "\n                        " +
-                              _vm._s(action.label) +
-                              "\n                    "
+                        _vm._l(_vm.fields, function(field) {
+                          return _c(
+                            "td",
+                            { key: field.id },
+                            [
+                              !field.hidden
+                                ? _c(field.component, {
+                                    tag: "component",
+                                    attrs: {
+                                      field: Object.assign({}, field, {
+                                        withoutLayout: true
+                                      }),
+                                      errors: _vm.$form.errors,
+                                      value: model
+                                    }
+                                  })
+                                : _vm._e()
+                            ],
+                            1
                           )
-                        ]
-                      )
-                    }),
-                    1
-                  )
-                ],
-                2
-              )
-            }),
-            0
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          { staticClass: "actions" },
+                          _vm._l(_vm.actions, function(action) {
+                            return _c(
+                              "fk-admin-button",
+                              {
+                                key: action.id,
+                                attrs: {
+                                  type: action.meta.button.type,
+                                  size: "sm"
+                                },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.tableAction(action, model)
+                                  }
+                                }
+                              },
+                              [
+                                action.meta.button.icon
+                                  ? _c("i", {
+                                      staticClass: "fa",
+                                      class: action.meta.button.icon
+                                    })
+                                  : _vm._e(),
+                                _vm._v(
+                                  "\n                            " +
+                                    _vm._s(action.label) +
+                                    "\n                        "
+                                )
+                              ]
+                            )
+                          }),
+                          1
+                        )
+                      ],
+                      2
+                    )
+                  })
+                : _c("tr", [
+                    _c(
+                      "td",
+                      {
+                        staticClass: "no-results",
+                        attrs: { colspan: Object.keys(_vm.fields).length + 1 }
+                      },
+                      [
+                        _vm._v(
+                          "\n                    No Results\n                "
+                        )
+                      ]
+                    )
+                  ])
+            ],
+            2
           )
         ]),
         _vm._v(" "),

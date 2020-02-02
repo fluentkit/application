@@ -1,40 +1,58 @@
 <template>
     <fk-admin-background v-if="!attributes || !fields || !actions"/>
     <div v-else class="fk-admin-screen-model-index">
+        <div class="header">
+            <fk-admin-title>
+                {{ $screen.modelPluralLabel }}
+            </fk-admin-title>
+            <fk-admin-button
+                type="info"
+                @click="$router.push({ name: `${$section.id}.create` })"
+            >
+                Add {{ $screen.modelLabel }}
+            </fk-admin-button>
+        </div>
         <div class="actions"></div>
         <table>
             <thead>
                 <tr>
                     <th v-for="field in fields">{{ field.label }}</th>
-                    <th></th>
+                    <th class="actions"></th>
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="model in models" :key="model.id">
-                    <td v-for="field in fields" :key="field.id">
-                        <component
-                            v-if="!field.hidden"
-                            :is="field.component"
-                            :field="{ ...field, withoutLayout: true }"
-                            :errors="$form.errors"
-                            :value="model"
-                        />
-                    </td>
-                    <td class="actions">
-                        <fk-admin-button
-                            v-for="action in actions"
-                            :key="action.id"
-                            :type="action.meta.button.type"
-                            size="sm"
-                            @click="tableAction(action, model)"
-                        >
-                            <i
-                                v-if="action.meta.button.icon"
-                                class="fa"
-                                :class="action.meta.button.icon"
+                <template v-if="models.length">
+                    <tr v-for="model in models" :key="model.id">
+                        <td v-for="field in fields" :key="field.id">
+                            <component
+                                v-if="!field.hidden"
+                                :is="field.component"
+                                :field="{ ...field, withoutLayout: true }"
+                                :errors="$form.errors"
+                                :value="model"
                             />
-                            {{ action.label }}
-                        </fk-admin-button>
+                        </td>
+                        <td class="actions">
+                            <fk-admin-button
+                                v-for="action in actions"
+                                :key="action.id"
+                                :type="action.meta.button.type"
+                                size="sm"
+                                @click="tableAction(action, model)"
+                            >
+                                <i
+                                    v-if="action.meta.button.icon"
+                                    class="fa"
+                                    :class="action.meta.button.icon"
+                                />
+                                {{ action.label }}
+                            </fk-admin-button>
+                        </td>
+                    </tr>
+                </template>
+                <tr v-else>
+                    <td class="no-results" :colspan="Object.keys(fields).length + 1">
+                        No Results
                     </td>
                 </tr>
             </tbody>
@@ -54,9 +72,11 @@
 
 <script>
     import screenBase from './base';
+    import FkAdminButton from "../components/elements/button";
 
 	export default {
 		name: 'fk-admin-screen-model-index',
+        components: {FkAdminButton},
         extends: screenBase,
         computed: {
             models () {
@@ -69,7 +89,7 @@
         methods: {
 		    async goToPage (page) {
                 try {
-                    this.$router.push({
+                    await this.$router.push({
                         name: this.$route.name,
                         params: {
                             ...this.$route.params
@@ -95,6 +115,18 @@
 </script>
 
 <style>
+    .fk-admin-screen-model-index {
+        @apply .mb-10;
+    }
+
+    .fk-admin-screen-model-index .header {
+        @apply .flex .flex-row .justify-between .items-center;
+    }
+
+    .fk-admin-screen-model-index .header .fk-admin-button {
+        @apply .mb-6;
+    }
+
     .fk-admin-screen-model-index > .actions {
         @apply .p-4 .shadow-md .bg-white .rounded-t .border-b;
     }
@@ -119,8 +151,15 @@
         @apply .px-4 .py-3;
     }
 
+    .fk-admin-screen-model-index table td.no-results {
+        @apply .text-center;
+    }
+
+    .fk-admin-screen-model-index table td.actions {
+        @apply .flex .justify-end;
+    }
     .fk-admin-screen-model-index table .fk-admin-button {
-        @apply .mb-0 .text-gray-500;
+        @apply .mb-0 .ml-2;
     }
 
     .fk-admin-screen-model-index > .pagination {

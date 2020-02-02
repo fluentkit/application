@@ -49,7 +49,28 @@
                     this.$progress().done();
                 }
             },
-            handleActionResponse (data) {
+            async performAction (action, data = {}, cb = async () => {}) {
+                const disabled = action.disabled;
+                try {
+                    action.disabled = true;
+                    this.$progress().start();
+                    const { $section, $screen } = this;
+                    const response = await this.$form.post(url`/admin/${$section.id}/${$screen.id}/${action.id}`+this.requestQuery, data);
+                    await this.handleActionResponse(response.data);
+                    this.attributes = await this.$screen.get('attributes');
+                    await cb(response);
+                } catch (e) {
+                    if (this.$isValidationError(e)) {
+                        this.$error(this.$form.message);
+                    } else {
+                        this.$error(e);
+                    }
+                } finally {
+                    action.disabled = disabled;
+                    this.$progress().done();
+                }
+            },
+            async handleActionResponse (data) {
                 const { message, type, meta } = data;
                 if (type === 'notification') {
                     this['$'+meta.toast.type](message);
@@ -65,27 +86,10 @@
                         return;
                     }
 
-                    this.$router.push({ name: route, params });
-                }
-            },
-            async performAction (action, data = {}, cb = async () => {}) {
-                const disabled = action.disabled;
-                try {
-                    action.disabled = true;
-                    this.$progress().start();
-                    const { $section, $screen } = this;
-                    const response = await this.$form.post(url`/admin/${$section.id}/${$screen.id}/${action.id}`+this.requestQuery, data);
-                    this.handleActionResponse(response.data);
-                    await cb(response);
-                } catch (e) {
-                    if (this.$isValidationError(e)) {
-                        this.$error(this.$form.message);
-                    } else {
-                        this.$error(e);
-                    }
-                } finally {
-                    action.disabled = disabled;
-                    this.$progress().done();
+                    // sometimes we might be navigating to the same route
+                    try {
+                        await this.$router.push({ name: route, params });
+                    } catch (e) {}
                 }
             }
         },

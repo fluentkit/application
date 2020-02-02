@@ -184,7 +184,7 @@ final class GeneralSettings extends FormScreen
 
         $this->addAction(
             (new SaveAction('save', 'Save Changes'))
-                ->saveCallback([$this, 'save'])
+                ->callback([$this, 'save'])
         );
     }
 

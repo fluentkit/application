@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace FluentKit\Admin\UI\Screens;
 
+use FluentKit\Admin\UI\Actions\DeleteAction;
 use FluentKit\Admin\UI\Actions\SaveAction;
 use FluentKit\Admin\UI\ResponseInterface;
 use FluentKit\Admin\UI\Responses\Notification;
@@ -30,7 +31,7 @@ class ModelScreen extends FormScreen implements ScreenInterface
             $this->setLabel('Add New');
             $this->addAction(
                 (new SaveAction('create', 'Create ' . class_basename($model)))
-                    ->saveCallback([$this, 'createModel'])
+                    ->callback([$this, 'createModel'])
             );
         } elseif ($context === 'edit') {
             $this->routeParams = [':id'];
@@ -38,7 +39,14 @@ class ModelScreen extends FormScreen implements ScreenInterface
             $this->hide();
             $this->addAction(
                 (new SaveAction('update', 'Update ' . class_basename($model)))
-                    ->saveCallback([$this, 'updateModel'])
+                    ->callback([$this, 'updateModel'])
+            );
+            $this->addAction(
+                (new DeleteAction('delete', 'Delete ' . class_basename($model)))
+                    ->setMeta('button.type', 'danger')
+                    ->setMeta('button.icon', 'fa-trash')
+                    ->callback([$this, 'deleteModel'])
+                    ->disable(fn (Request $request) => $request->get('id') === $request->user()->id)
             );
         }
     }
@@ -104,6 +112,17 @@ class ModelScreen extends FormScreen implements ScreenInterface
         $model->save();
 
         return Notification::success($this->getModelLabel() . ' Saved!');
+    }
+
+    public function deleteModel(Request $request): ResponseInterface
+    {
+        $this->getQuery()->where('id', $request->get('id'))->delete();
+
+        return Redirect::route(
+            Str::plural(Str::snake(class_basename($this->model))).'.index',
+            [],
+            Notification::success($this->getModelLabel() . ' Deleted!')
+        );
     }
 
     public function toArray(Request $request): array

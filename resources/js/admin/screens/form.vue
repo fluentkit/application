@@ -22,11 +22,7 @@
         },
         methods: {
 		    async formAction (action) {
-		        await this.$screen.action(
-		            action,
-                    { attributes: this.attributes },
-                    async ({ data: { attributes = {} } }) => this.attributes = attributes
-                );
+		        await this.$screen.action(action, { attributes: this.attributes });
             }
         }
 	}
