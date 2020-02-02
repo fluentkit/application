@@ -2132,6 +2132,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'fk-admin-field-key-value',
@@ -5674,38 +5676,46 @@ var render = function() {
                   }
                 }),
                 _vm._v(" "),
-                _c(
-                  "fk-admin-button",
-                  {
-                    attrs: {
-                      size: "sm",
-                      type: "transparent",
-                      disabled: _vm.field.disabled
-                    },
-                    on: {
-                      click: function($event) {
-                        return _vm.deleteKey(key)
-                      }
-                    }
-                  },
-                  [_c("i", { staticClass: "fa fa-trash" })]
-                )
+                !_vm.field.readOnly
+                  ? _c(
+                      "fk-admin-button",
+                      {
+                        attrs: {
+                          size: "sm",
+                          type: "transparent",
+                          disabled: _vm.field.disabled
+                        },
+                        on: {
+                          click: function($event) {
+                            return _vm.deleteKey(key)
+                          }
+                        }
+                      },
+                      [_c("i", { staticClass: "fa fa-trash" })]
+                    )
+                  : _vm._e()
               ],
               1
             )
           }),
           _vm._v(" "),
-          _c(
-            "fk-admin-button",
-            {
-              attrs: { size: "sm", type: "info", disabled: _vm.field.disabled },
-              on: { click: _vm.addKey }
-            },
-            [
-              _c("i", { staticClass: "fa fa-plus-circle" }),
-              _vm._v(" " + _vm._s(_vm.field.addLabel) + "\n        ")
-            ]
-          )
+          !_vm.field.readOnly
+            ? _c(
+                "fk-admin-button",
+                {
+                  attrs: {
+                    size: "sm",
+                    type: "info",
+                    disabled: _vm.field.disabled
+                  },
+                  on: { click: _vm.addKey }
+                },
+                [
+                  _c("i", { staticClass: "fa fa-plus-circle" }),
+                  _vm._v(" " + _vm._s(_vm.field.addLabel) + "\n        ")
+                ]
+              )
+            : _vm._e()
         ],
         2
       )

@@ -24,6 +24,7 @@
                     @input="updateValue(key, $event)"
                 />
                 <fk-admin-button
+                    v-if="!field.readOnly"
                     size="sm"
                     type="transparent"
                     :disabled="field.disabled"
@@ -33,6 +34,7 @@
                 </fk-admin-button>
             </div>
             <fk-admin-button
+                v-if="!field.readOnly"
                 size="sm"
                 type="info"
                 :disabled="field.disabled"
