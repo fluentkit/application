@@ -13,46 +13,57 @@ class ModelSection extends Section
 {
     use HasFields;
 
-    public function __construct(string $model, array $fields = [])
+    protected string $model = '';
+
+    public function __construct(string $model)
     {
+        $this->model = $model;
         $this->setId(Str::plural(Str::snake(class_basename($model))));
         $this->setLabel(Str::plural(class_basename($model)));
-
-        $this->registerIndex($model, $fields['index']);
-        $this->registerCreate($model, $fields['create']);
-        $this->registerEdit($model, $fields['edit']);
     }
 
-    private function registerIndex(string $model, array $fields)
+    protected function indexFields(array $fields): self
     {
-        $screen = new ModelIndexScreen($model);
+        $screen = $this->getScreen('index');
+        if (!$screen) {
+            $screen = new ModelIndexScreen($this->model);
+            $this->registerScreen($screen);
+        }
 
         foreach ($fields as $field) {
             $screen->addField($field->readOnly());
         }
 
-        $this->registerScreen($screen);
+        return $this;
     }
 
-    private function registerCreate(string $model, array $fields)
+    protected function createFields(array $fields): self
     {
-        $screen = new ModelScreen('create', $model);
+        $screen = $this->getScreen('create');
+        if (!$screen) {
+            $screen = new ModelScreen('create', $this->model);
+            $this->registerScreen($screen);
+        }
 
         foreach ($fields as $field) {
             $screen->addField($field);
         }
 
-        $this->registerScreen($screen);
+        return $this;
     }
 
-    private function registerEdit(string $model, array $fields)
+    protected function editFields(array $fields): self
     {
-        $screen = new ModelScreen('edit', $model);
+        $screen = $this->getScreen('edit');
+        if (!$screen) {
+            $screen = new ModelScreen('edit', $this->model);
+            $this->registerScreen($screen);
+        }
 
         foreach ($fields as $field) {
             $screen->addField($field);
         }
 
-        $this->registerScreen($screen);
+        return $this;
     }
 }

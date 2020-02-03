@@ -72,11 +72,9 @@
 
 <script>
     import screenBase from './base';
-    import FkAdminButton from "../components/elements/button";
 
 	export default {
 		name: 'fk-admin-screen-model-index',
-        components: {FkAdminButton},
         extends: screenBase,
         computed: {
             models () {

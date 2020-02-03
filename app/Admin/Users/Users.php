@@ -16,15 +16,18 @@ final class Users extends ModelSection
 {
     public function __construct()
     {
-        parent::__construct(User::class, [
-            'index' => [
+        parent::__construct(User::class);
+
+        $this->setIcon('fa-user');
+
+        $this->indexFields([
                 (new Number('id', 'ID')),
                 (new Email('email', 'Email Address')),
                 (new Text('name', 'Name')),
                 (new Text('created_at', 'Created At')),
                 (new Text('updated_at', 'Updated At'))
-            ],
-            'create' => [
+            ])
+            ->createFields([
                 new Panel('details', 'User Details', '', [
                     (new Email('email', 'Email Address'))->rules(['required', 'string', 'unique:users,email']),
                     (new Text('first_name', 'First Name'))->rules(['required', 'string']),
@@ -34,8 +37,8 @@ final class Users extends ModelSection
                     (new Password('password', 'Password'))->rules(['required', 'string', 'min:10', 'confirmed']),
                     (new Password('password_confirmation', 'Retype Password'))->rules(['required', 'string', 'min:10']),
                 ])
-            ],
-            'edit' => [
+            ])
+            ->editFields([
                 new Panel('details', 'User Details', '', [
                     (new Email('email', 'Email Address'))->rules(['required', 'string', 'unique:users,email,{$id}']),
                     (new Text('first_name', 'First Name'))->rules(['required', 'string']),
@@ -48,9 +51,6 @@ final class Users extends ModelSection
                     (new Password('password', 'Password'))->rules(['sometimes', 'string', 'min:10', 'confirmed']),
                     (new Password('password_confirmation', 'Retype Password'))->rules(['sometimes', 'required_with:passwords', 'string', 'min:10']),
                 ])
-            ]
-        ]);
-
-        $this->setIcon('fa-user');
+            ]);
     }
 }

@@ -2947,29 +2947,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       });
     }
   },
-  mounted: function mounted() {
-    var _this = this;
-
-    this.$modal('Create {{ foo }}', "<pre @click=\"$emit('foobar')\">{{ $props }}</pre><p>jhrfklw;</p><p>jhrfklw;</p><p>jhrfklw;</p><p>jhrfklw;</p><p>jhrfklw;</p><p>jhrfklw;</p><p>jhrfklw;</p><p>jhrfklw;</p>", {
-      foo: 'bar',
-      actions: [{
-        id: 'delete',
-        type: 'danger',
-        label: 'Delete',
-        icon: 'fa-trash'
-      }, {
-        id: 'add',
-        type: 'info',
-        label: 'Add New',
-        icon: 'fa-user'
-      }]
-    }).$on('action', function (action, modal) {
-      _this.$modal('Create 2', "bar<pre>{{ $props }}</pre>"); //modal.close();
-
-    }).$on('foobar', function () {
-      console.log('got here!');
-    });
-  },
   methods: {
     getScreenData: function () {
       var _getScreenData = _asyncToGenerator(
@@ -3008,7 +2985,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var _initScreen = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
-        var _this2 = this;
+        var _this = this;
 
         var data,
             cb,
@@ -3037,13 +3014,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 _context3.prev = 2;
                 _context3.next = 5;
                 return Promise.all(data.map(function (key) {
-                  return _this2.$screen.get(key);
+                  return _this.$screen.get(key);
                 }));
 
               case 5:
                 responses = _context3.sent;
                 data.forEach(function (key, index) {
-                  _this2[key] = responses[index];
+                  _this[key] = responses[index];
                 });
                 _context3.next = 9;
                 return cb();
@@ -3079,20 +3056,24 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     performAction: function () {
       var _performAction = _asyncToGenerator(
       /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5(action) {
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee6(action) {
+        var _this2 = this;
+
         var data,
             cb,
-            disabled,
-            $section,
-            $screen,
-            response,
-            _args5 = arguments;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
+            _action$meta$modal,
+            title,
+            body,
+            cancel,
+            confirm,
+            _args6 = arguments;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee6$(_context6) {
           while (1) {
-            switch (_context5.prev = _context5.next) {
+            switch (_context6.prev = _context6.next) {
               case 0:
-                data = _args5.length > 1 && _args5[1] !== undefined ? _args5[1] : {};
-                cb = _args5.length > 2 && _args5[2] !== undefined ? _args5[2] :
+                data = _args6.length > 1 && _args6[1] !== undefined ? _args6[1] : {};
+                cb = _args6.length > 2 && _args6[2] !== undefined ? _args6[2] :
                 /*#__PURE__*/
                 _asyncToGenerator(
                 /*#__PURE__*/
@@ -3107,54 +3088,63 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                     }
                   }, _callee4);
                 }));
-                disabled = action.disabled;
-                _context5.prev = 3;
-                action.disabled = true;
-                this.$progress().start();
-                $section = this.$section, $screen = this.$screen;
-                _context5.next = 9;
-                return this.$form.post(Object(_utils_url__WEBPACK_IMPORTED_MODULE_6__["default"])(_templateObject2(), $section.id, $screen.id, action.id) + this.requestQuery, data);
 
-              case 9:
-                response = _context5.sent;
-                _context5.next = 12;
-                return this.handleActionResponse(response.data);
-
-              case 12:
-                _context5.next = 14;
-                return this.$screen.get('attributes');
-
-              case 14:
-                this.attributes = _context5.sent;
-                _context5.next = 17;
-                return cb(response);
-
-              case 17:
-                _context5.next = 22;
-                break;
-
-              case 19:
-                _context5.prev = 19;
-                _context5.t0 = _context5["catch"](3);
-
-                if (this.$isValidationError(_context5.t0)) {
-                  this.$error(this.$form.message);
-                } else {
-                  this.$error(_context5.t0);
+                if (!action.meta.confirmable) {
+                  _context6.next = 6;
+                  break;
                 }
 
-              case 22:
-                _context5.prev = 22;
-                action.disabled = disabled;
-                this.$progress().done();
-                return _context5.finish(22);
+                _action$meta$modal = action.meta.modal, title = _action$meta$modal.title, body = _action$meta$modal.body, cancel = _action$meta$modal.cancel, confirm = _action$meta$modal.confirm;
+                this.$modal(title, body, _objectSpread({}, data, {
+                  actions: [cancel, confirm]
+                })).$on('action',
+                /*#__PURE__*/
+                function () {
+                  var _ref4 = _asyncToGenerator(
+                  /*#__PURE__*/
+                  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5(modalAction, modal) {
+                    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
+                      while (1) {
+                        switch (_context5.prev = _context5.next) {
+                          case 0:
+                            if (!(modalAction.id === 'cancel')) {
+                              _context5.next = 2;
+                              break;
+                            }
 
-              case 26:
+                            return _context5.abrupt("return", modal.close());
+
+                          case 2:
+                            _context5.next = 4;
+                            return _this2.submitAction(action, data, cb);
+
+                          case 4:
+                            modal.close();
+
+                          case 5:
+                          case "end":
+                            return _context5.stop();
+                        }
+                      }
+                    }, _callee5);
+                  }));
+
+                  return function (_x3, _x4) {
+                    return _ref4.apply(this, arguments);
+                  };
+                }());
+                return _context6.abrupt("return");
+
+              case 6:
+                _context6.next = 8;
+                return this.submitAction(action, data, cb);
+
+              case 8:
               case "end":
-                return _context5.stop();
+                return _context6.stop();
             }
           }
-        }, _callee5, this, [[3, 19, 22, 26]]);
+        }, _callee6, this);
       }));
 
       function performAction(_x2) {
@@ -3163,30 +3153,117 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       return performAction;
     }(),
+    submitAction: function () {
+      var _submitAction = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee8(action) {
+        var data,
+            cb,
+            disabled,
+            $section,
+            $screen,
+            response,
+            _args8 = arguments;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee8$(_context8) {
+          while (1) {
+            switch (_context8.prev = _context8.next) {
+              case 0:
+                data = _args8.length > 1 && _args8[1] !== undefined ? _args8[1] : {};
+                cb = _args8.length > 2 && _args8[2] !== undefined ? _args8[2] :
+                /*#__PURE__*/
+                _asyncToGenerator(
+                /*#__PURE__*/
+                _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee7() {
+                  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee7$(_context7) {
+                    while (1) {
+                      switch (_context7.prev = _context7.next) {
+                        case 0:
+                        case "end":
+                          return _context7.stop();
+                      }
+                    }
+                  }, _callee7);
+                }));
+                disabled = action.disabled;
+                _context8.prev = 3;
+                action.disabled = true;
+                this.$progress().start();
+                $section = this.$section, $screen = this.$screen;
+                _context8.next = 9;
+                return this.$form.post(Object(_utils_url__WEBPACK_IMPORTED_MODULE_6__["default"])(_templateObject2(), $section.id, $screen.id, action.id) + this.requestQuery, data);
+
+              case 9:
+                response = _context8.sent;
+                _context8.next = 12;
+                return this.handleActionResponse(response.data);
+
+              case 12:
+                _context8.next = 14;
+                return this.$screen.get('attributes');
+
+              case 14:
+                this.attributes = _context8.sent;
+                _context8.next = 17;
+                return cb(response);
+
+              case 17:
+                _context8.next = 22;
+                break;
+
+              case 19:
+                _context8.prev = 19;
+                _context8.t0 = _context8["catch"](3);
+
+                if (this.$isValidationError(_context8.t0)) {
+                  this.$error(this.$form.message);
+                } else {
+                  this.$error(_context8.t0);
+                }
+
+              case 22:
+                _context8.prev = 22;
+                action.disabled = disabled;
+                this.$progress().done();
+                return _context8.finish(22);
+
+              case 26:
+              case "end":
+                return _context8.stop();
+            }
+          }
+        }, _callee8, this, [[3, 19, 22, 26]]);
+      }));
+
+      function submitAction(_x5) {
+        return _submitAction.apply(this, arguments);
+      }
+
+      return submitAction;
+    }(),
     handleActionResponse: function () {
       var _handleActionResponse = _asyncToGenerator(
       /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee6(data) {
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee9(data) {
         var message, type, meta, _meta$redirect, _url, route, params, notification;
 
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee6$(_context6) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee9$(_context9) {
           while (1) {
-            switch (_context6.prev = _context6.next) {
+            switch (_context9.prev = _context9.next) {
               case 0:
                 message = data.message, type = data.type, meta = data.meta;
 
                 if (!(type === 'notification')) {
-                  _context6.next = 5;
+                  _context9.next = 5;
                   break;
                 }
 
                 this['$' + meta.toast.type](message);
-                _context6.next = 18;
+                _context9.next = 18;
                 break;
 
               case 5:
                 if (!(type === 'redirect')) {
-                  _context6.next = 18;
+                  _context9.next = 18;
                   break;
                 }
 
@@ -3197,38 +3274,38 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 }
 
                 if (!_url) {
-                  _context6.next = 11;
+                  _context9.next = 11;
                   break;
                 }
 
                 window.location.href = _url;
-                return _context6.abrupt("return");
+                return _context9.abrupt("return");
 
               case 11:
-                _context6.prev = 11;
-                _context6.next = 14;
+                _context9.prev = 11;
+                _context9.next = 14;
                 return this.$router.push({
                   name: route,
                   params: params
                 });
 
               case 14:
-                _context6.next = 18;
+                _context9.next = 18;
                 break;
 
               case 16:
-                _context6.prev = 16;
-                _context6.t0 = _context6["catch"](11);
+                _context9.prev = 16;
+                _context9.t0 = _context9["catch"](11);
 
               case 18:
               case "end":
-                return _context6.stop();
+                return _context9.stop();
             }
           }
-        }, _callee6, this, [[11, 16]]);
+        }, _callee9, this, [[11, 16]]);
       }));
 
-      function handleActionResponse(_x3) {
+      function handleActionResponse(_x6) {
         return _handleActionResponse.apply(this, arguments);
       }
 
@@ -3397,6 +3474,29 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
     return created;
   }(),
+  mounted: function mounted() {
+    var _this = this;
+
+    this.$modal('Create {{ foo }}', "<pre @click=\"$emit('foobar')\">{{ $props }}</pre><p>jhrfklw;</p><p>jhrfklw;</p><p>jhrfklw;</p><p>jhrfklw;</p><p>jhrfklw;</p><p>jhrfklw;</p><p>jhrfklw;</p><p>jhrfklw;</p>", {
+      foo: 'bar',
+      actions: [{
+        id: 'delete',
+        type: 'danger',
+        label: 'Delete',
+        icon: 'fa-trash'
+      }, {
+        id: 'add',
+        type: 'info',
+        label: 'Add New',
+        icon: 'fa-user'
+      }]
+    }).$on('action', function (action, modal) {
+      _this.$modal('Create 2', "bar<pre>{{ $props }}</pre>"); //modal.close();
+
+    }).$on('foobar', function () {
+      console.log('got here!');
+    });
+  },
   render: function render(createElement) {
     var _ref = this.$data || {},
         _ref$fields = _ref.fields,
@@ -3435,7 +3535,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./base */ "./resources/js/admin/screens/base.vue");
-/* harmony import */ var _components_elements_button__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/elements/button */ "./resources/js/admin/components/elements/button.vue");
 
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -3521,12 +3620,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 
-
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'fk-admin-screen-model-index',
-  components: {
-    FkAdminButton: _components_elements_button__WEBPACK_IMPORTED_MODULE_2__["default"]
-  },
   "extends": _base__WEBPACK_IMPORTED_MODULE_1__["default"],
   computed: {
     models: function models() {
@@ -3613,18 +3708,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     tableAction: function () {
       var _tableAction = _asyncToGenerator(
       /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(action, _ref) {
-        var id;
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(action, model) {
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
-                id = _ref.id;
-                this.$screen.action(action, {
-                  id: id
-                });
+                this.$screen.action(action, model);
 
-              case 2:
+              case 1:
               case "end":
                 return _context3.stop();
             }
