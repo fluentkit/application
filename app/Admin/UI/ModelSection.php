@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace FluentKit\Admin\UI;
 
+use FluentKit\Admin\UI\Screens\ModelCreateScreen;
 use FluentKit\Admin\UI\Screens\ModelIndexScreen;
-use FluentKit\Admin\UI\Screens\ModelScreen;
+use FluentKit\Admin\UI\Screens\ModelEditScreen;
 use FluentKit\Admin\UI\Traits\HasFields;
 use FluentKit\Admin\UI\Traits\HasModel;
 
@@ -39,7 +40,7 @@ class ModelSection extends Section
     {
         $screen = $this->getScreen('create');
         if (!$screen) {
-            $screen = new ModelScreen('create', $this->getModel());
+            $screen = new ModelCreateScreen($this->getModel());
             $this->registerScreen($screen);
         }
 
@@ -54,7 +55,7 @@ class ModelSection extends Section
     {
         $screen = $this->getScreen('edit');
         if (!$screen) {
-            $screen = new ModelScreen('edit', $this->getModel());
+            $screen = new ModelEditScreen($this->getModel());
             $this->registerScreen($screen);
         }
 

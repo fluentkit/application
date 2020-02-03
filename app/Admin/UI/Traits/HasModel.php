@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace FluentKit\Admin\UI\Traits;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
@@ -53,5 +54,10 @@ trait HasModel
     public function newModelInstance(): Model
     {
         return new $this->model();
+    }
+
+    public function newModelQuery(): Builder
+    {
+        return $this->newModelInstance()->newQuery();
     }
 }
