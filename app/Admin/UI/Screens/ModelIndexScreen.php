@@ -41,7 +41,10 @@ class ModelIndexScreen extends Screen implements ScreenInterface
         $this->addAction(
             (new DeleteAction('delete', ''))
                 ->location('table')
-                ->setMeta('modal.body', 'Please click to the '.$this->getModelLabel().' with ID: {{ id }}. This action is desctructive.')
+                ->setMeta(
+                    'modal.body',
+                    '<p class="text-center">Please confirm deletion of '.$this->getModelLabel().' ID: <strong>{{ id }}</strong>.</p><p class="text-center text-danger uppercase"><strong>This action cannot be reversed.</strong></p>'
+                )
                 ->setMeta('modal.confirm.label', 'Delete ' . $this->getModelLabel())
                 ->callback([$this, 'deleteModel'])
                 ->disable(fn (Request $request) => $request->get('id') === $request->user()->id)

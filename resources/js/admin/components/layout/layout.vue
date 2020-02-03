@@ -144,6 +144,10 @@
         min-width: 30rem;
     }
 
+    #fk-modal-container .fk-admin-modal.sm {
+        @apply .w-1/4;
+    }
+
     #fk-modal-container .fk-admin-modal > .title {
         @apply .flex .px-6 .py-3 .items-center .justify-between .bg-gray-200 .border-b .border-gray-400;
     }
@@ -176,6 +180,34 @@
     }
     #fk-modal-container .fk-admin-modal > .footer > * {
         @apply .mb-0 .ml-2;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+
+    .uppercase {
+        text-transform: uppercase;
+    }
+
+    .text-info {
+        @apply .text-blue-500;
+    }
+    .text-success {
+        @apply .text-green-500;
+    }
+    .text-danger {
+        @apply .text-red-500;
+    }
+
+    .bg-info {
+        @apply .bg-blue-500;
+    }
+    .bg-success {
+        @apply .bg-green-500;
+    }
+    .bg-danger {
+        @apply .bg-red-500;
     }
 
     /**

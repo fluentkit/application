@@ -27,6 +27,7 @@ abstract class Action
         'modal' => [
             'title' => 'Confirm',
             'body' => 'Please confirm to continue.',
+            'size' => 'md',
             'cancel' => [
                 'id' => 'cancel',
                 'type' => 'default',

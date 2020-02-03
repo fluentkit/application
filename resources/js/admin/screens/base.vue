@@ -71,9 +71,10 @@
                     });
                     await this.$router.push({ name, params });
                 } else if (action.meta.confirmable) {
-                    const { modal: { title, body, cancel, confirm } } = action.meta;
+                    const { modal: { title, body, size, cancel, confirm } } = action.meta;
                     this.$modal(title, body, {
                             ...data,
+                            size,
                             actions: [cancel, confirm]
                         })
                         .$on('action', async (modalAction, modal) => {

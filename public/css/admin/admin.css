@@ -981,6 +981,9 @@ html {
   overflow: hidden;
   min-width: 30rem;
 }
+#fk-modal-container .fk-admin-modal.sm {
+  width: 25%;
+}
 #fk-modal-container .fk-admin-modal > .title {
   display: flex;
   padding-left: 1.5rem;
@@ -1041,6 +1044,30 @@ html {
 #fk-modal-container .fk-admin-modal > .footer > * {
   margin-bottom: 0;
   margin-left: 0.5rem;
+}
+.text-center {
+  text-align: center;
+}
+.uppercase {
+  text-transform: uppercase;
+}
+.text-info {
+  color: #4299e1;
+}
+.text-success {
+  color: #48bb78;
+}
+.text-danger {
+  color: #f56565;
+}
+.bg-info {
+  background-color: #4299e1;
+}
+.bg-success {
+  background-color: #48bb78;
+}
+.bg-danger {
+  background-color: #f56565;
 }
 
 /**

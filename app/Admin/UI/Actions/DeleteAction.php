@@ -19,6 +19,7 @@ final class DeleteAction extends CallbackAction implements ActionInterface
             ->setMeta('button.icon', 'fa-trash')
             ->setMeta('confirmable', true)
             ->setMeta('modal.title', 'Are you sure?')
+            ->setMeta('modal.size', 'sm')
             ->setMeta('modal.confirm.type', 'danger')
             ->setMeta('modal.confirm.icon', 'fa-trash');
     }

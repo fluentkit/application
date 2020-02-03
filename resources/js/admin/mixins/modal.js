@@ -54,7 +54,7 @@ export default {
                 template: `
                     <div id="fk-modal-container">
                         <div class="backdrop" @click="close"/>
-                        <div class="fk-admin-modal">
+                        <div class="fk-admin-modal" :class="data.size">
                             <div class="title">
                                 <component :is="title" v-bind="data"/>
                                 <a @click.prevent="close" class="close">

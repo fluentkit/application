@@ -3085,6 +3085,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             _action$meta$modal,
             title,
             body,
+            size,
             cancel,
             confirm,
             _args6 = arguments;
@@ -3136,8 +3137,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                   break;
                 }
 
-                _action$meta$modal = action.meta.modal, title = _action$meta$modal.title, body = _action$meta$modal.body, cancel = _action$meta$modal.cancel, confirm = _action$meta$modal.confirm;
+                _action$meta$modal = action.meta.modal, title = _action$meta$modal.title, body = _action$meta$modal.body, size = _action$meta$modal.size, cancel = _action$meta$modal.cancel, confirm = _action$meta$modal.confirm;
                 this.$modal(title, body, _objectSpread({}, data, {
+                  size: size,
                   actions: [cancel, confirm]
                 })).$on('action',
                 /*#__PURE__*/
@@ -11556,7 +11558,7 @@ var modalStringsToComponent = function modalStringsToComponent(string, data) {
             return this;
           }
         },
-        template: "\n                    <div id=\"fk-modal-container\">\n                        <div class=\"backdrop\" @click=\"close\"/>\n                        <div class=\"fk-admin-modal\">\n                            <div class=\"title\">\n                                <component :is=\"title\" v-bind=\"data\"/>\n                                <a @click.prevent=\"close\" class=\"close\">\n                                    <i class=\"fa fa-times\"/>\n                                </a>\n                            </div>\n                            <div class=\"body\">\n                                <component :is=\"body\" v-bind=\"data\"/>\n                            </div>\n                            <div v-if=\"data.actions.length\" class=\"footer\">\n                                <fk-admin-button\n                                    v-for=\"action in data.actions\"\n                                    :key=\"action.id\"\n                                    :type=\"action.type\"\n                                    :disabled=\"action.disabled\"\n                                    @click=\"$emit('action', action, that)\"\n                                >\n                                    <i v-if=\"action.icon\" class=\"fa\" :class=\"action.icon\" />\n                                    {{ action.label }}\n                                </fk-admin-button>\n                            </div>\n                        </div>\n                    </div>",
+        template: "\n                    <div id=\"fk-modal-container\">\n                        <div class=\"backdrop\" @click=\"close\"/>\n                        <div class=\"fk-admin-modal\" :class=\"data.size\">\n                            <div class=\"title\">\n                                <component :is=\"title\" v-bind=\"data\"/>\n                                <a @click.prevent=\"close\" class=\"close\">\n                                    <i class=\"fa fa-times\"/>\n                                </a>\n                            </div>\n                            <div class=\"body\">\n                                <component :is=\"body\" v-bind=\"data\"/>\n                            </div>\n                            <div v-if=\"data.actions.length\" class=\"footer\">\n                                <fk-admin-button\n                                    v-for=\"action in data.actions\"\n                                    :key=\"action.id\"\n                                    :type=\"action.type\"\n                                    :disabled=\"action.disabled\"\n                                    @click=\"$emit('action', action, that)\"\n                                >\n                                    <i v-if=\"action.icon\" class=\"fa\" :class=\"action.icon\" />\n                                    {{ action.label }}\n                                </fk-admin-button>\n                            </div>\n                        </div>\n                    </div>",
         methods: {
           close: function close() {
             this.$destroy();
