@@ -107,8 +107,8 @@
                     this.$progress().done();
                 }
             },
-            async tableAction (action, { id }) {
-		        this.$screen.action(action, { id });
+            async tableAction (action, model) {
+		        this.$screen.action(action, model);
             }
         }
 	}

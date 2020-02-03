@@ -22,6 +22,23 @@ abstract class Action
             'type' => 'info',
             'icon' => null,
         ],
+        'confirmable' => false,
+        'modal' => [
+            'title' => 'Confirm',
+            'body' => 'Please confirm to continue.',
+            'cancel' => [
+                'id' => 'cancel',
+                'type' => 'default',
+                'label' => 'Cancel',
+                'icon' => ''
+            ],
+            'confirm' => [
+                'id' => 'confirm',
+                'type' => 'info',
+                'label' => 'Confirm',
+                'icon' => ''
+            ]
+        ]
     ];
 
     public function __construct(string $id, string $label)

@@ -34,8 +34,8 @@ class ModelIndexScreen extends Screen implements ScreenInterface
 
         $this->addAction(
             (new DeleteAction('delete', ''))
-                ->setMeta('button.type', 'danger')
-                ->setMeta('button.icon', 'fa-trash')
+                ->setMeta('modal.body', 'Please click to the '.class_basename($model).' with ID: {{ id }}. This action is desctructive.')
+                ->setMeta('modal.confirm.label', 'Delete User')
                 ->callback([$this, 'deleteModel'])
                 ->disable(fn (Request $request) => $request->get('id') === $request->user()->id)
         );

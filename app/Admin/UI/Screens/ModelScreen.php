@@ -43,8 +43,8 @@ class ModelScreen extends FormScreen implements ScreenInterface
             );
             $this->addAction(
                 (new DeleteAction('delete', 'Delete ' . class_basename($model)))
-                    ->setMeta('button.type', 'danger')
-                    ->setMeta('button.icon', 'fa-trash')
+                    ->setMeta('modal.body', 'Please click to the '.class_basename($model).' with ID: {{ attributes.id }}. This action is desctructive.')
+                    ->setMeta('modal.confirm.label', 'Delete User')
                     ->callback([$this, 'deleteModel'])
                     ->disable(fn (Request $request) => $request->get('id') === $request->user()->id)
             );

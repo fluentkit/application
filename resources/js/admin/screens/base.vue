@@ -51,6 +51,22 @@
                 }
             },
             async performAction (action, data = {}, cb = async () => {}) {
+                if (action.meta.confirmable) {
+                    const { modal: { title, body, cancel, confirm } } = action.meta;
+                    this.$modal(title, body, {
+                            ...data,
+                            actions: [cancel, confirm]
+                        })
+                        .$on('action', async (modalAction, modal) => {
+                            if (modalAction.id === 'cancel') return modal.close();
+                            await this.submitAction(action, data, cb);
+                            modal.close();
+                        });
+                    return;
+                }
+                await this.submitAction(action, data, cb);
+            },
+            async submitAction (action, data = {}, cb = async () => {}) {
                 const disabled = action.disabled;
                 try {
                     action.disabled = true;
