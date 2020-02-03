@@ -2885,7 +2885,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _mixins_form__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../mixins/form */ "./resources/js/mixins/form.js");
 /* harmony import */ var _mixins_progress__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../mixins/progress */ "./resources/js/admin/mixins/progress.js");
 /* harmony import */ var _mixins_toast__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../mixins/toast */ "./resources/js/admin/mixins/toast.js");
-/* harmony import */ var _utils_url__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../utils/url */ "./resources/js/utils/url.js");
+/* harmony import */ var _mixins_modal__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../mixins/modal */ "./resources/js/admin/mixins/modal.js");
+/* harmony import */ var _utils_url__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../utils/url */ "./resources/js/utils/url.js");
 
 
 function _templateObject2() {
@@ -2925,8 +2926,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  mixins: [_mixins_request__WEBPACK_IMPORTED_MODULE_1__["default"], _mixins_form__WEBPACK_IMPORTED_MODULE_2__["default"], _mixins_progress__WEBPACK_IMPORTED_MODULE_3__["default"], _mixins_toast__WEBPACK_IMPORTED_MODULE_4__["default"]],
+  mixins: [_mixins_request__WEBPACK_IMPORTED_MODULE_1__["default"], _mixins_form__WEBPACK_IMPORTED_MODULE_2__["default"], _mixins_progress__WEBPACK_IMPORTED_MODULE_3__["default"], _mixins_toast__WEBPACK_IMPORTED_MODULE_4__["default"], _mixins_modal__WEBPACK_IMPORTED_MODULE_5__["default"]],
   data: function data() {
     return {
       fields: null,
@@ -2945,6 +2947,29 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       });
     }
   },
+  mounted: function mounted() {
+    var _this = this;
+
+    this.$modal('Create {{ foo }}', "<pre @click=\"$emit('foobar')\">{{ $props }}</pre><p>jhrfklw;</p><p>jhrfklw;</p><p>jhrfklw;</p><p>jhrfklw;</p><p>jhrfklw;</p><p>jhrfklw;</p><p>jhrfklw;</p><p>jhrfklw;</p>", {
+      foo: 'bar',
+      actions: [{
+        id: 'delete',
+        type: 'danger',
+        label: 'Delete',
+        icon: 'fa-trash'
+      }, {
+        id: 'add',
+        type: 'info',
+        label: 'Add New',
+        icon: 'fa-user'
+      }]
+    }).$on('action', function (action, modal) {
+      _this.$modal('Create 2', "bar<pre>{{ $props }}</pre>"); //modal.close();
+
+    }).$on('foobar', function () {
+      console.log('got here!');
+    });
+  },
   methods: {
     getScreenData: function () {
       var _getScreenData = _asyncToGenerator(
@@ -2958,7 +2983,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
               case 0:
                 $section = this.$section, $screen = this.$screen;
                 _context.next = 3;
-                return this.$request().get(Object(_utils_url__WEBPACK_IMPORTED_MODULE_5__["default"])(_templateObject(), $section.id, $screen.id, key) + this.requestQuery);
+                return this.$request().get(Object(_utils_url__WEBPACK_IMPORTED_MODULE_6__["default"])(_templateObject(), $section.id, $screen.id, key) + this.requestQuery);
 
               case 3:
                 _ref = _context.sent;
@@ -2983,7 +3008,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var _initScreen = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
-        var _this = this;
+        var _this2 = this;
 
         var data,
             cb,
@@ -3012,13 +3037,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 _context3.prev = 2;
                 _context3.next = 5;
                 return Promise.all(data.map(function (key) {
-                  return _this.$screen.get(key);
+                  return _this2.$screen.get(key);
                 }));
 
               case 5:
                 responses = _context3.sent;
                 data.forEach(function (key, index) {
-                  _this[key] = responses[index];
+                  _this2[key] = responses[index];
                 });
                 _context3.next = 9;
                 return cb();
@@ -3088,7 +3113,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 this.$progress().start();
                 $section = this.$section, $screen = this.$screen;
                 _context5.next = 9;
-                return this.$form.post(Object(_utils_url__WEBPACK_IMPORTED_MODULE_5__["default"])(_templateObject2(), $section.id, $screen.id, action.id) + this.requestQuery, data);
+                return this.$form.post(Object(_utils_url__WEBPACK_IMPORTED_MODULE_6__["default"])(_templateObject2(), $section.id, $screen.id, action.id) + this.requestQuery, data);
 
               case 9:
                 response = _context5.sent;
@@ -11306,6 +11331,102 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_user_vue_vue_type_template_id_0c9ff8d5___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
+
+/***/ }),
+
+/***/ "./resources/js/admin/mixins/modal.js":
+/*!********************************************!*\
+  !*** ./resources/js/admin/mixins/modal.js ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+
+
+var createModalContainer = function createModalContainer() {
+  if (document.getElementById('fk-modal-container')) return;
+  var container = document.createElement('div');
+  container.id = 'fk-modal-container';
+  document.body.appendChild(container);
+};
+
+var modalStringsToComponent = function modalStringsToComponent(string, data) {
+  if (_typeof(string) !== 'object') {
+    string = {
+      props: Object.keys(data).concat(['$emit']),
+      template: "<div>".concat(string, "</div>")
+    };
+  }
+
+  return string;
+};
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      modalInstance: null
+    };
+  },
+  methods: {
+    $modal: function $modal() {
+      var title = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+      var body = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+
+      var _data = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+
+      createModalContainer();
+      title = modalStringsToComponent(title, _data);
+      body = modalStringsToComponent(body, _data);
+      this.modalInstance = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
+        data: function data() {
+          var _this = this;
+
+          return {
+            data: _objectSpread({
+              actions: []
+            }, _data, {
+              // Hack to emit events within child components as the root instance which can be
+              // consumed via this.$modal().$on(...);
+              $emit: function $emit() {
+                return _this.$emit.apply(_this, arguments);
+              }
+            }),
+            body: body,
+            title: title
+          };
+        },
+        computed: {
+          that: function that() {
+            return this;
+          }
+        },
+        template: "\n                    <div id=\"fk-modal-container\">\n                        <div class=\"backdrop\" @click=\"close\"/>\n                        <div class=\"fk-admin-modal\">\n                            <div class=\"title\">\n                                <component :is=\"title\" v-bind=\"data\"/>\n                                <a @click.prevent=\"close\" class=\"close\">\n                                    <i class=\"fa fa-times\"/>\n                                </a>\n                            </div>\n                            <div class=\"body\">\n                                <component :is=\"body\" v-bind=\"data\"/>\n                            </div>\n                            <div v-if=\"data.actions.length\" class=\"footer\">\n                                <fk-admin-button\n                                    v-for=\"action in data.actions\"\n                                    :key=\"action.id\"\n                                    :type=\"action.type\"\n                                    :disabled=\"action.disabled\"\n                                    @click=\"$emit('action', action, that)\"\n                                >\n                                    <i v-if=\"action.icon\" class=\"fa\" :class=\"action.icon\" />\n                                    {{ action.label }}\n                                </fk-admin-button>\n                            </div>\n                        </div>\n                    </div>",
+        methods: {
+          close: function close() {
+            this.$destroy();
+          }
+        },
+        destroyed: function destroyed() {
+          if (typeof this.$el.remove === 'function') this.$el.remove();
+        }
+      });
+      this.modalInstance.$mount('#fk-modal-container');
+      return this.modalInstance;
+    }
+  }
+});
 
 /***/ }),
 

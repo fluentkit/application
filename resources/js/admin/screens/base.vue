@@ -3,10 +3,11 @@
     import form from '../../mixins/form';
     import progress from '../mixins/progress';
     import toast from '../mixins/toast';
+    import modal from '../mixins/modal';
     import url from "../../utils/url";
 
     export default {
-        mixins: [request, form, progress, toast],
+        mixins: [request, form, progress, toast, modal],
         data () {
             return {
                 fields: null,

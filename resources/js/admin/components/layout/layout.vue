@@ -130,6 +130,55 @@
     }
 
     /**
+     * Modal styling
+     */
+    #fk-modal-container {
+        @apply .w-screen .h-screen .fixed .top-0 .right-0 .bottom-0 .left-0 .z-50 .flex .items-center .justify-center;
+    }
+    #fk-modal-container .backdrop {
+        @apply .w-screen .h-screen .fixed .top-0 .right-0 .bottom-0 .left-0 .bg-black .opacity-25;
+    }
+
+    #fk-modal-container .fk-admin-modal {
+        @apply .z-50 .flex .flex-col .bg-white .shadow-2xl .rounded-lg .w-1/2 .max-w-full .overflow-hidden;
+        min-width: 30rem;
+    }
+
+    #fk-modal-container .fk-admin-modal > .title {
+        @apply .flex .px-6 .py-3 .items-center .justify-between .bg-gray-200 .border-b .border-gray-400;
+    }
+    #fk-modal-container .fk-admin-modal > .title > * {
+        @apply .mb-0;
+    }
+
+    #fk-modal-container .fk-admin-modal > .title > *:first-child {
+        @apply .text-2xl;
+    }
+
+    #fk-modal-container .fk-admin-modal > .title > .close {
+        @apply .flex .p-6 .-my-3 .-mr-6 .relative .border-l .border-gray-400 .text-gray-500 .cursor-pointer;
+    }
+    #fk-modal-container .fk-admin-modal > .title > .close:hover {
+        @apply .bg-gray-300;
+    }
+
+    #fk-modal-container .fk-admin-modal > .body {
+        @apply .flex .p-6 .overflow-scroll;
+        max-height: 75vh;
+    }
+    #fk-modal-container .fk-admin-modal > .body > * {
+        @apply .flex .w-full .h-full .block;
+    }
+
+
+    #fk-modal-container .fk-admin-modal > .footer {
+        @apply .flex .px-6 .py-3 .items-center .justify-end .bg-gray-200 .border-t .border-gray-400;
+    }
+    #fk-modal-container .fk-admin-modal > .footer > * {
+        @apply .mb-0 .ml-2;
+    }
+
+    /**
      * Layout styling
      **/
     .fk-admin-layout {
