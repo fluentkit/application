@@ -6,10 +6,17 @@
                 {{ $screen.modelPluralLabel }}
             </fk-admin-title>
             <fk-admin-button
-                type="info"
-                @click="$router.push({ name: `${$section.id}.create` })"
+                v-for="action in primaryActions"
+                :key="action.id"
+                :type="action.meta.button.type"
+                @click="performAction(action, attributes)"
             >
-                Add {{ $screen.modelLabel }}
+                <i
+                    v-if="action.meta.button.icon"
+                    class="fa"
+                    :class="action.meta.button.icon"
+                />
+                {{ action.label }}
             </fk-admin-button>
         </div>
         <div class="actions"></div>
@@ -34,7 +41,7 @@
                         </td>
                         <td class="actions">
                             <fk-admin-button
-                                v-for="action in actions"
+                                v-for="action in actionsFor('table')"
                                 :key="action.id"
                                 :type="action.meta.button.type"
                                 size="sm"
@@ -121,8 +128,12 @@
         @apply .flex .flex-row .justify-between .items-center;
     }
 
+    .fk-admin-screen-model-index .header > .fk-admin-button:nth-child(2) {
+        @apply .ml-auto;
+    }
+
     .fk-admin-screen-model-index .header .fk-admin-button {
-        @apply .mb-6;
+        @apply .mb-6 .ml-2;
     }
 
     .fk-admin-screen-model-index > .actions {

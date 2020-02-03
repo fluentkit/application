@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace FluentKit\Admin\UI\Screens;
 
 use FluentKit\Admin\UI\Actions\DeleteAction;
-use FluentKit\Admin\UI\Actions\EditAction;
+use FluentKit\Admin\UI\Actions\RouteAction;
 use FluentKit\Admin\UI\ResponseInterface;
 use FluentKit\Admin\UI\Responses\Notification;
 use FluentKit\Admin\UI\Responses\Redirect;
@@ -26,14 +26,21 @@ class ModelIndexScreen extends Screen implements ScreenInterface
         $this->setLabel('View All');
 
         $this->addAction(
-            (new EditAction('edit', ''))
-                ->route($this->getModelRoute('edit'))
+            (new RouteAction('create', 'Add ' . $this->getModelLabel()))
+                ->route($this->getModelRoute('create'))
+        );
+
+        $this->addAction(
+            (new RouteAction('edit', ''))
+                ->route($this->getModelRoute('edit'), ['id'])
+                ->location('table')
                 ->setMeta('button.type', 'info')
                 ->setMeta('button.icon', 'fa-pencil-alt')
         );
 
         $this->addAction(
             (new DeleteAction('delete', ''))
+                ->location('table')
                 ->setMeta('modal.body', 'Please click to the '.$this->getModelLabel().' with ID: {{ id }}. This action is desctructive.')
                 ->setMeta('modal.confirm.label', 'Delete ' . $this->getModelLabel())
                 ->callback([$this, 'deleteModel'])

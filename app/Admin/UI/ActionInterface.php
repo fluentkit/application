@@ -20,6 +20,8 @@ interface ActionInterface
 
     public function disable($disabled);
 
+    public function location(string $location): self;
+
     public function getId(): string;
 
     public function getLabel(): string;

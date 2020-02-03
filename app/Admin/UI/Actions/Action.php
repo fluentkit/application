@@ -18,6 +18,7 @@ abstract class Action
     use HasId, HasLabel, HasPriority, HasMeta, CanBeDisabled;
 
     protected array $meta = [
+        'location' => 'primary',
         'button' => [
             'type' => 'info',
             'icon' => null,
@@ -45,6 +46,11 @@ abstract class Action
     {
         $this->setId($id);
         $this->setLabel($label);
+    }
+
+    public function location(string $location): ActionInterface
+    {
+        return $this->setMeta('location', $location);
     }
 
     public function toArray(Request $request): array

@@ -7,23 +7,21 @@ namespace FluentKit\Admin\UI\Actions;
 use FluentKit\Admin\UI\ActionInterface;
 use FluentKit\Admin\UI\ResponseInterface;
 use FluentKit\Admin\UI\Responses\Notification;
-use FluentKit\Admin\UI\Responses\Redirect;
 use FluentKit\Admin\UI\ScreenInterface;
 use Illuminate\Http\Request;
 
-final class EditAction extends Action implements ActionInterface
+final class RouteAction extends Action implements ActionInterface
 {
-    private $route;
-
-    public function route(string $route): self
+    public function route(string $route, array $params = []): ActionInterface
     {
-        $this->route = $route;
+        $this->setMeta('route.id', $route)
+            ->setMeta('route.params', $params);
 
         return $this;
     }
 
     public function handle(Request $request, ScreenInterface $screen): array
     {
-        return Redirect::route($this->route, ['id' => $request->get('id')])->toArray();
+        return [];
     }
 }

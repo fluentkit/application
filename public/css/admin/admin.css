@@ -35,8 +35,12 @@
   justify-content: space-between;
   align-items: center;
 }
+.fk-admin-screen-model-index .header > .fk-admin-button:nth-child(2) {
+  margin-left: auto;
+}
 .fk-admin-screen-model-index .header .fk-admin-button {
   margin-bottom: 1.5rem;
+  margin-left: 0.5rem;
 }
 .fk-admin-screen-model-index > .actions {
   padding: 1rem;

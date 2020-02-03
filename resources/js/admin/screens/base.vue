@@ -25,6 +25,9 @@
                     get: this.getScreenData,
                     action: this.performAction
                 };
+            },
+            primaryActions () {
+                return this.actionsFor('primary');
             }
         },
         methods: {
@@ -50,8 +53,24 @@
                     this.$progress().done();
                 }
             },
+            actionsFor (location = 'primary') {
+                return Object.keys(this.actions)
+                    .map(id => this.actions[id])
+                    .filter(({ meta: { location: actionLocation } }) => actionLocation === location)
+                    .reduce((actions, action) => {
+                        actions[action.id] = action;
+                        return actions;
+                    }, {});
+            },
             async performAction (action, data = {}, cb = async () => {}) {
-                if (action.meta.confirmable) {
+                if (action.meta.route) {
+                    const { id: name, params: includeParams } = action.meta.route;
+                    const params = {};
+                    includeParams.forEach(p => {
+                        params[p] = data[p];
+                    });
+                    await this.$router.push({ name, params });
+                } else if (action.meta.confirmable) {
                     const { modal: { title, body, cancel, confirm } } = action.meta;
                     this.$modal(title, body, {
                             ...data,
@@ -62,9 +81,9 @@
                             await this.submitAction(action, data, cb);
                             modal.close();
                         });
-                    return;
+                } else {
+                    await this.submitAction(action, data, cb);
                 }
-                await this.submitAction(action, data, cb);
             },
             async submitAction (action, data = {}, cb = async () => {}) {
                 const disabled = action.disabled;

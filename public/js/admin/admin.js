@@ -2945,6 +2945,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         get: this.getScreenData,
         action: this.performAction
       });
+    },
+    primaryActions: function primaryActions() {
+      return this.actionsFor('primary');
     }
   },
   methods: {
@@ -3053,14 +3056,32 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       return initScreen;
     }(),
+    actionsFor: function actionsFor() {
+      var _this2 = this;
+
+      var location = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'primary';
+      return Object.keys(this.actions).map(function (id) {
+        return _this2.actions[id];
+      }).filter(function (_ref3) {
+        var actionLocation = _ref3.meta.location;
+        return actionLocation === location;
+      }).reduce(function (actions, action) {
+        actions[action.id] = action;
+        return actions;
+      }, {});
+    },
     performAction: function () {
       var _performAction = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee6(action) {
-        var _this2 = this;
+        var _this3 = this;
 
         var data,
             cb,
+            _action$meta$route,
+            name,
+            includeParams,
+            params,
             _action$meta$modal,
             title,
             body,
@@ -3089,8 +3110,29 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                   }, _callee4);
                 }));
 
+                if (!action.meta.route) {
+                  _context6.next = 10;
+                  break;
+                }
+
+                _action$meta$route = action.meta.route, name = _action$meta$route.id, includeParams = _action$meta$route.params;
+                params = {};
+                includeParams.forEach(function (p) {
+                  params[p] = data[p];
+                });
+                _context6.next = 8;
+                return this.$router.push({
+                  name: name,
+                  params: params
+                });
+
+              case 8:
+                _context6.next = 17;
+                break;
+
+              case 10:
                 if (!action.meta.confirmable) {
-                  _context6.next = 6;
+                  _context6.next = 15;
                   break;
                 }
 
@@ -3100,7 +3142,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 })).$on('action',
                 /*#__PURE__*/
                 function () {
-                  var _ref4 = _asyncToGenerator(
+                  var _ref5 = _asyncToGenerator(
                   /*#__PURE__*/
                   _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5(modalAction, modal) {
                     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
@@ -3116,7 +3158,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
                           case 2:
                             _context5.next = 4;
-                            return _this2.submitAction(action, data, cb);
+                            return _this3.submitAction(action, data, cb);
 
                           case 4:
                             modal.close();
@@ -3130,16 +3172,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                   }));
 
                   return function (_x3, _x4) {
-                    return _ref4.apply(this, arguments);
+                    return _ref5.apply(this, arguments);
                   };
                 }());
-                return _context6.abrupt("return");
+                _context6.next = 17;
+                break;
 
-              case 6:
-                _context6.next = 8;
+              case 15:
+                _context6.next = 17;
                 return this.submitAction(action, data, cb);
 
-              case 8:
+              case 17:
               case "end":
                 return _context6.stop();
             }
@@ -3547,6 +3590,13 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -6586,7 +6636,7 @@ var render = function() {
           }),
           _vm._v(" "),
           _c("fk-admin-form-actions", {
-            attrs: { actions: _vm.actions },
+            attrs: { actions: _vm.primaryActions },
             on: { click: _vm.formAction }
           })
         ],
@@ -6630,28 +6680,31 @@ var render = function() {
               )
             ]),
             _vm._v(" "),
-            _c(
-              "fk-admin-button",
-              {
-                attrs: { type: "info" },
-                on: {
-                  click: function($event) {
-                    return _vm.$router.push({
-                      name: _vm.$section.id + ".create"
-                    })
+            _vm._l(_vm.primaryActions, function(action) {
+              return _c(
+                "fk-admin-button",
+                {
+                  key: action.id,
+                  attrs: { type: action.meta.button.type },
+                  on: {
+                    click: function($event) {
+                      return _vm.performAction(action, _vm.attributes)
+                    }
                   }
-                }
-              },
-              [
-                _vm._v(
-                  "\n            Add " +
-                    _vm._s(_vm.$screen.modelLabel) +
-                    "\n        "
-                )
-              ]
-            )
+                },
+                [
+                  action.meta.button.icon
+                    ? _c("i", {
+                        staticClass: "fa",
+                        class: action.meta.button.icon
+                      })
+                    : _vm._e(),
+                  _vm._v("\n            " + _vm._s(action.label) + "\n        ")
+                ]
+              )
+            })
           ],
-          1
+          2
         ),
         _vm._v(" "),
         _c("div", { staticClass: "actions" }),
@@ -6705,7 +6758,7 @@ var render = function() {
                         _c(
                           "td",
                           { staticClass: "actions" },
-                          _vm._l(_vm.actions, function(action) {
+                          _vm._l(_vm.actionsFor("table"), function(action) {
                             return _c(
                               "fk-admin-button",
                               {
