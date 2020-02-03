@@ -19,7 +19,15 @@
                 {{ action.label }}
             </fk-admin-button>
         </div>
-        <div class="actions"></div>
+        <div class="actions">
+            <input
+                type="text"
+                id="search"
+                class="fk-admin-field-input"
+                :value="$route.query.search"
+                @input="search($event.target.value)"
+            />
+        </div>
         <table>
             <thead>
                 <tr>
@@ -83,6 +91,11 @@
 	export default {
 		name: 'fk-admin-screen-model-index',
         extends: screenBase,
+        data () {
+		    return {
+		        searchBouncer: null
+            };
+        },
         computed: {
             models () {
 		        return this.attributes.data;
@@ -92,13 +105,31 @@
             await this.initScreen();
         },
         methods: {
+		    async search (search) {
+                if (this.searchBouncer) clearTimeout(this.searchBouncer);
+                this.searchBouncer = setTimeout(async () => {
+                    try {
+                        if (search === '') {
+                            search = undefined;
+                        }
+                        await this.$router.push({
+                            query: {
+                                ...this.$route.query,
+                                search
+                            }
+                        });
+
+                        this.attributes = await this.$screen.get('attributes');
+                    } catch (e) {
+                        this.$error(e);
+                    } finally {
+                        this.$progress().done();
+                    }
+                }, 500);
+            },
 		    async goToPage (page) {
                 try {
                     await this.$router.push({
-                        name: this.$route.name,
-                        params: {
-                            ...this.$route.params
-                        },
                         query: {
                             ...this.$route.query,
                             page

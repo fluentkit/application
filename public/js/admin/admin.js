@@ -3671,10 +3671,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'fk-admin-screen-model-index',
   "extends": _base__WEBPACK_IMPORTED_MODULE_1__["default"],
+  data: function data() {
+    return {
+      searchBouncer: null
+    };
+  },
   computed: {
     models: function models() {
       return this.attributes.data;
@@ -3706,52 +3719,127 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     return created;
   }(),
   methods: {
+    search: function () {
+      var _search2 = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(_search) {
+        var _this = this;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                if (this.searchBouncer) clearTimeout(this.searchBouncer);
+                this.searchBouncer = setTimeout(
+                /*#__PURE__*/
+                _asyncToGenerator(
+                /*#__PURE__*/
+                _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+                  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+                    while (1) {
+                      switch (_context2.prev = _context2.next) {
+                        case 0:
+                          _context2.prev = 0;
+
+                          if (_search === '') {
+                            _search = undefined;
+                          }
+
+                          _context2.next = 4;
+                          return _this.$router.push({
+                            query: _objectSpread({}, _this.$route.query, {
+                              search: _search
+                            })
+                          });
+
+                        case 4:
+                          _context2.next = 6;
+                          return _this.$screen.get('attributes');
+
+                        case 6:
+                          _this.attributes = _context2.sent;
+                          _context2.next = 12;
+                          break;
+
+                        case 9:
+                          _context2.prev = 9;
+                          _context2.t0 = _context2["catch"](0);
+
+                          _this.$error(_context2.t0);
+
+                        case 12:
+                          _context2.prev = 12;
+
+                          _this.$progress().done();
+
+                          return _context2.finish(12);
+
+                        case 15:
+                        case "end":
+                          return _context2.stop();
+                      }
+                    }
+                  }, _callee2, null, [[0, 9, 12, 15]]);
+                })), 500);
+
+              case 2:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3, this);
+      }));
+
+      function search(_x) {
+        return _search2.apply(this, arguments);
+      }
+
+      return search;
+    }(),
     goToPage: function () {
       var _goToPage = _asyncToGenerator(
       /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(page) {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4(page) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
           while (1) {
-            switch (_context2.prev = _context2.next) {
+            switch (_context4.prev = _context4.next) {
               case 0:
-                _context2.prev = 0;
-                _context2.next = 3;
+                _context4.prev = 0;
+                _context4.next = 3;
                 return this.$router.push({
-                  name: this.$route.name,
-                  params: _objectSpread({}, this.$route.params),
                   query: _objectSpread({}, this.$route.query, {
                     page: page
                   })
                 });
 
               case 3:
-                _context2.next = 5;
+                _context4.next = 5;
                 return this.$screen.get('attributes');
 
               case 5:
-                this.attributes = _context2.sent;
-                _context2.next = 11;
+                this.attributes = _context4.sent;
+                _context4.next = 11;
                 break;
 
               case 8:
-                _context2.prev = 8;
-                _context2.t0 = _context2["catch"](0);
-                this.$error(_context2.t0);
+                _context4.prev = 8;
+                _context4.t0 = _context4["catch"](0);
+                this.$error(_context4.t0);
 
               case 11:
-                _context2.prev = 11;
+                _context4.prev = 11;
                 this.$progress().done();
-                return _context2.finish(11);
+                return _context4.finish(11);
 
               case 14:
               case "end":
-                return _context2.stop();
+                return _context4.stop();
             }
           }
-        }, _callee2, this, [[0, 8, 11, 14]]);
+        }, _callee4, this, [[0, 8, 11, 14]]);
       }));
 
-      function goToPage(_x) {
+      function goToPage(_x2) {
         return _goToPage.apply(this, arguments);
       }
 
@@ -3760,22 +3848,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     tableAction: function () {
       var _tableAction = _asyncToGenerator(
       /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(action, model) {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5(action, model) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
           while (1) {
-            switch (_context3.prev = _context3.next) {
+            switch (_context5.prev = _context5.next) {
               case 0:
                 this.$screen.action(action, model);
 
               case 1:
               case "end":
-                return _context3.stop();
+                return _context5.stop();
             }
           }
-        }, _callee3, this);
+        }, _callee5, this);
       }));
 
-      function tableAction(_x2, _x3) {
+      function tableAction(_x3, _x4) {
         return _tableAction.apply(this, arguments);
       }
 
@@ -6709,7 +6797,18 @@ var render = function() {
           2
         ),
         _vm._v(" "),
-        _c("div", { staticClass: "actions" }),
+        _c("div", { staticClass: "actions" }, [
+          _c("input", {
+            staticClass: "fk-admin-field-input",
+            attrs: { type: "text", id: "search" },
+            domProps: { value: _vm.$route.query.search },
+            on: {
+              input: function($event) {
+                return _vm.search($event.target.value)
+              }
+            }
+          })
+        ]),
         _vm._v(" "),
         _c("table", [
           _c("thead", [

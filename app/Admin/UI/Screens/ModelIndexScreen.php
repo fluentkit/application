@@ -11,6 +11,7 @@ use FluentKit\Admin\UI\Responses\Notification;
 use FluentKit\Admin\UI\Responses\Redirect;
 use FluentKit\Admin\UI\ScreenInterface;
 use FluentKit\Admin\UI\Traits\HasModel;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
 class ModelIndexScreen extends Screen implements ScreenInterface
@@ -18,6 +19,8 @@ class ModelIndexScreen extends Screen implements ScreenInterface
     use HasModel;
 
     protected string $type = 'model-index';
+
+    protected array $searchableColumns = ['id'];
 
     public function __construct(string $model)
     {
@@ -51,6 +54,13 @@ class ModelIndexScreen extends Screen implements ScreenInterface
         );
     }
 
+    public function searchable(array $columns = ['id']): self
+    {
+        $this->searchableColumns = $columns;
+
+        return $this;
+    }
+
     public function toArray(Request $request): array
     {
         $screen = parent::toArray($request);
@@ -63,7 +73,17 @@ class ModelIndexScreen extends Screen implements ScreenInterface
 
     public function getAttributes(Request $request): array
     {
-        return $this->newModelInstance()->newQuery()->paginate()->toArray();
+        return $this->newModelInstance()
+            ->newQuery()
+            ->when($request->get('search', '') !== '', function (Builder $query) use ($request) {
+                foreach ($this->searchableColumns as $column) {
+                    $query = $query->orWhere($column, 'like', '%'.$request->get('search').'%');
+                }
+
+                return $query;
+            })
+            ->paginate()
+            ->toArray();
     }
 
     public function deleteModel(Request $request, ScreenInterface $screen): ResponseInterface

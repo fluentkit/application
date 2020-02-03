@@ -52,5 +52,7 @@ final class Users extends ModelSection
                     (new Password('password_confirmation', 'Retype Password'))->rules(['sometimes', 'required_with:passwords', 'string', 'min:10']),
                 ])
             ]);
+
+        $this->getScreen('index')->searchable(['id', 'email', 'first_name', 'last_name']);
     }
 }
