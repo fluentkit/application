@@ -36,7 +36,7 @@ export default {
                 data () {
                     return {
                         data: {
-                            actions: [],
+                            actions: {},
                             ...data,
                             // Hack to emit events within child components as the root instance which can be
                             // consumed via this.$modal().$on(...);
@@ -64,7 +64,7 @@ export default {
                             <div class="body">
                                 <component :is="body" v-bind="data"/>
                             </div>
-                            <div v-if="data.actions.length" class="footer">
+                            <div v-if="Object.keys(data.actions).length" class="footer">
                                 <fk-admin-button
                                     v-for="action in data.actions"
                                     :key="action.id"

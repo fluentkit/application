@@ -7,6 +7,7 @@ namespace FluentKit\Admin\UI\Actions;
 use FluentKit\Admin\UI\ActionInterface;
 use FluentKit\Admin\UI\ScreenInterface;
 use FluentKit\Admin\UI\Traits\CanBeDisabled;
+use FluentKit\Admin\UI\Traits\HasActions;
 use FluentKit\Admin\UI\Traits\HasId;
 use FluentKit\Admin\UI\Traits\HasLabel;
 use FluentKit\Admin\UI\Traits\HasMeta;
@@ -15,7 +16,7 @@ use Illuminate\Http\Request;
 
 abstract class Action
 {
-    use HasId, HasLabel, HasPriority, HasMeta, CanBeDisabled;
+    use HasId, HasLabel, HasPriority, HasMeta, CanBeDisabled, HasActions;
 
     protected array $meta = [
         'location' => 'primary',
@@ -62,6 +63,7 @@ abstract class Action
             'label' => $this->getLabel(),
             'disabled' => $this->getDisabled($request),
             'meta' => $this->getMeta(),
+            'actions' => $this->getActions($request),
         ];
     }
 

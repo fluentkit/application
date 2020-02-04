@@ -3033,9 +3033,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
               case 3:
                 _ref = _context.sent;
                 data = _ref.data;
+
+                if (!(key === 'attributes' && Array.isArray(data[key]))) {
+                  _context.next = 7;
+                  break;
+                }
+
+                return _context.abrupt("return", {});
+
+              case 7:
                 return _context.abrupt("return", data[key]);
 
-              case 6:
+              case 8:
               case "end":
                 return _context.stop();
             }
@@ -3147,6 +3156,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             name,
             includeParams,
             params,
+            _actions,
             _action$meta$modal,
             title,
             body,
@@ -3205,7 +3215,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 _action$meta$modal = action.meta.modal, title = _action$meta$modal.title, body = _action$meta$modal.body, size = _action$meta$modal.size, cancel = _action$meta$modal.cancel, confirm = _action$meta$modal.confirm;
                 this.$modal(title, body, _objectSpread({}, data, {
                   size: size,
-                  actions: [cancel, confirm]
+                  actions: (_actions = {}, _defineProperty(_actions, cancel.id, cancel), _defineProperty(_actions, confirm.id, confirm), _actions)
                 })).$on('action',
                 /*#__PURE__*/
                 function () {
@@ -11835,7 +11845,7 @@ var modalStringsToComponent = function modalStringsToComponent(string, data) {
 
           return {
             data: _objectSpread({
-              actions: []
+              actions: {}
             }, _data, {
               // Hack to emit events within child components as the root instance which can be
               // consumed via this.$modal().$on(...);
@@ -11852,7 +11862,7 @@ var modalStringsToComponent = function modalStringsToComponent(string, data) {
             return this;
           }
         },
-        template: "\n                    <div id=\"fk-modal-container\">\n                        <div class=\"backdrop\" @click=\"close\"/>\n                        <div class=\"fk-admin-modal\" :class=\"data.size\">\n                            <div class=\"title\">\n                                <component :is=\"title\" v-bind=\"data\"/>\n                                <a @click.prevent=\"close\" class=\"close\">\n                                    <i class=\"fa fa-times\"/>\n                                </a>\n                            </div>\n                            <div class=\"body\">\n                                <component :is=\"body\" v-bind=\"data\"/>\n                            </div>\n                            <div v-if=\"data.actions.length\" class=\"footer\">\n                                <fk-admin-button\n                                    v-for=\"action in data.actions\"\n                                    :key=\"action.id\"\n                                    :type=\"action.type\"\n                                    :disabled=\"action.disabled\"\n                                    @click=\"$emit('action', action, that)\"\n                                >\n                                    <i v-if=\"action.icon\" class=\"fa\" :class=\"action.icon\" />\n                                    {{ action.label }}\n                                </fk-admin-button>\n                            </div>\n                        </div>\n                    </div>",
+        template: "\n                    <div id=\"fk-modal-container\">\n                        <div class=\"backdrop\" @click=\"close\"/>\n                        <div class=\"fk-admin-modal\" :class=\"data.size\">\n                            <div class=\"title\">\n                                <component :is=\"title\" v-bind=\"data\"/>\n                                <a @click.prevent=\"close\" class=\"close\">\n                                    <i class=\"fa fa-times\"/>\n                                </a>\n                            </div>\n                            <div class=\"body\">\n                                <component :is=\"body\" v-bind=\"data\"/>\n                            </div>\n                            <div v-if=\"Object.keys(data.actions).length\" class=\"footer\">\n                                <fk-admin-button\n                                    v-for=\"action in data.actions\"\n                                    :key=\"action.id\"\n                                    :type=\"action.type\"\n                                    :disabled=\"action.disabled\"\n                                    @click=\"$emit('action', action, that)\"\n                                >\n                                    <i v-if=\"action.icon\" class=\"fa\" :class=\"action.icon\" />\n                                    {{ action.label }}\n                                </fk-admin-button>\n                            </div>\n                        </div>\n                    </div>",
         methods: {
           close: function close() {
             this.$destroy();

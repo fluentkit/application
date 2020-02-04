@@ -36,6 +36,10 @@
 
                 const { data } = await this.$request().get(url`/admin/${$section.id}/${$screen.id}/${key}`+this.requestQuery);
 
+                if (key === 'attributes' && Array.isArray(data[key])) {
+                    return {};
+                }
+
                 return data[key];
             },
             async initScreen (data = ['fields', 'attributes', 'actions'], cb = async () => {}) {
@@ -75,7 +79,10 @@
                     this.$modal(title, body, {
                             ...data,
                             size,
-                            actions: [cancel, confirm]
+                            actions: {
+                                [cancel.id]: cancel,
+                                [confirm.id]: confirm
+                            }
                         })
                         .$on('action', async (modalAction, modal) => {
                             if (modalAction.id === 'cancel') return modal.close();
