@@ -22,7 +22,10 @@
         },
         methods: {
 		    async formAction (action) {
-		        await this.$screen.action(action, { attributes: this.attributes });
+		        const data = { ...this.$data };
+		        delete data.modalInstance;
+		        delete data.form;
+		        await this.$screen.action(action, data);
             }
         }
 	}

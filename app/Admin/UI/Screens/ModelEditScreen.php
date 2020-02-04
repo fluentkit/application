@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace FluentKit\Admin\UI\Screens;
 
-use FluentKit\Admin\UI\Actions\DeleteAction;
+use FluentKit\Admin\UI\Actions\CallbackAction;
+use FluentKit\Admin\UI\Actions\ModalAction;
+use FluentKit\Admin\UI\Actions\ModalCloseAction;
 use FluentKit\Admin\UI\Actions\SaveAction;
 use FluentKit\Admin\UI\ResponseInterface;
 use FluentKit\Admin\UI\Responses\Notification;
@@ -31,11 +33,23 @@ class ModelEditScreen extends FormScreen implements ScreenInterface
                 ->callback([$this, 'updateModel'])
         );
         $this->addAction(
-            (new DeleteAction('delete', 'Delete ' . $this->getModelLabel()))
-                ->setMeta('modal.body', 'Please click to the ' . $this->getModelLabel() . ' with ID: {{ attributes.id }}. This action is desctructive.')
-                ->setMeta('modal.confirm.label', 'Delete ' . $this->getModelLabel())
-                ->callback([$this, 'deleteModel'])
+            (new ModalAction('delete', 'Delete ' . $this->getModelLabel()))
+                ->setMeta('button.type', 'danger')
+                ->setMeta('button.icon', 'fa-trash')
+                ->setMeta('modal.title', 'Are you sure?')
+                ->setMeta('modal.size', 'sm')
+                ->setMeta(
+                    'modal.body',
+                    '<p class="text-center">Please confirm deletion of '.$this->getModelLabel().' ID: <strong>{{ attributes.id }}</strong>.</p><p class="text-center text-danger uppercase"><strong>This action cannot be reversed.</strong></p>'
+                )
                 ->disable(fn (Request $request) => $request->get('id') === $request->user()->id)
+                ->addAction(new ModalCloseAction('cancel', 'Cancel'))
+                ->addAction(
+                    (new CallbackAction('confirm', 'Delete ' . $this->getModelLabel()))
+                        ->setMeta('button.type', 'danger')
+                        ->setMeta('button.icon', 'fa-trash')
+                        ->callback([$this, 'deleteModel'])
+                )
         );
     }
 

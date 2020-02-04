@@ -2955,7 +2955,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function _templateObject2() {
-  var data = _taggedTemplateLiteral(["/admin/", "/", "/", ""]);
+  var data = _taggedTemplateLiteral(["/admin/", "/", "/", "", ""]);
 
   _templateObject2 = function _templateObject2() {
     return data;
@@ -3172,20 +3172,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                   }, _callee4);
                 }));
 
-                if (!this.actionIs(action, 'redirect')) {
+                if (!this.actionIs(action, 'route_action')) {
                   _context5.next = 6;
                   break;
                 }
 
-                return _context5.abrupt("return", this.redirectAction(action, data));
+                return _context5.abrupt("return", this.routeAction(action, data));
 
               case 6:
-                if (!this.actionIs(action, 'confirmable')) {
+                if (!this.actionIs(action, 'modal_action')) {
                   _context5.next = 8;
                   break;
                 }
 
-                return _context5.abrupt("return", this.confirmableAction(action, data, cb));
+                return _context5.abrupt("return", this.modalAction(action, data, cb));
 
               case 8:
                 _context5.next = 10;
@@ -3209,19 +3209,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return performAction;
     }(),
     actionIs: function actionIs(action, type) {
-      switch (type) {
-        case 'redirect':
-          return !!action.meta.route;
-
-        case 'confirmable':
-          return !!action.meta.confirmable;
-
-        default:
-          return false;
-      }
+      return action.type === type;
     },
-    redirectAction: function () {
-      var _redirectAction = _asyncToGenerator(
+    routeAction: function () {
+      var _routeAction = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee6(action, data) {
         var _action$meta$route, name, includeParams, params;
@@ -3252,29 +3243,28 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }, _callee6, this);
       }));
 
-      function redirectAction(_x3, _x4) {
-        return _redirectAction.apply(this, arguments);
+      function routeAction(_x3, _x4) {
+        return _routeAction.apply(this, arguments);
       }
 
-      return redirectAction;
+      return routeAction;
     }(),
-    confirmableAction: function () {
-      var _confirmableAction = _asyncToGenerator(
+    modalAction: function () {
+      var _modalAction = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee8(action, data, cb) {
-        var _actions,
-            _this3 = this;
+        var _this3 = this;
 
-        var _action$meta$modal, title, body, size, cancel, confirm;
+        var _action$meta$modal, title, body, size;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee8$(_context8) {
           while (1) {
             switch (_context8.prev = _context8.next) {
               case 0:
-                _action$meta$modal = action.meta.modal, title = _action$meta$modal.title, body = _action$meta$modal.body, size = _action$meta$modal.size, cancel = _action$meta$modal.cancel, confirm = _action$meta$modal.confirm;
+                _action$meta$modal = action.meta.modal, title = _action$meta$modal.title, body = _action$meta$modal.body, size = _action$meta$modal.size;
                 return _context8.abrupt("return", this.$modal(title, body, _objectSpread({}, data, {
-                  size: size,
-                  actions: (_actions = {}, _defineProperty(_actions, cancel.id, cancel), _defineProperty(_actions, confirm.id, confirm), _actions)
+                  actions: action.actions,
+                  size: size
                 })).$on('action',
                 /*#__PURE__*/
                 function () {
@@ -3285,7 +3275,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                       while (1) {
                         switch (_context7.prev = _context7.next) {
                           case 0:
-                            if (!(modalAction.id === 'cancel')) {
+                            if (!(modalAction.type === 'modal_close_action')) {
                               _context7.next = 2;
                               break;
                             }
@@ -3294,7 +3284,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
                           case 2:
                             _context7.next = 4;
-                            return _this3.submitAction(action, data, cb);
+                            return _this3.performAction(_objectSpread({}, modalAction, {
+                              parentId: action.id
+                            }), data, cb);
 
                           case 4:
                             modal.close();
@@ -3320,11 +3312,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }, _callee8, this);
       }));
 
-      function confirmableAction(_x5, _x6, _x7) {
-        return _confirmableAction.apply(this, arguments);
+      function modalAction(_x5, _x6, _x7) {
+        return _modalAction.apply(this, arguments);
       }
 
-      return confirmableAction;
+      return modalAction;
     }(),
     submitAction: function () {
       var _submitAction = _asyncToGenerator(
@@ -3363,7 +3355,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 this.$progress().start();
                 $section = this.$section, $screen = this.$screen;
                 _context10.next = 9;
-                return this.$form.post(Object(_utils_url__WEBPACK_IMPORTED_MODULE_6__["default"])(_templateObject2(), $section.id, $screen.id, action.id) + this.requestQuery, data);
+                return this.$form.post(Object(_utils_url__WEBPACK_IMPORTED_MODULE_6__["default"])(_templateObject2(), $section.id, $screen.id, action.parentId ? action.parentId + '.' : '', action.id) + this.requestQuery, data);
 
               case 9:
                 response = _context10.sent;
@@ -3506,6 +3498,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./base */ "./resources/js/admin/screens/base.vue");
 
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
@@ -3557,16 +3555,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _formAction = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(action) {
+        var data;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                _context2.next = 2;
-                return this.$screen.action(action, {
-                  attributes: this.attributes
-                });
+                data = _objectSpread({}, this.$data);
+                delete data.modalInstance;
+                delete data.form;
+                _context2.next = 5;
+                return this.$screen.action(action, data);
 
-              case 2:
+              case 5:
               case "end":
                 return _context2.stop();
             }
@@ -3647,29 +3647,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
     return created;
   }(),
-  mounted: function mounted() {
-    var _this = this;
-
-    this.$modal('Create {{ foo }}', "<pre @click=\"$emit('foobar')\">{{ $props }}</pre><p>jhrfklw;</p><p>jhrfklw;</p><p>jhrfklw;</p><p>jhrfklw;</p><p>jhrfklw;</p><p>jhrfklw;</p><p>jhrfklw;</p><p>jhrfklw;</p>", {
-      foo: 'bar',
-      actions: [{
-        id: 'delete',
-        type: 'danger',
-        label: 'Delete',
-        icon: 'fa-trash'
-      }, {
-        id: 'add',
-        type: 'info',
-        label: 'Add New',
-        icon: 'fa-user'
-      }]
-    }).$on('action', function (action, modal) {
-      _this.$modal('Create 2', "bar<pre>{{ $props }}</pre>"); //modal.close();
-
-    }).$on('foobar', function () {
-      console.log('got here!');
-    });
-  },
   render: function render(createElement) {
     var _ref = this.$data || {},
         _ref$fields = _ref.fields,
@@ -11897,9 +11874,7 @@ var modalStringsToComponent = function modalStringsToComponent(string, data) {
           var _this = this;
 
           return {
-            data: _objectSpread({
-              actions: {}
-            }, _data, {
+            data: _objectSpread({}, _data, {
               // Hack to emit events within child components as the root instance which can be
               // consumed via this.$modal().$on(...);
               $emit: function $emit() {
@@ -11907,7 +11882,8 @@ var modalStringsToComponent = function modalStringsToComponent(string, data) {
               }
             }),
             body: body,
-            title: title
+            title: title,
+            actions: _data.actions
           };
         },
         computed: {
@@ -11915,7 +11891,7 @@ var modalStringsToComponent = function modalStringsToComponent(string, data) {
             return this;
           }
         },
-        template: "\n                    <div id=\"fk-modal-container\">\n                        <div class=\"backdrop\" @click=\"close\"/>\n                        <div class=\"fk-admin-modal\" :class=\"data.size\">\n                            <div class=\"title\">\n                                <component :is=\"title\" v-bind=\"data\"/>\n                                <a @click.prevent=\"close\" class=\"close\">\n                                    <i class=\"fa fa-times\"/>\n                                </a>\n                            </div>\n                            <div class=\"body\">\n                                <component :is=\"body\" v-bind=\"data\"/>\n                            </div>\n                            <div v-if=\"Object.keys(data.actions).length\" class=\"footer\">\n                                <fk-admin-button\n                                    v-for=\"action in data.actions\"\n                                    :key=\"action.id\"\n                                    :type=\"action.type\"\n                                    :disabled=\"action.disabled\"\n                                    @click=\"$emit('action', action, that)\"\n                                >\n                                    <i v-if=\"action.icon\" class=\"fa\" :class=\"action.icon\" />\n                                    {{ action.label }}\n                                </fk-admin-button>\n                            </div>\n                        </div>\n                    </div>",
+        template: "\n                    <div id=\"fk-modal-container\">\n                        <div class=\"backdrop\" @click=\"close\"/>\n                        <div class=\"fk-admin-modal\" :class=\"data.size\">\n                            <div class=\"title\">\n                                <component :is=\"title\" v-bind=\"data\"/>\n                                <a @click.prevent=\"close\" class=\"close\">\n                                    <i class=\"fa fa-times\"/>\n                                </a>\n                            </div>\n                            <div class=\"body\">\n                                <component :is=\"body\" v-bind=\"data\"/>\n                            </div>\n                            <div v-if=\"Object.keys(actions).length\" class=\"footer\">\n                                <fk-admin-button\n                                    v-for=\"action in actions\"\n                                    :key=\"action.id\"\n                                    :type=\"action.meta.button.type\"\n                                    :disabled=\"action.disabled\"\n                                    @click=\"$emit('action', action, that)\"\n                                >\n                                    <i v-if=\"action.meta.button.icon\" class=\"fa\" :class=\"action.meta.button.icon\" />\n                                    {{ action.label }}\n                                </fk-admin-button>\n                            </div>\n                        </div>\n                    </div>",
         methods: {
           close: function close() {
             this.$destroy();
@@ -12835,15 +12811,7 @@ __webpack_require__.r(__webpack_exports__);
       return axios__WEBPACK_IMPORTED_MODULE_0___default.a;
     },
     $isValidationError: function $isValidationError(error) {
-      var _error$response = error.response,
-          _error$response$statu = _error$response.status,
-          status = _error$response$statu === void 0 ? 500 : _error$response$statu,
-          _error$response$data = _error$response.data,
-          _error$response$data$ = _error$response$data.message,
-          message = _error$response$data$ === void 0 ? null : _error$response$data$,
-          _error$response$data$2 = _error$response$data.errors,
-          errors = _error$response$data$2 === void 0 ? null : _error$response$data$2;
-      return status && status === 422 && message && errors;
+      return error.response && error.response.status && error.response.status === 422 && error.response.data && error.response.data.message && error.response.data.errors;
     }
   }
 });

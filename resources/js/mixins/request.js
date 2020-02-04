@@ -27,8 +27,7 @@ export default {
             return axios;
         },
         $isValidationError (error) {
-            const { response: { status = 500, data: { message = null, errors = null } } } = error;
-            return status && status === 422 && message && errors;
+            return error.response && error.response.status && error.response.status === 422 && error.response.data && error.response.data.message && error.response.data.errors;
         }
     }
 }

@@ -36,14 +36,14 @@ export default {
                 data () {
                     return {
                         data: {
-                            actions: {},
                             ...data,
                             // Hack to emit events within child components as the root instance which can be
                             // consumed via this.$modal().$on(...);
                             $emit: (...args) => this.$emit(...args)
                         },
                         body,
-                        title
+                        title,
+                        actions: data.actions
                     };
                 },
                 computed: {
@@ -64,15 +64,15 @@ export default {
                             <div class="body">
                                 <component :is="body" v-bind="data"/>
                             </div>
-                            <div v-if="Object.keys(data.actions).length" class="footer">
+                            <div v-if="Object.keys(actions).length" class="footer">
                                 <fk-admin-button
-                                    v-for="action in data.actions"
+                                    v-for="action in actions"
                                     :key="action.id"
-                                    :type="action.type"
+                                    :type="action.meta.button.type"
                                     :disabled="action.disabled"
                                     @click="$emit('action', action, that)"
                                 >
-                                    <i v-if="action.icon" class="fa" :class="action.icon" />
+                                    <i v-if="action.meta.button.icon" class="fa" :class="action.meta.button.icon" />
                                     {{ action.label }}
                                 </fk-admin-button>
                             </div>

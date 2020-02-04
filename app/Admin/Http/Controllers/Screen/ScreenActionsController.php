@@ -22,7 +22,12 @@ final class ScreenActionsController extends Controller
     {
         $section = $this->admin->getSection($section);
         $screen = $section->getScreen($screen);
-        $action = $screen->getAction($action);
+        $actionIds = explode('.', $action);
+        $action = $screen;
+
+        foreach ($actionIds as $id) {
+            $action = $action->getAction($id);
+        }
 
         if ($action->getDisabled($request) === true) {
             throw new AuthorizationException('You cannot perform this action!');

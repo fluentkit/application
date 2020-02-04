@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace FluentKit\Admin\UI\Screens;
 
-use FluentKit\Admin\UI\Actions\DeleteAction;
+use FluentKit\Admin\UI\Actions\CallbackAction;
+use FluentKit\Admin\UI\Actions\ModalAction;
+use FluentKit\Admin\UI\Actions\ModalCloseAction;
 use FluentKit\Admin\UI\Actions\RouteAction;
 use FluentKit\Admin\UI\ResponseInterface;
 use FluentKit\Admin\UI\Responses\Notification;
@@ -42,15 +44,24 @@ class ModelIndexScreen extends Screen implements ScreenInterface
         );
 
         $this->addAction(
-            (new DeleteAction('delete', ''))
+            (new ModalAction('delete', ''))
                 ->location('table')
+                ->setMeta('button.type', 'danger')
+                ->setMeta('button.icon', 'fa-trash')
+                ->setMeta('modal.title', 'Are you sure?')
+                ->setMeta('modal.size', 'sm')
                 ->setMeta(
                     'modal.body',
                     '<p class="text-center">Please confirm deletion of '.$this->getModelLabel().' ID: <strong>{{ id }}</strong>.</p><p class="text-center text-danger uppercase"><strong>This action cannot be reversed.</strong></p>'
                 )
-                ->setMeta('modal.confirm.label', 'Delete ' . $this->getModelLabel())
-                ->callback([$this, 'deleteModel'])
                 ->disable(fn (Request $request) => $request->get('id') === $request->user()->id)
+                ->addAction(new ModalCloseAction('cancel', 'Cancel'))
+                ->addAction(
+                    (new CallbackAction('confirm', 'Delete ' . $this->getModelLabel()))
+                        ->setMeta('button.type', 'danger')
+                        ->setMeta('button.icon', 'fa-trash')
+                        ->callback([$this, 'deleteModel'])
+                )
         );
     }
 
