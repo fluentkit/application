@@ -12,7 +12,8 @@
 */
 
 Route::get('/', function () {
-    dd(config('mail'));
+    $user = \FluentKit\User::with('app')->first();
+    dd($user->attributesToArray(), $user->toArray(), $user->relationsToArray());
     return '@todo';
 })->name('home');
 

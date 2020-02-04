@@ -2,6 +2,7 @@
 
 namespace FluentKit\Providers;
 
+use FluentKit\Admin\Apps\Apps;
 use FluentKit\Admin\Area;
 use FluentKit\Admin\Dashboard\Dashboards;
 use FluentKit\Admin\Settings\Settings;
@@ -30,6 +31,7 @@ class AdminServiceProvider extends ServiceProvider
     public function boot(Area $admin)
     {
         $admin->serving(function (Area $admin) {
+            $admin->registerSection(new Apps());
             $admin->registerSection(new Dashboards());
             $admin->registerSection(new Users());
             $admin->registerSection(new Settings());
