@@ -67,31 +67,48 @@
                     }, {});
             },
             async performAction (action, data = {}, cb = async () => {}) {
-                if (action.meta.route) {
-                    const { id: name, params: includeParams } = action.meta.route;
-                    const params = {};
-                    includeParams.forEach(p => {
-                        params[p] = data[p];
-                    });
-                    await this.$router.push({ name, params });
-                } else if (action.meta.confirmable) {
-                    const { modal: { title, body, size, cancel, confirm } } = action.meta;
-                    this.$modal(title, body, {
-                            ...data,
-                            size,
-                            actions: {
-                                [cancel.id]: cancel,
-                                [confirm.id]: confirm
-                            }
-                        })
-                        .$on('action', async (modalAction, modal) => {
-                            if (modalAction.id === 'cancel') return modal.close();
-                            await this.submitAction(action, data, cb);
-                            modal.close();
-                        });
-                } else {
-                    await this.submitAction(action, data, cb);
+                if (this.actionIs(action, 'redirect')) {
+                    return this.redirectAction(action, data);
+                } else if (this.actionIs(action, 'confirmable')) {
+                    return this.confirmableAction(action, data, cb);
                 }
+
+                return await this.submitAction(action, data, cb);
+            },
+            actionIs (action, type) {
+                switch (type) {
+                    case 'redirect':
+                        return !!action.meta.route;
+                    case 'confirmable':
+                        return !!action.meta.confirmable;
+                    default:
+                        return false;
+                }
+            },
+            async redirectAction (action, data) {
+                const { id: name, params: includeParams } = action.meta.route;
+                const params = {};
+                includeParams.forEach(p => {
+                    params[p] = data[p];
+                });
+
+                return await this.$router.push({ name, params });
+            },
+            async confirmableAction (action, data, cb) {
+                const { modal: { title, body, size, cancel, confirm } } = action.meta;
+                return this.$modal(title, body, {
+                        ...data,
+                        size,
+                        actions: {
+                            [cancel.id]: cancel,
+                            [confirm.id]: confirm
+                        }
+                    })
+                    .$on('action', async (modalAction, modal) => {
+                        if (modalAction.id === 'cancel') return modal.close();
+                        await this.submitAction(action, data, cb);
+                        modal.close();
+                    });
             },
             async submitAction (action, data = {}, cb = async () => {}) {
                 const disabled = action.disabled;

@@ -3147,30 +3147,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     performAction: function () {
       var _performAction = _asyncToGenerator(
       /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee6(action) {
-        var _this3 = this;
-
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5(action) {
         var data,
             cb,
-            _action$meta$route,
-            name,
-            includeParams,
-            params,
-            _actions,
-            _action$meta$modal,
-            title,
-            body,
-            size,
-            cancel,
-            confirm,
-            _args6 = arguments;
-
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee6$(_context6) {
+            _args5 = arguments;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
           while (1) {
-            switch (_context6.prev = _context6.next) {
+            switch (_context5.prev = _context5.next) {
               case 0:
-                data = _args6.length > 1 && _args6[1] !== undefined ? _args6[1] : {};
-                cb = _args6.length > 2 && _args6[2] !== undefined ? _args6[2] :
+                data = _args5.length > 1 && _args5[1] !== undefined ? _args5[1] : {};
+                cb = _args5.length > 2 && _args5[2] !== undefined ? _args5[2] :
                 /*#__PURE__*/
                 _asyncToGenerator(
                 /*#__PURE__*/
@@ -3186,85 +3172,34 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                   }, _callee4);
                 }));
 
-                if (!action.meta.route) {
-                  _context6.next = 10;
+                if (!this.actionIs(action, 'redirect')) {
+                  _context5.next = 6;
                   break;
                 }
 
-                _action$meta$route = action.meta.route, name = _action$meta$route.id, includeParams = _action$meta$route.params;
-                params = {};
-                includeParams.forEach(function (p) {
-                  params[p] = data[p];
-                });
-                _context6.next = 8;
-                return this.$router.push({
-                  name: name,
-                  params: params
-                });
+                return _context5.abrupt("return", this.redirectAction(action, data));
+
+              case 6:
+                if (!this.actionIs(action, 'confirmable')) {
+                  _context5.next = 8;
+                  break;
+                }
+
+                return _context5.abrupt("return", this.confirmableAction(action, data, cb));
 
               case 8:
-                _context6.next = 17;
-                break;
-
-              case 10:
-                if (!action.meta.confirmable) {
-                  _context6.next = 15;
-                  break;
-                }
-
-                _action$meta$modal = action.meta.modal, title = _action$meta$modal.title, body = _action$meta$modal.body, size = _action$meta$modal.size, cancel = _action$meta$modal.cancel, confirm = _action$meta$modal.confirm;
-                this.$modal(title, body, _objectSpread({}, data, {
-                  size: size,
-                  actions: (_actions = {}, _defineProperty(_actions, cancel.id, cancel), _defineProperty(_actions, confirm.id, confirm), _actions)
-                })).$on('action',
-                /*#__PURE__*/
-                function () {
-                  var _ref5 = _asyncToGenerator(
-                  /*#__PURE__*/
-                  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5(modalAction, modal) {
-                    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
-                      while (1) {
-                        switch (_context5.prev = _context5.next) {
-                          case 0:
-                            if (!(modalAction.id === 'cancel')) {
-                              _context5.next = 2;
-                              break;
-                            }
-
-                            return _context5.abrupt("return", modal.close());
-
-                          case 2:
-                            _context5.next = 4;
-                            return _this3.submitAction(action, data, cb);
-
-                          case 4:
-                            modal.close();
-
-                          case 5:
-                          case "end":
-                            return _context5.stop();
-                        }
-                      }
-                    }, _callee5);
-                  }));
-
-                  return function (_x3, _x4) {
-                    return _ref5.apply(this, arguments);
-                  };
-                }());
-                _context6.next = 17;
-                break;
-
-              case 15:
-                _context6.next = 17;
+                _context5.next = 10;
                 return this.submitAction(action, data, cb);
 
-              case 17:
+              case 10:
+                return _context5.abrupt("return", _context5.sent);
+
+              case 11:
               case "end":
-                return _context6.stop();
+                return _context5.stop();
             }
           }
-        }, _callee6, this);
+        }, _callee5, this);
       }));
 
       function performAction(_x2) {
@@ -3273,88 +3208,206 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       return performAction;
     }(),
+    actionIs: function actionIs(action, type) {
+      switch (type) {
+        case 'redirect':
+          return !!action.meta.route;
+
+        case 'confirmable':
+          return !!action.meta.confirmable;
+
+        default:
+          return false;
+      }
+    },
+    redirectAction: function () {
+      var _redirectAction = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee6(action, data) {
+        var _action$meta$route, name, includeParams, params;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee6$(_context6) {
+          while (1) {
+            switch (_context6.prev = _context6.next) {
+              case 0:
+                _action$meta$route = action.meta.route, name = _action$meta$route.id, includeParams = _action$meta$route.params;
+                params = {};
+                includeParams.forEach(function (p) {
+                  params[p] = data[p];
+                });
+                _context6.next = 5;
+                return this.$router.push({
+                  name: name,
+                  params: params
+                });
+
+              case 5:
+                return _context6.abrupt("return", _context6.sent);
+
+              case 6:
+              case "end":
+                return _context6.stop();
+            }
+          }
+        }, _callee6, this);
+      }));
+
+      function redirectAction(_x3, _x4) {
+        return _redirectAction.apply(this, arguments);
+      }
+
+      return redirectAction;
+    }(),
+    confirmableAction: function () {
+      var _confirmableAction = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee8(action, data, cb) {
+        var _actions,
+            _this3 = this;
+
+        var _action$meta$modal, title, body, size, cancel, confirm;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee8$(_context8) {
+          while (1) {
+            switch (_context8.prev = _context8.next) {
+              case 0:
+                _action$meta$modal = action.meta.modal, title = _action$meta$modal.title, body = _action$meta$modal.body, size = _action$meta$modal.size, cancel = _action$meta$modal.cancel, confirm = _action$meta$modal.confirm;
+                return _context8.abrupt("return", this.$modal(title, body, _objectSpread({}, data, {
+                  size: size,
+                  actions: (_actions = {}, _defineProperty(_actions, cancel.id, cancel), _defineProperty(_actions, confirm.id, confirm), _actions)
+                })).$on('action',
+                /*#__PURE__*/
+                function () {
+                  var _ref5 = _asyncToGenerator(
+                  /*#__PURE__*/
+                  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee7(modalAction, modal) {
+                    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee7$(_context7) {
+                      while (1) {
+                        switch (_context7.prev = _context7.next) {
+                          case 0:
+                            if (!(modalAction.id === 'cancel')) {
+                              _context7.next = 2;
+                              break;
+                            }
+
+                            return _context7.abrupt("return", modal.close());
+
+                          case 2:
+                            _context7.next = 4;
+                            return _this3.submitAction(action, data, cb);
+
+                          case 4:
+                            modal.close();
+
+                          case 5:
+                          case "end":
+                            return _context7.stop();
+                        }
+                      }
+                    }, _callee7);
+                  }));
+
+                  return function (_x8, _x9) {
+                    return _ref5.apply(this, arguments);
+                  };
+                }()));
+
+              case 2:
+              case "end":
+                return _context8.stop();
+            }
+          }
+        }, _callee8, this);
+      }));
+
+      function confirmableAction(_x5, _x6, _x7) {
+        return _confirmableAction.apply(this, arguments);
+      }
+
+      return confirmableAction;
+    }(),
     submitAction: function () {
       var _submitAction = _asyncToGenerator(
       /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee8(action) {
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee10(action) {
         var data,
             cb,
             disabled,
             $section,
             $screen,
             response,
-            _args8 = arguments;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee8$(_context8) {
+            _args10 = arguments;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee10$(_context10) {
           while (1) {
-            switch (_context8.prev = _context8.next) {
+            switch (_context10.prev = _context10.next) {
               case 0:
-                data = _args8.length > 1 && _args8[1] !== undefined ? _args8[1] : {};
-                cb = _args8.length > 2 && _args8[2] !== undefined ? _args8[2] :
+                data = _args10.length > 1 && _args10[1] !== undefined ? _args10[1] : {};
+                cb = _args10.length > 2 && _args10[2] !== undefined ? _args10[2] :
                 /*#__PURE__*/
                 _asyncToGenerator(
                 /*#__PURE__*/
-                _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee7() {
-                  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee7$(_context7) {
+                _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee9() {
+                  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee9$(_context9) {
                     while (1) {
-                      switch (_context7.prev = _context7.next) {
+                      switch (_context9.prev = _context9.next) {
                         case 0:
                         case "end":
-                          return _context7.stop();
+                          return _context9.stop();
                       }
                     }
-                  }, _callee7);
+                  }, _callee9);
                 }));
                 disabled = action.disabled;
-                _context8.prev = 3;
+                _context10.prev = 3;
                 action.disabled = true;
                 this.$progress().start();
                 $section = this.$section, $screen = this.$screen;
-                _context8.next = 9;
+                _context10.next = 9;
                 return this.$form.post(Object(_utils_url__WEBPACK_IMPORTED_MODULE_6__["default"])(_templateObject2(), $section.id, $screen.id, action.id) + this.requestQuery, data);
 
               case 9:
-                response = _context8.sent;
-                _context8.next = 12;
+                response = _context10.sent;
+                _context10.next = 12;
                 return this.handleActionResponse(response.data);
 
               case 12:
-                _context8.next = 14;
+                _context10.next = 14;
                 return this.$screen.get('attributes');
 
               case 14:
-                this.attributes = _context8.sent;
-                _context8.next = 17;
+                this.attributes = _context10.sent;
+                _context10.next = 17;
                 return cb(response);
 
               case 17:
-                _context8.next = 22;
+                _context10.next = 22;
                 break;
 
               case 19:
-                _context8.prev = 19;
-                _context8.t0 = _context8["catch"](3);
+                _context10.prev = 19;
+                _context10.t0 = _context10["catch"](3);
 
-                if (this.$isValidationError(_context8.t0)) {
+                if (this.$isValidationError(_context10.t0)) {
                   this.$error(this.$form.message);
                 } else {
-                  this.$error(_context8.t0);
+                  this.$error(_context10.t0);
                 }
 
               case 22:
-                _context8.prev = 22;
+                _context10.prev = 22;
                 action.disabled = disabled;
                 this.$progress().done();
-                return _context8.finish(22);
+                return _context10.finish(22);
 
               case 26:
               case "end":
-                return _context8.stop();
+                return _context10.stop();
             }
           }
-        }, _callee8, this, [[3, 19, 22, 26]]);
+        }, _callee10, this, [[3, 19, 22, 26]]);
       }));
 
-      function submitAction(_x5) {
+      function submitAction(_x10) {
         return _submitAction.apply(this, arguments);
       }
 
@@ -3363,27 +3416,27 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     handleActionResponse: function () {
       var _handleActionResponse = _asyncToGenerator(
       /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee9(data) {
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee11(data) {
         var message, type, meta, _meta$redirect, _url, route, params, notification;
 
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee9$(_context9) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee11$(_context11) {
           while (1) {
-            switch (_context9.prev = _context9.next) {
+            switch (_context11.prev = _context11.next) {
               case 0:
                 message = data.message, type = data.type, meta = data.meta;
 
                 if (!(type === 'notification')) {
-                  _context9.next = 5;
+                  _context11.next = 5;
                   break;
                 }
 
                 this['$' + meta.toast.type](message);
-                _context9.next = 18;
+                _context11.next = 18;
                 break;
 
               case 5:
                 if (!(type === 'redirect')) {
-                  _context9.next = 18;
+                  _context11.next = 18;
                   break;
                 }
 
@@ -3394,38 +3447,38 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 }
 
                 if (!_url) {
-                  _context9.next = 11;
+                  _context11.next = 11;
                   break;
                 }
 
                 window.location.href = _url;
-                return _context9.abrupt("return");
+                return _context11.abrupt("return");
 
               case 11:
-                _context9.prev = 11;
-                _context9.next = 14;
+                _context11.prev = 11;
+                _context11.next = 14;
                 return this.$router.push({
                   name: route,
                   params: params
                 });
 
               case 14:
-                _context9.next = 18;
+                _context11.next = 18;
                 break;
 
               case 16:
-                _context9.prev = 16;
-                _context9.t0 = _context9["catch"](11);
+                _context11.prev = 16;
+                _context11.t0 = _context11["catch"](11);
 
               case 18:
               case "end":
-                return _context9.stop();
+                return _context11.stop();
             }
           }
-        }, _callee9, this, [[11, 16]]);
+        }, _callee11, this, [[11, 16]]);
       }));
 
-      function handleActionResponse(_x6) {
+      function handleActionResponse(_x11) {
         return _handleActionResponse.apply(this, arguments);
       }
 
