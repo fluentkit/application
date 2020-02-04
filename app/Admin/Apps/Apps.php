@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace FluentKit\Admin\Apps;
 
+use FluentKit\Admin\UI\Fields\Checkbox;
 use FluentKit\Admin\UI\Fields\Number;
 use FluentKit\Admin\UI\Fields\Panel;
 use FluentKit\Admin\UI\Fields\Text;
@@ -21,7 +22,7 @@ final class Apps extends ModelSection
         $this->indexFields([
                 (new Number('id', 'ID')),
                 (new Text('name', 'Name')),
-                (new Number('master', 'Master')),
+                (new Checkbox('master', 'Master'))->align('center'),
                 (new Text('created_at', 'Created At')),
                 (new Text('updated_at', 'Updated At'))
             ])
@@ -33,6 +34,7 @@ final class Apps extends ModelSection
             ->editFields([
                 new Panel('details', 'App Details', '', [
                     (new Text('name', 'Name'))->rules(['required', 'string', 'unique:apps,name,{$id}']),
+                    (new Checkbox('master', 'Master'))->readOnly(),
                     (new Text('created_at', 'Created At'))->readOnly(),
                     (new Text('updated_at', 'Updated At'))->readOnly()
                 ]),

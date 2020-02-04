@@ -18,6 +18,8 @@ interface FieldInterface
 
     public function layout(string $layout): self;
 
+    public function align(string $align): self;
+
     public function required(callable $callback): self;
 
     public function rules(array $rules): self;
@@ -33,6 +35,8 @@ interface FieldInterface
     public function getLabel(): string;
 
     public function getLayout(): string;
+
+    public function getAlign(): string;
 
     public function getRules(): array;
 

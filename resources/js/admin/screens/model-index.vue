@@ -31,14 +31,14 @@
         <table>
             <thead>
                 <tr>
-                    <th v-for="field in fields">{{ field.label }}</th>
+                    <th v-for="field in fields" :key="`${field.id}-header`" :class="field.align">{{ field.label }}</th>
                     <th class="actions"></th>
                 </tr>
             </thead>
             <tbody>
                 <template v-if="models.length">
                     <tr v-for="model in models" :key="model.id">
-                        <td v-for="field in fields" :key="field.id">
+                        <td v-for="field in fields" :key="field.id" :class="field.align">
                             <component
                                 v-if="!field.hidden"
                                 :is="field.component"
@@ -183,12 +183,20 @@
         @apply .px-4 .py-2 .border-b .bg-gray-200 .text-left .text-xs .uppercase .font-semibold .text-gray-600;
     }
 
+    .fk-admin-screen-model-index table th.center {
+        @apply .text-center;
+    }
+
     .fk-admin-screen-model-index table tbody tr:hover {
         @apply .bg-gray-100;
     }
 
     .fk-admin-screen-model-index table td {
         @apply .px-4 .py-3;
+    }
+
+    .fk-admin-screen-model-index table td.center {
+        @apply .text-center;
     }
 
     .fk-admin-screen-model-index table td.no-results {

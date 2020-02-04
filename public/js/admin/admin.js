@@ -1909,6 +1909,71 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/admin/components/elements/field/checkbox.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/admin/components/elements/field/checkbox.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'fk-admin-field-checkbox',
+  props: {
+    field: {
+      type: Object,
+      required: true
+    },
+    errors: {
+      type: Object,
+      required: true
+    },
+    value: {
+      type: Object,
+      required: true
+    }
+  },
+  methods: {
+    updateValue: function updateValue() {
+      var payload = _objectSpread({}, this.value, _defineProperty({}, this.field.id, !this.value[this.field.id]));
+
+      this.$emit('input', payload);
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/admin/components/elements/field/group.vue?vue&type=script&lang=js&":
 /*!*************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/admin/components/elements/field/group.vue?vue&type=script&lang=js& ***!
@@ -5814,6 +5879,63 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/admin/components/elements/field/checkbox.vue?vue&type=template&id=09a6fb15&":
+/*!********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/admin/components/elements/field/checkbox.vue?vue&type=template&id=09a6fb15& ***!
+  \********************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "fk-admin-field-row",
+    { attrs: { field: _vm.field, errors: _vm.errors } },
+    [
+      _c(
+        "label",
+        {
+          staticClass: "fk-admin-field-checkbox",
+          class: { error: _vm.errors.has(_vm.field.id) },
+          attrs: { id: "field-" + _vm.field.id }
+        },
+        [
+          _c("input", {
+            attrs: {
+              type: "checkbox",
+              disabled: _vm.field.disabled || _vm.field.readOnly
+            },
+            domProps: { checked: _vm.value[_vm.field.id] },
+            on: { click: _vm.updateValue }
+          }),
+          _vm._v(" "),
+          _vm.field.meta.checkbox.label
+            ? _c("span", [
+                _vm._v(
+                  "\n            " +
+                    _vm._s(_vm.field.meta.checkbox.label) +
+                    "\n        "
+                )
+              ])
+            : _vm._e()
+        ]
+      )
+    ]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/admin/components/elements/field/group.vue?vue&type=template&id=f0ac74c6&":
 /*!*****************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/admin/components/elements/field/group.vue?vue&type=template&id=f0ac74c6& ***!
@@ -6816,7 +6938,11 @@ var render = function() {
               "tr",
               [
                 _vm._l(_vm.fields, function(field) {
-                  return _c("th", [_vm._v(_vm._s(field.label))])
+                  return _c(
+                    "th",
+                    { key: field.id + "-header", class: field.align },
+                    [_vm._v(_vm._s(field.label))]
+                  )
                 }),
                 _vm._v(" "),
                 _c("th", { staticClass: "actions" })
@@ -6837,7 +6963,7 @@ var render = function() {
                         _vm._l(_vm.fields, function(field) {
                           return _c(
                             "td",
-                            { key: field.id },
+                            { key: field.id, class: field.align },
                             [
                               !field.hidden
                                 ? _c(field.component, {
@@ -10075,7 +10201,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   registerComponents([// layout
   __webpack_require__(/*! ./components/layout/background */ "./resources/js/admin/components/layout/background.vue")["default"], // elements
   __webpack_require__(/*! ./components/elements/title */ "./resources/js/admin/components/elements/title.vue")["default"], __webpack_require__(/*! ./components/elements/panel */ "./resources/js/admin/components/elements/panel.vue")["default"], __webpack_require__(/*! ./components/elements/button */ "./resources/js/admin/components/elements/button.vue")["default"], __webpack_require__(/*! ./components/elements/pagination */ "./resources/js/admin/components/elements/pagination.vue")["default"], // fields
-  __webpack_require__(/*! ./components/elements/field/row */ "./resources/js/admin/components/elements/field/row.vue")["default"], __webpack_require__(/*! ./components/elements/field/panel */ "./resources/js/admin/components/elements/field/panel.vue")["default"], __webpack_require__(/*! ./components/elements/field/group */ "./resources/js/admin/components/elements/field/group.vue")["default"], __webpack_require__(/*! ./components/elements/field/label */ "./resources/js/admin/components/elements/field/label.vue")["default"], __webpack_require__(/*! ./components/elements/field/input */ "./resources/js/admin/components/elements/field/input.vue")["default"], __webpack_require__(/*! ./components/elements/field/keyValue */ "./resources/js/admin/components/elements/field/keyValue.vue")["default"], // form
+  __webpack_require__(/*! ./components/elements/field/row */ "./resources/js/admin/components/elements/field/row.vue")["default"], __webpack_require__(/*! ./components/elements/field/panel */ "./resources/js/admin/components/elements/field/panel.vue")["default"], __webpack_require__(/*! ./components/elements/field/group */ "./resources/js/admin/components/elements/field/group.vue")["default"], __webpack_require__(/*! ./components/elements/field/label */ "./resources/js/admin/components/elements/field/label.vue")["default"], __webpack_require__(/*! ./components/elements/field/input */ "./resources/js/admin/components/elements/field/input.vue")["default"], __webpack_require__(/*! ./components/elements/field/checkbox */ "./resources/js/admin/components/elements/field/checkbox.vue")["default"], __webpack_require__(/*! ./components/elements/field/keyValue */ "./resources/js/admin/components/elements/field/keyValue.vue")["default"], // form
   __webpack_require__(/*! ./components/elements/form-actions */ "./resources/js/admin/components/elements/form-actions.vue")["default"]]);
   return new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
     router: Object(_router__WEBPACK_IMPORTED_MODULE_1__["default"])(config),
@@ -10182,6 +10308,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_button_vue_vue_type_template_id_9bb755e2___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_button_vue_vue_type_template_id_9bb755e2___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/admin/components/elements/field/checkbox.vue":
+/*!*******************************************************************!*\
+  !*** ./resources/js/admin/components/elements/field/checkbox.vue ***!
+  \*******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _checkbox_vue_vue_type_template_id_09a6fb15___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./checkbox.vue?vue&type=template&id=09a6fb15& */ "./resources/js/admin/components/elements/field/checkbox.vue?vue&type=template&id=09a6fb15&");
+/* harmony import */ var _checkbox_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./checkbox.vue?vue&type=script&lang=js& */ "./resources/js/admin/components/elements/field/checkbox.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _checkbox_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _checkbox_vue_vue_type_template_id_09a6fb15___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _checkbox_vue_vue_type_template_id_09a6fb15___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/admin/components/elements/field/checkbox.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/admin/components/elements/field/checkbox.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************!*\
+  !*** ./resources/js/admin/components/elements/field/checkbox.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_checkbox_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./checkbox.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/admin/components/elements/field/checkbox.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_checkbox_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/admin/components/elements/field/checkbox.vue?vue&type=template&id=09a6fb15&":
+/*!**************************************************************************************************!*\
+  !*** ./resources/js/admin/components/elements/field/checkbox.vue?vue&type=template&id=09a6fb15& ***!
+  \**************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_checkbox_vue_vue_type_template_id_09a6fb15___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./checkbox.vue?vue&type=template&id=09a6fb15& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/admin/components/elements/field/checkbox.vue?vue&type=template&id=09a6fb15&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_checkbox_vue_vue_type_template_id_09a6fb15___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_checkbox_vue_vue_type_template_id_09a6fb15___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

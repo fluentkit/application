@@ -10,16 +10,19 @@ use FluentKit\Admin\UI\Traits\CanBeHidden;
 use FluentKit\Admin\UI\Traits\CanBeReadOnly;
 use FluentKit\Admin\UI\Traits\HasId;
 use FluentKit\Admin\UI\Traits\HasLabel;
+use FluentKit\Admin\UI\Traits\HasMeta;
 use FluentKit\Admin\UI\Traits\HasPriority;
 use Illuminate\Http\Request;
 
 abstract class Field implements FieldInterface
 {
-    use HasId, HasLabel, HasPriority, CanBeDisabled, CanBeReadOnly, CanBeHidden;
+    use HasId, HasLabel, HasPriority, CanBeDisabled, CanBeReadOnly, CanBeHidden, HasMeta;
 
     protected ?string $description;
 
     protected string $layout = 'left';
+
+    protected string $align = 'left';
 
     protected string $component = 'fk-admin-field-input';
 
@@ -28,6 +31,8 @@ abstract class Field implements FieldInterface
     protected array $rules = [];
 
     protected array $defaultRules = [];
+
+    protected array $meta = [];
 
     public function __construct(string $id, string $label, string $description = '')
     {
@@ -42,6 +47,13 @@ abstract class Field implements FieldInterface
     public function layout(string $layout): FieldInterface
     {
         $this->layout = $layout;
+
+        return $this;
+    }
+
+    public function align(string $align): FieldInterface
+    {
+        $this->align = $align;
 
         return $this;
     }
@@ -65,6 +77,11 @@ abstract class Field implements FieldInterface
         return $this->layout;
     }
 
+    public function getAlign(): string
+    {
+        return $this->align;
+    }
+
     public function getRules(): array
     {
         return [$this->getId() => array_unique(array_merge($this->rules, $this->defaultRules))];
@@ -79,6 +96,7 @@ abstract class Field implements FieldInterface
             'priority' => $this->getPriority(),
             'label' => $this->getLabel(),
             'layout' => $this->getLayout(),
+            'align' => $this->getAlign(),
             'required' => in_array('required', $rules) || call_user_func($this->requiredCallback, $request),
             'disabled' => $this->getDisabled($request),
             'readOnly' => $this->getReadOnly($request),
@@ -86,6 +104,7 @@ abstract class Field implements FieldInterface
             'type' => static::FIELD_TYPE,
             'description' => $this->description,
             'component' => $this->component,
+            'meta' => $this->getMeta(),
         ];
     }
 
