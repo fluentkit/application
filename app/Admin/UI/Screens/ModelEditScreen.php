@@ -13,12 +13,13 @@ use FluentKit\Admin\UI\Responses\Notification;
 use FluentKit\Admin\UI\Responses\Redirect;
 use FluentKit\Admin\UI\ScreenInterface;
 use FluentKit\Admin\UI\Traits\HasModel;
+use FluentKit\Admin\UI\Traits\LoadsRelations;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 
 class ModelEditScreen extends FormScreen implements ScreenInterface
 {
-    use HasModel;
+    use HasModel, LoadsRelations;
 
     public function __construct(string $model)
     {
@@ -55,13 +56,13 @@ class ModelEditScreen extends FormScreen implements ScreenInterface
 
     public function getAttributes(Request $request): array
     {
-        return $this->newModelQuery()->findOrFail($request->get('id'))->attributesToArray();
+        return $this->newModelQuery()->with($this->getWith($request))->findOrFail($request->get('id'))->toArray();
     }
 
     public function updateModel(Request $request): ResponseInterface
     {
         $fields = $this->getFieldKeys($request);
-        $model = $this->newModelQuery()->findOrFail($request->get('id'));
+        $model = $this->newModelQuery()->with($this->getWith($request))->findOrFail($request->get('id'));
         $forUpdate = Arr::only($request->get('attributes'), $fields);
 
         $model->fill($forUpdate);

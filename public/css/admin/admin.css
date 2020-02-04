@@ -42,77 +42,6 @@
   margin-bottom: 1.5rem;
   margin-left: 0.5rem;
 }
-.fk-admin-screen-model-index > .actions {
-  padding: 1rem;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  background-color: #fff;
-  border-top-left-radius: 0.25rem;
-  border-top-right-radius: 0.25rem;
-  border-bottom-width: 1px;
-}
-.fk-admin-screen-model-index table {
-  table-layout: auto;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  background-color: #fff;
-}
-.fk-admin-screen-model-index table tr {
-  border-bottom-width: 1px;
-}
-.fk-admin-screen-model-index table th {
-  padding-left: 1rem;
-  padding-right: 1rem;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  border-bottom-width: 1px;
-  background-color: #edf2f7;
-  text-align: left;
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  font-weight: 600;
-  color: #718096;
-}
-.fk-admin-screen-model-index table th.center {
-  text-align: center;
-}
-.fk-admin-screen-model-index table tbody tr:hover {
-  background-color: #f7fafc;
-}
-.fk-admin-screen-model-index table td {
-  padding-left: 1rem;
-  padding-right: 1rem;
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
-}
-.fk-admin-screen-model-index table td.center {
-  text-align: center;
-}
-.fk-admin-screen-model-index table td.no-results {
-  text-align: center;
-}
-.fk-admin-screen-model-index table td.actions {
-  display: flex;
-  justify-content: flex-end;
-}
-.fk-admin-screen-model-index table .fk-admin-button {
-  margin-bottom: 0;
-  margin-left: 0.5rem;
-}
-.fk-admin-screen-model-index > .pagination {
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  background-color: #f7fafc;
-  border-bottom-right-radius: 0.25rem;
-  border-bottom-left-radius: 0.25rem;
-  display: flex;
-}
-.fk-admin-screen-model-index > .pagination > .totals {
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  color: #718096;
-  font-size: 0.875rem;
-  margin-left: auto;
-}
 .fk-admin-user {
   display: flex;
   display: block;
@@ -1244,6 +1173,81 @@ html {
   background-color: #c53030;
   color: #e2e8f0;
 }
+.fk-admin-table {
+  display: flex;
+  flex-direction: column;
+}
+.fk-admin-table > .header-actions {
+  padding: 1rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  background-color: #fff;
+  border-top-left-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
+  border-bottom-width: 1px;
+}
+.fk-admin-table table {
+  table-layout: auto;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  background-color: #fff;
+}
+.fk-admin-table table tr {
+  border-bottom-width: 1px;
+}
+.fk-admin-table table th {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom-width: 1px;
+  background-color: #edf2f7;
+  text-align: left;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #718096;
+}
+.fk-admin-table table th.center {
+  text-align: center;
+}
+.fk-admin-table table tbody tr:hover {
+  background-color: #f7fafc;
+}
+.fk-admin-table table td {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+.fk-admin-table table td.center {
+  text-align: center;
+}
+.fk-admin-table table td.no-results {
+  text-align: center;
+}
+.fk-admin-table table td.actions {
+  display: flex;
+  justify-content: flex-end;
+}
+.fk-admin-table table .fk-admin-button {
+  margin-bottom: 0;
+  margin-left: 0.5rem;
+}
+.fk-admin-table > .pagination {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  background-color: #f7fafc;
+  border-bottom-right-radius: 0.25rem;
+  border-bottom-left-radius: 0.25rem;
+  display: flex;
+}
+.fk-admin-table > .pagination > .totals {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  color: #718096;
+  font-size: 0.875rem;
+  margin-left: auto;
+}
 .fk-admin-pagination {
   display: flex;
 }
@@ -1411,6 +1415,16 @@ input.fk-admin-field-input.error {
 }
 .fk-admin-field-key-value .fk-admin-button {
   margin-bottom: 0;
+}
+.fk-admin-field-has-many {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2.5rem;
+}
+.fk-admin-field-has-many > .description {
+  color: #718096;
+  font-style: italic;
+  margin-bottom: 1rem;
 }
 .fk-admin-form-actions > .fk-admin-button {
   margin-right: 0.5rem;

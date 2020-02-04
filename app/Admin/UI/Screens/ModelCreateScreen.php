@@ -10,12 +10,13 @@ use FluentKit\Admin\UI\Responses\Notification;
 use FluentKit\Admin\UI\Responses\Redirect;
 use FluentKit\Admin\UI\ScreenInterface;
 use FluentKit\Admin\UI\Traits\HasModel;
+use FluentKit\Admin\UI\Traits\LoadsRelations;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 
 class ModelCreateScreen extends FormScreen implements ScreenInterface
 {
-    use HasModel;
+    use HasModel, LoadsRelations;
 
     public function __construct(string $model)
     {
@@ -31,7 +32,7 @@ class ModelCreateScreen extends FormScreen implements ScreenInterface
 
     public function getAttributes(Request $request): array
     {
-        return $this->newModelInstance()->attributesToArray();
+        return $this->newModelInstance()->toArray();
     }
 
     public function createModel(Request $request): ResponseInterface

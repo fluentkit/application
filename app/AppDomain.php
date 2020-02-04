@@ -4,7 +4,7 @@ namespace FluentKit;
 
 use Illuminate\Database\Eloquent\Model;
 
-class App extends Model
+class AppDomain extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -12,8 +12,8 @@ class App extends Model
      * @var array
      */
     protected $fillable = [
-        'name',
-        'master'
+        'domain',
+        'app_id'
     ];
 
     /**
@@ -22,12 +22,11 @@ class App extends Model
      * @var array
      */
     protected $casts = [
-        'name' => 'string',
-        'master' => 'bool',
+        'domain' => 'string',
     ];
 
-    public function domains()
+    public function app()
     {
-        return $this->hasMany(AppDomain::class);
+        return $this->belongsTo(App::class);
     }
 }

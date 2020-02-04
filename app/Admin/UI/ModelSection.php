@@ -9,10 +9,11 @@ use FluentKit\Admin\UI\Screens\ModelIndexScreen;
 use FluentKit\Admin\UI\Screens\ModelEditScreen;
 use FluentKit\Admin\UI\Traits\HasFields;
 use FluentKit\Admin\UI\Traits\HasModel;
+use FluentKit\Admin\UI\Traits\LoadsRelations;
 
 class ModelSection extends Section
 {
-    use HasFields, HasModel;
+    use HasFields, HasModel, LoadsRelations;
 
     public function __construct(string $model)
     {
@@ -26,6 +27,7 @@ class ModelSection extends Section
         $screen = $this->getScreen('index');
         if (!$screen) {
             $screen = new ModelIndexScreen($this->getModel());
+            $screen->with($this->with);
             $this->registerScreen($screen);
         }
 
@@ -41,6 +43,7 @@ class ModelSection extends Section
         $screen = $this->getScreen('create');
         if (!$screen) {
             $screen = new ModelCreateScreen($this->getModel());
+            $screen->with($this->with);
             $this->registerScreen($screen);
         }
 
@@ -56,6 +59,7 @@ class ModelSection extends Section
         $screen = $this->getScreen('edit');
         if (!$screen) {
             $screen = new ModelEditScreen($this->getModel());
+            $screen->with($this->with);
             $this->registerScreen($screen);
         }
 

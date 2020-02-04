@@ -13,12 +13,13 @@ use FluentKit\Admin\UI\Responses\Notification;
 use FluentKit\Admin\UI\Responses\Redirect;
 use FluentKit\Admin\UI\ScreenInterface;
 use FluentKit\Admin\UI\Traits\HasModel;
+use FluentKit\Admin\UI\Traits\LoadsRelations;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
 class ModelIndexScreen extends Screen implements ScreenInterface
 {
-    use HasModel;
+    use HasModel, LoadsRelations;
 
     protected string $type = 'model-index';
 

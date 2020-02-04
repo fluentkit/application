@@ -12,8 +12,8 @@
 */
 
 Route::get('/', function () {
-    $user = \FluentKit\User::with('app')->first();
-    dd($user->attributesToArray(), $user->toArray(), $user->relationsToArray());
+    $app = \FluentKit\App::with('domains')->first();
+    dd($app->attributesToArray(), $app->toArray(), $app->relationsToArray());
     return '@todo';
 })->name('home');
 

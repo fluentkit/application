@@ -18,6 +18,7 @@ export default config => {
         require('./components/elements/title').default,
         require('./components/elements/panel').default,
         require('./components/elements/button').default,
+        require('./components/elements/table').default,
         require('./components/elements/pagination').default,
         // fields
         require('./components/elements/field/row').default,
@@ -27,6 +28,7 @@ export default config => {
         require('./components/elements/field/input').default,
         require('./components/elements/field/checkbox').default,
         require('./components/elements/field/keyValue').default,
+        require('./components/elements/field/hasMany').default,
         // form
         require('./components/elements/form-actions').default,
     ]);
