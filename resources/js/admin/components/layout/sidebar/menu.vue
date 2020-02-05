@@ -1,6 +1,6 @@
 <template>
     <ul class="fk-admin-sidebar-menu">
-        <li v-for="section in sections" :key="section.id" :id="'section-'+section.id" class="item">
+        <li v-for="section in sections" :key="section.id" v-if="!section.hidden" :id="'section-'+section.id" class="item">
             <router-link :to="{ name: section.id }">
                 <i class="fas mr-2" :class="section.icon" />
                 {{ section.label }}

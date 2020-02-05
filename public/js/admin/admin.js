@@ -7147,59 +7147,61 @@ var render = function() {
     "ul",
     { staticClass: "fk-admin-sidebar-menu" },
     _vm._l(_vm.sections, function(section) {
-      return _c(
-        "li",
-        {
-          key: section.id,
-          staticClass: "item",
-          attrs: { id: "section-" + section.id }
-        },
-        [
-          _c("router-link", { attrs: { to: { name: section.id } } }, [
-            _c("i", { staticClass: "fas mr-2", class: section.icon }),
-            _vm._v("\n            " + _vm._s(section.label) + "\n        ")
-          ]),
-          _vm._v(" "),
-          Object.keys(section.screens).length
-            ? _c(
-                "ul",
-                { staticClass: "sub-menu" },
-                _vm._l(section.screens, function(screen) {
-                  return !screen.hidden
-                    ? _c(
-                        "li",
-                        {
-                          key: screen.id,
-                          staticClass: "item",
-                          attrs: { id: "screen-" + screen.id }
-                        },
-                        [
-                          _c(
-                            "router-link",
+      return !section.hidden
+        ? _c(
+            "li",
+            {
+              key: section.id,
+              staticClass: "item",
+              attrs: { id: "section-" + section.id }
+            },
+            [
+              _c("router-link", { attrs: { to: { name: section.id } } }, [
+                _c("i", { staticClass: "fas mr-2", class: section.icon }),
+                _vm._v("\n            " + _vm._s(section.label) + "\n        ")
+              ]),
+              _vm._v(" "),
+              Object.keys(section.screens).length
+                ? _c(
+                    "ul",
+                    { staticClass: "sub-menu" },
+                    _vm._l(section.screens, function(screen) {
+                      return !screen.hidden
+                        ? _c(
+                            "li",
                             {
-                              attrs: {
-                                to: { name: section.id + "." + screen.id }
-                              }
+                              key: screen.id,
+                              staticClass: "item",
+                              attrs: { id: "screen-" + screen.id }
                             },
                             [
-                              _vm._v(
-                                "\n                    " +
-                                  _vm._s(screen.label) +
-                                  "\n                "
+                              _c(
+                                "router-link",
+                                {
+                                  attrs: {
+                                    to: { name: section.id + "." + screen.id }
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                    " +
+                                      _vm._s(screen.label) +
+                                      "\n                "
+                                  )
+                                ]
                               )
-                            ]
+                            ],
+                            1
                           )
-                        ],
-                        1
-                      )
-                    : _vm._e()
-                }),
-                0
-              )
-            : _vm._e()
-        ],
-        1
-      )
+                        : _vm._e()
+                    }),
+                    0
+                  )
+                : _vm._e()
+            ],
+            1
+          )
+        : _vm._e()
     }),
     0
   )

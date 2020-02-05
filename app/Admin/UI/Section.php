@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace FluentKit\Admin\UI;
 
+use FluentKit\Admin\UI\Traits\CanBeHidden;
 use FluentKit\Admin\UI\Traits\HasIcon;
 use FluentKit\Admin\UI\Traits\HasId;
 use FluentKit\Admin\UI\Traits\HasLabel;
@@ -12,7 +13,7 @@ use Illuminate\Http\Request;
 
 class Section implements SectionInterface
 {
-    use HasId, HasIcon, HasLabel, HasPriority;
+    use HasId, HasIcon, HasLabel, HasPriority, CanBeHidden;
 
     protected array $screens = [];
 
@@ -38,7 +39,8 @@ class Section implements SectionInterface
             'screens' => collect($this->screens)
                 ->map(fn (ScreenInterface $screen) => $screen->toArray($request))
                 ->sortBy('priority')
-                ->toArray()
+                ->toArray(),
+            'hidden' => $this->getHidden($request)
         ];
     }
 }
