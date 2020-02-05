@@ -1300,7 +1300,7 @@ html {
   margin-top: 0.5rem;
   font-size: 0.875rem;
 }
-.fk-admin-field-row > .input > .error {
+.fk-admin-field-row > .input > p.error {
   color: #f56565;
   font-style: italic;
   margin-top: 0.5rem;
@@ -1369,6 +1369,35 @@ input.fk-admin-field-input[disabled] {
   cursor: not-allowed;
 }
 input.fk-admin-field-input.error {
+  border-color: #f56565;
+}
+div.fk-admin-field-select {
+}
+select.fk-admin-field-select {
+  display: block;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  appearance: none;
+  border-width: 1px;
+  border-radius: 0.25rem;
+  width: 100%;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  background-color: #fff;
+  color: #4a5568;
+  line-height: 1.25;
+  height: 40px;
+}
+select.fk-admin-field-select:focus {
+  outline: 0;
+  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
+}
+select.fk-admin-field-select[disabled] {
+  background-color: #e2e8f0;
+  cursor: not-allowed;
+}
+select.fk-admin-field-select.error {
   border-color: #f56565;
 }
 .fk-admin-field-key-value .headers {

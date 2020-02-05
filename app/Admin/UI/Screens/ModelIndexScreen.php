@@ -87,6 +87,7 @@ class ModelIndexScreen extends Screen implements ScreenInterface
     {
         return $this->newModelInstance()
             ->newQuery()
+            ->with($this->getWith($request))
             ->when($request->get('search', '') !== '', function (Builder $query) use ($request) {
                 foreach ($this->searchableColumns as $column) {
                     $query = $query->orWhere($column, 'like', '%'.$request->get('search').'%');

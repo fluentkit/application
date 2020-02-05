@@ -8,8 +8,10 @@ use FluentKit\Admin\UI\Fields\Checkbox;
 use FluentKit\Admin\UI\Fields\HasMany;
 use FluentKit\Admin\UI\Fields\Number;
 use FluentKit\Admin\UI\Fields\Panel;
+use FluentKit\Admin\UI\Fields\Select;
 use FluentKit\Admin\UI\Fields\Text;
 use FluentKit\Admin\UI\ModelSection;
+use FluentKit\App;
 use FluentKit\AppDomain;
 
 final class AppDomains extends ModelSection
@@ -26,17 +28,24 @@ final class AppDomains extends ModelSection
         $this->indexFields([
                 (new Number('id', 'ID')),
                 new Text('domain', 'Domain'),
+                new Text('app_id', 'App'),
                 (new Text('created_at', 'Created At')),
                 (new Text('updated_at', 'Updated At'))
             ])
             ->createFields([
                 new Panel('details', 'Domain Details', '', [
                     (new Text('domain', 'Domain'))->rules(['required', 'string', 'unique:app_domains,domain']),
+                    (new Select('app_id', 'App'))
+                        ->rules(['required', 'numeric', 'exists:apps,id'])
+                        ->options(new Select\OptionsForModel(App::class, 'name')),
                 ]),
             ])
             ->editFields([
                 new Panel('details', 'App Details', '', [
                     (new Text('domain', 'Domain'))->rules(['required', 'string', 'unique:app_domains,domain,{$id}']),
+                    (new Select('app_id', 'App'))
+                        ->rules(['required', 'numeric', 'exists:apps,id'])
+                        ->options(new Select\OptionsForModel(App::class, 'name')),
                     (new Text('created_at', 'Created At'))->readOnly(),
                     (new Text('updated_at', 'Updated At'))->readOnly()
                 ])

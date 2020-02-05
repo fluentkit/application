@@ -49,7 +49,7 @@
     .fk-admin-field-row > .input > .description {
         @apply .text-gray-600 .italic .mt-2 .text-sm;
     }
-    .fk-admin-field-row > .input > .error {
+    .fk-admin-field-row > .input > p.error {
         @apply .text-red-500 .italic .mt-2;
     }
 </style>
