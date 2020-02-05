@@ -12,7 +12,6 @@ use FluentKit\Admin\UI\ScreenInterface;
 use FluentKit\Admin\UI\Traits\HasModel;
 use FluentKit\Admin\UI\Traits\LoadsRelations;
 use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
 
 class ModelCreateScreen extends FormScreen implements ScreenInterface
 {
@@ -37,11 +36,10 @@ class ModelCreateScreen extends FormScreen implements ScreenInterface
 
     public function createModel(Request $request): ResponseInterface
     {
-        $fields = $this->getFieldKeys($request);
         $model = $this->newModelInstance();
-        $attributes = Arr::only($request->get('attributes'), $fields);
-
-        $model->fill($attributes);
+        foreach ($this->fields as $field) {
+            $model = $field->saveAttributes($model, $request);
+        }
         $model->push();
 
         $request->merge(['id' => $model->id]);

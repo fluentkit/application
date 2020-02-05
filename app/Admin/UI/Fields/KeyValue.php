@@ -4,10 +4,13 @@ declare(strict_types=1);
 
 namespace FluentKit\Admin\UI\Fields;
 
+use FluentKit\Admin\UI\Fields\Traits\SavesModelAttributes;
 use Illuminate\Http\Request;
 
 final class KeyValue extends Field
 {
+    use SavesModelAttributes;
+
     public const FIELD_TYPE = 'key-value';
 
     protected string $component = 'fk-admin-field-key-value';

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace FluentKit\Admin\UI;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
 interface FieldInterface
@@ -47,4 +48,6 @@ interface FieldInterface
     public function getHidden(Request $request): bool;
 
     public function toArray(Request $request): array;
+
+    public function saveAttributes(Model $model, Request $request): Model;
 }

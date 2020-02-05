@@ -12,6 +12,7 @@ use FluentKit\Admin\UI\Traits\HasId;
 use FluentKit\Admin\UI\Traits\HasLabel;
 use FluentKit\Admin\UI\Traits\HasMeta;
 use FluentKit\Admin\UI\Traits\HasPriority;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
 abstract class Field implements FieldInterface
@@ -108,4 +109,9 @@ abstract class Field implements FieldInterface
         ];
     }
 
+    public function saveAttributes(Model $model, Request $request): Model
+    {
+        // Nothing to do here
+        return $model;
+    }
 }
