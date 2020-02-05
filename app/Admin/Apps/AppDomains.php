@@ -29,7 +29,10 @@ final class AppDomains extends ModelSection
         $this->indexFields([
                 (new Number('id', 'ID')),
                 new Text('domain', 'Domain'),
-                (new Route('app_id', 'App'))->route('apps.edit')->routeLabelFrom('app.name')->align('center'),
+                (new Route('app_id', 'App'))
+                    ->route('apps.edit')
+                    ->routeLabelFrom('app.name')
+                    ->align('center'),
                 (new Text('created_at', 'Created At')),
                 (new Text('updated_at', 'Updated At'))
             ])

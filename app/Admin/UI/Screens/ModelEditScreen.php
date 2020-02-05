@@ -66,7 +66,7 @@ class ModelEditScreen extends FormScreen implements ScreenInterface
         $forUpdate = Arr::only($request->get('attributes'), $fields);
 
         $model->fill($forUpdate);
-        $model->save();
+        $model->push();
 
         return Notification::success($this->getModelLabel() . ' Saved!');
     }

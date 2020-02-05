@@ -39,10 +39,10 @@ class ModelCreateScreen extends FormScreen implements ScreenInterface
     {
         $fields = $this->getFieldKeys($request);
         $model = $this->newModelInstance();
-        $forUpdate = Arr::only($request->get('attributes'), $fields);
+        $attributes = Arr::only($request->get('attributes'), $fields);
 
-        $model->fill($forUpdate);
-        $model->save();
+        $model->fill($attributes);
+        $model->push();
 
         $request->merge(['id' => $model->id]);
 

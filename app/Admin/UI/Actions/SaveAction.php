@@ -19,7 +19,7 @@ final class SaveAction extends CallbackAction implements ActionInterface
         $response = call_user_func($this->callback, $request, $screen);
 
         if (!$response || !$response instanceof ResponseInterface) {
-            $response = Notification::success('Settings Updated!');
+            $response = Notification::success('Saved!');
         }
 
         return  $response->toArray();
