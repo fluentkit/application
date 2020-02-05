@@ -8,6 +8,7 @@ use FluentKit\Admin\UI\Fields\Checkbox;
 use FluentKit\Admin\UI\Fields\HasMany;
 use FluentKit\Admin\UI\Fields\Number;
 use FluentKit\Admin\UI\Fields\Panel;
+use FluentKit\Admin\UI\Fields\Route;
 use FluentKit\Admin\UI\Fields\Select;
 use FluentKit\Admin\UI\Fields\Text;
 use FluentKit\Admin\UI\ModelSection;
@@ -28,7 +29,7 @@ final class AppDomains extends ModelSection
         $this->indexFields([
                 (new Number('id', 'ID')),
                 new Text('domain', 'Domain'),
-                new Text('app_id', 'App'),
+                (new Route('app_id', 'App'))->route('apps.edit')->routeLabelFrom('app.name')->align('center'),
                 (new Text('created_at', 'Created At')),
                 (new Text('updated_at', 'Updated At'))
             ])

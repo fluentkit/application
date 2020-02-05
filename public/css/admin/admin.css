@@ -1400,6 +1400,14 @@ select.fk-admin-field-select[disabled] {
 select.fk-admin-field-select.error {
   border-color: #f56565;
 }
+a.fk-admin-field-route {
+  color: #4299e1;
+  font-weight: 600;
+  cursor: pointer;
+}
+a.fk-admin-field-route:hover {
+  color: #2b6cb0;
+}
 .fk-admin-field-key-value .headers {
   display: flex;
   flex-direction: row;

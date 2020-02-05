@@ -28,6 +28,7 @@ export default config => {
         require('./components/elements/field/input').default,
         require('./components/elements/field/checkbox').default,
         require('./components/elements/field/select').default,
+        require('./components/elements/field/route').default,
         require('./components/elements/field/keyValue').default,
         require('./components/elements/field/hasMany').default,
         // form
