@@ -10,10 +10,6 @@ class Checkbox extends Field
 {
     use SavesModelAttributes;
 
-    public const FIELD_TYPE = 'checkbox';
-
-    protected string $component = 'fk-admin-field-checkbox';
-
     public function __construct(string $id, string $label, string $description = '')
     {
         parent::__construct($id, $label, $description);

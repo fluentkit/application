@@ -6,10 +6,6 @@ namespace FluentKit\Admin\UI\Fields;
 
 class Route extends Field
 {
-    public const FIELD_TYPE = 'route';
-
-    protected string $component = 'fk-admin-field-route';
-
     public function route(string $route): self
     {
         return $this->setMeta('route.id', $route);

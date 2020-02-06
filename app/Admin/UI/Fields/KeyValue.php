@@ -11,10 +11,6 @@ final class KeyValue extends Field
 {
     use SavesModelAttributes;
 
-    public const FIELD_TYPE = 'key-value';
-
-    protected string $component = 'fk-admin-field-key-value';
-
     protected string $keyLabel = 'Key';
 
     protected string $valueLabel = 'Label';

@@ -12,10 +12,6 @@ final class Group extends Field
 {
     use HasFields, FieldsSavesModelAttributes;
 
-    public const FIELD_TYPE = 'group';
-
-    protected string $component = 'fk-admin-field-group';
-
     public function getRules(): array
     {
         return $this->getFieldRules();

@@ -10,7 +10,7 @@ class Text extends Field
 {
     use SavesModelAttributes;
 
-    public const FIELD_TYPE = 'text';
+    protected ?string $component = 'fk-admin-field-input';
 
     protected array $defaultRules = ['string'];
 }

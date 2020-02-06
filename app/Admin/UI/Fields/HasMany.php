@@ -11,10 +11,6 @@ final class HasMany extends Field
 {
     use HasFields;
 
-    public const FIELD_TYPE = 'has-many';
-
-    protected string $component = 'fk-admin-field-has-many';
-
     public function indexFields(array $fields): self
     {
         foreach ($fields as $field) {

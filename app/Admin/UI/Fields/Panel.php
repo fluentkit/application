@@ -13,10 +13,6 @@ final class Panel extends Field
 {
     use HasFields, FieldsSavesModelAttributes;
 
-    public const FIELD_TYPE = 'panel';
-
-    protected string $component = 'fk-admin-field-panel';
-
     public function __construct(string $id, string $label, string $description = '', array $fields = [])
     {
         parent::__construct($id, $label, $description);

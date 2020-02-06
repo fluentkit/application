@@ -17,10 +17,6 @@ final class BelongsTo extends Field
 {
     use HasFields, HasModel;
 
-    public const FIELD_TYPE = 'belongs-to';
-
-    protected string $component = 'fk-admin-field-belongs-to';
-
     public function __construct(string $id, string $label, string $description = '')
     {
         $this->setModel($label);

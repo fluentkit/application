@@ -14,6 +14,7 @@ use FluentKit\Admin\UI\Traits\HasMeta;
 use FluentKit\Admin\UI\Traits\HasPriority;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 abstract class Field implements FieldInterface
 {
@@ -25,7 +26,7 @@ abstract class Field implements FieldInterface
 
     protected string $align = 'left';
 
-    protected string $component = 'fk-admin-field-input';
+    protected ?string $component = null;
 
     protected $requiredCallback;
 
@@ -91,6 +92,7 @@ abstract class Field implements FieldInterface
     public function toArray(Request $request): array
     {
         $rules = $this->getRules()[$this->getId()] ?? [];
+        $type = str_replace('_', '-', Str::snake(class_basename(get_called_class())));
 
         return [
             'id' => $this->getId(),
@@ -102,9 +104,9 @@ abstract class Field implements FieldInterface
             'disabled' => $this->getDisabled($request),
             'readOnly' => $this->getReadOnly($request),
             'hidden' => $this->getHidden($request),
-            'type' => static::FIELD_TYPE,
+            'type' => $type,
             'description' => $this->description,
-            'component' => $this->component,
+            'component' => $this->component ?? 'fk-admin-field-' . $type,
             'meta' => $this->getMeta(),
         ];
     }

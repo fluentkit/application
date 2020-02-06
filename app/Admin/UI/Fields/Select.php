@@ -10,10 +10,6 @@ use Illuminate\Http\Request;
 class Select extends Field
 {
     use SavesModelAttributes;
-    
-    public const FIELD_TYPE = 'select';
-
-    public string $component = 'fk-admin-field-select';
 
     protected $options = [];
 
