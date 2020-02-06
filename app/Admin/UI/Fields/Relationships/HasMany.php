@@ -2,14 +2,22 @@
 
 declare(strict_types=1);
 
-namespace FluentKit\Admin\UI\Fields;
+namespace FluentKit\Admin\UI\Fields\Relationships;
 
+use FluentKit\Admin\UI\Fields\Field;
 use FluentKit\Admin\UI\Traits\HasFields;
+use FluentKit\Admin\UI\Traits\HasModel;
 use Illuminate\Http\Request;
 
 final class HasMany extends Field
 {
-    use HasFields;
+    use HasFields, HasModel;
+
+    public function __construct(string $id, string $label, string $description = '')
+    {
+        $this->setModel($label);
+        parent::__construct($id, $this->getModelPluralLabel(), $description);
+    }
 
     public function indexFields(array $fields): self
     {

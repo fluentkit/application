@@ -4,7 +4,7 @@
         <p v-if="field.description" class="description">{{ field.description }}</p>
         <fk-admin-table
             :columns="tableColumns"
-            :rows="value[field.id]"
+            :rows="fieldValue"
         >
             <div slot="table-header">header actions</div>
             <template
@@ -21,13 +21,8 @@
                 />
             </template>
             <template slot="table-footer">
-<!--                <fk-admin-pagination-->
-<!--                    :page="attributes.current_page"-->
-<!--                    :pages="attributes.last_page"-->
-<!--                    @click="goToPage"-->
-<!--                />-->
                 <div class="totals">
-                    {{ value[field.id].length }}
+                    {{ fieldValue.length }}
                 </div>
             </template>
         </fk-admin-table>
@@ -35,32 +30,19 @@
 </template>
 
 <script>
+    import field from './field';
+
     export default {
         name: 'fk-admin-field-has-many',
-        props: {
-            field: {
-                type: Object,
-                required: true
-            },
-            errors: {
-                type: Object,
-                required: true
-            },
-            value: {
-                type: Object,
-                required: true
-            }
-        },
+        extends: field,
         computed: {
             tableColumns () {
                 return Object.keys(this.field.fields)
                     .map(id => this.field.fields[id])
                     .filter(({ hidden }) => !hidden)
-                    .map(({ id, label, align }) => {
+                    .map(field => {
                         return {
-                            id,
-                            label,
-                            align,
+                            ...field,
                             classes: []
                         }
                     })
