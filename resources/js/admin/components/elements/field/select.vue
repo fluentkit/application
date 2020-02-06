@@ -4,7 +4,7 @@
         :errors="errors"
     >
         <div
-            v-if="field.readOnly"
+            v-if="isReadOnly"
             class="fk-admin-field-select"
         >
             {{ readOnlyValue }}
@@ -14,8 +14,8 @@
             :id="'field-'+field.id"
             class="fk-admin-field-select"
             :class="{ error: errors.has(field.id) }"
-            :value="value[field.id]"
-            :disabled="field.disabled"
+            :value="fieldValue"
+            :disabled="isDisabled"
             @input="updateValue($event.target.value)"
         >
             <option v-for="option in field.options" :key="option.id" :value="option.id">
@@ -26,36 +26,16 @@
 </template>
 
 <script>
+    import field from './field';
+
     export default {
         name: 'fk-admin-field-select',
-        props: {
-            field: {
-                type: Object,
-                required: true
-            },
-            errors: {
-                type: Object,
-                required: true
-            },
-            value: {
-                type: Object,
-                required: true
-            }
-        },
+        extends: field,
         computed: {
             readOnlyValue () {
-                const { label = this.value[this.field.id] } = this.field.options.find(({ id }) => this.value[this.field.id]);
+                const { label } = this.field.options.find(({ id }) => this.fieldValue);
 
-                return label;
-            }
-        },
-        methods: {
-            updateValue (value) {
-                const payload = {
-                    ...this.value,
-                    [this.field.id]: value
-                };
-                this.$emit('input', payload);
+                return label || this.fieldValue;
             }
         }
     }

@@ -28,7 +28,7 @@ final class BelongsTo extends Field
         $this->addField(
             (new Route('route', $label, $description))
                 ->route(Str::plural($id).'.edit')
-                ->routeLabelFrom('id')
+                ->routeLabelFrom($this->getId().'.'.'id')
         );
         $this->addField(
             (new Select('input', $this->getModelLabel()))
@@ -45,16 +45,23 @@ final class BelongsTo extends Field
 
     public function labelFrom(string $from): self
     {
-        $this->getField('route')->routeLabelFrom($from);
+        $this->getField('route')->routeLabelFrom($this->getId().'.'.$from);
         $this->getField('input')->options(new Select\OptionsForModel($this->getModel(), $from));
 
         return $this;
+    }
+
+    public function getRules(): array
+    {
+        return [$this->getId().'.id' => array_unique(array_merge($this->rules, $this->defaultRules))];
     }
 
     public function toArray(Request $request): array
     {
         $data = parent::toArray($request);
         $data['fields'] = $this->getFields($request);
+        // fix required as we actually use the sub key `id` for the rules
+        $data['required'] = in_array('required', $this->rules) || call_user_func($this->requiredCallback, $request);
 
         return $data;
     }

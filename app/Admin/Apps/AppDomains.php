@@ -29,23 +29,23 @@ final class AppDomains extends ModelSection
                 new Text('domain', 'Domain'),
                 (new BelongsTo('app', App::class))
                     ->labelFrom('name')
-                    ->align('center')
-                    ->readOnly(),
+                    ->align('center'),
                 (new Text('created_at', 'Created At')),
                 (new Text('updated_at', 'Updated At'))
             ])
             ->createFields([
                 new Panel('details', 'Domain Details', '', [
                     (new Text('domain', 'Domain'))->rules(['required', 'string', 'unique:app_domains,domain']),
-                    (new Select('app_id', 'App'))
+                    (new BelongsTo('app', App::class))
                         ->rules(['required', 'numeric', 'exists:apps,id'])
-                        ->options(new Select\OptionsForModel(App::class, 'name')),
+                        ->labelFrom('name'),
                 ]),
             ])
             ->editFields([
                 new Panel('details', 'App Details', '', [
                     (new Text('domain', 'Domain'))->rules(['required', 'string', 'unique:app_domains,domain,{$id}']),
                     (new BelongsTo('app', App::class))
+                        ->rules(['required', 'numeric', 'exists:apps,id'])
                         ->labelFrom('name'),
                     (new Text('created_at', 'Created At'))->readOnly(),
                     (new Text('updated_at', 'Updated At'))->readOnly()

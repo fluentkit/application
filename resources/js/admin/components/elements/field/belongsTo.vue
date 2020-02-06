@@ -1,50 +1,38 @@
 <template>
     <fk-admin-field-row
-        :field="field"
+        :field="{ ...field, id: field.id+'.id' }"
         :errors="errors"
     >
-        <div v-if="!value[this.field.id] && field.readOnly">-</div>
+        <div v-if="!fieldValue && isReadOnly">-</div>
         <fk-admin-field-route
-            v-else-if="field.readOnly"
-            :field="{ ...this.field.fields.route, id: 'id', withoutLayout: true }"
+            v-else-if="isReadOnly"
+            :field="{ ...this.field.fields.route, id: this.field.id+'.id', withoutLayout: true }"
             :errors="errors"
-            :value="value[this.field.id]"
+            :value="value"
         />
         <fk-admin-field-select
             v-else
-            :field="{ ...this.field.fields.input, id: 'id', withoutLayout: true }"
+            :field="{ ...this.field.fields.input, id: this.field.id+'.id', withoutLayout: true }"
+            class="fk-admin-belongs-to-input"
             :errors="errors"
-            :value="value[this.field.id] || {}"
-            @input="updateValue"
+            :value="value"
+            @input="$emit('input', $event)"
         />
     </fk-admin-field-row>
 </template>
 
 <script>
+    import field from './field';
+
     export default {
         name: 'fk-admin-field-belongs-to',
-        props: {
-            field: {
-                type: Object,
-                required: true
-            },
-            errors: {
-                type: Object,
-                required: true
-            },
-            value: {
-                type: Object,
-                required: true
-            }
-        },
-        methods: {
-            updateValue (value) {
-                const payload = {
-                    ...this.value,
-                    [this.field.id]: value
-                };
-                this.$emit('input', payload);
-            }
-        }
+        extends: field
     }
 </script>
+
+<style>
+    /* hack to hide sub field errors until we make the form errors more flexible */
+    .fk-admin-belongs-to-input p.error {
+        @apply .hidden;
+    }
+</style>

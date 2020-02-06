@@ -4,10 +4,10 @@
         :errors="errors"
     >
         <div
-            v-if="field.readOnly"
+            v-if="isReadOnly"
             class="fk-admin-field-input"
         >
-            {{ value[field.id] }}
+            {{ fieldValue }}
         </div>
         <input
             v-else
@@ -15,42 +15,22 @@
             :id="'field-'+field.id"
             class="fk-admin-field-input"
             :class="{ error: errors.has(field.id) }"
-            :value="value[field.id]"
-            :disabled="field.disabled"
+            :value="fieldValue"
+            :disabled="isDisabled"
             @input="updateValue($event.target.value)"
         />
     </fk-admin-field-row>
 </template>
 
 <script>
+    import field from './field';
+
     export default {
         name: 'fk-admin-field-input',
-        props: {
-            field: {
-                type: Object,
-                required: true
-            },
-            errors: {
-                type: Object,
-                required: true
-            },
-            value: {
-                type: Object,
-                required: true
-            }
-        },
+        extends: field,
         created () {
             if (!['text', 'email', 'number', 'password'].includes(this.field.type)) {
                 throw new Error('Invalid field type supplied!');
-            }
-        },
-        methods: {
-            updateValue (value) {
-                const payload = {
-                    ...this.value,
-                    [this.field.id]: value
-                };
-                this.$emit('input', payload);
             }
         }
     }

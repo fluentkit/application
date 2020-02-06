@@ -8,36 +8,36 @@
                 <div>{{ field.keyLabel }}</div>
                 <div>{{ field.valueLabel }}</div>
             </div>
-            <div v-for="(value, key) in values" class="values">
+            <div v-for="(value, key) in fieldValue" class="values">
                 <component
                     :is="field.keyField.component"
-                    :field="{ ...field.keyField, disabled: field.disabled, readOnly: field.readOnly, withoutLayout: true }"
+                    :field="{ ...field.keyField, disabled: isDisabled, readOnly: isReadOnly, withoutLayout: true }"
                     :errors="keyValueErrors(key)"
                     :value="{ key }"
                     @input="updateKey(key, $event)"
                 />
                 <component
                     :is="field.valueField.component"
-                    :field="{ ...field.valueField, disabled: field.disabled, readOnly: field.readOnly, withoutLayout: true }"
+                    :field="{ ...field.valueField, disabled: isDisabled, readOnly: isReadOnly, withoutLayout: true }"
                     :errors="keyValueErrors(key)"
                     :value="{ value }"
-                    @input="updateValue(key, $event)"
+                    @input="updateKeyValue(key, $event)"
                 />
                 <fk-admin-button
-                    v-if="!field.readOnly"
+                    v-if="!isReadOnly"
                     size="sm"
                     type="transparent"
-                    :disabled="field.disabled"
+                    :disabled="isDisabled"
                     @click="deleteKey(key)"
                 >
                     <i class="fa fa-trash" />
                 </fk-admin-button>
             </div>
             <fk-admin-button
-                v-if="!field.readOnly"
+                v-if="!isReadOnly"
                 size="sm"
                 type="info"
-                :disabled="field.disabled"
+                :disabled="isDisabled"
                 @click="addKey"
             >
                 <i class="fa fa-plus-circle" /> {{ field.addLabel }}
@@ -47,29 +47,11 @@
 </template>
 
 <script>
-    import FkAdminButton from "../button";
+    import field from './field';
+
     export default {
         name: 'fk-admin-field-key-value',
-        components: {FkAdminButton},
-        props: {
-            field: {
-                type: Object,
-                required: true
-            },
-            errors: {
-                type: Object,
-                required: true
-            },
-            value: {
-                type: Object,
-                required: true
-            }
-        },
-        computed: {
-            values () {
-                return this.value[this.field.id];
-            }
-        },
+        extends: field,
         methods: {
             keyValueErrors (rowKey) {
                 if (rowKey) {
@@ -84,7 +66,7 @@
                     has: () => {
                         if (this.errors.has(this.field.id)) return true;
 
-                        for (const key in this.values) {
+                        for (const key in this.fieldValue) {
                             if (this.errors.has(`${this.field.id}.${key}`)) return true;
                         }
                     },
@@ -94,7 +76,7 @@
                             this.errors.get(this.field.id).forEach(error => errors.push(error));
                         }
 
-                        for (const key in this.values) {
+                        for (const key in this.fieldValue) {
                             if (this.errors.has(`${this.field.id}.${key}`)) {
                                 this.errors.get(`${this.field.id}.${key}`).forEach(error => errors.push(error));
                             }
@@ -107,7 +89,7 @@
                             return this.errors.first(this.field.id);
                         }
 
-                        for (const key in this.values) {
+                        for (const key in this.fieldValue) {
                             if (this.errors.has(`${this.field.id}.${key}`)) {
                                 return this.errors.first(`${this.field.id}.${key}`);
                             }
@@ -118,55 +100,35 @@
                 }
             },
             updateKey (oldKey, { key: newKey }) {
-                if (Object.keys(this.values).includes(newKey)) return this.$forceUpdate();
+                if (Object.keys(this.fieldValue).includes(newKey)) return this.$forceUpdate();
 
-                const update = {};
-                Object.keys(this.values).forEach(key => {
-                    if (key === oldKey) {
-                        update[newKey] = this.values[key];
-                        return;
-                    }
+                const update = { ...this.fieldValue };
+                update[newKey] = update[oldKey];
+                delete update[oldKey];
 
-                    update[key] = this.values[key];
-                });
-
-                this.$emit('input', {
-                    ...this.value,
-                    [this.field.id]: update
-                });
+                this.updateValue(update);
             },
-            updateValue (key, { value }) {
-                const update = {
-                    ...this.value,
-                    [this.field.id]: { ...this.values }
-                };
-                update[this.field.id][key] = value;
+            updateKeyValue (key, { value }) {
+                const update = { ...this.fieldValue };
+                update[key] = value;
 
-                this.$emit('input', update);
+                this.updateValue(update);
             },
             deleteKey (key) {
                 if (this.field.readOnly) return;
 
-                const update = {
-                    ...this.value,
-                    [this.field.id]: { ...this.values }
-                };
-                delete update[this.field.id][key];
+                const update = { ...this.fieldValue };
+                delete update[key];
 
-                this.$emit('input', update);
+                this.updateValue(update);
             },
             addKey () {
                 if (this.field.readOnly) return;
 
-                const update = {
-                    ...this.value,
-                    [this.field.id]: {
-                        ...this.values,
-                        '': ''
-                    }
-                };
-
-                this.$emit('input', update);
+                this.updateValue({
+                    ...this.fieldValue,
+                    '': ''
+                });
             }
         }
     }

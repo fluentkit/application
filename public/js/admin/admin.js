@@ -1918,57 +1918,34 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+/* harmony import */ var _field__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./field */ "./resources/js/admin/components/elements/field/field.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'fk-admin-field-belongs-to',
-  props: {
-    field: {
-      type: Object,
-      required: true
-    },
-    errors: {
-      type: Object,
-      required: true
-    },
-    value: {
-      type: Object,
-      required: true
-    }
-  },
-  methods: {
-    updateValue: function updateValue(value) {
-      var payload = _objectSpread({}, this.value, _defineProperty({}, this.field.id, value));
-
-      this.$emit('input', payload);
-    }
-  }
+  "extends": _field__WEBPACK_IMPORTED_MODULE_0__["default"]
 });
 
 /***/ }),
@@ -1982,99 +1959,52 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+/* harmony import */ var _field__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./field */ "./resources/js/admin/components/elements/field/field.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'fk-admin-field-checkbox',
-  props: {
-    field: {
-      type: Object,
-      required: true
-    },
-    errors: {
-      type: Object,
-      required: true
-    },
-    value: {
-      type: Object,
-      required: true
-    }
-  },
-  methods: {
-    updateValue: function updateValue() {
-      var payload = _objectSpread({}, this.value, _defineProperty({}, this.field.id, !this.value[this.field.id]));
-
-      this.$emit('input', payload);
-    }
-  }
+  "extends": _field__WEBPACK_IMPORTED_MODULE_0__["default"]
 });
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/admin/components/elements/field/group.vue?vue&type=script&lang=js&":
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/admin/components/elements/field/field.vue?vue&type=script&lang=js&":
 /*!*************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/admin/components/elements/field/group.vue?vue&type=script&lang=js& ***!
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/admin/components/elements/field/field.vue?vue&type=script&lang=js& ***!
   \*************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+/* harmony import */ var _mixins_dot__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../mixins/dot */ "./resources/js/mixins/dot.js");
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'fk-admin-field-group',
+  name: 'fk-admin-field',
+  mixins: [_mixins_dot__WEBPACK_IMPORTED_MODULE_0__["default"]],
   props: {
     field: {
       type: Object,
@@ -2090,14 +2020,77 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   },
   computed: {
+    fieldValue: function fieldValue() {
+      return this.dotGet(this.value, this.field.id);
+    },
+    isReadOnly: function isReadOnly() {
+      return this.field.readOnly;
+    },
+    isDisabled: function isDisabled() {
+      return this.field.disabled;
+    },
+    isHidden: function isHidden() {
+      return this.field.hidden;
+    }
+  },
+  methods: {
+    updateValue: function updateValue(value) {
+      this.$emit('input', this.dotSet(this.value, this.field.id, value));
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/admin/components/elements/field/group.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/admin/components/elements/field/group.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _field__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./field */ "./resources/js/admin/components/elements/field/field.vue");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'fk-admin-field-group',
+  "extends": _field__WEBPACK_IMPORTED_MODULE_0__["default"],
+  computed: {
     groupErrors: function groupErrors() {
       var _this = this;
 
       return {
         has: function has(key) {
           if (key === _this.field.id) {
-            for (var field in _this.fields) {
-              if (_this.errors.has(_this.field.fields[field].id)) {
+            for (var _field in _this.fields) {
+              if (_this.errors.has(_this.field.fields[_field].id)) {
                 return true;
               }
             }
@@ -2117,8 +2110,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var fields = {};
       Object.keys(this.field.fields).forEach(function (field) {
         fields[field] = _objectSpread({}, _this2.field.fields[field], {
-          disabled: _this2.field.fields[field].disabled || _this2.field.disabled,
-          readOnly: _this2.field.fields[field].readOnly || _this2.field.readOnly
+          disabled: _this2.isDisabled || _this2.field.disabled,
+          readOnly: _this2.isReadOnly || _this2.field.readOnly
         });
       });
       return fields;
@@ -2229,62 +2222,38 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+/* harmony import */ var _field__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./field */ "./resources/js/admin/components/elements/field/field.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'fk-admin-field-input',
-  props: {
-    field: {
-      type: Object,
-      required: true
-    },
-    errors: {
-      type: Object,
-      required: true
-    },
-    value: {
-      type: Object,
-      required: true
-    }
-  },
+  "extends": _field__WEBPACK_IMPORTED_MODULE_0__["default"],
   created: function created() {
     if (!['text', 'email', 'number', 'password'].includes(this.field.type)) {
       throw new Error('Invalid field type supplied!');
-    }
-  },
-  methods: {
-    updateValue: function updateValue(value) {
-      var payload = _objectSpread({}, this.value, _defineProperty({}, this.field.id, value));
-
-      this.$emit('input', payload);
     }
   }
 });
@@ -2300,7 +2269,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _button__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../button */ "./resources/js/admin/components/elements/button.vue");
+/* harmony import */ var _field__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./field */ "./resources/js/admin/components/elements/field/field.vue");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -2358,28 +2327,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'fk-admin-field-key-value',
-  components: {
-    FkAdminButton: _button__WEBPACK_IMPORTED_MODULE_0__["default"]
-  },
-  props: {
-    field: {
-      type: Object,
-      required: true
-    },
-    errors: {
-      type: Object,
-      required: true
-    },
-    value: {
-      type: Object,
-      required: true
-    }
-  },
-  computed: {
-    values: function values() {
-      return this.value[this.field.id];
-    }
-  },
+  "extends": _field__WEBPACK_IMPORTED_MODULE_0__["default"],
   methods: {
     keyValueErrors: function keyValueErrors(rowKey) {
       var _this = this;
@@ -2402,7 +2350,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         has: function has() {
           if (_this.errors.has(_this.field.id)) return true;
 
-          for (var key in _this.values) {
+          for (var key in _this.fieldValue) {
             if (_this.errors.has("".concat(_this.field.id, ".").concat(key))) return true;
           }
         },
@@ -2415,7 +2363,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             });
           }
 
-          for (var key in _this.values) {
+          for (var key in _this.fieldValue) {
             if (_this.errors.has("".concat(_this.field.id, ".").concat(key))) {
               _this.errors.get("".concat(_this.field.id, ".").concat(key)).forEach(function (error) {
                 return errors.push(error);
@@ -2430,7 +2378,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             return _this.errors.first(_this.field.id);
           }
 
-          for (var key in _this.values) {
+          for (var key in _this.fieldValue) {
             if (_this.errors.has("".concat(_this.field.id, ".").concat(key))) {
               return _this.errors.first("".concat(_this.field.id, ".").concat(key));
             }
@@ -2441,45 +2389,36 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       };
     },
     updateKey: function updateKey(oldKey, _ref) {
-      var _this2 = this;
-
       var newKey = _ref.key;
-      if (Object.keys(this.values).includes(newKey)) return this.$forceUpdate();
-      var update = {};
-      Object.keys(this.values).forEach(function (key) {
-        if (key === oldKey) {
-          update[newKey] = _this2.values[key];
-          return;
-        }
+      if (Object.keys(this.fieldValue).includes(newKey)) return this.$forceUpdate();
 
-        update[key] = _this2.values[key];
-      });
-      this.$emit('input', _objectSpread({}, this.value, _defineProperty({}, this.field.id, update)));
+      var update = _objectSpread({}, this.fieldValue);
+
+      update[newKey] = update[oldKey];
+      delete update[oldKey];
+      this.updateValue(update);
     },
-    updateValue: function updateValue(key, _ref2) {
+    updateKeyValue: function updateKeyValue(key, _ref2) {
       var value = _ref2.value;
 
-      var update = _objectSpread({}, this.value, _defineProperty({}, this.field.id, _objectSpread({}, this.values)));
+      var update = _objectSpread({}, this.fieldValue);
 
-      update[this.field.id][key] = value;
-      this.$emit('input', update);
+      update[key] = value;
+      this.updateValue(update);
     },
     deleteKey: function deleteKey(key) {
       if (this.field.readOnly) return;
 
-      var update = _objectSpread({}, this.value, _defineProperty({}, this.field.id, _objectSpread({}, this.values)));
+      var update = _objectSpread({}, this.fieldValue);
 
-      delete update[this.field.id][key];
-      this.$emit('input', update);
+      delete update[key];
+      this.updateValue(update);
     },
     addKey: function addKey() {
       if (this.field.readOnly) return;
-
-      var update = _objectSpread({}, this.value, _defineProperty({}, this.field.id, _objectSpread({}, this.values, {
+      this.updateValue(_objectSpread({}, this.fieldValue, {
         '': ''
-      })));
-
-      this.$emit('input', update);
+      }));
     }
   }
 });
@@ -2526,6 +2465,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _field__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./field */ "./resources/js/admin/components/elements/field/field.vue");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -2551,22 +2491,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'fk-admin-field-panel',
-  props: {
-    field: {
-      type: Object,
-      required: true
-    },
-    errors: {
-      type: Object,
-      required: true
-    },
-    value: {
-      type: Object,
-      required: true
-    }
-  },
+  "extends": _field__WEBPACK_IMPORTED_MODULE_0__["default"],
   computed: {
     fields: function fields() {
       var _this = this;
@@ -2574,8 +2502,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var fields = {};
       Object.keys(this.field.fields).forEach(function (field) {
         fields[field] = _objectSpread({}, _this.field.fields[field], {
-          disabled: _this.field.fields[field].disabled || _this.field.disabled,
-          readOnly: _this.field.fields[field].readOnly || _this.field.readOnly
+          disabled: _this.field.fields[field].disabled || _this.isDisabled,
+          readOnly: _this.field.fields[field].readOnly || _this.isReadOnly
         });
       });
       return fields;
@@ -2596,6 +2524,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _field__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./field */ "./resources/js/admin/components/elements/field/field.vue");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -2616,36 +2545,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'fk-admin-field-route',
-  props: {
-    field: {
-      type: Object,
-      required: true
-    },
-    errors: {
-      type: Object,
-      required: true
-    },
-    value: {
-      type: Object,
-      required: true
-    }
-  },
+  "extends": _field__WEBPACK_IMPORTED_MODULE_1__["default"],
   computed: {
     routeLabel: function routeLabel() {
       if (this.field.meta.route.from) {
-        var from = this.field.meta.route.from.split('.');
-        var value = this.value;
-
-        for (var i = 0; i < from.length; i++) {
-          if (!value[from[i]]) {
-            value = false;
-            break;
-          }
-
-          value = value[from[i]];
-        }
+        var value = this.dotGet(this.value, this.field.meta.route.from);
 
         if (value) {
           return value;
@@ -2653,7 +2560,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
 
       if (this.field.meta.route.label) return this.field.meta.route.label;
-      return this.value[this.field.id];
+      return this.fieldValue;
     }
   },
   methods: {
@@ -2669,7 +2576,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return this.$router.push({
                   name: this.field.meta.route.id,
                   params: {
-                    id: this.value[this.field.id]
+                    id: this.fieldValue
                   }
                 });
 
@@ -2737,74 +2644,49 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+/* harmony import */ var _field__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./field */ "./resources/js/admin/components/elements/field/field.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'fk-admin-field-select',
-  props: {
-    field: {
-      type: Object,
-      required: true
-    },
-    errors: {
-      type: Object,
-      required: true
-    },
-    value: {
-      type: Object,
-      required: true
-    }
-  },
+  "extends": _field__WEBPACK_IMPORTED_MODULE_0__["default"],
   computed: {
     readOnlyValue: function readOnlyValue() {
       var _this = this;
 
       var _this$field$options$f = this.field.options.find(function (_ref) {
         var id = _ref.id;
-        return _this.value[_this.field.id];
+        return _this.fieldValue;
       }),
-          _this$field$options$f2 = _this$field$options$f.label,
-          label = _this$field$options$f2 === void 0 ? this.value[this.field.id] : _this$field$options$f2;
+          label = _this$field$options$f.label;
 
-      return label;
-    }
-  },
-  methods: {
-    updateValue: function updateValue(value) {
-      var payload = _objectSpread({}, this.value, _defineProperty({}, this.field.id, value));
-
-      this.$emit('input', payload);
+      return label || this.fieldValue;
     }
   }
 });
@@ -4442,6 +4324,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 /*!***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/extract-text-webpack-plugin/dist/loader.js??ref--5-0!./node_modules/style-loader!./node_modules/css-loader??ref--5-2!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--5-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/admin/components/elements/button.vue?vue&type=style&index=0&lang=css& ***!
   \***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ "./node_modules/extract-text-webpack-plugin/dist/loader.js?!./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/admin/components/elements/field/belongsTo.vue?vue&type=style&index=0&lang=css&":
+/*!************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/extract-text-webpack-plugin/dist/loader.js??ref--5-0!./node_modules/style-loader!./node_modules/css-loader??ref--5-2!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--5-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/admin/components/elements/field/belongsTo.vue?vue&type=style&index=0&lang=css& ***!
+  \************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -6439,31 +6332,41 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "fk-admin-field-row",
-    { attrs: { field: _vm.field, errors: _vm.errors } },
+    {
+      attrs: {
+        field: Object.assign({}, _vm.field, { id: _vm.field.id + ".id" }),
+        errors: _vm.errors
+      }
+    },
     [
-      !_vm.value[this.field.id] && _vm.field.readOnly
+      !_vm.fieldValue && _vm.isReadOnly
         ? _c("div", [_vm._v("-")])
-        : _vm.field.readOnly
+        : _vm.isReadOnly
         ? _c("fk-admin-field-route", {
             attrs: {
               field: Object.assign({}, this.field.fields.route, {
-                id: "id",
+                id: this.field.id + ".id",
                 withoutLayout: true
               }),
               errors: _vm.errors,
-              value: _vm.value[this.field.id]
+              value: _vm.value
             }
           })
         : _c("fk-admin-field-select", {
+            staticClass: "fk-admin-belongs-to-input",
             attrs: {
               field: Object.assign({}, this.field.fields.input, {
-                id: "id",
+                id: this.field.id + ".id",
                 withoutLayout: true
               }),
               errors: _vm.errors,
-              value: _vm.value[this.field.id] || {}
+              value: _vm.value
             },
-            on: { input: _vm.updateValue }
+            on: {
+              input: function($event) {
+                return _vm.$emit("input", $event)
+              }
+            }
           })
     ],
     1
@@ -6506,10 +6409,14 @@ var render = function() {
           _c("input", {
             attrs: {
               type: "checkbox",
-              disabled: _vm.field.disabled || _vm.field.readOnly
+              disabled: _vm.isDisabled || _vm.isReadOnly
             },
-            domProps: { checked: _vm.value[_vm.field.id] },
-            on: { click: _vm.updateValue }
+            domProps: { checked: _vm.fieldValue },
+            on: {
+              click: function($event) {
+                return _vm.updateValue(!_vm.fieldValue)
+              }
+            }
           }),
           _vm._v(" "),
           _vm.field.meta.checkbox.label
@@ -6556,7 +6463,7 @@ var render = function() {
         "div",
         { staticClass: "fk-admin-field-group" },
         _vm._l(_vm.fields, function(field) {
-          return !field.hidden
+          return !_vm.isHidden
             ? _c(field.component, {
                 key: field.id,
                 tag: "component",
@@ -6692,9 +6599,9 @@ var render = function() {
     "fk-admin-field-row",
     { attrs: { field: _vm.field, errors: _vm.errors } },
     [
-      _vm.field.readOnly
+      _vm.isReadOnly
         ? _c("div", { staticClass: "fk-admin-field-input" }, [
-            _vm._v("\n        " + _vm._s(_vm.value[_vm.field.id]) + "\n    ")
+            _vm._v("\n        " + _vm._s(_vm.fieldValue) + "\n    ")
           ])
         : _c("input", {
             staticClass: "fk-admin-field-input",
@@ -6702,9 +6609,9 @@ var render = function() {
             attrs: {
               type: _vm.field.type,
               id: "field-" + _vm.field.id,
-              disabled: _vm.field.disabled
+              disabled: _vm.isDisabled
             },
-            domProps: { value: _vm.value[_vm.field.id] },
+            domProps: { value: _vm.fieldValue },
             on: {
               input: function($event) {
                 return _vm.updateValue($event.target.value)
@@ -6750,7 +6657,7 @@ var render = function() {
             _c("div", [_vm._v(_vm._s(_vm.field.valueLabel))])
           ]),
           _vm._v(" "),
-          _vm._l(_vm.values, function(value, key) {
+          _vm._l(_vm.fieldValue, function(value, key) {
             return _c(
               "div",
               { staticClass: "values" },
@@ -6759,8 +6666,8 @@ var render = function() {
                   tag: "component",
                   attrs: {
                     field: Object.assign({}, _vm.field.keyField, {
-                      disabled: _vm.field.disabled,
-                      readOnly: _vm.field.readOnly,
+                      disabled: _vm.isDisabled,
+                      readOnly: _vm.isReadOnly,
                       withoutLayout: true
                     }),
                     errors: _vm.keyValueErrors(key),
@@ -6777,8 +6684,8 @@ var render = function() {
                   tag: "component",
                   attrs: {
                     field: Object.assign({}, _vm.field.valueField, {
-                      disabled: _vm.field.disabled,
-                      readOnly: _vm.field.readOnly,
+                      disabled: _vm.isDisabled,
+                      readOnly: _vm.isReadOnly,
                       withoutLayout: true
                     }),
                     errors: _vm.keyValueErrors(key),
@@ -6786,19 +6693,19 @@ var render = function() {
                   },
                   on: {
                     input: function($event) {
-                      return _vm.updateValue(key, $event)
+                      return _vm.updateKeyValue(key, $event)
                     }
                   }
                 }),
                 _vm._v(" "),
-                !_vm.field.readOnly
+                !_vm.isReadOnly
                   ? _c(
                       "fk-admin-button",
                       {
                         attrs: {
                           size: "sm",
                           type: "transparent",
-                          disabled: _vm.field.disabled
+                          disabled: _vm.isDisabled
                         },
                         on: {
                           click: function($event) {
@@ -6814,15 +6721,11 @@ var render = function() {
             )
           }),
           _vm._v(" "),
-          !_vm.field.readOnly
+          !_vm.isReadOnly
             ? _c(
                 "fk-admin-button",
                 {
-                  attrs: {
-                    size: "sm",
-                    type: "info",
-                    disabled: _vm.field.disabled
-                  },
+                  attrs: { size: "sm", type: "info", disabled: _vm.isDisabled },
                   on: { click: _vm.addKey }
                 },
                 [
@@ -7057,7 +6960,7 @@ var render = function() {
     "fk-admin-field-row",
     { attrs: { field: _vm.field, errors: _vm.errors } },
     [
-      _vm.field.readOnly
+      _vm.isReadOnly
         ? _c("div", { staticClass: "fk-admin-field-select" }, [
             _vm._v("\n        " + _vm._s(_vm.readOnlyValue) + "\n    ")
           ])
@@ -7066,11 +6969,8 @@ var render = function() {
             {
               staticClass: "fk-admin-field-select",
               class: { error: _vm.errors.has(_vm.field.id) },
-              attrs: {
-                id: "field-" + _vm.field.id,
-                disabled: _vm.field.disabled
-              },
-              domProps: { value: _vm.value[_vm.field.id] },
+              attrs: { id: "field-" + _vm.field.id, disabled: _vm.isDisabled },
+              domProps: { value: _vm.fieldValue },
               on: {
                 input: function($event) {
                   return _vm.updateValue($event.target.value)
@@ -11184,7 +11084,9 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _belongsTo_vue_vue_type_template_id_092388cd___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./belongsTo.vue?vue&type=template&id=092388cd& */ "./resources/js/admin/components/elements/field/belongsTo.vue?vue&type=template&id=092388cd&");
 /* harmony import */ var _belongsTo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./belongsTo.vue?vue&type=script&lang=js& */ "./resources/js/admin/components/elements/field/belongsTo.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _belongsTo_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./belongsTo.vue?vue&type=style&index=0&lang=css& */ "./resources/js/admin/components/elements/field/belongsTo.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
 
 
 
@@ -11192,7 +11094,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
   _belongsTo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _belongsTo_vue_vue_type_template_id_092388cd___WEBPACK_IMPORTED_MODULE_0__["render"],
   _belongsTo_vue_vue_type_template_id_092388cd___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
@@ -11221,6 +11123,22 @@ component.options.__file = "resources/js/admin/components/elements/field/belongs
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_belongsTo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./belongsTo.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/admin/components/elements/field/belongsTo.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_belongsTo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/admin/components/elements/field/belongsTo.vue?vue&type=style&index=0&lang=css&":
+/*!*****************************************************************************************************!*\
+  !*** ./resources/js/admin/components/elements/field/belongsTo.vue?vue&type=style&index=0&lang=css& ***!
+  \*****************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_extract_text_webpack_plugin_dist_loader_js_ref_5_0_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_5_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_5_3_node_modules_vue_loader_lib_index_js_vue_loader_options_belongsTo_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/extract-text-webpack-plugin/dist/loader.js??ref--5-0!../../../../../../node_modules/style-loader!../../../../../../node_modules/css-loader??ref--5-2!../../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../../node_modules/postcss-loader/src??ref--5-3!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./belongsTo.vue?vue&type=style&index=0&lang=css& */ "./node_modules/extract-text-webpack-plugin/dist/loader.js?!./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/admin/components/elements/field/belongsTo.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_extract_text_webpack_plugin_dist_loader_js_ref_5_0_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_5_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_5_3_node_modules_vue_loader_lib_index_js_vue_loader_options_belongsTo_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_extract_text_webpack_plugin_dist_loader_js_ref_5_0_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_5_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_5_3_node_modules_vue_loader_lib_index_js_vue_loader_options_belongsTo_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_extract_text_webpack_plugin_dist_loader_js_ref_5_0_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_5_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_5_3_node_modules_vue_loader_lib_index_js_vue_loader_options_belongsTo_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_extract_text_webpack_plugin_dist_loader_js_ref_5_0_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_5_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_5_3_node_modules_vue_loader_lib_index_js_vue_loader_options_belongsTo_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_extract_text_webpack_plugin_dist_loader_js_ref_5_0_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_5_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_5_3_node_modules_vue_loader_lib_index_js_vue_loader_options_belongsTo_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 
@@ -11308,6 +11226,56 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_checkbox_vue_vue_type_template_id_09a6fb15___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
+
+/***/ }),
+
+/***/ "./resources/js/admin/components/elements/field/field.vue":
+/*!****************************************************************!*\
+  !*** ./resources/js/admin/components/elements/field/field.vue ***!
+  \****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _field_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./field.vue?vue&type=script&lang=js& */ "./resources/js/admin/components/elements/field/field.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+var render, staticRenderFns
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
+  _field_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"],
+  render,
+  staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/admin/components/elements/field/field.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/admin/components/elements/field/field.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************!*\
+  !*** ./resources/js/admin/components/elements/field/field.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_field_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./field.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/admin/components/elements/field/field.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_field_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
@@ -13719,6 +13687,30 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/mixins/dot.js":
+/*!************************************!*\
+  !*** ./resources/js/mixins/dot.js ***!
+  \************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _utils_dot__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/dot */ "./resources/js/utils/dot.js");
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  methods: {
+    dotSet: function dotSet() {
+      return _utils_dot__WEBPACK_IMPORTED_MODULE_0__["dotSet"].apply(void 0, arguments);
+    },
+    dotGet: function dotGet() {
+      return _utils_dot__WEBPACK_IMPORTED_MODULE_0__["dotGet"].apply(void 0, arguments);
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./resources/js/mixins/form.js":
 /*!*************************************!*\
   !*** ./resources/js/mixins/form.js ***!
@@ -14052,6 +14044,50 @@ __webpack_require__.r(__webpack_exports__);
     }
   }
 });
+
+/***/ }),
+
+/***/ "./resources/js/utils/dot.js":
+/*!***********************************!*\
+  !*** ./resources/js/utils/dot.js ***!
+  \***********************************/
+/*! exports provided: dotGet, dotSet */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "dotGet", function() { return dotGet; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "dotSet", function() { return dotSet; });
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+var dotGet = function dotGet(source, key) {
+  var defaultValue = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+  var keys = key.split('.');
+
+  for (var i = 0; i < keys.length; i++) {
+    if (!source || _typeof(source) !== 'object' || !source.hasOwnProperty(keys[i])) return defaultValue;
+    source = source[keys[i]];
+  }
+
+  return source;
+};
+var dotSet = function dotSet(source, key, value) {
+  var keys = key.split('.');
+  var length = keys.length - 1;
+  var copy = _typeof(source) !== 'object' ? {} : JSON.parse(JSON.stringify(source));
+  var part = copy;
+
+  for (var i = 0; i < length; i++) {
+    if (part[keys[i]] === null || _typeof(part[keys[i]]) !== 'object' || !part.hasOwnProperty(keys[i])) {
+      part[keys[i]] = {};
+    }
+
+    part = part[keys[i]];
+  }
+
+  part[keys[length]] = value;
+  return copy;
+};
 
 /***/ }),
 

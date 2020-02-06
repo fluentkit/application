@@ -18,30 +18,19 @@
 </template>
 
 <script>
+    import field from './field';
+
     export default {
         name: 'fk-admin-field-panel',
-        props: {
-            field: {
-                type: Object,
-                required: true
-            },
-            errors: {
-                type: Object,
-                required: true
-            },
-            value: {
-                type: Object,
-                required: true
-            }
-        },
+        extends: field,
         computed: {
             fields () {
                 const fields = {};
                 Object.keys(this.field.fields).forEach(field => {
                     fields[field] = {
                         ...this.field.fields[field],
-                        disabled: this.field.fields[field].disabled || this.field.disabled,
-                        readOnly: this.field.fields[field].readOnly || this.field.readOnly
+                        disabled: this.field.fields[field].disabled || this.isDisabled,
+                        readOnly: this.field.fields[field].readOnly || this.isReadOnly
                     };
                 });
 

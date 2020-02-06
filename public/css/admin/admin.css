@@ -1453,6 +1453,10 @@ a.fk-admin-field-route:hover {
 .fk-admin-field-key-value .fk-admin-button {
   margin-bottom: 0;
 }
+/* hack to hide sub field errors until we make the form errors more flexible */
+.fk-admin-belongs-to-input p.error {
+  display: none;
+}
 .fk-admin-field-has-many {
   display: flex;
   flex-direction: column;

@@ -10,9 +10,9 @@
         >
             <input
                 type="checkbox"
-                :checked="value[field.id]"
-                :disabled="field.disabled || field.readOnly"
-                @click="updateValue"
+                :checked="fieldValue"
+                :disabled="isDisabled || isReadOnly"
+                @click="updateValue(!fieldValue)"
             />
             <span v-if="field.meta.checkbox.label">
                 {{ field.meta.checkbox.label }}
@@ -22,30 +22,10 @@
 </template>
 
 <script>
+    import field from './field';
+
     export default {
         name: 'fk-admin-field-checkbox',
-        props: {
-            field: {
-                type: Object,
-                required: true
-            },
-            errors: {
-                type: Object,
-                required: true
-            },
-            value: {
-                type: Object,
-                required: true
-            }
-        },
-        methods: {
-            updateValue () {
-                const payload = {
-                    ...this.value,
-                    [this.field.id]: !this.value[this.field.id]
-                };
-                this.$emit('input', payload);
-            }
-        }
+        extends: field
     }
 </script>

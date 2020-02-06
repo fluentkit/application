@@ -8,7 +8,7 @@
                 v-for="field in fields"
                 :key="field.id"
                 :is="field.component"
-                v-if="!field.hidden"
+                v-if="!isHidden"
                 :field="field"
                 :errors="errors"
                 :value="value"
@@ -19,22 +19,11 @@
 </template>
 
 <script>
+    import field from './field';
+
     export default {
         name: 'fk-admin-field-group',
-        props: {
-            field: {
-                type: Object,
-                required: true
-            },
-            errors: {
-                type: Object,
-                required: true
-            },
-            value: {
-                type: Object,
-                required: true
-            }
-        },
+        extends: field,
         computed: {
             groupErrors () {
                 return {
@@ -60,8 +49,8 @@
                 Object.keys(this.field.fields).forEach(field => {
                     fields[field] = {
                         ...this.field.fields[field],
-                        disabled: this.field.fields[field].disabled || this.field.disabled,
-                        readOnly: this.field.fields[field].readOnly || this.field.readOnly
+                        disabled: this.isDisabled || this.field.disabled,
+                        readOnly: this.isReadOnly || this.field.readOnly
                     };
                 });
 

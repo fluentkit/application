@@ -13,34 +13,15 @@
 </template>
 
 <script>
+    import field from './field';
+
     export default {
         name: 'fk-admin-field-route',
-        props: {
-            field: {
-                type: Object,
-                required: true
-            },
-            errors: {
-                type: Object,
-                required: true
-            },
-            value: {
-                type: Object,
-                required: true
-            }
-        },
+        extends: field,
         computed: {
             routeLabel () {
                 if (this.field.meta.route.from) {
-                    const from = this.field.meta.route.from.split('.');
-                    let value = this.value;
-                    for (let i = 0;i < from.length;i++) {
-                        if (!value[from[i]]) {
-                            value = false;
-                            break;
-                        }
-                        value = value[from[i]];
-                    }
+                    const value = this.dotGet(this.value, this.field.meta.route.from);
 
                     if (value) {
                         return value;
@@ -49,7 +30,7 @@
 
                 if (this.field.meta.route.label) return this.field.meta.route.label;
 
-                return this.value[this.field.id];
+                return this.fieldValue;
             }
         },
         methods: {
@@ -57,7 +38,7 @@
                 await this.$router.push({
                     name: this.field.meta.route.id,
                     params: {
-                        id: this.value[this.field.id]
+                        id: this.fieldValue
                     }
                 });
             }
