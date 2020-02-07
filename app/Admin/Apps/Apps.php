@@ -44,6 +44,7 @@ final class Apps extends ModelSection
                     (new Text('updated_at', 'Updated At'))->readOnly()
                 ]),
                 (new HasMany('domains', AppDomain::class, 'Each application can have many associated domains, but must have at least one.'))
+                    ->setLabel('Domains')
                     ->indexFields([
                         (new Number('id', 'ID')),
                         (new Route('route', 'Domain'))

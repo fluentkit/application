@@ -13405,7 +13405,8 @@ var createRoutes = function createRoutes(_ref) {
           render: function render(createElement, _ref2) {
             var props = _ref2.props;
             return createElement(screen.component, {
-              props: props
+              props: props,
+              key: "".concat(props.section.id, ".").concat(props.screen.id, ".").concat(JSON.stringify(props.params))
             });
           }
         },
@@ -13422,6 +13423,7 @@ var createRoutes = function createRoutes(_ref) {
               screen = _ref3$meta.screen,
               user = _ref3$meta.user;
           return _objectSpread({}, params, {
+            params: params,
             section: section,
             screen: screen,
             user: user
