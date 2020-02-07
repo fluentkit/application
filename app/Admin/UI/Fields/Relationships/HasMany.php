@@ -7,6 +7,7 @@ namespace FluentKit\Admin\UI\Fields\Relationships;
 use FluentKit\Admin\UI\FieldInterface;
 use FluentKit\Admin\UI\Fields\Field;
 use FluentKit\Admin\UI\Traits\HasModel;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
 final class HasMany extends Field
@@ -72,5 +73,19 @@ final class HasMany extends Field
             ->toArray();
 
         return $data;
+    }
+
+    public function saveAttributes(Model $model, Request $request): Model
+    {
+        $requestModels = $request->input('attributes.'.$this->getId());
+        $models = call_user_func([$model, $this->getId()]);
+
+        foreach ($requestModels as $requestModel) {
+            if (isset($requestModel['__fk_delete']) && $requestModel['__fk_delete'] === true) {
+                $models->find($requestModel['id'])->delete();
+            }
+        }
+
+        return $model;
     }
 }

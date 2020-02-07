@@ -2131,6 +2131,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _field__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./field */ "./resources/js/admin/components/elements/field/field.vue");
+/* harmony import */ var _button__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../button */ "./resources/js/admin/components/elements/button.vue");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -2168,9 +2169,31 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'fk-admin-field-has-many',
+  components: {
+    FkAdminButton: _button__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
   "extends": _field__WEBPACK_IMPORTED_MODULE_0__["default"],
   computed: {
     tableColumns: function tableColumns() {
@@ -2191,6 +2214,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         align: 'center',
         classes: ['actions']
       }]);
+    }
+  },
+  methods: {
+    rowClasses: function rowClasses(classes, row, column) {
+      if (row['__fk_delete']) {
+        return classes.concat(['deleted']);
+      }
+
+      return classes;
+    },
+    markRowDeleted: function markRowDeleted(row) {
+      this.$set(row, '__fk_delete', true);
+    },
+    restoreRow: function restoreRow(row) {
+      this.$delete(row, '__fk_delete');
     }
   }
 });
@@ -2897,6 +2935,12 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
     rowKey: {
       type: [String, Function],
       "default": 'id'
+    },
+    rowClass: {
+      type: Function,
+      "default": function _default(classes) {
+        return classes;
+      }
     }
   },
   methods: {
@@ -2911,12 +2955,14 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
           classes = _ref$classes === void 0 ? [] : _ref$classes;
       return [align].concat(_toConsumableArray(classes));
     },
-    rowClasses: function rowClasses(row, _ref2) {
-      var _ref2$align = _ref2.align,
-          align = _ref2$align === void 0 ? 'left' : _ref2$align,
-          _ref2$classes = _ref2.classes,
-          classes = _ref2$classes === void 0 ? [] : _ref2$classes;
-      return [align].concat(_toConsumableArray(classes));
+    rowClasses: function rowClasses(row, column) {
+      var _row$classes = row.classes,
+          rowClasses = _row$classes === void 0 ? [] : _row$classes;
+      var _column$align = column.align,
+          align = _column$align === void 0 ? 'left' : _column$align,
+          _column$classes = column.classes,
+          classes = _column$classes === void 0 ? [] : _column$classes;
+      return this.rowClass([align].concat(_toConsumableArray(classes), _toConsumableArray(rowClasses)), row, column);
     }
   }
 });
@@ -6509,7 +6555,11 @@ var render = function() {
       _c(
         "fk-admin-table",
         {
-          attrs: { columns: _vm.tableColumns, rows: _vm.fieldValue },
+          attrs: {
+            columns: _vm.tableColumns,
+            rows: _vm.fieldValue,
+            rowClass: _vm.rowClasses
+          },
           scopedSlots: _vm._u(
             [
               _vm._l(_vm.tableColumns, function(column) {
@@ -6532,6 +6582,36 @@ var render = function() {
                               value: row
                             }
                           })
+                        : _vm._e(),
+                      _vm._v(" "),
+                      column.id === "actions"
+                        ? [
+                            row["__fk_delete"]
+                              ? _c(
+                                  "fk-admin-button",
+                                  {
+                                    attrs: { size: "sm" },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.restoreRow(row)
+                                      }
+                                    }
+                                  },
+                                  [_c("i", { staticClass: "fa fa-undo" })]
+                                )
+                              : _c(
+                                  "fk-admin-button",
+                                  {
+                                    attrs: { size: "sm", type: "danger" },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.markRowDeleted(row)
+                                      }
+                                    }
+                                  },
+                                  [_c("i", { staticClass: "fa fa-trash" })]
+                                )
+                          ]
                         : _vm._e()
                     ]
                   }
@@ -6543,9 +6623,7 @@ var render = function() {
           )
         },
         [
-          _c("div", { attrs: { slot: "table-header" }, slot: "table-header" }, [
-            _vm._v("header actions")
-          ]),
+          _c("div", { attrs: { slot: "table-header" }, slot: "table-header" }),
           _vm._v(" "),
           _vm._v(" "),
           _c("template", { slot: "table-footer" }, [

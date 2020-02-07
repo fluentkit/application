@@ -52,6 +52,10 @@
             rowKey: {
                 type: [String, Function],
                 default: 'id'
+            },
+            rowClass: {
+                type: Function,
+                default: classes => classes
             }
         },
         methods: {
@@ -63,8 +67,10 @@
             columnClasses ({ align = 'left', classes = [] }) {
                 return [align, ...classes];
             },
-            rowClasses (row, { align = 'left', classes = [] }) {
-                return [align, ...classes];
+            rowClasses (row, column) {
+                const { classes: rowClasses = [] } = row;
+                const { align = 'left', classes = [] } = column;
+                return this.rowClass([align, ...classes, ...rowClasses], row, column);
             }
         }
     }
@@ -111,9 +117,18 @@
         @apply .text-center;
     }
 
+    .fk-admin-table table td.deleted {
+        @apply .bg-red-100 .text-red-500;
+    }
+    .fk-admin-table table td.deleted > *:not(.fk-admin-button) {
+        @apply .opacity-75;
+        filter: blur(1px);
+    }
+
     .fk-admin-table table td.actions {
         @apply .flex .justify-end;
     }
+
     .fk-admin-table table .fk-admin-button {
         @apply .mb-0 .ml-2;
     }

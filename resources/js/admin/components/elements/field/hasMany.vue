@@ -5,8 +5,9 @@
         <fk-admin-table
             :columns="tableColumns"
             :rows="fieldValue"
+            :rowClass="rowClasses"
         >
-            <div slot="table-header">header actions</div>
+            <div slot="table-header"> </div>
             <template
                 v-for="column in tableColumns"
                 :slot="column.id"
@@ -19,6 +20,23 @@
                     :errors="errors"
                     :value="row"
                 />
+                <template v-if="column.id === 'actions'">
+                    <fk-admin-button
+                        v-if="row['__fk_delete']"
+                        size="sm"
+                        @click="restoreRow(row)"
+                    >
+                        <i class="fa fa-undo" />
+                    </fk-admin-button>
+                    <fk-admin-button
+                        v-else
+                        size="sm"
+                        type="danger"
+                        @click="markRowDeleted(row)"
+                    >
+                        <i class="fa fa-trash" />
+                    </fk-admin-button>
+                </template>
             </template>
             <template slot="table-footer">
                 <div class="totals">
@@ -31,9 +49,11 @@
 
 <script>
     import field from './field';
+    import FkAdminButton from "../button";
 
     export default {
         name: 'fk-admin-field-has-many',
+        components: {FkAdminButton},
         extends: field,
         computed: {
             tableColumns () {
@@ -54,6 +74,21 @@
                             classes: ['actions']
                         }
                     ])
+            }
+        },
+        methods: {
+            rowClasses (classes, row, column) {
+                if (row['__fk_delete']) {
+                    return classes.concat(['deleted']);
+                }
+
+                return classes;
+            },
+            markRowDeleted (row) {
+                this.$set(row, '__fk_delete', true);
+            },
+            restoreRow (row) {
+                this.$delete(row, '__fk_delete');
             }
         }
     }

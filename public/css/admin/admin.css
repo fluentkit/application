@@ -1224,6 +1224,15 @@ html {
 .fk-admin-table table td.no-results {
   text-align: center;
 }
+.fk-admin-table table td.deleted {
+  background-color: #fff5f5;
+  color: #f56565;
+}
+.fk-admin-table table td.deleted > *:not(.fk-admin-button) {
+  opacity: 0.75;
+  -webkit-filter: blur(1px);
+  filter: blur(1px);
+}
 .fk-admin-table table td.actions {
   display: flex;
   justify-content: flex-end;
