@@ -19,6 +19,13 @@
         name: 'fk-admin-field-route',
         extends: field,
         computed: {
+            routeIdParam () {
+                if (this.field.meta.route.idFrom) {
+                    return this.dotGet(this.value, this.field.meta.route.idFrom, this.fieldValue);
+                }
+
+                return this.fieldValue;
+            },
             routeLabel () {
                 if (this.field.meta.route.from) {
                     const value = this.dotGet(this.value, this.field.meta.route.from);
@@ -38,7 +45,7 @@
                 await this.$router.push({
                     name: this.field.meta.route.id,
                     params: {
-                        id: this.fieldValue
+                        id: this.routeIdParam
                     }
                 });
             }

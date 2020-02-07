@@ -8,6 +8,7 @@ use FluentKit\Admin\UI\Fields\Checkbox;
 use FluentKit\Admin\UI\Fields\Relationships\HasMany;
 use FluentKit\Admin\UI\Fields\Number;
 use FluentKit\Admin\UI\Fields\Panel;
+use FluentKit\Admin\UI\Fields\Route;
 use FluentKit\Admin\UI\Fields\Text;
 use FluentKit\Admin\UI\ModelSection;
 use FluentKit\App;
@@ -43,6 +44,15 @@ final class Apps extends ModelSection
                     (new Text('updated_at', 'Updated At'))->readOnly()
                 ]),
                 (new HasMany('domains', AppDomain::class, 'Each application can have many associated domains, but must have at least one.'))
+                    ->indexFields([
+                        (new Number('id', 'ID')),
+                        (new Route('route', 'Domain'))
+                            ->route('app_domains.edit')
+                            ->routeIdFrom('id')
+                            ->routeLabelFrom('domain'),
+                        (new Text('created_at', 'Created At')),
+                        (new Text('updated_at', 'Updated At'))
+                    ])
                     ->editFields([
                         (new Number('id', 'ID')),
                         new Text('domain', 'Domain'),

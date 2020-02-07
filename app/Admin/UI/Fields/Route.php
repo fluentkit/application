@@ -11,6 +11,11 @@ class Route extends Field
         return $this->setMeta('route.id', $route);
     }
 
+    public function routeIdFrom(string $from): self
+    {
+        return $this->setMeta('route.idFrom', $from);
+    }
+
     public function routeLabel(string $label): self
     {
         return $this->setMeta('route.label', $label);

@@ -2176,8 +2176,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     tableColumns: function tableColumns() {
       var _this = this;
 
-      return Object.keys(this.field.fields).map(function (id) {
-        return _this.field.fields[id];
+      return Object.keys(this.field.indexFields).map(function (id) {
+        return _this.field.indexFields[id];
       }).filter(function (_ref) {
         var hidden = _ref.hidden;
         return !hidden;
@@ -2534,6 +2534,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   name: 'fk-admin-field-route',
   "extends": _field__WEBPACK_IMPORTED_MODULE_1__["default"],
   computed: {
+    routeIdParam: function routeIdParam() {
+      if (this.field.meta.route.idFrom) {
+        return this.dotGet(this.value, this.field.meta.route.idFrom, this.fieldValue);
+      }
+
+      return this.fieldValue;
+    },
     routeLabel: function routeLabel() {
       if (this.field.meta.route.from) {
         var value = this.dotGet(this.value, this.field.meta.route.from);
@@ -2560,7 +2567,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return this.$router.push({
                   name: this.field.meta.route.id,
                   params: {
-                    id: this.fieldValue
+                    id: this.routeIdParam
                   }
                 });
 
@@ -6512,13 +6519,13 @@ var render = function() {
                     var row = ref.row
                     var column = ref.column
                     return [
-                      _vm.field.fields[column.id]
-                        ? _c(_vm.field.fields[column.id].component, {
+                      _vm.field.indexFields[column.id]
+                        ? _c(_vm.field.indexFields[column.id].component, {
                             tag: "component",
                             attrs: {
                               field: Object.assign(
                                 {},
-                                _vm.field.fields[column.id],
+                                _vm.field.indexFields[column.id],
                                 { withoutLayout: true }
                               ),
                               errors: _vm.errors,

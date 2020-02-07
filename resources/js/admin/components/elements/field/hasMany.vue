@@ -13,9 +13,9 @@
                 slot-scope="{ row, column }"
             >
                 <component
-                    v-if="field.fields[column.id]"
-                    :is="field.fields[column.id].component"
-                    :field="{ ...field.fields[column.id], withoutLayout: true }"
+                    v-if="field.indexFields[column.id]"
+                    :is="field.indexFields[column.id].component"
+                    :field="{ ...field.indexFields[column.id], withoutLayout: true }"
                     :errors="errors"
                     :value="row"
                 />
@@ -37,8 +37,8 @@
         extends: field,
         computed: {
             tableColumns () {
-                return Object.keys(this.field.fields)
-                    .map(id => this.field.fields[id])
+                return Object.keys(this.field.indexFields)
+                    .map(id => this.field.indexFields[id])
                     .filter(({ hidden }) => !hidden)
                     .map(field => {
                         return {

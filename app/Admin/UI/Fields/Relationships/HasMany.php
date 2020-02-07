@@ -4,14 +4,20 @@ declare(strict_types=1);
 
 namespace FluentKit\Admin\UI\Fields\Relationships;
 
+use FluentKit\Admin\UI\FieldInterface;
 use FluentKit\Admin\UI\Fields\Field;
-use FluentKit\Admin\UI\Traits\HasFields;
 use FluentKit\Admin\UI\Traits\HasModel;
 use Illuminate\Http\Request;
 
 final class HasMany extends Field
 {
-    use HasFields, HasModel;
+    use HasModel;
+
+    protected array $indexFields = [];
+
+    protected array $createFields = [];
+
+    protected array $editFields = [];
 
     public function __construct(string $id, string $label, string $description = '')
     {
@@ -22,7 +28,7 @@ final class HasMany extends Field
     public function indexFields(array $fields): self
     {
         foreach ($fields as $field) {
-            $this->addField($field->readOnly()->setMeta('hasMany.showOnIndex', true));
+            $this->indexFields[$field->getId()] = $field->readOnly();
         }
 
         return $this;
@@ -31,7 +37,7 @@ final class HasMany extends Field
     public function createFields(array $fields): self
     {
         foreach ($fields as $field) {
-            $this->addField($field->readOnly()->setMeta('hasMany.showOnCreate', true));
+            $this->createFields[$field->getId()] = $field;
         }
 
         return $this;
@@ -40,7 +46,7 @@ final class HasMany extends Field
     public function editFields(array $fields): self
     {
         foreach ($fields as $field) {
-            $this->addField($field->readOnly()->setMeta('hasMany.showOnEdit', true));
+            $this->editFields[$field->getId()] = $field;
         }
 
         return $this;
@@ -49,7 +55,21 @@ final class HasMany extends Field
     public function toArray(Request $request): array
     {
         $data = parent::toArray($request);
-        $data['fields'] = $this->getFields($request);
+
+        $data['indexFields'] = collect($this->indexFields)
+            ->map(fn (FieldInterface $field) => $field->toArray($request))
+            ->sortBy('priority')
+            ->toArray();
+
+        $data['createFields'] = collect($this->createFields)
+            ->map(fn (FieldInterface $field) => $field->toArray($request))
+            ->sortBy('priority')
+            ->toArray();
+
+        $data['editFields'] = collect($this->editFields)
+            ->map(fn (FieldInterface $field) => $field->toArray($request))
+            ->sortBy('priority')
+            ->toArray();
 
         return $data;
     }
