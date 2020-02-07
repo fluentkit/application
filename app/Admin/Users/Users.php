@@ -8,6 +8,7 @@ use FluentKit\Admin\UI\Fields\Email;
 use FluentKit\Admin\UI\Fields\Number;
 use FluentKit\Admin\UI\Fields\Panel;
 use FluentKit\Admin\UI\Fields\Password;
+use FluentKit\Admin\UI\Fields\PasswordConfirmation;
 use FluentKit\Admin\UI\Fields\Text;
 use FluentKit\Admin\UI\ModelSection;
 use FluentKit\User;
@@ -35,7 +36,7 @@ final class Users extends ModelSection
                 ]),
                 new Panel('passwords', 'Password', '', [
                     (new Password('password', 'Password'))->rules(['required', 'string', 'min:10', 'confirmed']),
-                    (new Password('password_confirmation', 'Retype Password'))->rules(['required', 'string', 'min:10']),
+                    (new PasswordConfirmation('password_confirmation', 'Retype Password'))->rules(['required', 'string', 'min:10']),
                 ])
             ])
             ->editFields([
@@ -49,7 +50,7 @@ final class Users extends ModelSection
                 ]),
                 new Panel('passwords', 'Password', 'Enter a new password to change the users password.', [
                     (new Password('password', 'Password'))->rules(['sometimes', 'string', 'min:10', 'confirmed']),
-                    (new Password('password_confirmation', 'Retype Password'))->rules(['sometimes', 'required_with:passwords', 'string', 'min:10']),
+                    (new PasswordConfirmation('password_confirmation', 'Retype Password'))->rules(['sometimes', 'required_with:passwords', 'string', 'min:10']),
                 ])
             ]);
 
