@@ -3359,6 +3359,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   mixins: [_mixins_request__WEBPACK_IMPORTED_MODULE_1__["default"], _mixins_form__WEBPACK_IMPORTED_MODULE_2__["default"], _mixins_progress__WEBPACK_IMPORTED_MODULE_3__["default"], _mixins_toast__WEBPACK_IMPORTED_MODULE_4__["default"], _mixins_modal__WEBPACK_IMPORTED_MODULE_5__["default"]],
+  props: {
+    section: {
+      type: Object,
+      required: true
+    },
+    screen: {
+      type: Object,
+      required: true
+    }
+  },
   data: function data() {
     return {
       fields: null,
@@ -3368,10 +3378,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   computed: {
     $section: function $section() {
-      return this.$route.meta.section;
+      return this.section;
     },
     $screen: function $screen() {
-      return _objectSpread({}, this.$route.meta.screen, {
+      return _objectSpread({}, this.screen, {
         get: this.getScreenData,
         action: this.performAction
       });
@@ -13347,6 +13357,12 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
@@ -13385,8 +13401,12 @@ var createRoutes = function createRoutes(_ref) {
       return {
         path: path,
         component: {
-          render: function render(createElement) {
-            return createElement(screen.component);
+          functional: true,
+          render: function render(createElement, _ref2) {
+            var props = _ref2.props;
+            return createElement(screen.component, {
+              props: props
+            });
           }
         },
         name: "".concat(id, ".").concat(screen.id),
@@ -13394,6 +13414,18 @@ var createRoutes = function createRoutes(_ref) {
           section: section,
           screen: screen,
           user: user
+        },
+        props: function props(_ref3) {
+          var params = _ref3.params,
+              _ref3$meta = _ref3.meta,
+              section = _ref3$meta.section,
+              screen = _ref3$meta.screen,
+              user = _ref3$meta.user;
+          return _objectSpread({}, params, {
+            section: section,
+            screen: screen,
+            user: user
+          });
         }
       };
     })));

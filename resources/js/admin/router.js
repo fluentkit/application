@@ -32,8 +32,9 @@ const createRoutes = ({ sections, user }) => {
                         return {
                             path,
                             component: {
-                                render (createElement) {
-                                    return createElement(screen.component);
+                                functional: true,
+                                render (createElement, { props }) {
+                                    return createElement(screen.component, { props });
                                 }
                             },
                             name: `${id}.${screen.id}`,
@@ -41,6 +42,14 @@ const createRoutes = ({ sections, user }) => {
                                 section,
                                 screen,
                                 user
+                            },
+                            props: ({ params, meta: { section, screen, user } }) => {
+                                return {
+                                    ...params,
+                                    section,
+                                    screen,
+                                    user
+                                }
                             }
                         }
                     })

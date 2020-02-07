@@ -8,6 +8,16 @@
 
     export default {
         mixins: [request, form, progress, toast, modal],
+        props: {
+            section: {
+                type: Object,
+                required: true
+            },
+            screen: {
+                type: Object,
+                required: true
+            }
+        },
         data () {
             return {
                 fields: null,
@@ -17,11 +27,11 @@
         },
         computed: {
             $section () {
-                return this.$route.meta.section;
+                return this.section;
             },
             $screen () {
                 return {
-                    ...this.$route.meta.screen,
+                    ...this.screen,
                     get: this.getScreenData,
                     action: this.performAction
                 };
