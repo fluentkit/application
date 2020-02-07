@@ -6,6 +6,7 @@ namespace FluentKit\Admin\UI;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Validator;
 
 interface FieldInterface
 {
@@ -48,6 +49,10 @@ interface FieldInterface
     public function getHidden(Request $request): bool;
 
     public function toArray(Request $request): array;
+
+    public function addValidationLabels(Validator $validator, Request $request, ScreenInterface $screen): Validator;
+
+    public function addValidationRules(Validator $validator, Request $request, ScreenInterface $screen): Validator;
 
     public function saveAttributes(Model $model, Request $request): Model;
 }

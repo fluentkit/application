@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace FluentKit\Admin\UI\Fields;
 
 use FluentKit\Admin\UI\FieldInterface;
+use FluentKit\Admin\UI\ScreenInterface;
 use FluentKit\Admin\UI\Traits\CanBeDisabled;
 use FluentKit\Admin\UI\Traits\CanBeHidden;
 use FluentKit\Admin\UI\Traits\CanBeReadOnly;
@@ -15,6 +16,7 @@ use FluentKit\Admin\UI\Traits\HasPriority;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Validator;
 
 abstract class Field implements FieldInterface
 {
@@ -86,12 +88,11 @@ abstract class Field implements FieldInterface
 
     public function getRules(): array
     {
-        return [$this->getId() => array_unique(array_merge($this->rules, $this->defaultRules))];
+        return array_unique(array_merge($this->rules, $this->defaultRules));
     }
 
     public function toArray(Request $request): array
     {
-        $rules = $this->getRules()[$this->getId()] ?? [];
         $type = str_replace('_', '-', Str::snake(class_basename(get_called_class())));
 
         return [
@@ -100,7 +101,7 @@ abstract class Field implements FieldInterface
             'label' => $this->getLabel(),
             'layout' => $this->getLayout(),
             'align' => $this->getAlign(),
-            'required' => in_array('required', $rules) || call_user_func($this->requiredCallback, $request),
+            'required' => in_array('required', $this->getRules()) || call_user_func($this->requiredCallback, $request),
             'disabled' => $this->getDisabled($request),
             'readOnly' => $this->getReadOnly($request),
             'hidden' => $this->getHidden($request),
@@ -109,6 +110,31 @@ abstract class Field implements FieldInterface
             'component' => $this->component ?? 'fk-admin-field-' . $type,
             'meta' => $this->getMeta(),
         ];
+    }
+
+    public function addValidationLabels(Validator $validator, Request $request, ScreenInterface $screen): Validator
+    {
+        $validator->addCustomAttributes([
+            $this->getId() => $this->getLabel()
+        ]);
+
+        return $validator;
+    }
+
+    public function addValidationRules(Validator $validator, Request $request, ScreenInterface $screen): Validator
+    {
+        $validator->addRules([
+            $this->getId() => $this->replaceValidationPatterns($request, $this->getRules())
+        ]);
+
+        return $validator;
+    }
+
+    protected function replaceValidationPatterns(Request $request, array $rules): array
+    {
+        return collect($rules)->map(function ($rule) use ($request) {
+            return str_replace('{$id}', $request->get('id'), (string) $rule);
+        })->toArray();
     }
 
     public function saveAttributes(Model $model, Request $request): Model

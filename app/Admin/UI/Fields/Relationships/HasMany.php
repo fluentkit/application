@@ -46,11 +46,6 @@ final class HasMany extends Field
         return $this;
     }
 
-    public function getRules(): array
-    {
-        return $this->getFieldRules();
-    }
-
     public function toArray(Request $request): array
     {
         $data = parent::toArray($request);

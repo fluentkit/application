@@ -7,11 +7,13 @@ namespace FluentKit\Admin\UI\Fields\Relationships;
 use FluentKit\Admin\UI\Fields\Field;
 use FluentKit\Admin\UI\Fields\Route;
 use FluentKit\Admin\UI\Fields\Select;
+use FluentKit\Admin\UI\ScreenInterface;
 use FluentKit\Admin\UI\Traits\HasFields;
 use FluentKit\Admin\UI\Traits\HasModel;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Validator;
 
 final class BelongsTo extends Field
 {
@@ -47,19 +49,30 @@ final class BelongsTo extends Field
         return $this;
     }
 
-    public function getRules(): array
-    {
-        return [$this->getId().'.id' => array_unique(array_merge($this->rules, $this->defaultRules))];
-    }
-
     public function toArray(Request $request): array
     {
         $data = parent::toArray($request);
         $data['fields'] = $this->getFields($request);
-        // fix required as we actually use the sub key `id` for the rules
-        $data['required'] = in_array('required', $this->rules) || call_user_func($this->requiredCallback, $request);
 
         return $data;
+    }
+
+    public function addValidationLabels(Validator $validator, Request $request, ScreenInterface $screen): Validator
+    {
+        $validator->addCustomAttributes([
+            $this->getId().'.id' => $this->getLabel()
+        ]);
+
+        return $validator;
+    }
+
+    public function addValidationRules(Validator $validator, Request $request, ScreenInterface $screen): Validator
+    {
+        $validator->addRules([
+            $this->getId().'.id' => $this->replaceValidationPatterns($request, $this->getRules())
+        ]);
+
+        return $validator;
     }
 
     public function saveAttributes(Model $model, Request $request): Model

@@ -16,15 +16,13 @@ abstract class FormScreen extends Screen implements ScreenInterface
 
     public function validateAttributes(Request $request): void
     {
-        $fields = $this->getFieldRules();
-        $fieldNames = $this->getFieldLabels();
+        $validator = Validator::make($request->get('attributes'), [], []);
 
-        $rules = collect($fields)->map(function (array $rules) use ($request) {
-            return collect($rules)->map(function ($rule) use ($request) {
-                return str_replace('{$id}', $request->get('id'), (string) $rule);
-            })->toArray();
-        })->toArray();
+        foreach ($this->fields as $field) {
+            $validator = $field->addValidationLabels($validator, $request, $this);
+            $validator = $field->addValidationRules($validator, $request, $this);
+        }
 
-        Validator::make($request->get('attributes'), $rules, [], $fieldNames)->validate();
+        $validator->validate();
     }
 }

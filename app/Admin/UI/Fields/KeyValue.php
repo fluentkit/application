@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace FluentKit\Admin\UI\Fields;
 
 use FluentKit\Admin\UI\Fields\Traits\SavesModelAttributes;
+use FluentKit\Admin\UI\ScreenInterface;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Validator;
 
 final class KeyValue extends Field
 {
@@ -55,18 +57,10 @@ final class KeyValue extends Field
         return $this;
     }
 
-    public function getRules(): array
-    {
-        return [
-            $this->getId().'.*' => array_unique(array_merge($this->rules, $this->defaultRules))
-        ];
-    }
-
     public function toArray(Request $request): array
     {
         $data = parent::toArray($request);
-        $rules = $this->getRules()[$this->getId().'.*'] ?? [];
-        $data['required'] = in_array('required', $rules) || call_user_func($this->requiredCallback, $request);
+        $data['required'] = in_array('required', $this->getRules()) || call_user_func($this->requiredCallback, $request);
         $data['keyLabel'] = trans($this->keyLabel);
         $data['valueLabel'] = trans($this->valueLabel);
         $data['addLabel'] = trans($this->addLabel);
@@ -78,5 +72,23 @@ final class KeyValue extends Field
         $data['valueField'] = (new $fieldClass('value', $this->valueLabel))->toArray($request);
 
         return $data;
+    }
+
+    public function addValidationLabels(Validator $validator, Request $request, ScreenInterface $screen): Validator
+    {
+        $validator->addCustomAttributes([
+            $this->getId().'.*' => $this->getLabel()
+        ]);
+
+        return $validator;
+    }
+
+    public function addValidationRules(Validator $validator, Request $request, ScreenInterface $screen): Validator
+    {
+        $validator->addRules([
+            $this->getId().'.*' => $this->replaceValidationPatterns($request, $this->getRules())
+        ]);
+
+        return $validator;
     }
 }
