@@ -21,7 +21,6 @@
             :rows="fieldValue"
             :rowClass="rowClasses"
         >
-            <div slot="table-header"> </div>
             <template
                 v-for="column in tableColumns"
                 :slot="column.id"

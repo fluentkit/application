@@ -2224,7 +2224,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
 
 
 
@@ -3055,6 +3054,16 @@ function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
 
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3118,6 +3127,31 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
       "default": function _default(classes) {
         return classes;
       }
+    },
+    searchable: {
+      type: Boolean,
+      "default": true
+    }
+  },
+  data: function data() {
+    return {
+      search: ''
+    };
+  },
+  computed: {
+    filteredRows: function filteredRows() {
+      var _this = this;
+
+      if (!this.searchable) return this.rows;
+      return this.rows.filter(function (row) {
+        for (var key in row) {
+          if (!row.hasOwnProperty(key)) continue;
+          if (!['number', 'string'].includes(_typeof(row[key]))) continue;
+          if ("".concat(row[key]).toLowerCase().includes(_this.search)) return true;
+        }
+
+        return false;
+      });
     }
   },
   methods: {
@@ -4295,6 +4329,7 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
 //
 //
 //
@@ -6896,8 +6931,6 @@ var render = function() {
           )
         },
         [
-          _c("div", { attrs: { slot: "table-header" }, slot: "table-header" }),
-          _vm._v(" "),
           _vm._v(" "),
           _c("template", { slot: "table-footer" }, [
             _c("div", { staticClass: "totals" }, [
@@ -7535,6 +7568,30 @@ var render = function() {
           [_vm._t("table-header")],
           2
         )
+      : _vm.searchable
+      ? _c("div", { staticClass: "header-actions" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.search,
+                expression: "search"
+              }
+            ],
+            staticClass: "fk-admin-field-input",
+            attrs: { type: "text", id: "search" },
+            domProps: { value: _vm.search },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.search = $event.target.value
+              }
+            }
+          })
+        ])
       : _vm._e(),
     _vm._v(" "),
     _c("table", [
@@ -7555,8 +7612,8 @@ var render = function() {
       _c(
         "tbody",
         [
-          _vm.rows.length
-            ? _vm._l(_vm.rows, function(row, index) {
+          _vm.filteredRows.length
+            ? _vm._l(_vm.filteredRows, function(row, index) {
                 return _c(
                   "tr",
                   { key: _vm.getRowKey(row) },
@@ -8060,7 +8117,11 @@ var render = function() {
           _c(
             "fk-admin-table",
             {
-              attrs: { columns: _vm.tableColumns, rows: _vm.models },
+              attrs: {
+                columns: _vm.tableColumns,
+                rows: _vm.models,
+                searchable: false
+              },
               scopedSlots: _vm._u(
                 [
                   _vm._l(_vm.tableColumns, function(column) {

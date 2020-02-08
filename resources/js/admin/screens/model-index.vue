@@ -22,6 +22,7 @@
         <fk-admin-table
             :columns="tableColumns"
             :rows="models"
+            :searchable="false"
         >
             <input
                 slot="table-header"

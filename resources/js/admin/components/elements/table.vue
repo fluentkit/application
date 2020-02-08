@@ -3,6 +3,14 @@
         <div v-if="$scopedSlots['table-header']" class="header-actions">
             <slot name="table-header" />
         </div>
+        <div v-else-if="searchable" class="header-actions">
+            <input
+                type="text"
+                id="search"
+                class="fk-admin-field-input"
+                v-model="search"
+            />
+        </div>
         <table>
             <thead>
             <tr>
@@ -10,8 +18,8 @@
             </tr>
             </thead>
             <tbody>
-            <template v-if="rows.length">
-                <tr v-for="(row, index) in rows" :key="getRowKey(row)">
+            <template v-if="filteredRows.length">
+                <tr v-for="(row, index) in filteredRows" :key="getRowKey(row)">
                     <td v-for="column in columns" :key="column.id" :class="rowClasses(row, column)">
                         <slot
                             v-if="$scopedSlots[column.id]"
@@ -56,6 +64,29 @@
             rowClass: {
                 type: Function,
                 default: classes => classes
+            },
+            searchable: {
+                type: Boolean,
+                default: true
+            }
+        },
+        data () {
+            return {
+                search: ''
+            };
+        },
+        computed: {
+            filteredRows () {
+                if (!this.searchable) return this.rows;
+
+                return this.rows.filter(row => {
+                    for (let key in row) {
+                        if (!row.hasOwnProperty(key)) continue;
+                        if (!['number', 'string'].includes(typeof row[key])) continue;
+                        if (`${row[key]}`.toLowerCase().includes(this.search)) return true;
+                    }
+                    return false;
+                });
             }
         },
         methods: {
