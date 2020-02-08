@@ -1242,6 +1242,9 @@ html {
 .fk-admin-table table td.no-results {
   text-align: center;
 }
+.fk-admin-table table td.new {
+  background-color: #f0fff4;
+}
 .fk-admin-table table td.modified {
   background-color: #fffaf0;
 }
@@ -1491,6 +1494,22 @@ a.fk-admin-field-route:hover {
   display: flex;
   flex-direction: column;
   margin-bottom: 2.5rem;
+}
+.fk-admin-field-has-many .header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.fk-admin-field-has-many .header > * {
+  margin-bottom: 0;
+}
+.fk-admin-field-has-many .header > .fk-admin-button:nth-child(2) {
+  margin-left: auto;
+}
+.fk-admin-field-has-many .header .fk-admin-button {
+  margin-left: 0.5rem;
 }
 .fk-admin-field-has-many > .description {
   color: #718096;

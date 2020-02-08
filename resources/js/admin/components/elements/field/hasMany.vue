@@ -1,6 +1,20 @@
 <template>
     <div class="fk-admin-field-has-many">
-        <fk-admin-title>{{ field.label }}</fk-admin-title>
+        <div class="header">
+            <fk-admin-title>{{ field.label }}</fk-admin-title>
+            <fk-admin-button
+                :type="createAction.meta.button.type"
+                size="sm"
+                @click="addRow"
+            >
+                <i
+                    v-if="createAction.meta.button.icon"
+                    class="fa"
+                    :class="createAction.meta.button.icon"
+                />
+                {{ createAction.label }}
+            </fk-admin-button>
+        </div>
         <p v-if="field.description" class="description">{{ field.description }}</p>
         <fk-admin-table
             :columns="tableColumns"
@@ -11,7 +25,7 @@
             <template
                 v-for="column in tableColumns"
                 :slot="column.id"
-                slot-scope="{ row, column }"
+                slot-scope="{ row, index, column }"
             >
                 <component
                     v-if="field.indexFields[column.id]"
@@ -24,14 +38,14 @@
                     <fk-admin-button
                         size="sm"
                         type="info"
-                        @click="editRow(row)"
+                        @click="editRow(row, index)"
                     >
                         <i class="fa fa-pencil-alt" />
                     </fk-admin-button>
                     <fk-admin-button
                         v-if="row['__fk_delete']"
                         size="sm"
-                        @click="restoreRow(row)"
+                        @click="restoreRow(row, index)"
                     >
                         <i class="fa fa-undo" />
                     </fk-admin-button>
@@ -39,7 +53,7 @@
                         v-else
                         size="sm"
                         type="danger"
-                        @click="markRowDeleted(row)"
+                        @click="markRowDeleted(row, index)"
                     >
                         <i class="fa fa-trash" />
                     </fk-admin-button>
@@ -71,10 +85,19 @@
                     .filter(({ hidden }) => !hidden)
                     .map(field => ({ ...field, classes: [] }))
                     .concat([{ id: 'actions', label: 'Actions', align: 'center', classes: ['actions'] }])
+            },
+            createAction () {
+                return this.field.actions.create;
+            },
+            editAction () {
+                return this.field.actions.edit;
             }
         },
         methods: {
             rowClasses (classes, row, column) {
+                if (row['__fk_new']) {
+                    return classes.concat(['new']);
+                }
                 if (row['__fk_delete']) {
                     return classes.concat(['deleted']);
                 }
@@ -84,14 +107,13 @@
 
                 return classes;
             },
-            editRow (row) {
-                const action = this.field.actions.edit;
+            createFormModal (action, fields = {}, attributes = {}, cb = () => {}) {
                 const { modal: { title, size } } = action.meta;
                 const data = {
                     $form: this.$form,
-                    attributes: row,
+                    attributes,
                     field: this.field,
-                    fields: this.field.editFields
+                    fields
                 };
 
                 const modal = this.$modal(
@@ -131,10 +153,7 @@
                             }
                         );
                         await this.screen.handleActionResponse(data);
-                        Object.keys(modal.data.attributes).forEach(attribute => {
-                            this.$set(row, attribute, modal.data.attributes[attribute]);
-                        });
-                        this.$set(row, '__fk_modified', true);
+                        cb(modalAction, modal, data);
                         modal.close();
                     } catch (e) {
                         if (this.screen.$isValidationError(e)) {
@@ -147,11 +166,50 @@
                         this.screen.$progress().done();
                     }
                 });
+
+                return modal;
             },
-            markRowDeleted (row) {
+            addRow () {
+                this.createFormModal(
+                    this.createAction,
+                    this.field.createFields,
+                    {},
+                    (action, modal, responseData) => {
+                        this.updateValue([
+                            ...this.fieldValue,
+                            {
+                                ...modal.data.attributes,
+                                '__fk_new': true
+                            }
+                        ]);
+                    }
+                );
+            },
+            editRow (row, index) {
+                this.createFormModal(
+                    this.editAction,
+                    this.field.editFields,
+                    row,
+                    (action, modal, responseData) => {
+                        Object.keys(modal.data.attributes).forEach(attribute => {
+                            this.$set(row, attribute, modal.data.attributes[attribute]);
+                        });
+                        if (!row['__fk_new']) {
+                            this.$set(row, '__fk_modified', true);
+                        }
+                    }
+                );
+            },
+            markRowDeleted (row, index) {
+                if (row['__fk_new']) {
+                    const value = [...this.fieldValue];
+                    value.splice(index, 1);
+                    this.updateValue(value);
+                    return;
+                }
                 this.$set(row, '__fk_delete', true);
             },
-            restoreRow (row) {
+            restoreRow (row, index) {
                 this.$delete(row, '__fk_delete');
             }
         }
@@ -162,6 +220,22 @@
     .fk-admin-field-has-many {
         @apply .flex .flex-col .mb-10;
     }
+    .fk-admin-field-has-many .header {
+        @apply .flex .flex-row .justify-between .items-center .mb-4;
+    }
+
+    .fk-admin-field-has-many .header > * {
+        @apply .mb-0;
+    }
+
+    .fk-admin-field-has-many .header > .fk-admin-button:nth-child(2) {
+        @apply .ml-auto;
+    }
+
+    .fk-admin-field-has-many .header .fk-admin-button {
+        @apply .ml-2;
+    }
+
     .fk-admin-field-has-many > .description {
         @apply .text-gray-600 .italic .mb-4;
     }

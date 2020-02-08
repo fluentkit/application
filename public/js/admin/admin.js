@@ -2137,6 +2137,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _mixins_form__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../mixins/form */ "./resources/js/mixins/form.js");
 
 
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
@@ -2147,6 +2155,20 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2230,10 +2252,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         align: 'center',
         classes: ['actions']
       }]);
+    },
+    createAction: function createAction() {
+      return this.field.actions.create;
+    },
+    editAction: function editAction() {
+      return this.field.actions.edit;
     }
   },
   methods: {
     rowClasses: function rowClasses(classes, row, column) {
+      if (row['__fk_new']) {
+        return classes.concat(['new']);
+      }
+
       if (row['__fk_delete']) {
         return classes.concat(['deleted']);
       }
@@ -2244,18 +2276,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       return classes;
     },
-    editRow: function editRow(row) {
+    createFormModal: function createFormModal(action) {
       var _this2 = this;
 
-      var action = this.field.actions.edit;
+      var fields = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+      var attributes = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+      var cb = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : function () {};
       var _action$meta$modal = action.meta.modal,
           title = _action$meta$modal.title,
           size = _action$meta$modal.size;
       var data = {
         $form: this.$form,
-        attributes: row,
+        attributes: attributes,
         field: this.field,
-        fields: this.field.editFields
+        fields: fields
       };
       var modal = this.$modal(title, "\n                    <component\n                        v-for=\"field in fields\"\n                        :key=\"field.id\"\n                        :is=\"field.component\"\n                        v-if=\"!field.hidden\"\n                        :field=\"field\"\n                        :errors=\"$form.errors\"\n                        :value=\"attributes\"\n                        @input=\"$emit('input', $event)\"\n                    />\n                ", _objectSpread({}, data, {
         actions: action.actions,
@@ -2300,18 +2334,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                   return _this2.screen.handleActionResponse(_data);
 
                 case 11:
-                  Object.keys(modal.data.attributes).forEach(function (attribute) {
-                    _this2.$set(row, attribute, modal.data.attributes[attribute]);
-                  });
-
-                  _this2.$set(row, '__fk_modified', true);
-
+                  cb(modalAction, modal, _data);
                   modal.close();
-                  _context.next = 19;
+                  _context.next = 18;
                   break;
 
-                case 16:
-                  _context.prev = 16;
+                case 15:
+                  _context.prev = 15;
                   _context.t0 = _context["catch"](2);
 
                   if (_this2.screen.$isValidationError(_context.t0)) {
@@ -2320,31 +2349,62 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                     _this2.screen.$error(_context.t0);
                   }
 
-                case 19:
-                  _context.prev = 19;
+                case 18:
+                  _context.prev = 18;
                   modalAction.disabled = false;
 
                   _this2.screen.$progress().done();
 
-                  return _context.finish(19);
+                  return _context.finish(18);
 
-                case 23:
+                case 22:
                 case "end":
                   return _context.stop();
               }
             }
-          }, _callee, null, [[2, 16, 19, 23]]);
+          }, _callee, null, [[2, 15, 18, 22]]);
         }));
 
         return function (_x, _x2) {
           return _ref2.apply(this, arguments);
         };
       }());
+      return modal;
     },
-    markRowDeleted: function markRowDeleted(row) {
+    addRow: function addRow() {
+      var _this3 = this;
+
+      this.createFormModal(this.createAction, this.field.createFields, {}, function (action, modal, responseData) {
+        _this3.updateValue([].concat(_toConsumableArray(_this3.fieldValue), [_objectSpread({}, modal.data.attributes, {
+          '__fk_new': true
+        })]));
+      });
+    },
+    editRow: function editRow(row, index) {
+      var _this4 = this;
+
+      this.createFormModal(this.editAction, this.field.editFields, row, function (action, modal, responseData) {
+        Object.keys(modal.data.attributes).forEach(function (attribute) {
+          _this4.$set(row, attribute, modal.data.attributes[attribute]);
+        });
+
+        if (!row['__fk_new']) {
+          _this4.$set(row, '__fk_modified', true);
+        }
+      });
+    },
+    markRowDeleted: function markRowDeleted(row, index) {
+      if (row['__fk_new']) {
+        var value = _toConsumableArray(this.fieldValue);
+
+        value.splice(index, 1);
+        this.updateValue(value);
+        return;
+      }
+
       this.$set(row, '__fk_delete', true);
     },
-    restoreRow: function restoreRow(row) {
+    restoreRow: function restoreRow(row, index) {
       this.$delete(row, '__fk_delete');
     }
   }
@@ -6717,7 +6777,33 @@ var render = function() {
     "div",
     { staticClass: "fk-admin-field-has-many" },
     [
-      _c("fk-admin-title", [_vm._v(_vm._s(_vm.field.label))]),
+      _c(
+        "div",
+        { staticClass: "header" },
+        [
+          _c("fk-admin-title", [_vm._v(_vm._s(_vm.field.label))]),
+          _vm._v(" "),
+          _c(
+            "fk-admin-button",
+            {
+              attrs: { type: _vm.createAction.meta.button.type, size: "sm" },
+              on: { click: _vm.addRow }
+            },
+            [
+              _vm.createAction.meta.button.icon
+                ? _c("i", {
+                    staticClass: "fa",
+                    class: _vm.createAction.meta.button.icon
+                  })
+                : _vm._e(),
+              _vm._v(
+                "\n            " + _vm._s(_vm.createAction.label) + "\n        "
+              )
+            ]
+          )
+        ],
+        1
+      ),
       _vm._v(" "),
       _vm.field.description
         ? _c("p", { staticClass: "description" }, [
@@ -6740,6 +6826,7 @@ var render = function() {
                   key: column.id,
                   fn: function(ref) {
                     var row = ref.row
+                    var index = ref.index
                     var column = ref.column
                     return [
                       _vm.field.indexFields[column.id]
@@ -6765,7 +6852,7 @@ var render = function() {
                                 attrs: { size: "sm", type: "info" },
                                 on: {
                                   click: function($event) {
-                                    return _vm.editRow(row)
+                                    return _vm.editRow(row, index)
                                   }
                                 }
                               },
@@ -6779,7 +6866,7 @@ var render = function() {
                                     attrs: { size: "sm" },
                                     on: {
                                       click: function($event) {
-                                        return _vm.restoreRow(row)
+                                        return _vm.restoreRow(row, index)
                                       }
                                     }
                                   },
@@ -6791,7 +6878,7 @@ var render = function() {
                                     attrs: { size: "sm", type: "danger" },
                                     on: {
                                       click: function($event) {
-                                        return _vm.markRowDeleted(row)
+                                        return _vm.markRowDeleted(row, index)
                                       }
                                     }
                                   },
@@ -7469,7 +7556,7 @@ var render = function() {
         "tbody",
         [
           _vm.rows.length
-            ? _vm._l(_vm.rows, function(row) {
+            ? _vm._l(_vm.rows, function(row, index) {
                 return _c(
                   "tr",
                   { key: _vm.getRowKey(row) },
@@ -7481,6 +7568,7 @@ var render = function() {
                         _vm.$scopedSlots[column.id]
                           ? _vm._t(column.id, null, null, {
                               row: row,
+                              index: index,
                               column: column
                             })
                           : [

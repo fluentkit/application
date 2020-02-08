@@ -54,8 +54,11 @@ final class Apps extends ModelSection
                         (new Text('created_at', 'Created At')),
                         (new Text('updated_at', 'Updated At'))
                     ])
+                    ->createFields([
+                        (new Text('domain', 'Domain'))->rules(['required', 'string', 'unique:app_domains,domain']),
+                    ])
                     ->editFields([
-                        (new Text('domain', 'Domain'))->rules(['required', 'string']),
+                        (new Text('domain', 'Domain'))->rules(['required', 'string', 'unique:app_domains,domain,{$id}']),
                     ])
             ]);
 

@@ -11,12 +11,12 @@
             </thead>
             <tbody>
             <template v-if="rows.length">
-                <tr v-for="row in rows" :key="getRowKey(row)">
+                <tr v-for="(row, index) in rows" :key="getRowKey(row)">
                     <td v-for="column in columns" :key="column.id" :class="rowClasses(row, column)">
                         <slot
                             v-if="$scopedSlots[column.id]"
                             :name="column.id"
-                            v-bind="{ row, column }"
+                            v-bind="{ row, index, column }"
                         />
                         <template v-else>
                             {{ row[column.id] }}
@@ -115,6 +115,10 @@
 
     .fk-admin-table table td.no-results {
         @apply .text-center;
+    }
+
+    .fk-admin-table table td.new {
+        @apply .bg-green-100;
     }
 
     .fk-admin-table table td.modified {

@@ -33,6 +33,18 @@ final class HasMany extends Field
         parent::__construct($id, $this->getModelPluralLabel(), $description);
 
         $this->addAction(
+            (new ModalAction('create', 'Add New'))
+                ->setMeta('modal.title', 'Create ' . $this->getLabel())
+                ->setMeta('modal.size', 'lg')
+                ->addAction(new ModalCloseAction('cancel', 'Cancel'))
+                ->addAction(
+                    (new CallbackAction('validate', 'Save'))
+                        ->setMeta('button.type', 'info')
+                        ->callback([$this, 'validateModel'])
+                )
+        );
+
+        $this->addAction(
             (new ModalAction('edit', ''))
                 ->setMeta('modal.title', 'Edit ' . $this->getLabel())
                 ->setMeta('modal.size', 'lg')
@@ -98,6 +110,7 @@ final class HasMany extends Field
     {
         $requestModels = $request->input('attributes.'.$this->getId());
         $models = $model->{$this->getId()};
+        $newRelations = [];
 
         foreach ($requestModels as $key => $requestModel) {
             if (isset($requestModel['__fk_delete']) && $requestModel['__fk_delete'] === true) {
@@ -110,7 +123,19 @@ final class HasMany extends Field
                 foreach ($this->editFields as $field) {
                     $relatedModel = $field->saveAttributes($relatedModel, $relationRequest);
                 }
+            } elseif (isset($requestModel['__fk_new']) && $requestModel['__fk_new'] === true) {
+                $relatedModel = call_user_func([$model, $this->getId()])->make([]);
+                $relationRequest = $request->duplicate();
+                $relationRequest->merge(['attributes' => $requestModel]);
+                foreach ($this->createFields as $field) {
+                    $relatedModel = $field->saveAttributes($relatedModel, $relationRequest);
+                }
+                $newRelations[] = $relatedModel;
             }
+        }
+
+        foreach ($newRelations as $relation) {
+            $models->push($relation);
         }
 
         return $model;
