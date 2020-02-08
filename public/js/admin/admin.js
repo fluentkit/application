@@ -2134,22 +2134,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _field__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./field */ "./resources/js/admin/components/elements/field/field.vue");
 /* harmony import */ var _mixins_modal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../mixins/modal */ "./resources/js/admin/mixins/modal.js");
-/* harmony import */ var _mixins_request__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../mixins/request */ "./resources/js/mixins/request.js");
-/* harmony import */ var _mixins_form__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../mixins/form */ "./resources/js/mixins/form.js");
-/* harmony import */ var _utils_url__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../utils/url */ "./resources/js/utils/url.js");
+/* harmony import */ var _mixins_form__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../mixins/form */ "./resources/js/mixins/form.js");
 
-
-function _templateObject() {
-  var data = _taggedTemplateLiteral(["/admin/", "/", "/", ".", ""]);
-
-  _templateObject = function _templateObject() {
-    return data;
-  };
-
-  return data;
-}
-
-function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
@@ -2220,12 +2206,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-
-
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'fk-admin-field-has-many',
   "extends": _field__WEBPACK_IMPORTED_MODULE_1__["default"],
-  mixins: [_mixins_request__WEBPACK_IMPORTED_MODULE_3__["default"], _mixins_form__WEBPACK_IMPORTED_MODULE_4__["default"], _mixins_modal__WEBPACK_IMPORTED_MODULE_2__["default"]],
+  mixins: [_mixins_form__WEBPACK_IMPORTED_MODULE_3__["default"], _mixins_modal__WEBPACK_IMPORTED_MODULE_2__["default"]],
   inject: ['screen'],
   computed: {
     tableColumns: function tableColumns() {
@@ -2284,7 +2268,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         var _ref2 = _asyncToGenerator(
         /*#__PURE__*/
         _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(modalAction, modal) {
-          var _this2$screen, $section, $screen, response;
+          var _ref3, _data;
 
           return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
             while (1) {
@@ -2303,17 +2287,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
                   _this2.screen.$progress().start();
 
-                  _this2$screen = _this2.screen, $section = _this2$screen.$section, $screen = _this2$screen.$screen;
-                  _context.next = 8;
-                  return _this2.$form.post(Object(_utils_url__WEBPACK_IMPORTED_MODULE_5__["default"])(_templateObject(), $section.id, $screen.id, action.id, modalAction.id) + _this2.requestQuery, {
+                  _context.next = 7;
+                  return _this2.$form.post(_this2.screen.getScreenUrl("".concat(action.id, ".").concat(modalAction.id)), {
                     attributes: modal.data.attributes,
                     field: _this2.field
                   });
 
-                case 8:
-                  response = _context.sent;
+                case 7:
+                  _ref3 = _context.sent;
+                  _data = _ref3.data;
                   _context.next = 11;
-                  return _this2.screen.handleActionResponse(response.data);
+                  return _this2.screen.handleActionResponse(_data);
 
                 case 11:
                   Object.keys(modal.data.attributes).forEach(function (attribute) {
@@ -3452,8 +3436,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils_url__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../utils/url */ "./resources/js/utils/url.js");
 
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 function _templateObject2() {
-  var data = _taggedTemplateLiteral(["/admin/", "/", "/", "", ""]);
+  var data = _taggedTemplateLiteral(["/", ""]);
 
   _templateObject2 = function _templateObject2() {
     return data;
@@ -3462,14 +3456,8 @@ function _templateObject2() {
   return data;
 }
 
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["/admin/", "/", "/", ""]);
+  var data = _taggedTemplateLiteral(["/admin/", "/", ""]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -3479,10 +3467,6 @@ function _templateObject() {
 }
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 
 
@@ -3526,35 +3510,51 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   methods: {
+    getScreenUrl: function getScreenUrl() {
+      var append = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+      var includeQuery = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+      var $section = this.$section,
+          $screen = this.$screen;
+      var path = Object(_utils_url__WEBPACK_IMPORTED_MODULE_6__["default"])(_templateObject(), $section.id, $screen.id);
+
+      if (append !== '') {
+        path = path + Object(_utils_url__WEBPACK_IMPORTED_MODULE_6__["default"])(_templateObject2(), append);
+      }
+
+      if (includeQuery) {
+        path = path + this.requestQuery;
+      }
+
+      return path;
+    },
     getScreenData: function () {
       var _getScreenData = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(key) {
-        var $section, $screen, _ref, data;
+        var _ref, data;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                $section = this.$section, $screen = this.$screen;
-                _context.next = 3;
-                return this.$request().get(Object(_utils_url__WEBPACK_IMPORTED_MODULE_6__["default"])(_templateObject(), $section.id, $screen.id, key) + this.requestQuery);
+                _context.next = 2;
+                return this.$request().get(this.getScreenUrl(key));
 
-              case 3:
+              case 2:
                 _ref = _context.sent;
                 data = _ref.data;
 
                 if (!(key === 'attributes' && Array.isArray(data[key]))) {
-                  _context.next = 7;
+                  _context.next = 6;
                   break;
                 }
 
                 return _context.abrupt("return", {});
 
-              case 7:
+              case 6:
                 return _context.abrupt("return", data[key]);
 
-              case 8:
+              case 7:
               case "end":
                 return _context.stop();
             }
@@ -3835,8 +3835,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         var data,
             cb,
             disabled,
-            $section,
-            $screen,
             response,
             _args10 = arguments;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee10$(_context10) {
@@ -3863,25 +3861,24 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _context10.prev = 3;
                 action.disabled = true;
                 this.$progress().start();
-                $section = this.$section, $screen = this.$screen;
-                _context10.next = 9;
-                return this.$form.post(Object(_utils_url__WEBPACK_IMPORTED_MODULE_6__["default"])(_templateObject2(), $section.id, $screen.id, action.parentId ? action.parentId + '.' : '', action.id) + this.requestQuery, data);
+                _context10.next = 8;
+                return this.$form.post(this.getScreenUrl("".concat(action.parentId ? action.parentId + '.' : '').concat(action.id)), data);
 
-              case 9:
+              case 8:
                 response = _context10.sent;
-                _context10.next = 12;
+                _context10.next = 11;
                 return this.handleActionResponse(response.data);
 
-              case 12:
-                _context10.next = 14;
+              case 11:
+                _context10.next = 13;
                 return cb(response);
 
-              case 14:
-                _context10.next = 19;
+              case 13:
+                _context10.next = 18;
                 break;
 
-              case 16:
-                _context10.prev = 16;
+              case 15:
+                _context10.prev = 15;
                 _context10.t0 = _context10["catch"](3);
 
                 if (this.$isValidationError(_context10.t0)) {
@@ -3890,18 +3887,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   this.$error(_context10.t0);
                 }
 
-              case 19:
-                _context10.prev = 19;
+              case 18:
+                _context10.prev = 18;
                 action.disabled = disabled;
                 this.$progress().done();
-                return _context10.finish(19);
+                return _context10.finish(18);
 
-              case 23:
+              case 22:
               case "end":
                 return _context10.stop();
             }
           }
-        }, _callee10, this, [[3, 16, 19, 23]]);
+        }, _callee10, this, [[3, 15, 18, 22]]);
       }));
 
       function submitAction(_x10) {

@@ -42,10 +42,20 @@
             }
         },
         methods: {
-            async getScreenData (key) {
+            getScreenUrl (append = '', includeQuery = true) {
                 const { $section, $screen } = this;
+                let path = url`/admin/${$section.id}/${$screen.id}`;
+                if (append !== '') {
+                    path = path + url`/${append}`;
+                }
+                if (includeQuery) {
+                    path = path + this.requestQuery;
+                }
 
-                const { data } = await this.$request().get(url`/admin/${$section.id}/${$screen.id}/${key}`+this.requestQuery);
+                return path;
+            },
+            async getScreenData (key) {
+                const { data } = await this.$request().get(this.getScreenUrl(key));
 
                 if (key === 'attributes' && Array.isArray(data[key])) {
                     return {};
@@ -123,9 +133,8 @@
                 try {
                     action.disabled = true;
                     this.$progress().start();
-                    const { $section, $screen } = this;
                     const response = await this.$form.post(
-                        url`/admin/${$section.id}/${$screen.id}/${action.parentId ? action.parentId+'.' : ''}${action.id}`+this.requestQuery,
+                        this.getScreenUrl(`${action.parentId ? action.parentId + '.' : ''}${action.id}`),
                         data
                     );
                     await this.handleActionResponse(response.data);

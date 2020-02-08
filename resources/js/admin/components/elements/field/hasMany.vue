@@ -57,14 +57,12 @@
 <script>
     import field from './field';
     import modal from '../../../mixins/modal';
-    import request from '../../../../mixins/request';
     import form from '../../../../mixins/form';
-    import url from "../../../../utils/url";
 
     export default {
         name: 'fk-admin-field-has-many',
         extends: field,
-        mixins: [request, form, modal],
+        mixins: [form, modal],
         inject: ['screen'],
         computed: {
             tableColumns () {
@@ -125,15 +123,14 @@
                     try {
                         modalAction.disabled = true;
                         this.screen.$progress().start();
-                        const { $section, $screen } = this.screen;
-                        const response = await this.$form.post(
-                            url`/admin/${$section.id}/${$screen.id}/${action.id}.${modalAction.id}`+this.requestQuery,
+                        const { data } = await this.$form.post(
+                            this.screen.getScreenUrl(`${action.id}.${modalAction.id}`),
                             {
                                 attributes: modal.data.attributes,
                                 field: this.field
                             }
                         );
-                        await this.screen.handleActionResponse(response.data);
+                        await this.screen.handleActionResponse(data);
                         Object.keys(modal.data.attributes).forEach(attribute => {
                             this.$set(row, attribute, modal.data.attributes[attribute]);
                         });
