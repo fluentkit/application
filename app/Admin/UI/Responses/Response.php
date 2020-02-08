@@ -16,9 +16,23 @@ abstract class Response implements ResponseInterface
 
     protected array $meta = [];
 
+    protected array $reloads = [];
+
     public function __construct(string $label)
     {
         $this->setLabel($label);
+    }
+
+    public function reloads(array $reloads): ResponseInterface
+    {
+        $this->reloads = $reloads;
+
+        return $this;
+    }
+
+    public function getReloads(): array
+    {
+        return $this->reloads;
     }
 
     public function toArray(): array
@@ -26,7 +40,8 @@ abstract class Response implements ResponseInterface
         return [
             'type' => $this->type,
             'message' => $this->getLabel(),
-            'meta' => $this->getMeta()
+            'meta' => $this->getMeta(),
+            'reloads' => $this->getReloads()
         ];
     }
 }

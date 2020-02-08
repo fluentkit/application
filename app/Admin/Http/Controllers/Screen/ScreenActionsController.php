@@ -27,6 +27,10 @@ final class ScreenActionsController extends Controller
 
         foreach ($actionIds as $id) {
             $action = $action->getAction($id);
+
+            if (!$action) {
+                throw new \InvalidArgumentException('Missing action!');
+            }
         }
 
         if ($action->getDisabled($request) === true) {

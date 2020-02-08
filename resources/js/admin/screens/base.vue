@@ -128,7 +128,6 @@
                         data
                     );
                     await this.handleActionResponse(response.data);
-                    this.attributes = await this.$screen.get('attributes');
                     await cb(response);
                 } catch (e) {
                     if (this.$isValidationError(e)) {
@@ -142,7 +141,7 @@
                 }
             },
             async handleActionResponse (data) {
-                const { message, type, meta } = data;
+                const { message, type, meta, reloads } = data;
                 if (type === 'notification') {
                     this['$'+meta.toast.type](message);
                 } else if (type === 'redirect') {
@@ -161,7 +160,14 @@
                     try {
                         await this.$router.push({ name: route, params });
                     } catch (e) {}
+
+                    return;
                 }
+
+                // if were still on the same screen lets reload attributes requested by response
+                reloads.forEach(async property => {
+                    this[property] = await this.$screen.get(property);
+                });
             }
         },
         render () {

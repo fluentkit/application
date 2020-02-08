@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace FluentKit\Admin\UI\Actions;
 
 use FluentKit\Admin\UI\ActionInterface;
-use FluentKit\Admin\UI\ResponseInterface;
-use FluentKit\Admin\UI\Responses\Notification;
 use FluentKit\Admin\UI\ScreenInterface;
 use Illuminate\Http\Request;
 

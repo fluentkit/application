@@ -67,7 +67,7 @@ class ModelEditScreen extends FormScreen implements ScreenInterface
         }
         $model->push();
 
-        return Notification::success($this->getModelLabel() . ' Saved!');
+        return Notification::success($this->getModelLabel() . ' Saved!')->reloads(['attributes']);
     }
 
     public function deleteModel(Request $request): ResponseInterface
