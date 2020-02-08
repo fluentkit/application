@@ -964,6 +964,24 @@ html {
   height: 100%;
   display: block;
 }
+#fk-modal-container .fk-admin-modal > .body > div > .fk-admin-field-row {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+#fk-modal-container .fk-admin-modal > .body > div > .fk-admin-field-row:first-child {
+  padding-top: 1.5rem;
+  margin-top: -1.5rem;
+}
+#fk-modal-container .fk-admin-modal > .body > div > .fk-admin-field-row:last-child {
+  padding-bottom: 1.5rem;
+  margin-bottom: -1.5rem;
+}
+#fk-modal-container .fk-admin-modal > .body > div > .fk-admin-field-row.error {
+  margin-left: -1.5rem;
+  margin-right: -1.5rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
 #fk-modal-container .fk-admin-modal > .footer {
   display: flex;
   padding-left: 1.5rem;
@@ -1223,6 +1241,9 @@ html {
 }
 .fk-admin-table table td.no-results {
   text-align: center;
+}
+.fk-admin-table table td.modified {
+  background-color: #fffaf0;
 }
 .fk-admin-table table td.deleted {
   background-color: #fff5f5;

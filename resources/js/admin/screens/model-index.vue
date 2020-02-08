@@ -128,7 +128,7 @@
                             }
                         });
 
-                        this.attributes = await this.$screen.get('attributes');
+                        this.attributes = await this.getScreenData('attributes');
                     } catch (e) {
                         this.$error(e);
                     } finally {
@@ -145,7 +145,7 @@
                         }
                     });
 
-                    this.attributes = await this.$screen.get('attributes');
+                    this.attributes = await this.getScreenData('attributes');
                 } catch (e) {
                     this.$error(e);
                 } finally {
@@ -153,7 +153,7 @@
                 }
             },
             async tableAction (action, model) {
-		        this.$screen.action(action, model);
+		        this.performAction(action, model);
             }
         }
 	}

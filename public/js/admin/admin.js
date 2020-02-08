@@ -2130,8 +2130,31 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _field__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./field */ "./resources/js/admin/components/elements/field/field.vue");
-/* harmony import */ var _button__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../button */ "./resources/js/admin/components/elements/button.vue");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _field__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./field */ "./resources/js/admin/components/elements/field/field.vue");
+/* harmony import */ var _mixins_modal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../mixins/modal */ "./resources/js/admin/mixins/modal.js");
+/* harmony import */ var _mixins_request__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../mixins/request */ "./resources/js/mixins/request.js");
+/* harmony import */ var _mixins_form__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../mixins/form */ "./resources/js/mixins/form.js");
+/* harmony import */ var _utils_url__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../utils/url */ "./resources/js/utils/url.js");
+
+
+function _templateObject() {
+  var data = _taggedTemplateLiteral(["/admin/", "/", "/", ".", ""]);
+
+  _templateObject = function _templateObject() {
+    return data;
+  };
+
+  return data;
+}
+
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -2187,14 +2210,23 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+
+
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'fk-admin-field-has-many',
-  components: {
-    FkAdminButton: _button__WEBPACK_IMPORTED_MODULE_1__["default"]
-  },
-  "extends": _field__WEBPACK_IMPORTED_MODULE_0__["default"],
+  "extends": _field__WEBPACK_IMPORTED_MODULE_1__["default"],
+  mixins: [_mixins_request__WEBPACK_IMPORTED_MODULE_3__["default"], _mixins_form__WEBPACK_IMPORTED_MODULE_4__["default"], _mixins_modal__WEBPACK_IMPORTED_MODULE_2__["default"]],
+  inject: ['screen'],
   computed: {
     tableColumns: function tableColumns() {
       var _this = this;
@@ -2222,7 +2254,108 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         return classes.concat(['deleted']);
       }
 
+      if (row['__fk_modified']) {
+        return classes.concat(['modified']);
+      }
+
       return classes;
+    },
+    editRow: function editRow(row) {
+      var _this2 = this;
+
+      var action = this.field.actions.edit;
+      var _action$meta$modal = action.meta.modal,
+          title = _action$meta$modal.title,
+          size = _action$meta$modal.size;
+      var data = {
+        $form: this.$form,
+        attributes: row,
+        field: this.field,
+        fields: this.field.editFields
+      };
+      var modal = this.$modal(title, "\n                    <component\n                        v-for=\"field in fields\"\n                        :key=\"field.id\"\n                        :is=\"field.component\"\n                        v-if=\"!field.hidden\"\n                        :field=\"field\"\n                        :errors=\"$form.errors\"\n                        :value=\"attributes\"\n                        @input=\"$emit('input', $event)\"\n                    />\n                ", _objectSpread({}, data, {
+        actions: action.actions,
+        size: size
+      })).$on('input', function (attributes) {
+        modal.data.attributes = attributes;
+      }).$on('action',
+      /*#__PURE__*/
+      function () {
+        var _ref2 = _asyncToGenerator(
+        /*#__PURE__*/
+        _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(modalAction, modal) {
+          var _this2$screen, $section, $screen, response;
+
+          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+            while (1) {
+              switch (_context.prev = _context.next) {
+                case 0:
+                  if (!(modalAction.type === 'modal_close_action')) {
+                    _context.next = 2;
+                    break;
+                  }
+
+                  return _context.abrupt("return", modal.close());
+
+                case 2:
+                  _context.prev = 2;
+                  modalAction.disabled = true;
+
+                  _this2.screen.$progress().start();
+
+                  _this2$screen = _this2.screen, $section = _this2$screen.$section, $screen = _this2$screen.$screen;
+                  _context.next = 8;
+                  return _this2.$form.post(Object(_utils_url__WEBPACK_IMPORTED_MODULE_5__["default"])(_templateObject(), $section.id, $screen.id, action.id, modalAction.id) + _this2.requestQuery, {
+                    attributes: modal.data.attributes,
+                    field: _this2.field
+                  });
+
+                case 8:
+                  response = _context.sent;
+                  _context.next = 11;
+                  return _this2.screen.handleActionResponse(response.data);
+
+                case 11:
+                  Object.keys(modal.data.attributes).forEach(function (attribute) {
+                    _this2.$set(row, attribute, modal.data.attributes[attribute]);
+                  });
+
+                  _this2.$set(row, '__fk_modified', true);
+
+                  modal.close();
+                  _context.next = 19;
+                  break;
+
+                case 16:
+                  _context.prev = 16;
+                  _context.t0 = _context["catch"](2);
+
+                  if (_this2.screen.$isValidationError(_context.t0)) {
+                    _this2.screen.$error(_this2.$form.message);
+                  } else {
+                    _this2.screen.$error(_context.t0);
+                  }
+
+                case 19:
+                  _context.prev = 19;
+                  modalAction.disabled = false;
+
+                  _this2.screen.$progress().done();
+
+                  return _context.finish(19);
+
+                case 23:
+                case "end":
+                  return _context.stop();
+              }
+            }
+          }, _callee, null, [[2, 16, 19, 23]]);
+        }));
+
+        return function (_x, _x2) {
+          return _ref2.apply(this, arguments);
+        };
+      }());
     },
     markRowDeleted: function markRowDeleted(row) {
       this.$set(row, '__fk_delete', true);
@@ -3329,6 +3462,12 @@ function _templateObject2() {
   return data;
 }
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _templateObject() {
   var data = _taggedTemplateLiteral(["/admin/", "/", "/", ""]);
 
@@ -3344,12 +3483,6 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
 
@@ -3369,6 +3502,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       required: true
     }
   },
+  provide: function provide() {
+    return {
+      screen: this
+    };
+  },
   data: function data() {
     return {
       fields: null,
@@ -3381,10 +3519,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return this.section;
     },
     $screen: function $screen() {
-      return _objectSpread({}, this.screen, {
-        get: this.getScreenData,
-        action: this.performAction
-      });
+      return this.screen;
     },
     primaryActions: function primaryActions() {
       return this.actionsFor('primary');
@@ -3466,7 +3601,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 _context3.prev = 2;
                 _context3.next = 5;
                 return Promise.all(data.map(function (key) {
-                  return _this.$screen.get(key);
+                  return _this.getScreenData(key);
                 }));
 
               case 5:
@@ -3739,19 +3874,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
               case 12:
                 _context10.next = 14;
-                return this.$screen.get('attributes');
-
-              case 14:
-                this.attributes = _context10.sent;
-                _context10.next = 17;
                 return cb(response);
 
-              case 17:
-                _context10.next = 22;
+              case 14:
+                _context10.next = 19;
                 break;
 
-              case 19:
-                _context10.prev = 19;
+              case 16:
+                _context10.prev = 16;
                 _context10.t0 = _context10["catch"](3);
 
                 if (this.$isValidationError(_context10.t0)) {
@@ -3760,18 +3890,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                   this.$error(_context10.t0);
                 }
 
-              case 22:
-                _context10.prev = 22;
+              case 19:
+                _context10.prev = 19;
                 action.disabled = disabled;
                 this.$progress().done();
-                return _context10.finish(22);
+                return _context10.finish(19);
 
-              case 26:
+              case 23:
               case "end":
                 return _context10.stop();
             }
           }
-        }, _callee10, this, [[3, 19, 22, 26]]);
+        }, _callee10, this, [[3, 16, 19, 23]]);
       }));
 
       function submitAction(_x10) {
@@ -3783,27 +3913,29 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     handleActionResponse: function () {
       var _handleActionResponse = _asyncToGenerator(
       /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee11(data) {
-        var message, type, meta, _meta$redirect, _url, route, params, notification;
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee12(data) {
+        var _this4 = this;
 
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee11$(_context11) {
+        var message, type, meta, reloads, _meta$redirect, _url, route, params, notification;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee12$(_context12) {
           while (1) {
-            switch (_context11.prev = _context11.next) {
+            switch (_context12.prev = _context12.next) {
               case 0:
-                message = data.message, type = data.type, meta = data.meta;
+                message = data.message, type = data.type, meta = data.meta, reloads = data.reloads;
 
                 if (!(type === 'notification')) {
-                  _context11.next = 5;
+                  _context12.next = 5;
                   break;
                 }
 
                 this['$' + meta.toast.type](message);
-                _context11.next = 18;
+                _context12.next = 19;
                 break;
 
               case 5:
                 if (!(type === 'redirect')) {
-                  _context11.next = 18;
+                  _context12.next = 19;
                   break;
                 }
 
@@ -3814,35 +3946,69 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 }
 
                 if (!_url) {
-                  _context11.next = 11;
+                  _context12.next = 11;
                   break;
                 }
 
                 window.location.href = _url;
-                return _context11.abrupt("return");
+                return _context12.abrupt("return");
 
               case 11:
-                _context11.prev = 11;
-                _context11.next = 14;
+                _context12.prev = 11;
+                _context12.next = 14;
                 return this.$router.push({
                   name: route,
                   params: params
                 });
 
               case 14:
-                _context11.next = 18;
+                _context12.next = 18;
                 break;
 
               case 16:
-                _context11.prev = 16;
-                _context11.t0 = _context11["catch"](11);
+                _context12.prev = 16;
+                _context12.t0 = _context12["catch"](11);
 
               case 18:
+                return _context12.abrupt("return");
+
+              case 19:
+                // if were still on the same screen lets reload attributes requested by response
+                reloads.forEach(
+                /*#__PURE__*/
+                function () {
+                  var _ref7 = _asyncToGenerator(
+                  /*#__PURE__*/
+                  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee11(property) {
+                    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee11$(_context11) {
+                      while (1) {
+                        switch (_context11.prev = _context11.next) {
+                          case 0:
+                            _context11.next = 2;
+                            return _this4.getScreenData(property);
+
+                          case 2:
+                            _this4[property] = _context11.sent;
+
+                          case 3:
+                          case "end":
+                            return _context11.stop();
+                        }
+                      }
+                    }, _callee11);
+                  }));
+
+                  return function (_x12) {
+                    return _ref7.apply(this, arguments);
+                  };
+                }());
+
+              case 20:
               case "end":
-                return _context11.stop();
+                return _context12.stop();
             }
           }
-        }, _callee11, this, [[11, 16]]);
+        }, _callee12, this, [[11, 16]]);
       }));
 
       function handleActionResponse(_x11) {
@@ -3939,7 +4105,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 delete data.modalInstance;
                 delete data.form;
                 _context2.next = 5;
-                return this.$screen.action(action, data);
+                return this.performAction(action, data);
 
               case 5:
               case "end":
@@ -4247,7 +4413,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                         case 4:
                           _context2.next = 6;
-                          return _this2.$screen.get('attributes');
+                          return _this2.getScreenData('attributes');
 
                         case 6:
                           _this2.attributes = _context2.sent;
@@ -4307,7 +4473,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 3:
                 _context4.next = 5;
-                return this.$screen.get('attributes');
+                return this.getScreenData('attributes');
 
               case 5:
                 this.attributes = _context4.sent;
@@ -4346,7 +4512,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context5.prev = _context5.next) {
               case 0:
-                this.$screen.action(action, model);
+                this.performAction(action, model);
 
               case 1:
               case "end":
@@ -6596,6 +6762,19 @@ var render = function() {
                       _vm._v(" "),
                       column.id === "actions"
                         ? [
+                            _c(
+                              "fk-admin-button",
+                              {
+                                attrs: { size: "sm", type: "info" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.editRow(row)
+                                  }
+                                }
+                              },
+                              [_c("i", { staticClass: "fa fa-pencil-alt" })]
+                            ),
+                            _vm._v(" "),
                             row["__fk_delete"]
                               ? _c(
                                   "fk-admin-button",

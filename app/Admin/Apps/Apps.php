@@ -55,10 +55,7 @@ final class Apps extends ModelSection
                         (new Text('updated_at', 'Updated At'))
                     ])
                     ->editFields([
-                        (new Number('id', 'ID')),
-                        new Text('domain', 'Domain'),
-                        (new Text('created_at', 'Created At'))->readOnly(),
-                        (new Text('updated_at', 'Updated At'))->readOnly()
+                        (new Text('domain', 'Domain'))->rules(['required', 'string']),
                     ])
             ]);
 

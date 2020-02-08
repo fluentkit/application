@@ -117,6 +117,10 @@
         @apply .text-center;
     }
 
+    .fk-admin-table table td.modified {
+        @apply .bg-orange-100;
+    }
+
     .fk-admin-table table td.deleted {
         @apply .bg-red-100 .text-red-500;
     }

@@ -174,6 +174,20 @@
         @apply .flex .w-full .h-full .block;
     }
 
+    #fk-modal-container .fk-admin-modal > .body > div > .fk-admin-field-row {
+        @apply .py-3;
+    }
+    #fk-modal-container .fk-admin-modal > .body > div > .fk-admin-field-row:first-child {
+        @apply .pt-6 .-mt-6;
+    }
+    #fk-modal-container .fk-admin-modal > .body > div > .fk-admin-field-row:last-child {
+        @apply .pb-6 .-mb-6;
+    }
+
+    #fk-modal-container .fk-admin-modal > .body > div > .fk-admin-field-row.error {
+        @apply .-mx-6 .px-6;
+    }
+
 
     #fk-modal-container .fk-admin-modal > .footer {
         @apply .flex .px-6 .py-3 .items-center .justify-end .bg-gray-200 .border-t .border-gray-400;

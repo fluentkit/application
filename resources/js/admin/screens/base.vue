@@ -18,6 +18,11 @@
                 required: true
             }
         },
+        provide () {
+            return {
+                screen: this
+            };
+        },
         data () {
             return {
                 fields: null,
@@ -30,11 +35,7 @@
                 return this.section;
             },
             $screen () {
-                return {
-                    ...this.screen,
-                    get: this.getScreenData,
-                    action: this.performAction
-                };
+                return this.screen;
             },
             primaryActions () {
                 return this.actionsFor('primary');
@@ -54,7 +55,7 @@
             },
             async initScreen (data = ['fields', 'attributes', 'actions'], cb = async () => {}) {
                 try {
-                    const responses = await Promise.all(data.map(key => this.$screen.get(key)));
+                    const responses = await Promise.all(data.map(key => this.getScreenData(key)));
 
                     data.forEach((key, index) => {
                         this[key] = responses[index];
@@ -166,7 +167,7 @@
 
                 // if were still on the same screen lets reload attributes requested by response
                 reloads.forEach(async property => {
-                    this[property] = await this.$screen.get(property);
+                    this[property] = await this.getScreenData(property);
                 });
             }
         },

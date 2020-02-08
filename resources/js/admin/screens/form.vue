@@ -25,7 +25,7 @@
 		        const data = { ...this.$data };
 		        delete data.modalInstance;
 		        delete data.form;
-		        await this.$screen.action(action, data);
+		        await this.performAction(action, data);
             }
         }
 	}
