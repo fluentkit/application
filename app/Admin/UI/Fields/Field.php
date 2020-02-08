@@ -9,6 +9,7 @@ use FluentKit\Admin\UI\ScreenInterface;
 use FluentKit\Admin\UI\Traits\CanBeDisabled;
 use FluentKit\Admin\UI\Traits\CanBeHidden;
 use FluentKit\Admin\UI\Traits\CanBeReadOnly;
+use FluentKit\Admin\UI\Traits\HasActions;
 use FluentKit\Admin\UI\Traits\HasId;
 use FluentKit\Admin\UI\Traits\HasLabel;
 use FluentKit\Admin\UI\Traits\HasMeta;
@@ -20,7 +21,7 @@ use Illuminate\Validation\Validator;
 
 abstract class Field implements FieldInterface
 {
-    use HasId, HasLabel, HasPriority, CanBeDisabled, CanBeReadOnly, CanBeHidden, HasMeta;
+    use HasId, HasLabel, HasPriority, CanBeDisabled, CanBeReadOnly, CanBeHidden, HasMeta, HasActions;
 
     protected ?string $description;
 
@@ -109,6 +110,7 @@ abstract class Field implements FieldInterface
             'description' => $this->description,
             'component' => $this->component ?? 'fk-admin-field-' . $type,
             'meta' => $this->getMeta(),
+            'actions' => $this->getActions($request),
         ];
     }
 

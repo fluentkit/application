@@ -23,7 +23,12 @@ final class ScreenActionsController extends Controller
         $section = $this->admin->getSection($section);
         $screen = $section->getScreen($screen);
         $actionIds = explode('.', $action);
-        $action = $screen;
+
+        if ($field = $request->get('field')) {
+            $action = $screen->getField($field['id']);
+        } else {
+            $action = $screen;
+        }
 
         foreach ($actionIds as $id) {
             $action = $action->getAction($id);
