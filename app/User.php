@@ -8,7 +8,7 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, HasRoles, HasPermissions;
 
     /**
      * The attributes that are mass assignable.
@@ -51,6 +51,11 @@ class User extends Authenticatable
         'avatar',
         'name'
     ];
+
+    public function getMorphClass()
+    {
+        return 'user';
+    }
 
     public function setPasswordAttribute($pass)
     {

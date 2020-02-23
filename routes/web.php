@@ -12,8 +12,7 @@
 */
 
 Route::get('/', function () {
-    $app = \FluentKit\App::with('domains')->first();
-    dd($app->attributesToArray(), $app->toArray(), $app->relationsToArray());
+    dd(\FluentKit\User::with('roles.permissions', 'permissions')->first()->toArray());
     return '@todo';
 })->name('home');
 
