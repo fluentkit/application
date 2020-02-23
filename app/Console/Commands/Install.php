@@ -2,6 +2,7 @@
 
 namespace FluentKit\Console\Commands;
 
+use FluentKit\Role;
 use FluentKit\User;
 use Illuminate\Console\Command;
 
@@ -59,7 +60,9 @@ class Install extends Command
 
         $this->info('Creating admin user.');
 
-        $user->save();
+        $superAdmin = Role::create(['name' => 'superAdmin']);
+        $user->roles()->attach($superAdmin);
+        $user->push();
 
         $this->info('Install completed.');
     }

@@ -39,7 +39,7 @@ trait HasPermissions
         if (method_exists($this, 'roles')) {
             $this->loadMissing('roles.permissions');
             foreach ($this->roles as $role) {
-                if ($role->hasPermissionTo($requestedPermission)) {
+                if ($role->name === 'superAdmin' || $role->hasPermissionTo($requestedPermission)) {
                     return true;
                 }
             }

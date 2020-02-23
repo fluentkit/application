@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    dd(\FluentKit\User::with('roles.permissions', 'permissions')->first()->toArray());
+    dd(\FluentKit\User::first()->can('admin.delete'));
     return '@todo';
 })->name('home');
 
