@@ -2257,6 +2257,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     editAction: function editAction() {
       return this.field.actions.edit;
+    },
+    rows: function rows() {
+      return this.fieldValue || [];
     }
   },
   methods: {
@@ -2374,7 +2377,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var _this3 = this;
 
       this.createFormModal(this.createAction, this.field.createFields, {}, function (action, modal, responseData) {
-        _this3.updateValue([].concat(_toConsumableArray(_this3.fieldValue), [_objectSpread({}, modal.data.attributes, {
+        _this3.updateValue([].concat(_toConsumableArray(_this3.rows), [_objectSpread({}, modal.data.attributes, {
           '__fk_new': true
         })]));
       });
@@ -2394,7 +2397,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     markRowDeleted: function markRowDeleted(row, index) {
       if (row['__fk_new']) {
-        var value = _toConsumableArray(this.fieldValue);
+        var value = _toConsumableArray(this.rows);
 
         value.splice(index, 1);
         this.updateValue(value);
@@ -6851,7 +6854,7 @@ var render = function() {
         {
           attrs: {
             columns: _vm.tableColumns,
-            rows: _vm.fieldValue,
+            rows: _vm.rows,
             rowClass: _vm.rowClasses
           },
           scopedSlots: _vm._u(
@@ -6936,7 +6939,7 @@ var render = function() {
             _c("div", { staticClass: "totals" }, [
               _vm._v(
                 "\n                " +
-                  _vm._s(_vm.fieldValue.length) +
+                  _vm._s(_vm.rows.length) +
                   "\n            "
               )
             ])

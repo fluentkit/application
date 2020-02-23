@@ -18,7 +18,7 @@
         <p v-if="field.description" class="description">{{ field.description }}</p>
         <fk-admin-table
             :columns="tableColumns"
-            :rows="fieldValue"
+            :rows="rows"
             :rowClass="rowClasses"
         >
             <template
@@ -60,7 +60,7 @@
             </template>
             <template slot="table-footer">
                 <div class="totals">
-                    {{ fieldValue.length }}
+                    {{ rows.length }}
                 </div>
             </template>
         </fk-admin-table>
@@ -90,6 +90,9 @@
             },
             editAction () {
                 return this.field.actions.edit;
+            },
+            rows () {
+                return this.fieldValue || [];
             }
         },
         methods: {
@@ -175,7 +178,7 @@
                     {},
                     (action, modal, responseData) => {
                         this.updateValue([
-                            ...this.fieldValue,
+                            ...this.rows,
                             {
                                 ...modal.data.attributes,
                                 '__fk_new': true
@@ -201,7 +204,7 @@
             },
             markRowDeleted (row, index) {
                 if (row['__fk_new']) {
-                    const value = [...this.fieldValue];
+                    const value = [...this.rows];
                     value.splice(index, 1);
                     this.updateValue(value);
                     return;

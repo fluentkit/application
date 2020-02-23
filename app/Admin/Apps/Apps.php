@@ -35,6 +35,23 @@ final class Apps extends ModelSection
                 new Panel('details', 'App Details', '', [
                     (new Text('name', 'Name'))->rules(['required', 'string', 'unique:apps,name']),
                 ]),
+                (new HasMany('domains', AppDomain::class, 'Each application can have many associated domains, but must have at least one.'))
+                    ->setLabel('Domains')
+                    ->indexFields([
+                        (new Number('id', 'ID')),
+                        (new Route('route', 'Domain'))
+                            ->route('app_domains.edit')
+                            ->routeIdFrom('id')
+                            ->routeLabelFrom('domain'),
+                        (new Text('created_at', 'Created At')),
+                        (new Text('updated_at', 'Updated At'))
+                    ])
+                    ->createFields([
+                        (new Text('domain', 'Domain'))->rules(['required', 'string', 'unique:app_domains,domain']),
+                    ])
+                    ->editFields([
+                        (new Text('domain', 'Domain'))->rules(['required', 'string', 'unique:app_domains,domain,{$id}']),
+                    ])
             ])
             ->editFields([
                 new Panel('details', 'App Details', '', [

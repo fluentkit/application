@@ -108,35 +108,32 @@ final class HasMany extends Field
 
     public function saveAttributes(Model $model, Request $request): Model
     {
-        $requestModels = $request->input('attributes.'.$this->getId());
-        $models = $model->{$this->getId()};
-        $newRelations = [];
+        $model::saved(function (Model $model) use ($request) {
+            $requestModels = $request->input('attributes.'.$this->getId());
+            $models = $model->{$this->getId()};
 
-        foreach ($requestModels as $key => $requestModel) {
-            if (isset($requestModel['__fk_delete']) && $requestModel['__fk_delete'] === true) {
-                $models->find($requestModel['id'])->delete();
-                unset($models[$key]);
-            } elseif (isset($requestModel['__fk_modified']) && $requestModel['__fk_modified'] === true) {
-                $relatedModel = $models->find($requestModel['id']);
-                $relationRequest = $request->duplicate();
-                $relationRequest->merge(['attributes' => $requestModel]);
-                foreach ($this->editFields as $field) {
-                    $relatedModel = $field->saveAttributes($relatedModel, $relationRequest);
+            foreach ($requestModels as $key => $requestModel) {
+                if (isset($requestModel['__fk_delete']) && $requestModel['__fk_delete'] === true) {
+                    $models->find($requestModel['id'])->delete();
+                } elseif (isset($requestModel['__fk_modified']) && $requestModel['__fk_modified'] === true) {
+                    $relatedModel = $models->find($requestModel['id']);
+                    $relationRequest = $request->duplicate();
+                    $relationRequest->merge(['attributes' => $requestModel]);
+                    foreach ($this->editFields as $field) {
+                        $relatedModel = $field->saveAttributes($relatedModel, $relationRequest);
+                    }
+                    $relatedModel->push();
+                } elseif (isset($requestModel['__fk_new']) && $requestModel['__fk_new'] === true) {
+                    $relatedModel = call_user_func([$model, $this->getId()])->make([]);
+                    $relationRequest = $request->duplicate();
+                    $relationRequest->merge(['attributes' => $requestModel]);
+                    foreach ($this->createFields as $field) {
+                        $relatedModel = $field->saveAttributes($relatedModel, $relationRequest);
+                    }
+                    $relatedModel->push();
                 }
-            } elseif (isset($requestModel['__fk_new']) && $requestModel['__fk_new'] === true) {
-                $relatedModel = call_user_func([$model, $this->getId()])->make([]);
-                $relationRequest = $request->duplicate();
-                $relationRequest->merge(['attributes' => $requestModel]);
-                foreach ($this->createFields as $field) {
-                    $relatedModel = $field->saveAttributes($relatedModel, $relationRequest);
-                }
-                $newRelations[] = $relatedModel;
             }
-        }
-
-        foreach ($newRelations as $relation) {
-            $models->push($relation);
-        }
+        });
 
         return $model;
     }
