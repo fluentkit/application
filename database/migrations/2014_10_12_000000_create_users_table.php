@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('last_name');
             $table->string('email');
             $table->string('password');
+            $table->json('meta')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('reset_token')->nullable();
             $table->timestamp('last_reset_request')->nullable();

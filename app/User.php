@@ -20,6 +20,7 @@ class User extends Authenticatable
         'last_name',
         'email',
         'password',
+        'meta',
         'app_id',
     ];
 
@@ -41,6 +42,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $casts = [
+        'meta' => 'array',
         'email_verified_at' => 'datetime',
         'last_reset_request' => 'datetime',
     ];

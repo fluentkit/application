@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace FluentKit\Admin\Users;
 
 use FluentKit\Admin\UI\Fields\Email;
+use FluentKit\Admin\UI\Fields\KeyValue;
 use FluentKit\Admin\UI\Fields\Number;
 use FluentKit\Admin\UI\Fields\Panel;
 use FluentKit\Admin\UI\Fields\Password;
@@ -33,6 +34,7 @@ final class Users extends ModelSection
                     (new Email('email', 'Email Address'))->rules(['required', 'string', 'unique:users,email']),
                     (new Text('first_name', 'First Name'))->rules(['required', 'string']),
                     (new Text('last_name', 'Last Name'))->rules(['required', 'string']),
+                    (new KeyValue('meta', 'Meta')),
                 ]),
                 new Panel('passwords', 'Password', '', [
                     (new Password('password', 'Password'))->rules(['required', 'string', 'min:10', 'confirmed']),
@@ -44,6 +46,7 @@ final class Users extends ModelSection
                     (new Email('email', 'Email Address'))->rules(['required', 'string', 'unique:users,email,{$id}']),
                     (new Text('first_name', 'First Name'))->rules(['required', 'string']),
                     (new Text('last_name', 'Last Name'))->rules(['required', 'string']),
+                    (new KeyValue('meta', 'Meta')),
                     (new Text('email_verified_at', 'Email Verified On'))->rules(['nullable'])->readOnly(),
                     (new Text('created_at', 'Created At'))->readOnly(),
                     (new Text('updated_at', 'Updated At'))->readOnly()
