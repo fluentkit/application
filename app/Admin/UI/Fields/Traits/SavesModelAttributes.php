@@ -11,7 +11,9 @@ trait SavesModelAttributes
 {
     public function saveAttributes(Model $model, Request $request): Model
     {
-        $model->setAttribute($this->getId(), $request->input('attributes.'.$this->getId()));
+        if ($request->has('attributes.'.$this->getId())) {
+            $model->setAttribute($this->getId(), $request->input('attributes.'.$this->getId()));
+        }
 
         return $model;
     }
