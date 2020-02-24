@@ -8,6 +8,7 @@ use FluentKit\Admin\Area;
 use FluentKit\Admin\Dashboard\Dashboards;
 use FluentKit\Admin\Settings\Settings;
 use FluentKit\Admin\UI\UserLink;
+use FluentKit\Admin\Roles\Roles;
 use FluentKit\Admin\Users\Users;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
@@ -36,6 +37,7 @@ class AdminServiceProvider extends ServiceProvider
             $admin->registerSection(new Apps());
             $admin->registerSection(new AppDomains());
             $admin->registerSection(new Users());
+            $admin->registerSection(new Roles());
             $admin->registerSection(new Settings());
 
             $admin->registerUserLink(
