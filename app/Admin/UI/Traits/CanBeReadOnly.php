@@ -23,6 +23,10 @@ trait CanBeReadOnly
             return call_user_func($this->readOnly, $request);
         }
 
+        if (is_string($this->readOnly)) {
+            return !$request->user()->can($this->readOnly);
+        }
+
         return (bool) $this->readOnly;
     }
 }

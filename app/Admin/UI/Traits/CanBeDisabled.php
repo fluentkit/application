@@ -23,6 +23,10 @@ trait CanBeDisabled
             return call_user_func($this->disabled, $request);
         }
 
+        if (is_string($this->disabled)) {
+            return !$request->user()->can($this->disabled);
+        }
+
         return (bool) $this->disabled;
     }
 }

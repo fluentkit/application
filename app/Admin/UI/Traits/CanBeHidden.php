@@ -23,6 +23,10 @@ trait CanBeHidden
             return call_user_func($this->hidden, $request);
         }
 
+        if (is_string($this->hidden)) {
+            return !$request->user()->can($this->hidden);
+        }
+
         return (bool) $this->hidden;
     }
 }
