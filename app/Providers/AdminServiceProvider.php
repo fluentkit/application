@@ -32,9 +32,9 @@ class AdminServiceProvider extends ServiceProvider
     public function boot(Area $admin)
     {
         $admin->serving(function (Area $admin) {
+            $admin->registerSection(new Dashboards());
             $admin->registerSection(new Apps());
             $admin->registerSection(new AppDomains());
-            $admin->registerSection(new Dashboards());
             $admin->registerSection(new Users());
             $admin->registerSection(new Settings());
 
