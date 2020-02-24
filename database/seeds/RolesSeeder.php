@@ -33,6 +33,10 @@ class RolesSeeder extends Seeder
 
         $allPermissionIds = [];
 
+        // core admin view permission
+        $permission = \FluentKit\Permission::create(['name' => 'admin.view']);
+        $allPermissionIds[] = $permission->id;
+
         foreach ($resources as $resource) {
             $name = \Illuminate\Support\Str::camel(class_basename($resource));
             foreach ($permissions as $permission) {
