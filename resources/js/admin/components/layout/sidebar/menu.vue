@@ -5,7 +5,7 @@
                 <i class="fas mr-2" :class="section.icon" />
                 {{ section.label }}
             </router-link>
-            <ul v-if="Object.keys(section.screens).length" class="sub-menu">
+            <ul v-if="showSubMenu(section)" class="sub-menu">
                 <li v-for="screen in section.screens" :key="screen.id" v-if="!screen.hidden" :id="'screen-'+screen.id" class="item">
                     <router-link :to="{ name: section.id+'.'+screen.id }">
                         {{ screen.label }}
@@ -23,6 +23,18 @@
             sections: {
                 type: Object,
                 required: true
+            }
+        },
+        methods: {
+            showSubMenu (section) {
+                if (Object.keys(section.screens).length < 2) return false;
+
+                const visibleScreens = Object.keys(section.screens)
+                    .map(key => section.screens[key])
+                    .filter(screen => !screen.hidden)
+                    .length;
+
+                return visibleScreens > 1;
             }
         }
     }

@@ -16,7 +16,7 @@ final class Roles extends ModelSection
     {
         parent::__construct(Role::class);
 
-        $this->setIcon('fa-lock');
+        $this->setIcon('fa-user-lock');
 
         $this->indexFields([
                 (new Number('id', 'ID')),
@@ -38,5 +38,6 @@ final class Roles extends ModelSection
             ]);
 
         $this->getScreen('index')->searchable(['id', 'name']);
+        $this->getScreen('create')->hide(true);
     }
 }
