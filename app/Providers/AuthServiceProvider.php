@@ -26,7 +26,7 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        Gate::before(function (Authorizable $model, string $ability) {
+        Gate::after(function (Authorizable $model, string $ability) {
             if (method_exists($model, 'hasPermissionTo')) {
                 return $model->hasPermissionTo($ability) ?: null;
             }
