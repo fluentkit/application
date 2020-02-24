@@ -51,6 +51,11 @@ trait HasModel
         return $this->getModelRouteId().'.'.$route;
     }
 
+    public function getModelPermissionName(string $permission): string
+    {
+        return Str::camel($this->getModelBaseName()).'.'.$permission;
+    }
+
     public function newModelInstance(): Model
     {
         return new $this->model();

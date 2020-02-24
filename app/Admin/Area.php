@@ -69,6 +69,7 @@ final class Area
         return collect($this->sections)
             ->map(fn(SectionInterface $section) => $section->toArray($request))
             ->sortBy('priority')
+            ->reject(fn(array $section) => $section['disabled'])
             ->toArray();
     }
 

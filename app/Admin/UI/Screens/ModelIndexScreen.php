@@ -31,15 +31,19 @@ class ModelIndexScreen extends Screen implements ScreenInterface
         $this->setId('index');
         $this->setLabel('View All');
 
+        $this->disable($this->getModelPermissionName('viewAny'));
+
         $this->addAction(
             (new RouteAction('create', 'Add ' . $this->getModelLabel()))
                 ->route($this->getModelRoute('create'))
+                ->disable($this->getModelPermissionName('create'))
         );
 
         $this->addAction(
             (new RouteAction('edit', ''))
                 ->route($this->getModelRoute('edit'), ['id'])
                 ->location('table')
+                ->disable($this->getModelPermissionName('update'))
                 ->setMeta('button.type', 'info')
                 ->setMeta('button.icon', 'fa-pencil-alt')
         );
@@ -47,6 +51,7 @@ class ModelIndexScreen extends Screen implements ScreenInterface
         $this->addAction(
             (new ModalAction('delete', ''))
                 ->location('table')
+                ->disable($this->getModelPermissionName('delete'))
                 ->setMeta('button.type', 'danger')
                 ->setMeta('button.icon', 'fa-trash')
                 ->setMeta('modal.title', 'Are you sure?')
@@ -55,7 +60,7 @@ class ModelIndexScreen extends Screen implements ScreenInterface
                     'modal.body',
                     '<p class="text-center">Please confirm deletion of '.$this->getModelLabel().' ID: <strong>{{ id }}</strong>.</p><p class="text-center text-danger uppercase"><strong>This action cannot be reversed.</strong></p>'
                 )
-                ->disable(fn (Request $request) => $request->get('id') === $request->user()->id)
+                ->disable($this->getModelPermissionName('delete'))
                 ->addAction(new ModalCloseAction('cancel', 'Cancel'))
                 ->addAction(
                     (new CallbackAction('confirm', 'Delete ' . $this->getModelLabel()))

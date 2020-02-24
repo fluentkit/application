@@ -22,10 +22,12 @@ class ModelCreateScreen extends FormScreen implements ScreenInterface
         $this->setModel($model);
         $this->setId('create');
         $this->setLabel('Add New');
+        $this->disable($this->getModelPermissionName('create'));
 
         $this->addAction(
             (new SaveAction('create', 'Create ' . $this->getModelLabel()))
                 ->callback([$this, 'createModel'])
+                ->disable($this->getModelPermissionName('create'))
         );
     }
 

@@ -28,6 +28,7 @@ trait HasActions
         return collect($this->actions)
             ->map(fn (ActionInterface $action) => $action->toArray($request))
             ->sortBy('priority')
+            ->reject(fn (array $action) => $action['disabled'])
             ->toArray();
     }
 }

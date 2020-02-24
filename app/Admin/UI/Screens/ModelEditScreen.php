@@ -28,10 +28,12 @@ class ModelEditScreen extends FormScreen implements ScreenInterface
         $this->setId('edit');
         $this->setLabel('Edit ' . $this->getModelLabel());
         $this->hide();
+        $this->disable($this->getModelPermissionName('update'));
 
         $this->addAction(
             (new SaveAction('update', 'Update ' . $this->getModelLabel()))
                 ->callback([$this, 'updateModel'])
+                ->disable($this->getModelPermissionName('update'))
         );
         $this->addAction(
             (new ModalAction('delete', 'Delete ' . $this->getModelLabel()))
@@ -43,7 +45,7 @@ class ModelEditScreen extends FormScreen implements ScreenInterface
                     'modal.body',
                     '<p class="text-center">Please confirm deletion of '.$this->getModelLabel().' ID: <strong>{{ attributes.id }}</strong>.</p><p class="text-center text-danger uppercase"><strong>This action cannot be reversed.</strong></p>'
                 )
-                ->disable(fn (Request $request) => $request->get('id') === $request->user()->id)
+                ->disable($this->getModelPermissionName('delete'))
                 ->addAction(new ModalCloseAction('cancel', 'Cancel'))
                 ->addAction(
                     (new CallbackAction('confirm', 'Delete ' . $this->getModelLabel()))

@@ -20,6 +20,7 @@ class ModelSection extends Section
         $this->setModel($model);
         $this->setId($this->getModelRouteId());
         $this->setLabel($this->getModelPluralLabel());
+        $this->disable($this->getModelPermissionName('viewAny'));
     }
 
     protected function indexFields(array $fields): self
