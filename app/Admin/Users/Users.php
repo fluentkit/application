@@ -10,9 +10,12 @@ use FluentKit\Admin\UI\Fields\Number;
 use FluentKit\Admin\UI\Fields\Panel;
 use FluentKit\Admin\UI\Fields\Password;
 use FluentKit\Admin\UI\Fields\PasswordConfirmation;
+use FluentKit\Admin\UI\Fields\Relationships\BelongsToMany;
+use FluentKit\Admin\UI\Fields\Route;
 use FluentKit\Admin\UI\Fields\Text;
 use FluentKit\Admin\UI\ModelSection;
 use FluentKit\Admin\UI\Screens\RedirectScreen;
+use FluentKit\Role;
 use FluentKit\User;
 
 final class Users extends ModelSection
@@ -22,6 +25,7 @@ final class Users extends ModelSection
         parent::__construct(User::class);
 
         $this->setIcon('fa-user');
+        $this->with('roles');
 
         $this->indexFields([
                 (new Number('id', 'ID')),
@@ -37,6 +41,18 @@ final class Users extends ModelSection
                     (new Text('last_name', 'Last Name'))->rules(['required', 'string']),
                     (new KeyValue('meta', 'Meta')),
                 ]),
+                (new BelongsToMany('roles', Role::class, ''))
+                    ->setLabel('Roles')
+                    ->labelFrom('name')
+                    ->indexFields([
+                        (new Number('id', 'ID')),
+                        (new Route('route', 'Role'))
+                            ->route('roles.edit')
+                            ->routeIdFrom('id')
+                            ->routeLabelFrom('name'),
+                        (new Text('created_at', 'Created At')),
+                        (new Text('updated_at', 'Updated At'))
+                    ]),
                 new Panel('passwords', 'Password', '', [
                     (new Password('password', 'Password'))->rules(['required', 'string', 'min:10', 'confirmed']),
                     (new PasswordConfirmation('password_confirmation', 'Retype Password'))->rules(['required', 'string', 'min:10']),
@@ -52,6 +68,18 @@ final class Users extends ModelSection
                     (new Text('created_at', 'Created At'))->readOnly(),
                     (new Text('updated_at', 'Updated At'))->readOnly()
                 ]),
+                (new BelongsToMany('roles', Role::class, ''))
+                    ->setLabel('Roles')
+                    ->labelFrom('name')
+                    ->indexFields([
+                        (new Number('id', 'ID')),
+                        (new Route('route', 'Role'))
+                            ->route('roles.edit')
+                            ->routeIdFrom('id')
+                            ->routeLabelFrom('name'),
+                        (new Text('created_at', 'Created At')),
+                        (new Text('updated_at', 'Updated At'))
+                    ]),
                 new Panel('passwords', 'Password', 'Enter a new password to change the users password.', [
                     (new Password('password', 'Password'))->rules(['sometimes', 'string', 'min:10', 'confirmed']),
                     (new PasswordConfirmation('password_confirmation', 'Retype Password'))->rules(['sometimes', 'required_with:passwords', 'string', 'min:10']),
