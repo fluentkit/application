@@ -15,6 +15,7 @@ use FluentKit\Admin\UI\Fields\Route;
 use FluentKit\Admin\UI\Fields\Text;
 use FluentKit\Admin\UI\ModelSection;
 use FluentKit\Admin\UI\Screens\RedirectScreen;
+use FluentKit\Permission;
 use FluentKit\Role;
 use FluentKit\User;
 
@@ -25,7 +26,7 @@ final class Users extends ModelSection
         parent::__construct(User::class);
 
         $this->setIcon('fa-user');
-        $this->with('roles');
+        $this->with(['roles', 'permissions']);
 
         $this->indexFields([
                 (new Number('id', 'ID')),
@@ -41,13 +42,25 @@ final class Users extends ModelSection
                     (new Text('last_name', 'Last Name'))->rules(['required', 'string']),
                     (new KeyValue('meta', 'Meta')),
                 ]),
-                (new BelongsToMany('roles', Role::class, ''))
+                (new BelongsToMany('roles', Role::class, 'User roles allow you to provide group style permissions for a user. A user can have one or many roles.'))
                     ->setLabel('Roles')
                     ->labelFrom('name')
                     ->indexFields([
                         (new Number('id', 'ID')),
                         (new Route('route', 'Role'))
                             ->route('roles.edit')
+                            ->routeIdFrom('id')
+                            ->routeLabelFrom('name'),
+                        (new Text('created_at', 'Created At')),
+                        (new Text('updated_at', 'Updated At'))
+                    ]),
+                (new BelongsToMany('permissions', Permission::class, 'You can optionally provide a user with specific permissions not found within their assigned roles.'))
+                    ->setLabel('Permissions')
+                    ->labelFrom('name')
+                    ->indexFields([
+                        (new Number('id', 'ID')),
+                        (new Route('route', 'Permission'))
+                            ->route('permissions.edit')
                             ->routeIdFrom('id')
                             ->routeLabelFrom('name'),
                         (new Text('created_at', 'Created At')),
@@ -68,13 +81,25 @@ final class Users extends ModelSection
                     (new Text('created_at', 'Created At'))->readOnly(),
                     (new Text('updated_at', 'Updated At'))->readOnly()
                 ]),
-                (new BelongsToMany('roles', Role::class, ''))
+                (new BelongsToMany('roles', Role::class, 'User roles allow you to provide group style permissions for a user. A user can have one or many roles.'))
                     ->setLabel('Roles')
                     ->labelFrom('name')
                     ->indexFields([
                         (new Number('id', 'ID')),
                         (new Route('route', 'Role'))
                             ->route('roles.edit')
+                            ->routeIdFrom('id')
+                            ->routeLabelFrom('name'),
+                        (new Text('created_at', 'Created At')),
+                        (new Text('updated_at', 'Updated At'))
+                    ]),
+                (new BelongsToMany('permissions', Permission::class, 'You can optionally provide a user with specific permissions not found within their assigned roles.'))
+                    ->setLabel('Permissions')
+                    ->labelFrom('name')
+                    ->indexFields([
+                        (new Number('id', 'ID')),
+                        (new Route('route', 'Permission'))
+                            ->route('permissions.edit')
                             ->routeIdFrom('id')
                             ->routeLabelFrom('name'),
                         (new Text('created_at', 'Created At')),
