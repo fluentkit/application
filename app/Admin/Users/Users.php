@@ -30,7 +30,10 @@ final class Users extends ModelSection
 
         $this->indexFields([
                 (new Number('id', 'ID')),
-                (new Email('email', 'Email Address')),
+                (new Route('route', 'Email Address'))
+                    ->route('users.edit')
+                    ->routeIdFrom('id')
+                    ->routeLabelFrom('email'),
                 (new Text('name', 'Name')),
                 (new Text('created_at', 'Created At')),
                 (new Text('updated_at', 'Updated At'))

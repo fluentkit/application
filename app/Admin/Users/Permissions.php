@@ -26,7 +26,10 @@ final class Permissions extends ModelSection
 
         $this->indexFields([
                 (new Number('id', 'ID')),
-                (new Text('name', 'Name')),
+                (new Route('route', 'Name'))
+                    ->route('permissions.edit')
+                    ->routeIdFrom('id')
+                    ->routeLabelFrom('name'),
                 (new Text('created_at', 'Created At')),
                 (new Text('updated_at', 'Updated At'))
             ])

@@ -11,6 +11,7 @@ use FluentKit\Admin\UI\Fields\Panel;
 use FluentKit\Admin\UI\Fields\Route;
 use FluentKit\Admin\UI\Fields\Text;
 use FluentKit\Admin\UI\ModelSection;
+use FluentKit\Admin\UI\Screens\RedirectScreen;
 use FluentKit\App;
 use FluentKit\AppDomain;
 
@@ -26,7 +27,10 @@ final class Apps extends ModelSection
 
         $this->indexFields([
                 (new Number('id', 'ID')),
-                (new Text('name', 'Name')),
+                (new Route('route', 'Name'))
+                    ->route('apps.edit')
+                    ->routeIdFrom('id')
+                    ->routeLabelFrom('name'),
                 (new Checkbox('master', 'Master'))->align('center'),
                 (new Text('created_at', 'Created At')),
                 (new Text('updated_at', 'Updated At'))
@@ -80,5 +84,6 @@ final class Apps extends ModelSection
             ]);
 
         $this->getScreen('index')->searchable(['id', 'name']);
+        $this->registerScreen(new RedirectScreen('app_domains', 'Domains', 'app_domains'));
     }
 }

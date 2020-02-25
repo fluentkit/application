@@ -7,6 +7,7 @@ namespace FluentKit\Admin\Apps;
 use FluentKit\Admin\UI\Fields\Number;
 use FluentKit\Admin\UI\Fields\Panel;
 use FluentKit\Admin\UI\Fields\Relationships\BelongsTo;
+use FluentKit\Admin\UI\Fields\Route;
 use FluentKit\Admin\UI\Fields\Select;
 use FluentKit\Admin\UI\Fields\Text;
 use FluentKit\Admin\UI\ModelSection;
@@ -26,10 +27,11 @@ final class AppDomains extends ModelSection
 
         $this->indexFields([
                 (new Number('id', 'ID')),
-                new Text('domain', 'Domain'),
-                (new BelongsTo('app', App::class))
-                    ->labelFrom('name')
-                    ->align('center'),
+                (new Route('route', 'Domain'))
+                    ->route('app_domains.edit')
+                    ->routeIdFrom('id')
+                    ->routeLabelFrom('domain'),
+                (new BelongsTo('app', App::class))->labelFrom('name'),
                 (new Text('created_at', 'Created At')),
                 (new Text('updated_at', 'Updated At'))
             ])
