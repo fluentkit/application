@@ -74,7 +74,7 @@ class ModelEditScreen extends FormScreen implements ScreenInterface
 
     public function deleteModel(Request $request): ResponseInterface
     {
-        $this->newModelQuery()->where('id', $request->get('id'))->delete();
+        $this->getModel()::findOrFail($request->get('id'))->delete();
 
         return Redirect::route(
             $this->getModelRoute('index'),
