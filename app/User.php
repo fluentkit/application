@@ -72,9 +72,4 @@ class User extends Authenticatable
     {
         return 'https://www.gravatar.com/avatar/' . md5(strtolower($this->email));
     }
-
-    public function app()
-    {
-        return $this->belongsTo(App::class);
-    }
 }

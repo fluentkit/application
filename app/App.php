@@ -40,9 +40,25 @@ class App extends Model
         return $this->hasMany(AppDomain::class);
     }
 
+    public function settings()
+    {
+        return $this->hasMany(Setting::class);
+    }
+
+    public function loadSettings()
+    {
+        $this->settings()
+            ->get(['setting', 'value'])
+            ->each(function (Setting $setting) {
+                config()->set($setting->setting, $setting->value);
+            });
+    }
+
     public static function setCurrent(App $app)
     {
         app()->instance(App::class, $app);
+
+        $app->loadSettings();
     }
 
     public static function current(): ?self

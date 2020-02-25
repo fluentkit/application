@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    dd(\FluentKit\App::current()->toArray());
+    //dd(\FluentKit\Setting::all()->toArray());
     //sdd(DB::table('permissions')->where('name', 'not like', 'app%')->pluck('id'));
     //dd(\FluentKit\User::first()->roles()->first()->users);
     return '@todo';
