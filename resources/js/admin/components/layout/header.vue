@@ -1,9 +1,14 @@
 <template>
     <nav class="fk-admin-header">
         <i v-if="icon" class="fas" :class="icon" />
-        <span v-for="(title, index) in titles" class="title">
-            <i v-if="index !== 0" class="fas fa-chevron-right" /> {{ title }}
-        </span>
+        <template v-for="(title, index) in titles">
+            <router-link v-if="index === 0" :to="{ name: title.route }" :key="index" class="title">
+                <i v-if="index !== 0" class="fas fa-chevron-right" /> {{ title.label }}
+            </router-link>
+            <span v-else :key="index" class="title">
+                <i v-if="index !== 0" class="fas fa-chevron-right" /> {{ title.label }}
+            </span>
+        </template>
         <fk-admin-user :avatar="$user.avatar" :links="userLinks" />
     </nav>
 </template>
@@ -37,9 +42,9 @@
 
                 if (!section || !screen) return [];
 
-                if (screen.hideSectionTitle) return [ screen.label ];
+                if (screen.hideSectionTitle) return [ { label: screen.label, route: `${section.id}.${screen.id}` } ];
 
-                return [ section.label, screen.label ];
+                return [ { label: section.label, route: section.id }, { label: screen.label, route: `${section.id}.${screen.id}` } ];
             },
             icon () {
                 const { section, screen } = this;

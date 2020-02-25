@@ -3523,6 +3523,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3548,8 +3553,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var section = this.section,
           screen = this.screen;
       if (!section || !screen) return [];
-      if (screen.hideSectionTitle) return [screen.label];
-      return [section.label, screen.label];
+      if (screen.hideSectionTitle) return [{
+        label: screen.label,
+        route: "".concat(section.id, ".").concat(screen.id)
+      }];
+      return [{
+        label: section.label,
+        route: section.id
+      }, {
+        label: screen.label,
+        route: "".concat(section.id, ".").concat(screen.id)
+      }];
     },
     icon: function icon() {
       var section = this.section,
@@ -8188,12 +8202,29 @@ var render = function() {
       _vm.icon ? _c("i", { staticClass: "fas", class: _vm.icon }) : _vm._e(),
       _vm._v(" "),
       _vm._l(_vm.titles, function(title, index) {
-        return _c("span", { staticClass: "title" }, [
-          index !== 0
-            ? _c("i", { staticClass: "fas fa-chevron-right" })
-            : _vm._e(),
-          _vm._v(" " + _vm._s(title) + "\n    ")
-        ])
+        return [
+          index === 0
+            ? _c(
+                "router-link",
+                {
+                  key: index,
+                  staticClass: "title",
+                  attrs: { to: { name: title.route } }
+                },
+                [
+                  index !== 0
+                    ? _c("i", { staticClass: "fas fa-chevron-right" })
+                    : _vm._e(),
+                  _vm._v(" " + _vm._s(title.label) + "\n        ")
+                ]
+              )
+            : _c("span", { key: index, staticClass: "title" }, [
+                index !== 0
+                  ? _c("i", { staticClass: "fas fa-chevron-right" })
+                  : _vm._e(),
+                _vm._v(" " + _vm._s(title.label) + "\n        ")
+              ])
+        ]
       }),
       _vm._v(" "),
       _c("fk-admin-user", {
