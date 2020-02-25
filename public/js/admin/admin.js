@@ -2193,7 +2193,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       var fields = this.field.attachFields; // remove any existing relationships from the select field
 
-      var ids = this.fieldValue.map(function (_ref4) {
+      var ids = (this.fieldValue || []).map(function (_ref4) {
         var id = _ref4.id;
         return id;
       });

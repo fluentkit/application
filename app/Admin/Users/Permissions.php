@@ -12,6 +12,7 @@ use FluentKit\Admin\UI\Fields\Text;
 use FluentKit\Admin\UI\ModelSection;
 use FluentKit\Permission;
 use FluentKit\Role;
+use FluentKit\User;
 
 final class Permissions extends ModelSection
 {
@@ -20,7 +21,7 @@ final class Permissions extends ModelSection
         parent::__construct(Permission::class);
 
         $this->setIcon('fa-lock');
-        $this->with('roles');
+        $this->with(['roles', 'users']);
         $this->hide();
 
         $this->indexFields([
@@ -44,6 +45,18 @@ final class Permissions extends ModelSection
                             ->route('roles.edit')
                             ->routeIdFrom('id')
                             ->routeLabelFrom('name'),
+                        (new Text('created_at', 'Created At')),
+                        (new Text('updated_at', 'Updated At'))
+                    ]),
+                (new BelongsToMany('users', User::class, ''))
+                    ->setLabel('Users')
+                    ->labelFrom('email')
+                    ->indexFields([
+                        (new Number('id', 'ID')),
+                        (new Route('route', 'Email Address'))
+                            ->route('users.edit')
+                            ->routeIdFrom('id')
+                            ->routeLabelFrom('email'),
                         (new Text('created_at', 'Created At')),
                         (new Text('updated_at', 'Updated At'))
                     ]),

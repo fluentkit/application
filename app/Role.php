@@ -21,6 +21,11 @@ class Role extends Model
         return $this->belongsToMany(Permission::class, 'role_permissions');
     }
 
+    public function users()
+    {
+        return $this->morphedByMany(User::class, 'model', 'model_roles', 'role_id', 'model_id');
+    }
+
     public function hasPermissionTo($permission): bool
     {
         if (is_string($permission)) {

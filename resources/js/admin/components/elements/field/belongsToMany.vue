@@ -161,7 +161,7 @@
             addRow () {
                 const fields = this.field.attachFields;
                 // remove any existing relationships from the select field
-                const ids = this.fieldValue.map(({ id }) => id);
+                const ids = (this.fieldValue || []).map(({ id }) => id);
                 fields.id.options = Object.values(fields.id.options)
                     .filter(({ id }) => !ids.includes(id))
                     .reduce((options, option, index) => {

@@ -12,6 +12,7 @@ use FluentKit\Admin\UI\Fields\Text;
 use FluentKit\Admin\UI\ModelSection;
 use FluentKit\Permission;
 use FluentKit\Role;
+use FluentKit\User;
 
 final class Roles extends ModelSection
 {
@@ -20,7 +21,7 @@ final class Roles extends ModelSection
         parent::__construct(Role::class);
 
         $this->setIcon('fa-user-lock');
-        $this->with('permissions');
+        $this->with(['permissions', 'users']);
         $this->hide();
 
         $this->indexFields([
@@ -45,6 +46,18 @@ final class Roles extends ModelSection
                         (new Text('created_at', 'Created At')),
                         (new Text('updated_at', 'Updated At'))
                     ]),
+                (new BelongsToMany('users', User::class, ''))
+                    ->setLabel('Users')
+                    ->labelFrom('email')
+                    ->indexFields([
+                        (new Number('id', 'ID')),
+                        (new Route('route', 'Email Address'))
+                            ->route('users.edit')
+                            ->routeIdFrom('id')
+                            ->routeLabelFrom('email'),
+                        (new Text('created_at', 'Created At')),
+                        (new Text('updated_at', 'Updated At'))
+                    ]),
             ])
             ->editFields([
                 new Panel('details', 'Role Details', '', [
@@ -61,6 +74,18 @@ final class Roles extends ModelSection
                             ->route('permissions.edit')
                             ->routeIdFrom('id')
                             ->routeLabelFrom('name'),
+                        (new Text('created_at', 'Created At')),
+                        (new Text('updated_at', 'Updated At'))
+                    ]),
+                (new BelongsToMany('users', User::class, ''))
+                    ->setLabel('Users')
+                    ->labelFrom('email')
+                    ->indexFields([
+                        (new Number('id', 'ID')),
+                        (new Route('route', 'Email Address'))
+                            ->route('users.edit')
+                            ->routeIdFrom('id')
+                            ->routeLabelFrom('email'),
                         (new Text('created_at', 'Created At')),
                         (new Text('updated_at', 'Updated At'))
                     ]),

@@ -20,4 +20,9 @@ class Permission extends Model
     {
         return $this->belongsToMany(Role::class, 'role_permissions');
     }
+
+    public function users()
+    {
+        return $this->morphedByMany(User::class, 'model', 'model_permissions', 'permission_id', 'model_id');
+    }
 }
