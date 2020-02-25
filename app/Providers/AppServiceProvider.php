@@ -2,6 +2,7 @@
 
 namespace FluentKit\Providers;
 
+use FluentKit\App;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\ServiceProvider;
 
@@ -14,7 +15,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(App::class, function () {
+            return App::with('domains')->master();
+        });
     }
 
     /**

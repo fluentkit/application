@@ -2,6 +2,7 @@
 
 namespace FluentKit;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 class App extends Model
@@ -26,8 +27,18 @@ class App extends Model
         'master' => 'bool',
     ];
 
+    public function scopeMaster(Builder $query)
+    {
+        return $query->where('master', true)->first();
+    }
+
     public function domains()
     {
         return $this->hasMany(AppDomain::class);
+    }
+
+    public static function current(): ?self
+    {
+        return app(App::class);
     }
 }

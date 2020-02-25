@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Permission extends Model
 {
+    use LinkedToApp;
+
     /**
      * The attributes that are mass assignable.
      *

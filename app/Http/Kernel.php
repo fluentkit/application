@@ -2,6 +2,7 @@
 
 namespace FluentKit\Http;
 
+use FluentKit\Http\Middleware\BindApp;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -19,6 +20,7 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \FluentKit\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
+        BindApp::class,
     ];
 
     /**
