@@ -12,6 +12,7 @@
 */
 
 Route::get('/', function () {
+    //sdd(DB::table('permissions')->where('name', 'not like', 'app%')->pluck('id'));
     dd(\FluentKit\User::first()->can('admin.delete'));
     return '@todo';
 })->name('home');

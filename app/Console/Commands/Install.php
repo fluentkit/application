@@ -58,9 +58,6 @@ class Install extends Command
         $this->call('migrate');
         //$this->call('optimize');
 
-        $this->info('Creating core roles');
-        $this->call('db:seed', ['--class' => \RolesSeeder::class]);
-
         $this->info('Creating admin user.');
 
         $superAdmin = Role::where('name', 'superAdmin')->first();
