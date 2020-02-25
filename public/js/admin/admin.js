@@ -2191,7 +2191,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     addRow: function addRow() {
       var _this3 = this;
 
-      this.attachFormModal(this.attachAction, this.field.attachFields, {}, function (action, modal, responseData) {
+      var fields = this.field.attachFields; // remove any existing relationships from the select field
+
+      var ids = this.fieldValue.map(function (_ref4) {
+        var id = _ref4.id;
+        return id;
+      });
+      fields.id.options = Object.values(fields.id.options).filter(function (_ref5) {
+        var id = _ref5.id;
+        return !ids.includes(id);
+      }).reduce(function (options, option, index) {
+        options[index] = option;
+        return options;
+      }, {});
+      this.attachFormModal(this.attachAction, fields, {}, function (action, modal, responseData) {
         _this3.updateValue([].concat(_toConsumableArray(_this3.rows), [_objectSpread({}, responseData.meta.attached, {
           '__fk_new': true
         })]));
