@@ -108,10 +108,7 @@ class ModelIndexScreen extends Screen implements ScreenInterface
     {
         ($this->newModelInstance())->newQuery()->where('id', $request->get('id'))->delete();
 
-        return Redirect::route(
-            $this->getModelRoute('index'),
-            [],
-            Notification::success($this->getModelLabel() . ' Deleted!')
-        );
+        return Notification::success($this->getModelLabel() . ' Deleted!')
+            ->reloads(['attributes']);
     }
 }
