@@ -22,7 +22,7 @@ final class BindApp
            return $app ?? App::master();
         });
 
-        app()->instance(App::class, $currentApp);
+        App::setCurrent($currentApp);
         return $next($request);
     }
 }

@@ -4,9 +4,12 @@ namespace FluentKit;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class App extends Model
 {
+    use SoftDeletes;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -29,12 +32,17 @@ class App extends Model
 
     public function scopeMaster(Builder $query)
     {
-        return $query->where('master', true)->first();
+        return $query->where('master', true);
     }
 
     public function domains()
     {
         return $this->hasMany(AppDomain::class);
+    }
+
+    public static function setCurrent(App $app)
+    {
+        app()->instance(App::class, $app);
     }
 
     public static function current(): ?self

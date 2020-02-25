@@ -2,6 +2,8 @@
 
 namespace FluentKit\Console\Commands;
 
+use FluentKit\App;
+use FluentKit\AppDomain;
 use FluentKit\Role;
 use FluentKit\User;
 use Illuminate\Console\Command;
@@ -39,7 +41,15 @@ class Install extends Command
      */
     public function handle()
     {
+        $app = new App();
+        $app->master = true;
+        $app->name = $this->ask('Please enter the master applications name.', 'Master Application');
+
+        $appDomain = new AppDomain();
+        $appDomain->domain = $this->ask('Enter the master applications domain name.');
+
         $user = new User();
+        $user->app_id = null;
         $user->email = $this->ask('Please enter the administrators email.');
         $user->first_name = $this->ask('Please enter the administrators first name.');
         $user->last_name = $this->ask('Please enter the administrators last name.');
@@ -57,6 +67,10 @@ class Install extends Command
 
         $this->call('migrate');
         //$this->call('optimize');
+
+        $this->info('Creating master application.');
+        $app->save();
+        $app->domains()->save($appDomain);
 
         $this->info('Creating admin user.');
 

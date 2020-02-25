@@ -25,4 +25,9 @@ trait LinkedToApp
             }
         });
     }
+
+    public function app()
+    {
+        return $this->hasOne(App::class);
+    }
 }

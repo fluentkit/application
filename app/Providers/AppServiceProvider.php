@@ -16,7 +16,7 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(App::class, function () {
-            return App::with('domains')->master();
+            return App::with('domains')->master()->first();
         });
     }
 

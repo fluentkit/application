@@ -17,12 +17,14 @@ class CreateAppsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->boolean('master')->default(0);
+            $table->softDeletes();
             $table->timestamps();
         });
 
         Schema::create('app_domains', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->text('domain');
+            $table->softDeletes();
             $table->timestamps();
 
             $table->linkToApp();

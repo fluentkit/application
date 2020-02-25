@@ -24,6 +24,7 @@ class CreateUsersTable extends Migration
             $table->string('reset_token')->nullable();
             $table->timestamp('last_reset_request')->nullable();
             $table->rememberToken();
+            $table->softDeletes();
             $table->timestamps();
 
             $table->linkToApp();

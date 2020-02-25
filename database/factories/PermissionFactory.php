@@ -18,6 +18,6 @@ use Illuminate\Support\Str;
 
 $factory->define(\FluentKit\Permission::class, function (Faker $faker) {
     return [
-        'name' => $faker->word,
+        'name' => $faker->unique()->word,
     ];
 });
