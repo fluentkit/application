@@ -18,8 +18,8 @@ final class BindApp
             })
             ->first();
 
-        $currentApp = tap($currentApp, function ($app) {
-           return $app ?? App::master();
+        $currentApp = with($currentApp, function ($app) {
+           return $app ?: App::master()->first();
         });
 
         App::setCurrent($currentApp);
