@@ -6,6 +6,7 @@ use FluentKit\Admin\Apps\AppDomains;
 use FluentKit\Admin\Apps\Apps;
 use FluentKit\Admin\Area;
 use FluentKit\Admin\Dashboard\Dashboards;
+use FluentKit\Admin\Roles\Permissions;
 use FluentKit\Admin\Settings\Settings;
 use FluentKit\Admin\UI\UserLink;
 use FluentKit\Admin\Roles\Roles;
@@ -38,6 +39,7 @@ class AdminServiceProvider extends ServiceProvider
             $admin->registerSection(new AppDomains());
             $admin->registerSection(new Users());
             $admin->registerSection(new Roles());
+            $admin->registerSection(new Permissions());
             $admin->registerSection(new Settings());
 
             $admin->registerUserLink(

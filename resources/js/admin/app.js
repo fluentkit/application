@@ -32,6 +32,7 @@ export default config => {
         require('./components/elements/field/keyValue').default,
         require('./components/elements/field/belongsTo').default,
         require('./components/elements/field/hasMany').default,
+        require('./components/elements/field/belongsToMany').default,
         // form
         require('./components/elements/form-actions').default,
     ]);
