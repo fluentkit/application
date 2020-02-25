@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace FluentKit\Admin\Roles;
+namespace FluentKit\Admin\Users;
 
 use FluentKit\Admin\UI\Fields\Number;
 use FluentKit\Admin\UI\Fields\Panel;
@@ -21,6 +21,7 @@ final class Roles extends ModelSection
 
         $this->setIcon('fa-user-lock');
         $this->with('permissions');
+        $this->hide();
 
         $this->indexFields([
                 (new Number('id', 'ID')),
@@ -66,6 +67,5 @@ final class Roles extends ModelSection
             ]);
 
         $this->getScreen('index')->searchable(['id', 'name']);
-        $this->getScreen('create')->hide(true);
     }
 }

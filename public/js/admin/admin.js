@@ -14280,6 +14280,16 @@ var createRoutes = function createRoutes(_ref) {
     }].concat(_toConsumableArray(Object.keys(screens).map(function (_id) {
       return screens[_id];
     }).map(function (screen) {
+      if (screen.type === 'redirect') {
+        return {
+          path: "/".concat(id, "/").concat(screen.id),
+          redirect: {
+            name: screen.route
+          },
+          name: "".concat(id, ".").concat(screen.id)
+        };
+      }
+
       var path = ["/".concat(id, "/").concat(screen.id)].concat(_toConsumableArray(screen.routeParams)).join('/');
       return {
         path: path,

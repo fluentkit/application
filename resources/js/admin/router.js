@@ -27,6 +27,16 @@ const createRoutes = ({ sections, user }) => {
                 ...Object.keys(screens)
                     .map(_id => screens[_id])
                     .map(screen => {
+                        if (screen.type === 'redirect') {
+                            return {
+                                path: `/${id}/${screen.id}`,
+                                redirect: {
+                                    name: screen.route
+                                },
+                                name: `${id}.${screen.id}`
+                            }
+                        }
+
                         const path = [`/${id}/${screen.id}`, ...screen.routeParams].join('/');
 
                         return {

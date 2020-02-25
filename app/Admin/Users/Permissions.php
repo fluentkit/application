@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace FluentKit\Admin\Roles;
+namespace FluentKit\Admin\Users;
 
 use FluentKit\Admin\UI\Fields\Number;
 use FluentKit\Admin\UI\Fields\Panel;

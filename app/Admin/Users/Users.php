@@ -12,6 +12,7 @@ use FluentKit\Admin\UI\Fields\Password;
 use FluentKit\Admin\UI\Fields\PasswordConfirmation;
 use FluentKit\Admin\UI\Fields\Text;
 use FluentKit\Admin\UI\ModelSection;
+use FluentKit\Admin\UI\Screens\RedirectScreen;
 use FluentKit\User;
 
 final class Users extends ModelSection
@@ -58,5 +59,8 @@ final class Users extends ModelSection
             ]);
 
         $this->getScreen('index')->searchable(['id', 'email', 'first_name', 'last_name']);
+
+        $this->registerScreen((new RedirectScreen('roles', 'Roles', 'roles')));
+        $this->registerScreen((new RedirectScreen('permissions', 'Permissions', 'permissions')));
     }
 }
