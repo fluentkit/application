@@ -11,6 +11,8 @@ trait SavesModelAttributes
 {
     public function saveAttributes(Model $model, Request $request): Model
     {
+        if ($this->getDisabled($request)) return $model;
+
         if ($request->has('attributes.'.$this->getId())) {
             $model->setAttribute($this->getId(), $request->input('attributes.'.$this->getId()));
         }
