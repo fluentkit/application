@@ -1,5 +1,6 @@
 <template>
     <fk-admin-field-row
+        v-show="!isHidden"
         :field="{ ...field, id: field.id+'.id' }"
         :errors="errors"
     >

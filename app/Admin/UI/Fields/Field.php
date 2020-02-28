@@ -37,6 +37,8 @@ abstract class Field implements FieldInterface
 
     protected array $defaultRules = [];
 
+    protected array $conditions = [];
+
     protected array $meta = [];
 
     public function __construct(string $id, string $label, string $description = '')
@@ -92,6 +94,27 @@ abstract class Field implements FieldInterface
         return array_unique(array_merge($this->rules, $this->defaultRules));
     }
 
+    public function setConditions(array $conditions = []): FieldInterface
+    {
+        $this->conditions = $conditions;
+
+        return $this;
+    }
+
+    public function addCondition(FieldConditionInterface $condition) : FieldInterface{
+        $this->conditions[] = $condition;
+
+        return $this;
+    }
+
+    public function getConditions(Request $request): array
+    {
+        return collect($this->conditions)
+            ->reject(fn (FieldConditionInterface $condition) => $condition->getDisabled($request))
+            ->map(fn (FieldConditionInterface $condition) => $condition->toArray())
+            ->toArray();
+    }
+
     public function toArray(Request $request): array
     {
         $type = str_replace('_', '-', Str::snake(class_basename(get_called_class())));
@@ -111,6 +134,7 @@ abstract class Field implements FieldInterface
             'component' => $this->component ?? 'fk-admin-field-' . $type,
             'meta' => $this->getMeta(),
             'actions' => $this->getActions($request),
+            'conditions' => $this->getConditions($request),
         ];
     }
 

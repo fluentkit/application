@@ -1,5 +1,5 @@
 <template>
-    <div class="fk-admin-field-panel">
+    <div v-show="!isHidden" class="fk-admin-field-panel">
         <fk-admin-title>{{ field.label }}</fk-admin-title>
         <p v-if="field.description" class="description">{{ field.description }}</p>
         <fk-admin-panel>

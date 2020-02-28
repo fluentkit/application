@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace FluentKit\Admin\Settings\Screens;
 
 use FluentKit\Admin\UI\Actions\SaveAction;
+use FluentKit\Admin\UI\Fields\Condition;
 use FluentKit\Admin\UI\Fields\Email;
 use FluentKit\Admin\UI\Fields\Group;
 use FluentKit\Admin\UI\Fields\KeyValue;
@@ -24,10 +25,52 @@ final class GeneralSettings extends FormScreen
 
         $this->addField(
             (new Panel('panel', 'Field Types', 'Panel fields can/should be used to group fields.'))
-                ->addField(new Text('text', 'Text', 'Basic text field.'))
-                ->addField(new Number('number', 'Number', 'Basic number field.'))
+                ->addField(
+                    (new Text('text', 'Text', 'Basic text field.'))
+                        ->addCondition(
+                            (new Condition())
+                                ->when('number')
+                                ->notEquals(11)
+                                ->setDisabled()
+                        )
+                        ->addCondition(
+                            (new Condition())
+                                ->when('number')
+                                ->contains(3)
+                                ->setHidden()
+                        )
+                )
+                ->addField(
+                    (new Number('number', 'Number', 'Basic number field.'))
+                        ->addCondition(
+                            (new Condition())
+                                ->when('text')
+                                ->equals('foobar')
+                                ->setDisabled()
+                        )
+                        ->addCondition(
+                            (new Condition())
+                                ->when('text')
+                                ->equals('bazzer')
+                                ->setHidden()
+                        )
+                )
                 ->addField(new Password('password', 'Password', 'Basic number field.'))
-                ->addField(new Email('email', 'Email', 'Basic email field.'))
+                ->addField(
+                    (new Email('email', 'Email', 'Basic email field.'))
+                        ->addCondition(
+                            (new Condition())
+                                ->when('text')
+                                ->equals('change email')
+                                ->setValue('hi there! ive changed!')
+                        )
+                        ->addCondition(
+                            (new Condition())
+                                ->when('text')
+                                ->equals('change email2')
+                                ->setValue('hi there! ive changed twice!')
+                        )
+                )
                 ->addField(
                     (new Group('group', 'Group', 'Group fields can be used to group similar fields.'))
                         ->addField(new Text('group-text', 'Text'))

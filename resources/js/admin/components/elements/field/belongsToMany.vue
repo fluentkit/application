@@ -1,5 +1,5 @@
 <template>
-    <div class="fk-admin-field-belongs-to-many">
+    <div v-show="!isHidden" class="fk-admin-field-belongs-to-many">
         <div class="header">
             <fk-admin-title>{{ field.label }}</fk-admin-title>
             <fk-admin-button

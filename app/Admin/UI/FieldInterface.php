@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace FluentKit\Admin\UI;
 
+use FluentKit\Admin\UI\Fields\FieldConditionInterface;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Validator;
@@ -47,6 +48,12 @@ interface FieldInterface
     public function getReadOnly(Request $request): bool;
 
     public function getHidden(Request $request): bool;
+
+    public function setConditions(array $conditions = []): self;
+
+    public function addCondition(FieldConditionInterface $condition): self;
+
+    public function getConditions(Request $request): array;
 
     public function toArray(Request $request): array;
 

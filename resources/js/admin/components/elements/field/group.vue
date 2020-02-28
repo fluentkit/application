@@ -1,5 +1,6 @@
 <template>
     <fk-admin-field-row
+        v-show="!isHidden"
         :field="field"
         :errors="groupErrors"
     >
@@ -8,7 +9,6 @@
                 v-for="field in fields"
                 :key="field.id"
                 :is="field.component"
-                v-if="!isHidden"
                 :field="field"
                 :errors="errors"
                 :value="value"
