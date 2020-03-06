@@ -51,18 +51,18 @@ class Install extends Command
         $ci = $this->hasOption('ci');
         $app = new App();
         $app->master = true;
-        $app->name = $ci ? $this->option('app-name') ? $this->ask('Please enter the master applications name.', 'Master Application');
+        $app->name = $ci ? $this->option('app-name') : $this->ask('Please enter the master applications name.', 'Master Application');
 
         $appDomain = new AppDomain();
-        $appDomain->domain = $ci ? $this->option('app-domain') ? $this->ask('Enter the master applications domain name.');
+        $appDomain->domain = $ci ? $this->option('app-domain') : $this->ask('Enter the master applications domain name.');
 
         $user = new User();
         $user->app_id = null;
-        $user->email = $ci ? $this->option('email') ? $this->ask('Please enter the administrators email.');
-        $user->first_name = $ci ? $this->option('first-name') ? $this->ask('Please enter the administrators first name.');
-        $user->last_name = $ci ? $this->option('last-name') ? $this->ask('Please enter the administrators last name.');
-        $password = $ci ? $this->option('password') ? $this->secret('Please enter the administrators password.');
-        $confirmed = $ci ? $this->option('password') ? $this->secret('Please retype the password.');
+        $user->email = $ci ? $this->option('email') : $this->ask('Please enter the administrators email.');
+        $user->first_name = $ci ? $this->option('first-name') : $this->ask('Please enter the administrators first name.');
+        $user->last_name = $ci ? $this->option('last-name') : $this->ask('Please enter the administrators last name.');
+        $password = $ci ? $this->option('password') : $this->secret('Please enter the administrators password.');
+        $confirmed = $ci ? $this->option('password') : $this->secret('Please retype the password.');
 
         while ($confirmed !== $password) {
             $confirmed = $this->secret('Passwords do not match, please retype the password.');
