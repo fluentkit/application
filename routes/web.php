@@ -15,7 +15,7 @@ Route::get('/', function () {
     //dd(\FluentKit\Setting::all()->toArray());
     //sdd(DB::table('permissions')->where('name', 'not like', 'app%')->pluck('id'));
     //dd(\FluentKit\User::first()->roles()->first()->users);
-    return '@todo';
+    return view('welcome', ['foo' => 'bar']);
 })->name('home');
 
 Route::middleware('guest')->group(function () {
