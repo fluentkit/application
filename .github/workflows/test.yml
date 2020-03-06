@@ -14,7 +14,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Copy .env
-      run: php -r "file_exists('.env') || copy('.env.ci', '.env');"
+      run: rm .env && mv .env.ci .env
     - name: Install Dependencies
       run: composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
     - name: Generate key
@@ -27,8 +27,10 @@ jobs:
       run: mysql -uroot -h127.0.0.1 -proot -e 'CREATE DATABASE IF NOT EXISTS ci;'
     - name: Install Application
       run: php fluentkit install --ci --app-name="Testing" --app-domain="http://localhost" --email="noreply@fluentkit.io" --first-name="Fluent" --last-name="Kit" --password="FluentkitKitIsAwesome!"
+    - name: Optimise Application
+      run: php fluentkit optimize
     - name: Execute tests (Unit and Feature tests) via PHPUnit
-      run: vendor/bin/phpunit
+      run: php fluentkit test
     - name: Upload Error Log
       uses: actions/upload-artifact@v1
       if: failure()
