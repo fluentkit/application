@@ -14,7 +14,7 @@ class CreateAppsTable extends Migration
     public function up()
     {
         Schema::create('apps', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->id();
             $table->string('name');
             $table->boolean('master')->default(0);
             $table->softDeletes();
@@ -22,7 +22,7 @@ class CreateAppsTable extends Migration
         });
 
         Schema::create('app_domains', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->id();
             $table->text('domain');
             $table->softDeletes();
             $table->timestamps();
