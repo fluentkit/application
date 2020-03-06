@@ -21,10 +21,10 @@ jobs:
       run: php fluentkit key:generate
     - name: Directory Permissions
       run: chmod -R 777 storage bootstrap/cache
+    - name: Start MySql
+      run: sudo /etc/init.d/mysql start
     - name: Create Database
-      run: |
-        mkdir -p database
-        touch database/database.sqlite
+      run: mysql -uroot -h127.0.0.1 -proot -e 'CREATE DATABASE IF NOT EXISTS ci;'
     - name: Install Application
       run: php fluentkit install --ci --app-name="Testing" --app-domain="http://localhost" --email="noreply@fluentkit.io" --first-name="Fluent" --last-name="Kit" --password="FluentkitKitIsAwesome!"
     - name: Execute tests (Unit and Feature tests) via PHPUnit
