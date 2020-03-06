@@ -10,7 +10,7 @@ jobs:
   tests:
 
     runs-on: ubuntu-latest
-    
+
     steps:
     - uses: actions/checkout@v2
     - name: Copy .env
@@ -25,6 +25,8 @@ jobs:
       run: |
         mkdir -p database
         touch database/database.sqlite
+    - name: Install Application
+      run: php fluentkit install --ci --app-name="Testing" --app-domain="http://localhost" --email="noreply@fluentkit.io" --first-name="Fluent" --last-name="Kit" --password="FluentkitKitIsAwesome!"
     - name: Execute tests (Unit and Feature tests) via PHPUnit
       env:
         DB_CONNECTION: sqlite

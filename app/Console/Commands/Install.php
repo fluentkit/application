@@ -15,7 +15,14 @@ class Install extends Command
      *
      * @var string
      */
-    protected $signature = 'install';
+    protected $signature = 'install
+                            {--ci}
+                            {--app-name="Master Application"}
+                            {--app-domain="http://localhost"}
+                            {--email=}
+                            {--first-name=}
+                            {--last-name=}
+                            {--password=}';
 
     /**
      * The console command description.
@@ -41,20 +48,21 @@ class Install extends Command
      */
     public function handle()
     {
+        $ci = $this->hasOption('ci');
         $app = new App();
         $app->master = true;
-        $app->name = $this->ask('Please enter the master applications name.', 'Master Application');
+        $app->name = $ci ? $this->option('app-name') ? $this->ask('Please enter the master applications name.', 'Master Application');
 
         $appDomain = new AppDomain();
-        $appDomain->domain = $this->ask('Enter the master applications domain name.');
+        $appDomain->domain = $ci ? $this->option('app-domain') ? $this->ask('Enter the master applications domain name.');
 
         $user = new User();
         $user->app_id = null;
-        $user->email = $this->ask('Please enter the administrators email.');
-        $user->first_name = $this->ask('Please enter the administrators first name.');
-        $user->last_name = $this->ask('Please enter the administrators last name.');
-        $password = $this->secret('Please enter the administrators password.');
-        $confirmed = $this->secret('Please retype the password.');
+        $user->email = $ci ? $this->option('email') ? $this->ask('Please enter the administrators email.');
+        $user->first_name = $ci ? $this->option('first-name') ? $this->ask('Please enter the administrators first name.');
+        $user->last_name = $ci ? $this->option('last-name') ? $this->ask('Please enter the administrators last name.');
+        $password = $ci ? $this->option('password') ? $this->secret('Please enter the administrators password.');
+        $confirmed = $ci ? $this->option('password') ? $this->secret('Please retype the password.');
 
         while ($confirmed !== $password) {
             $confirmed = $this->secret('Passwords do not match, please retype the password.');
@@ -63,7 +71,7 @@ class Install extends Command
         $user->password = $password;
         $user->email_verified_at = now();
 
-        if (!$this->confirm('Please confirm to install')) return;
+        if (!$ci && !$this->confirm('Please confirm to install')) return;
 
         $this->call('migrate');
         //$this->call('optimize');
