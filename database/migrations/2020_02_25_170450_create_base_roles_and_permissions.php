@@ -13,12 +13,13 @@ class CreateBaseRolesAndPermissions extends Migration
     public function up()
     {
         $permissions = ['viewAny', 'view', 'create', 'update', 'delete', 'restore', 'forceDelete'];
-        $resources = ['app', 'appDomain', 'role', 'permission', 'user'];
+        $resources = ['app', 'appDomain', 'role', 'permission', 'user', 'setting'];
         $now = now();
 
         DB::table('roles')->insert([
             ['name' => 'superAdmin', 'created_at' => $now, 'updated_at' => $now],
-            ['name' => 'administrator', 'created_at' => $now, 'updated_at' => $now]
+            ['name' => 'administrator', 'created_at' => $now, 'updated_at' => $now],
+            ['name' => 'guest', 'created_at' => $now, 'updated_at' => $now]
         ]);
 
         $perms = [ ['name' => 'admin.view', 'created_at' => $now, 'updated_at' => $now] ];
