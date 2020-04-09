@@ -12,5 +12,5 @@ class Text extends Field
 
     protected ?string $component = 'fk-admin-field-input';
 
-    protected array $defaultRules = ['string'];
+    protected array $defaultRules = ['nullable', 'string'];
 }

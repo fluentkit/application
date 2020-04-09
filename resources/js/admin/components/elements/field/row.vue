@@ -4,7 +4,7 @@
         <div class="input">
             <slot />
             <p v-if="errors.has(field.id)" class="error">{{ errors.first(field.id) }}</p>
-            <p v-if="field.description" class="description">{{ field.description }}</p>
+            <p v-if="field.description" class="description" v-html="field.description"></p>
         </div>
     </div>
 </template>

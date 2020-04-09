@@ -6,5 +6,5 @@ namespace FluentKit\Admin\UI\Fields;
 
 final class Number extends Text
 {
-    protected array $defaultRules = ['numeric'];
+    protected array $defaultRules = ['nullable', 'numeric'];
 }
