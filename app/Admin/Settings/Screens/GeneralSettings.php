@@ -26,6 +26,10 @@ final class GeneralSettings extends SettingScreen
                         ->rules(['required'])
                 )
                 ->addField(
+                    (new Text('url', 'Application URL', 'Please enter the applications main URL.'))
+                        ->rules(['required', 'url'])
+                )
+                ->addField(
                     (new Select('timezone', 'Timezone', 'Choose the timezone your application uses.'))
                         ->options(
                             collect(\DateTimeZone::listIdentifiers())
