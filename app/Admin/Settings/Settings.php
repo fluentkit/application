@@ -6,6 +6,7 @@ namespace FluentKit\Admin\Settings;
 
 use FluentKit\Admin\Settings\Screens\CacheSettings;
 use FluentKit\Admin\Settings\Screens\MailSettings;
+use FluentKit\Admin\UI\Screens\RedirectScreen;
 use FluentKit\Admin\UI\Section;
 use FluentKit\Admin\Settings\Screens\GeneralSettings;
 
@@ -22,5 +23,6 @@ final class Settings extends Section
         $this->registerScreen(new GeneralSettings());
         $this->registerScreen(new MailSettings());
         $this->registerScreen(new CacheSettings());
+        $this->registerScreen(new RedirectScreen('services', 'Services', 'services'));
     }
 }

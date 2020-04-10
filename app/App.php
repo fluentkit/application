@@ -45,6 +45,11 @@ class App extends Model
         return $this->hasMany(Setting::class);
     }
 
+    public function services()
+    {
+        return $this->hasMany(Service::class);
+    }
+
     public function loadSettings()
     {
         $this->settings()
@@ -74,11 +79,26 @@ class App extends Model
         return $merged;
     }
 
+    public function loadServices()
+    {
+        $services = $this->services()
+            ->get(['name', 'credentials'])
+            ->keyBy('name')
+            ->map(fn(Service $service) => $service->credentials)
+            ->toArray();
+
+        if (empty($services)) return;
+
+        $default = config()->get('services', []);
+        config()->set('services', $this->array_merge_recursive_distinct($default, $services));
+    }
+
     public static function setCurrent(App $app)
     {
         app()->instance(App::class, $app);
 
         $app->loadSettings();
+        $app->loadServices();
     }
 
     public static function current(): ?self
