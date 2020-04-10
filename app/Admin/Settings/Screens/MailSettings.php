@@ -36,7 +36,6 @@ final class MailSettings extends SettingScreen
                 ->addField(
                     (new Select('default', 'Mail Driver', 'Choose the mail driver to deliver emails. The <code>log</code> and <code>array</code> are for debugging or suppressing mail only.'))
                         ->options([
-                            [ 'id' => 'mail', 'label' => trans('PHP Mail') ],
                             [ 'id' => 'smtp', 'label' => trans('SMTP') ],
                             [ 'id' => 'ses', 'label' => trans('Amazon SES') ],
                             [ 'id' => 'mailgun', 'label' => trans('Mailgun') ],
