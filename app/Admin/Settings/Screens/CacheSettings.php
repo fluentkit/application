@@ -4,12 +4,10 @@ declare(strict_types=1);
 
 namespace FluentKit\Admin\Settings\Screens;
 
-use FluentKit\Admin\UI\Fields\Checkbox;
 use FluentKit\Admin\UI\Fields\Panel;
 use FluentKit\Admin\UI\Fields\Select;
 use FluentKit\Admin\UI\Fields\Text;
 use FluentKit\Admin\UI\Screens\SettingScreen;
-use FluentKit\Role;
 
 final class CacheSettings extends SettingScreen
 {
