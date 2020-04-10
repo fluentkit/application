@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Support\Str;
-
 return [
 
     /*
@@ -18,7 +16,7 @@ return [
     |
     */
 
-    'default' => env('CACHE_DRIVER', 'file'),
+    'default' => 'file',
 
     /*
     |--------------------------------------------------------------------------
@@ -99,6 +97,6 @@ return [
     |
     */
 
-    'prefix' => env('CACHE_PREFIX', Str::slug(env('APP_NAME', 'fluentkit'), '_').'_cache'),
+    'prefix' => 'fluentkit_cache_',
 
 ];

@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => env('MAIL_MAILER', 'sendmail'),
+    'default' => 'sendmail',
 
     /*
     |--------------------------------------------------------------------------
@@ -36,11 +36,11 @@ return [
     'mailers' => [
         'smtp' => [
             'transport' => 'smtp',
-            'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
-            'port' => env('MAIL_PORT', 587),
-            'encryption' => env('MAIL_ENCRYPTION', 'tls'),
-            'username' => env('MAIL_USERNAME'),
-            'password' => env('MAIL_PASSWORD'),
+            'host' => null,
+            'port' => 587,
+            'encryption' => 'tls',
+            'username' => null,
+            'password' => null,
         ],
 
         'ses' => [
@@ -62,7 +62,7 @@ return [
 
         'log' => [
             'transport' => 'log',
-            'channel' => env('MAIL_LOG_CHANNEL'),
+            'channel' => null,
         ],
 
         'array' => [
@@ -82,8 +82,8 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'noreply@fluentkit.com'),
-        'name' => env('MAIL_FROM_NAME', 'FluentKit'),
+        'address' => 'noreply@fluentkit.com',
+        'name' => 'FluentKit',
     ],
 
     /*

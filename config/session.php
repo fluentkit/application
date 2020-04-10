@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Support\Str;
-
 return [
 
     /*
@@ -18,7 +16,7 @@ return [
     |
     */
 
-    'driver' => env('SESSION_DRIVER', 'file'),
+    'driver' => 'database',
 
     /*
     |--------------------------------------------------------------------------
@@ -31,7 +29,7 @@ return [
     |
     */
 
-    'lifetime' => env('SESSION_LIFETIME', 120),
+    'lifetime' => 120,
 
     'expire_on_close' => false,
 
@@ -72,7 +70,7 @@ return [
     |
     */
 
-    'connection' => env('SESSION_CONNECTION', null),
+    'connection' => null,
 
     /*
     |--------------------------------------------------------------------------
@@ -98,7 +96,7 @@ return [
     |
     */
 
-    'store' => env('SESSION_STORE', null),
+    'store' => null,
 
     /*
     |--------------------------------------------------------------------------
@@ -124,10 +122,7 @@ return [
     |
     */
 
-    'cookie' => env(
-        'SESSION_COOKIE',
-        Str::slug(env('APP_NAME', 'fluentkit'), '_').'_session'
-    ),
+    'cookie' => 'fluentkit_session',
 
     /*
     |--------------------------------------------------------------------------
@@ -153,7 +148,7 @@ return [
     |
     */
 
-    'domain' => env('SESSION_DOMAIN', null),
+    'domain' => null,
 
     /*
     |--------------------------------------------------------------------------
@@ -166,7 +161,7 @@ return [
     |
     */
 
-    'secure' => env('SESSION_SECURE_COOKIE', null),
+    'secure' => null,
 
     /*
     |--------------------------------------------------------------------------
