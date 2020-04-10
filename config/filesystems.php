@@ -62,6 +62,12 @@ return [
             'region' => null,
             'bucket' => null,
             'url' => null,
+
+            'cache' => [
+                'store' => 'file',
+                'expire' => 600,
+                'prefix' => 'cloud-files',
+            ],
         ],
 
     ],
