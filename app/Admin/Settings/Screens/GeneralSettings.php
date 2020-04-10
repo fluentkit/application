@@ -69,5 +69,10 @@ final class GeneralSettings extends SettingScreen
                         ->setMeta('checkbox.label', 'Allow anyone to register')
                 )
         );
+
+        $this->addField(
+            (new Panel('debug_mode', 'Debug Mode', 'You can enable debug mode to produce extended error messages when required.'))
+                ->addField((new Checkbox('debug', 'Debug Mode', 'Ensure this is disabled in production.'))->setMeta('checkbox.label', 'Enabled'))
+        );
     }
 }
