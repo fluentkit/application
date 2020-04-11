@@ -76,6 +76,11 @@ class Media extends Model
         static::$audioExtensions = array_unique(array_merge(static::$audioExtensions, $extensions));
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function scopeImages(Builder $query)
     {
         return $query->whereIn('extension', static::getImageExtensions());
