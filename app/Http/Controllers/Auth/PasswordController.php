@@ -8,6 +8,7 @@ use FluentKit\Http\Controllers\Controller;
 use FluentKit\Http\Requests\Auth\ForgotRequest;
 use FluentKit\Http\Requests\Auth\ResetRequest;
 use FluentKit\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
@@ -60,6 +61,11 @@ final class PasswordController extends Controller
                 'redirect' => route('home')
             ],
         ];
+    }
+
+    public function redirect(Request $request, $token)
+    {
+        return redirect()->route('admin.password.reset', ['token' => $token] + $request->query());
     }
 
     private function getToken(): string

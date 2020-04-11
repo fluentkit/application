@@ -33,7 +33,7 @@ Route::middleware('admin', 'can:admin.view')->group(function () {
 
     Route::post('/{section}/{screen}/{action}', [\FluentKit\Admin\Http\Controllers\Screen\ScreenActionsController::class, 'postAction']);
 
-    Route::get('/{path?}', function (\Illuminate\Http\Request $request) {
-        return view('admin.layouts.default', ['admin' => app(\FluentKit\Admin\Area::class)->toArray($request)]);
-    })->where('path', '(.*?)')->name('home');
+    Route::get('/{path?}', [\FluentKit\Admin\Http\Controllers\HomeController::class, 'index'])
+        ->where('path', '(.*?)')
+        ->name('home');
 });

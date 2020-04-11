@@ -12,6 +12,11 @@ use Illuminate\Validation\ValidationException;
 
 final class LoginController extends Controller
 {
+    public function loginView()
+    {
+        return 'login page';
+    }
+
     public function login(LoginRequest $request)
     {
         $authenticated = Auth::guard()

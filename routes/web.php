@@ -12,17 +12,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    //dd(\FluentKit\Setting::all()->toArray());
-    //sdd(DB::table('permissions')->where('name', 'not like', 'app%')->pluck('id'));
-    //dd(\FluentKit\User::first()->roles()->first()->users);
-    return view('welcome', ['foo' => 'bar']);
-})->name('home');
+Route::view('/', 'welcome')->name('home');
 
 Route::middleware('guest')->group(function () {
-    Route::get('/login', function () {
-            return 'login page';
-        })
+    Route::get('/login', [\FluentKit\Http\Controllers\Auth\LoginController::class, 'loginView'])
         ->name('login');
 
     Route::post('/login', [\FluentKit\Http\Controllers\Auth\LoginController::class, 'login'])
@@ -33,9 +26,7 @@ Route::middleware('guest')->group(function () {
         ->middleware('throttle:10,1')
         ->name('password.forgot.post');
 
-    Route::get('/reset-password/{token}', function (\Illuminate\Http\Request $request, $token) {
-            return redirect()->route('admin.password.reset', ['token' => $token] + $request->query());
-        })
+    Route::get('/reset-password/{token}', [\FluentKit\Http\Controllers\Auth\PasswordController::class, 'redirect'])
         ->name('password.reset');
 
     Route::post('/reset-password', [\FluentKit\Http\Controllers\Auth\PasswordController::class, 'resetPassword'])
