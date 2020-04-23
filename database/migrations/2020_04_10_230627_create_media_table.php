@@ -26,7 +26,7 @@ class CreateMediaTable extends Migration
             $table->timestamps();
 
             $table->linkToApp();
-            $table->unique(['app_id', 'filename']);
+            $table->unique(['app_id', 'disk', 'path', 'filename']);
 
             $table->foreign('user_id')
                 ->references('id')

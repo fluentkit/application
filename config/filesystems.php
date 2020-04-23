@@ -62,6 +62,7 @@ return [
             'region' => null,
             'bucket' => null,
             'url' => null,
+            'visibility' => 'public',
 
             'cache' => [
                 'store' => 'file',
