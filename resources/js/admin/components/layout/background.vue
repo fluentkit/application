@@ -7,15 +7,7 @@
 
 <script>
     export default {
-        name: 'fk-admin-background',
-        props: {
-            title: {
-                type: String
-            },
-            content: {
-                type: String
-            }
-        }
+        name: 'fk-admin-background'
     }
 </script>
 

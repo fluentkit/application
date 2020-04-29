@@ -1,12 +1,12 @@
 <template>
     <nav class="fk-admin-header">
         <i v-if="icon" class="fas" :class="icon" />
-        <template v-for="(title, index) in titles">
-            <router-link v-if="index === 0" :to="{ name: title.route }" :key="index" class="title">
-                <i v-if="index !== 0" class="fas fa-chevron-right" /> {{ title.label }}
+        <template v-for="({ route: name, label }, index) in titles">
+            <router-link v-if="index === 0" :to="{ name }" :key="index" class="title">
+                <i v-if="index !== 0" class="fas fa-chevron-right" /> {{ label }}
             </router-link>
             <span v-else :key="index" class="title">
-                <i v-if="index !== 0" class="fas fa-chevron-right" /> {{ title.label }}
+                <i v-if="index !== 0" class="fas fa-chevron-right" /> {{ label }}
             </span>
         </template>
         <fk-admin-user />
@@ -14,6 +14,7 @@
 </template>
 
 <script>
+    import { mapGetters } from 'vuex';
     import user from './user';
 
 	export default {
@@ -22,14 +23,12 @@
 		    [user.name]: user
         },
         computed: {
-            section () {
-                return this.$route.meta.section;
-            },
-            screen () {
-                return this.$route.meta.screen;
-            },
+		    ...mapGetters('sections', [
+		        'currentSection',
+                'currentScreen'
+            ]),
             titles () {
-                const { section, screen } = this;
+                const { currentSection: section, currentScreen: screen } = this;
 
                 if (!section || !screen) return [];
 
@@ -38,11 +37,11 @@
                 return [ { label: section.label, route: section.id }, { label: screen.label, route: `${section.id}.${screen.id}` } ];
             },
             icon () {
-                const { section, screen } = this;
+                const { currentSection: section, currentScreen: screen } = this;
 
                 if (!section || !screen) return '';
 
-                return screen.icon !== '' ? screen.icon : section.icon;
+                return screen.icon && screen.icon !== '' ? screen.icon : section.icon;
             }
         }
 	}

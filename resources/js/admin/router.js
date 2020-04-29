@@ -48,24 +48,22 @@ const createRoutes = ({ sections, user }) => {
                                         screen.component,
                                         {
                                             props,
-                                            key: `${props.section.id}.${props.screen.id}.${JSON.stringify(props.params)}`
+                                            key: `${props.section}.${props.screen}.${JSON.stringify(props.params)}`
                                         }
                                     );
                                 }
                             },
                             name: `${id}.${screen.id}`,
                             meta: {
-                                section,
-                                screen,
-                                user
+                                section: section.id,
+                                screen: screen.id
                             },
-                            props: ({ params, meta: { section, screen, user } }) => {
+                            props: ({ params, meta: { section, screen } }) => {
                                 return {
                                     ...params,
                                     params,
                                     section,
-                                    screen,
-                                    user
+                                    screen
                                 }
                             }
                         }
@@ -111,17 +109,8 @@ const createRoutes = ({ sections, user }) => {
                 }
             },
             meta: {
-                section: {
-                    id: '404',
-                    priority: 10,
-                    icon: 'fa-exclamation-triangle',
-                    label: 'Not Found'
-                },
-                screen: {
-                    label: 'Not Found',
-                    hideSectionTitle: true
-                },
-                user
+                section: '404',
+                screen: 'index'
             }
         }
     ]

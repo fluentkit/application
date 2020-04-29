@@ -17,13 +17,14 @@
 </template>
 
 <script>
+    import { mapGetters } from 'vuex';
+
     export default {
         name: 'fk-admin-sidebar-menu',
-        props: {
-            sections: {
-                type: Object,
-                required: true
-            }
+        computed: {
+            ...mapGetters('sections', [
+                'sections'
+            ])
         },
         methods: {
             showSubMenu (section) {

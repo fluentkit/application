@@ -1,4 +1,5 @@
 <script>
+    import { mapGetters } from 'vuex';
     import request from '../../mixins/request';
     import form from '../../mixins/form';
     import progress from '../mixins/progress';
@@ -8,16 +9,6 @@
 
     export default {
         mixins: [request, form, progress, toast, modal],
-        props: {
-            section: {
-                type: Object,
-                required: true
-            },
-            screen: {
-                type: Object,
-                required: true
-            }
-        },
         provide () {
             return {
                 screen: this
@@ -31,11 +22,15 @@
             }
         },
         computed: {
+            ...mapGetters('sections', [
+                'currentScreen',
+                'currentSection'
+            ]),
             $section () {
-                return this.section;
+                return this.currentSection;
             },
             $screen () {
-                return this.screen;
+                return this.currentScreen;
             },
             primaryActions () {
                 return this.actionsFor('primary');

@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import { sync } from 'vuex-router-sync';
 import createStore from './store';
 import createRouter from './router';
 
@@ -39,9 +40,15 @@ export default config => {
         require('./components/elements/form-actions').default,
     ]);
 
+    const store = createStore(config);
+    const router = createRouter(config);
+
+    // Sync router with store
+    sync(store, router);
+
     return new Vue({
-        store: createStore(config),
-        router: createRouter(config),
+        store,
+        router,
         components: {
             [layout.name]: layout
         },
@@ -49,8 +56,7 @@ export default config => {
             return config;
         },
         render (createElement) {
-            const { sections, user } = this;
-            return createElement('fk-admin-layout', { props: { sections } });
+            return createElement('fk-admin-layout');
         }
     });
 }

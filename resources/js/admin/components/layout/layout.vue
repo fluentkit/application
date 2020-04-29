@@ -2,7 +2,7 @@
     <div class="fk-admin-layout">
         <section class="sidebar">
             <fk-admin-sidebar-header />
-            <fk-admin-sidebar-menu :sections="sections" />
+            <fk-admin-sidebar-menu />
         </section>
         <section class="main">
             <fk-admin-header />
@@ -28,12 +28,6 @@
             [header.name]: header,
             [sidebarHeader.name]: sidebarHeader,
             [sidebarMenu.name]: sidebarMenu
-        },
-        props: {
-            sections: {
-                type: Object,
-                required: true
-            }
         },
         mounted () {
             this.$progress().configure({ parent: '#progress-container' });

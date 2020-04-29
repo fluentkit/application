@@ -3,11 +3,11 @@
     "/css/auth/auth.css": "/css/auth/auth.css?id=c190ed343dbfb2ad6520",
     "/js/auth/manifest.js": "/js/auth/manifest.js?id=1bb80909efbb442df5c4",
     "/js/auth/vendor.js": "/js/auth/vendor.js?id=2eb2680446d6ca11fbc2",
-    "/js/admin/admin.js": "/js/admin/admin.js",
-    "/css/admin/admin.css": "/css/admin/admin.css",
-    "/js/admin/manifest.js": "/js/admin/manifest.js",
-    "/js/admin/vendor.js": "/js/admin/vendor.js",
-    "/js/admin/admin.js.map": "/js/admin/admin.js.map?id=95825ac7e9c9a833b9eb",
+    "/js/admin/admin.js": "/js/admin/admin.js?id=7b201f17e1dc8e1984d7",
+    "/css/admin/admin.css": "/css/admin/admin.css?id=64e209b649a1318404b3",
+    "/js/admin/manifest.js": "/js/admin/manifest.js?id=89712bc6d8c588400cae",
+    "/js/admin/vendor.js": "/js/admin/vendor.js?id=5c71a8cd6bd23ac8d0f8",
+    "/js/admin/admin.js.map": "/js/admin/admin.js.map?id=42beb4dbc50e1dfaefbf",
     "/js/admin/manifest.js.map": "/js/admin/manifest.js.map?id=5906234619ec89896ec0",
     "/js/admin/vendor.js.map": "/js/admin/vendor.js.map?id=a673a8218e331c5ff0e3"
 }
