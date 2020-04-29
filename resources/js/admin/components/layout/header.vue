@@ -9,26 +9,17 @@
                 <i v-if="index !== 0" class="fas fa-chevron-right" /> {{ title.label }}
             </span>
         </template>
-        <fk-admin-user :avatar="$user.avatar" :links="userLinks" />
+        <fk-admin-user />
     </nav>
 </template>
 
 <script>
-    import userMixin from '../../mixins/user';
-
     import user from './user';
 
 	export default {
 		name: 'fk-admin-header',
-        mixins: [userMixin],
         components: {
 		    [user.name]: user
-        },
-        props: {
-		    userLinks: {
-		        type: Array,
-                default: () => ([])
-            }
         },
         computed: {
             section () {

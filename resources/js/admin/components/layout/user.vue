@@ -11,22 +11,22 @@
 </template>
 
 <script>
+    import { mapGetters } from 'vuex';
+
     export default {
         name: 'fk-admin-user',
-        props: {
-            avatar: {
-                type: String,
-                required: true
-            },
-            links: {
-                type: Array,
-                required: true
-            }
-        },
         data () {
             return {
                 menuOpen: false
             };
+        },
+        computed: {
+            ...mapGetters('auth', [
+                'avatar'
+            ]),
+            ...mapGetters('userLinks', [
+                'links'
+            ])
         },
         methods: {
             toggleMenu () {
@@ -35,9 +35,9 @@
             closeMenu () {
                 this.menuOpen = false;
             },
-            clickLink (link) {
+            clickLink ({ route }) {
                 this.closeMenu();
-                link.click();
+                this.$router.push(route);
             }
         }
     }

@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import createStore from './store';
 import createRouter from './router';
 
 // Global components
@@ -6,6 +7,7 @@ import layout from './components/layout/layout';
 
 // Export app creator
 export default config => {
+
     // Apply filters
     Vue.filter('url', path => config.assetUrl+path);
 
@@ -38,6 +40,7 @@ export default config => {
     ]);
 
     return new Vue({
+        store: createStore(config),
         router: createRouter(config),
         components: {
             [layout.name]: layout
@@ -46,8 +49,8 @@ export default config => {
             return config;
         },
         render (createElement) {
-            const { sections, user, userLinks } = this;
-            return createElement('fk-admin-layout', { props: { sections, user, userLinks } });
+            const { sections, user } = this;
+            return createElement('fk-admin-layout', { props: { sections } });
         }
     });
 }

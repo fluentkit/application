@@ -1,14 +1,14 @@
 <template>
     <div class="fk-admin-layout">
         <section class="sidebar">
-            <fk-admin-sidebar-header></fk-admin-sidebar-header>
-            <fk-admin-sidebar-menu :sections="sections"></fk-admin-sidebar-menu>
+            <fk-admin-sidebar-header />
+            <fk-admin-sidebar-menu :sections="sections" />
         </section>
         <section class="main">
-            <fk-admin-header :user-links="mappedUserLinks"></fk-admin-header>
+            <fk-admin-header />
             <div id="progress-container"></div>
             <div id="screen-container">
-                <router-view :key="$route.path"></router-view>
+                <router-view :key="$route.path" />
             </div>
         </section>
     </div>
@@ -33,25 +33,6 @@
             sections: {
                 type: Object,
                 required: true
-            },
-            user: {
-                type: Object,
-                required: true
-            },
-            userLinks: {
-                type: Array,
-                default: () => ([])
-            }
-        },
-        computed: {
-            mappedUserLinks () {
-                return this.userLinks.map(({ type = 'link', text, name, params = {}, query = {} }) => {
-                    return {
-                        type,
-                        text,
-                        click: () => this.$router.push({ name, params, query })
-                    };
-                });
             }
         },
         mounted () {
