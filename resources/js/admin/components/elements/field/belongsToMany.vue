@@ -135,7 +135,7 @@
                         modalAction.disabled = true;
                         this.screen.$progress().start();
                         const { data } = await this.$form.post(
-                            this.screen.getScreenUrl(`${action.id}.${modalAction.id}`),
+                            this.screen.currentScreenUrl(`${action.id}.${modalAction.id}`),
                             {
                                 attributes: modal.data.attributes,
                                 field: this.field

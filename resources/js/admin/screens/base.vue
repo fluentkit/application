@@ -1,11 +1,10 @@
 <script>
-    import { mapGetters } from 'vuex';
+    import { mapGetters, mapActions } from 'vuex';
     import request from '../../mixins/request';
     import form from '../../mixins/form';
     import progress from '../mixins/progress';
     import toast from '../mixins/toast';
     import modal from '../mixins/modal';
-    import url from "../../utils/url";
 
     export default {
         mixins: [request, form, progress, toast, modal],
@@ -23,49 +22,30 @@
         },
         computed: {
             ...mapGetters('sections', [
-                'currentScreen',
                 'currentSection'
             ]),
-            $section () {
-                return this.currentSection;
-            },
-            $screen () {
-                return this.currentScreen;
-            },
+            ...mapGetters('screen', [
+                'currentScreen',
+                'currentScreenUrl'
+            ]),
             primaryActions () {
                 return this.actionsFor('primary');
             }
         },
         methods: {
-            getScreenUrl (append = '', includeQuery = true) {
-                const { $section, $screen } = this;
-                let path = url`/admin/${$section.id}/${$screen.id}`;
-                if (append !== '') {
-                    path = path + url`/${append}`;
-                }
-                if (includeQuery) {
-                    path = path + this.requestQuery;
-                }
+            ...mapActions('screen', [
+                'loadScreenData'
+            ]),
+            async setScreenData (data = []) {
+                const responses = await this.loadScreenData(data);
 
-                return path;
-            },
-            async getScreenData (key) {
-                const { data } = await this.$request().get(this.getScreenUrl(key));
-
-                if (key === 'attributes' && Array.isArray(data[key])) {
-                    return {};
-                }
-
-                return data[key];
+                data.forEach((key, index) => {
+                    this[key] = responses[index];
+                });
             },
             async initScreen (data = ['fields', 'attributes', 'actions'], cb = async () => {}) {
                 try {
-                    const responses = await Promise.all(data.map(key => this.getScreenData(key)));
-
-                    data.forEach((key, index) => {
-                        this[key] = responses[index];
-                    });
-
+                    await this.setScreenData(data);
                     await cb();
                 } catch (e) {
                     this.$error(e);
@@ -129,7 +109,7 @@
                     action.disabled = true;
                     this.$progress().start();
                     const response = await this.$form.post(
-                        this.getScreenUrl(`${action.parentId ? action.parentId + '.' : ''}${action.id}`),
+                        this.currentScreenUrl(`${action.parentId ? action.parentId + '.' : ''}${action.id}`),
                         data
                     );
                     await this.handleActionResponse(response.data);
@@ -170,9 +150,7 @@
                 }
 
                 // if were still on the same screen lets reload attributes requested by response
-                reloads.forEach(async property => {
-                    this[property] = await this.getScreenData(property);
-                });
+                await this.setScreenData(reloads);
             }
         },
         render () {

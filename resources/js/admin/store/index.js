@@ -1,5 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import axios from 'axios';
+import url from '../../utils/url';
 
 export default config => {
     Vue.use(Vuex);
@@ -9,6 +11,22 @@ export default config => {
         state: () => ({
             assetUrl: config.assetUrl,
         }),
+        getters: {
+            requestQuery ({ route: { params = {}, query = {} } }) {
+                const parts = [
+                    ...Object.keys(params)
+                        .filter(param => params[param])
+                        .map(param => `${param}=${params[param]}`),
+                    ...Object.keys(query)
+                        .filter(q => query[q])
+                        .map(q => `${q}=${query[q]}`)
+                ];
+
+                if (!parts.length) return '';
+
+                return `?${parts.join('?')}`;
+            }
+        },
         modules: {
             auth: {
                 namespaced: true,
@@ -31,6 +49,7 @@ export default config => {
                             priority: 10,
                             icon: 'fa-exclamation-triangle',
                             label: 'Not Found',
+                            hidden: true,
                             screens: {
                                 index: {
                                     id: 'index',
@@ -53,6 +72,41 @@ export default config => {
                     },
                     currentScreen (state, { screens = {} }, { route: { meta: { screen } } }) {
                         return screens[screen] || null;
+                    }
+                }
+            },
+            screen: {
+                namespaced: true,
+                state: () => ({}),
+                getters: {
+                    currentScreen (state, getters, rootState, rootGetters) {
+                        return rootGetters['sections/currentScreen'];
+                    },
+                    currentScreenUrl: (state, getters, rootState, rootGetters) => (append = '', includeQuery = true) => {
+                        let path = url`/admin/${rootGetters['sections/currentSection'].id}/${getters.currentScreen.id}`;
+                        if (append !== '') {
+                            path = path + url`/${append}`;
+                        }
+                        if (includeQuery) {
+                            path = path + rootGetters.requestQuery;
+                        }
+
+                        return path;
+                    }
+                },
+                actions: {
+                    async loadScreenData ({ getters, dispatch }, key) {
+                        if (Array.isArray(key)) {
+                            return await Promise.all(key.map(k => dispatch('loadScreenData', k)));
+                        }
+
+                        const { data } = await axios.get(getters.currentScreenUrl(key));
+
+                        if (key === 'attributes' && Array.isArray(data[key])) {
+                            return {};
+                        }
+
+                        return data[key];
                     }
                 }
             },

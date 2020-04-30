@@ -3,7 +3,7 @@
     <div v-else class="fk-admin-screen-model-index">
         <div class="header">
             <fk-admin-title>
-                {{ $screen.modelPluralLabel }}
+                {{ currentScreen.modelPluralLabel }}
             </fk-admin-title>
             <fk-admin-button
                 v-for="action in primaryActions"
@@ -129,7 +129,7 @@
                             }
                         });
 
-                        this.attributes = await this.getScreenData('attributes');
+                        await this.setScreenData(['attributes']);
                     } catch (e) {
                         this.$error(e);
                     } finally {
@@ -146,7 +146,7 @@
                         }
                     });
 
-                    this.attributes = await this.getScreenData('attributes');
+                    await this.setScreenData(['attributes']);
                 } catch (e) {
                     this.$error(e);
                 } finally {
